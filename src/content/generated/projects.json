@@ -1,0 +1,1764 @@
+[
+  {
+    "id": 1,
+    "slug": "flat-57175-meridian-park",
+    "flatNo": "57175",
+    "configuration": "3 BHK",
+    "development": "Meridian Park",
+    "community": "The Prestige City",
+    "area": "200 m²",
+    "cover": {
+      "src": "/images/57175/21.jpeg",
+      "room": "Dining & Crockery",
+      "width": 960,
+      "height": 1280
+    },
+    "images": [
+      {
+        "src": "/images/57175/21.jpeg",
+        "room": "Dining & Crockery",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "slug": "flat-59051-meridian-park",
+    "flatNo": "59051",
+    "configuration": "3 BHK",
+    "development": "Meridian Park",
+    "community": "The Prestige City",
+    "area": "200 m²",
+    "cover": {
+      "src": "/images/59051/3.jpeg",
+      "room": "Wall Décor",
+      "width": 2448,
+      "height": 3264
+    },
+    "images": [
+      {
+        "src": "/images/59051/3.jpeg",
+        "room": "Wall Décor",
+        "width": 2448,
+        "height": 3264
+      },
+      {
+        "src": "/images/59051/19.jpeg",
+        "room": "Wall Décor",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/2.jpeg",
+        "room": "Wall Décor",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/5.jpeg",
+        "room": "Wall Décor",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/22.jpeg",
+        "room": "Living Room",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/8.jpeg",
+        "room": "Kitchen",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/11.jpeg",
+        "room": "Kitchen",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/12.jpeg",
+        "room": "Kitchen",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/9.jpeg",
+        "room": "Kitchen",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/17.jpeg",
+        "room": "Master Bedroom",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/7.jpeg",
+        "room": "Master Bedroom",
+        "width": 4000,
+        "height": 3000
+      },
+      {
+        "src": "/images/59051/4.jpeg",
+        "room": "Master Bedroom",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/6.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 1320,
+        "height": 1760
+      },
+      {
+        "src": "/images/59051/13.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/14.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/16.jpeg",
+        "room": "Guest Bedroom",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/18.jpeg",
+        "room": "Guest Bedroom",
+        "width": 3000,
+        "height": 4000
+      },
+      {
+        "src": "/images/59051/15.jpeg",
+        "room": "Guest Bedroom",
+        "width": 1320,
+        "height": 1760
+      },
+      {
+        "src": "/images/59051/10.jpeg",
+        "room": "Guest Bedroom",
+        "width": 1320,
+        "height": 1760
+      },
+      {
+        "src": "/images/59051/20.jpeg",
+        "room": "Details",
+        "width": 898,
+        "height": 1280
+      },
+      {
+        "src": "/images/59051/21.jpeg",
+        "room": "Details",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "slug": "flat-17242-avlon-park",
+    "flatNo": "17242",
+    "configuration": "3 BHK",
+    "development": "Avlon Park",
+    "community": "The Prestige City",
+    "area": "200 m²",
+    "cover": {
+      "src": "/images/17242/9.jpeg",
+      "room": "Master Bedroom",
+      "width": 1500,
+      "height": 1125
+    },
+    "images": [
+      {
+        "src": "/images/17242/1.jpeg",
+        "room": "Entrance & Foyer",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/2.jpeg",
+        "room": "Entrance & Foyer",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/8.jpeg",
+        "room": "Wall Décor",
+        "width": 1500,
+        "height": 1125
+      },
+      {
+        "src": "/images/17242/21.jpeg",
+        "room": "Wall Décor",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/6.jpeg",
+        "room": "Living Room",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/7.jpeg",
+        "room": "Living Room",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/20.jpeg",
+        "room": "Dining & Crockery",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/3.jpeg",
+        "room": "Dining & Crockery",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/4.jpeg",
+        "room": "Dining & Crockery",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/5.jpeg",
+        "room": "Dining & Crockery",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/19.jpeg",
+        "room": "Dining & Crockery",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/22.jpeg",
+        "room": "Kitchen",
+        "width": 784,
+        "height": 1080
+      },
+      {
+        "src": "/images/17242/23.jpeg",
+        "room": "Kitchen",
+        "width": 788,
+        "height": 1080
+      },
+      {
+        "src": "/images/17242/24.jpeg",
+        "room": "Kitchen",
+        "width": 781,
+        "height": 1080
+      },
+      {
+        "src": "/images/17242/25.jpeg",
+        "room": "Kitchen",
+        "width": 797,
+        "height": 1080
+      },
+      {
+        "src": "/images/17242/26.jpeg",
+        "room": "Kitchen",
+        "width": 796,
+        "height": 1080
+      },
+      {
+        "src": "/images/17242/27.jpeg",
+        "room": "Kitchen",
+        "width": 1404,
+        "height": 1079
+      },
+      {
+        "src": "/images/17242/28.jpeg",
+        "room": "Kitchen",
+        "width": 725,
+        "height": 1080
+      },
+      {
+        "src": "/images/17242/13.jpeg",
+        "room": "Master Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/16.jpeg",
+        "room": "Master Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/9.jpeg",
+        "room": "Master Bedroom",
+        "width": 1500,
+        "height": 1125
+      },
+      {
+        "src": "/images/17242/10.jpeg",
+        "room": "Master Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/15.jpeg",
+        "room": "Master Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/11.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/12.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/17.jpeg",
+        "room": "Guest Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/18.jpeg",
+        "room": "Guest Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17242/14.jpeg",
+        "room": "Details",
+        "width": 900,
+        "height": 1198
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "slug": "flat-13104-avlon-park",
+    "flatNo": "13104",
+    "configuration": "3 BHK",
+    "development": "Avlon Park",
+    "community": "The Prestige City",
+    "area": "210 m²",
+    "cover": {
+      "src": "/images/13104/3.jpg",
+      "room": "Master Bedroom",
+      "width": 1672,
+      "height": 941
+    },
+    "images": [
+      {
+        "src": "/images/13104/01.jpg",
+        "room": "Entrance & Foyer",
+        "width": 1023,
+        "height": 1537
+      },
+      {
+        "src": "/images/13104/4.jpg",
+        "room": "Wall Décor",
+        "width": 1672,
+        "height": 941
+      },
+      {
+        "src": "/images/13104/12.jpg",
+        "room": "Living Room",
+        "width": 941,
+        "height": 1220
+      },
+      {
+        "src": "/images/13104/9.jpg",
+        "room": "Living Room",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "/images/13104/1.jpg",
+        "room": "Dining & Crockery",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "/images/13104/13.jpg",
+        "room": "Dining & Crockery",
+        "width": 940,
+        "height": 1673
+      },
+      {
+        "src": "/images/13104/2.jpg",
+        "room": "Dining & Crockery",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "/images/13104/11.jpg",
+        "room": "Kitchen",
+        "width": 940,
+        "height": 1672
+      },
+      {
+        "src": "/images/13104/14.jpg",
+        "room": "Kitchen",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "/images/13104/3.jpg",
+        "room": "Master Bedroom",
+        "width": 1672,
+        "height": 941
+      },
+      {
+        "src": "/images/13104/6.jpg",
+        "room": "Master Bedroom",
+        "width": 941,
+        "height": 1672
+      },
+      {
+        "src": "/images/13104/10.jpg",
+        "room": "Kids' Bedroom",
+        "width": 1448,
+        "height": 1086
+      },
+      {
+        "src": "/images/13104/7.jpg",
+        "room": "Kids' Bedroom",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "/images/13104/5.jpg",
+        "room": "Guest Bedroom",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "/images/13104/8.jpg",
+        "room": "Guest Bedroom",
+        "width": 1448,
+        "height": 1086
+      },
+      {
+        "src": "/images/13104/15.jpg",
+        "room": "Guest Bedroom",
+        "width": 1086,
+        "height": 1448
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "slug": "flat-17193-avlon-park",
+    "flatNo": "17193",
+    "configuration": "3 BHK",
+    "development": "Avlon Park",
+    "community": "The Prestige City",
+    "area": "210 m²",
+    "cover": {
+      "src": "/images/17193/6.jpeg",
+      "room": "Kitchen",
+      "width": 1500,
+      "height": 1000
+    },
+    "images": [
+      {
+        "src": "/images/17193/2.jpeg",
+        "room": "Entrance & Foyer",
+        "width": 777,
+        "height": 1023
+      },
+      {
+        "src": "/images/17193/1.jpeg",
+        "room": "Wall Décor",
+        "width": 1536,
+        "height": 817
+      },
+      {
+        "src": "/images/17193/16.jpeg",
+        "room": "Wall Décor",
+        "width": 1500,
+        "height": 1000
+      },
+      {
+        "src": "/images/17193/3.jpeg",
+        "room": "Living Room",
+        "width": 982,
+        "height": 1023
+      },
+      {
+        "src": "/images/17193/4.jpeg",
+        "room": "Dining & Crockery",
+        "width": 1081,
+        "height": 1023
+      },
+      {
+        "src": "/images/17193/5.jpeg",
+        "room": "Dining & Crockery",
+        "width": 1500,
+        "height": 1000
+      },
+      {
+        "src": "/images/17193/6.jpeg",
+        "room": "Kitchen",
+        "width": 1500,
+        "height": 1000
+      },
+      {
+        "src": "/images/17193/7.jpeg",
+        "room": "Kitchen",
+        "width": 639,
+        "height": 1023
+      },
+      {
+        "src": "/images/17193/8.jpeg",
+        "room": "Kitchen",
+        "width": 597,
+        "height": 1023
+      },
+      {
+        "src": "/images/17193/12.jpeg",
+        "room": "Master Bedroom",
+        "width": 935,
+        "height": 1023
+      },
+      {
+        "src": "/images/17193/13.jpeg",
+        "room": "Master Bedroom",
+        "width": 1341,
+        "height": 1023
+      },
+      {
+        "src": "/images/17193/9.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 1240,
+        "height": 1023
+      },
+      {
+        "src": "/images/17193/10.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 1126,
+        "height": 1023
+      },
+      {
+        "src": "/images/17193/11.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 1536,
+        "height": 934
+      },
+      {
+        "src": "/images/17193/14.jpeg",
+        "room": "Guest Bedroom",
+        "width": 940,
+        "height": 1023
+      },
+      {
+        "src": "/images/17193/15.jpeg",
+        "room": "Details",
+        "width": 803,
+        "height": 1023
+      },
+      {
+        "src": "/images/17193/22.jpeg",
+        "room": "Details",
+        "width": 1354,
+        "height": 1023
+      },
+      {
+        "src": "/images/17193/27.jpeg",
+        "room": "Details",
+        "width": 878,
+        "height": 1023
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "slug": "flat-17285-avlon-park",
+    "flatNo": "17285",
+    "configuration": "3 BHK",
+    "development": "Avlon Park",
+    "community": "The Prestige City",
+    "area": "195 m²",
+    "cover": {
+      "src": "/images/17285/2.jpg",
+      "room": "Kitchen",
+      "width": 1200,
+      "height": 1600
+    },
+    "images": [
+      {
+        "src": "/images/17285/9.jpg",
+        "room": "Entrance & Foyer",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17285/11.jpg",
+        "room": "Entrance & Foyer",
+        "width": 900,
+        "height": 1600
+      },
+      {
+        "src": "/images/17285/16.jpg",
+        "room": "Wall Décor",
+        "width": 1500,
+        "height": 1125
+      },
+      {
+        "src": "/images/17285/13.jpg",
+        "room": "Living Room",
+        "width": 1500,
+        "height": 1125
+      },
+      {
+        "src": "/images/17285/14.jpg",
+        "room": "Living Room",
+        "width": 1500,
+        "height": 1125
+      },
+      {
+        "src": "/images/17285/15.jpg",
+        "room": "Living Room",
+        "width": 1500,
+        "height": 1125
+      },
+      {
+        "src": "/images/17285/2.jpg",
+        "room": "Kitchen",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17285/3.jpg",
+        "room": "Kitchen",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17285/4.jpg",
+        "room": "Kitchen",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17285/6.jpg",
+        "room": "Kitchen",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17285/7.jpg",
+        "room": "Kitchen",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17285/5.jpg",
+        "room": "Kitchen",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17285/17.jpeg",
+        "room": "Master Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17285/10.jpg",
+        "room": "Master Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17285/1.jpg",
+        "room": "Kids' Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17285/8.jpg",
+        "room": "Kids' Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/17285/12.jpg",
+        "room": "Guest Bedroom",
+        "width": 900,
+        "height": 1600
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "slug": "flat-13102-avlon-park",
+    "flatNo": "13102",
+    "configuration": "3 BHK",
+    "development": "Avlon Park",
+    "community": "The Prestige City",
+    "area": "195 m²",
+    "cover": {
+      "src": "/images/13102/22.jpeg",
+      "room": "Living Room",
+      "width": 1536,
+      "height": 856
+    },
+    "images": [
+      {
+        "src": "/images/13102/21.jpeg",
+        "room": "Entrance & Foyer",
+        "width": 821,
+        "height": 1023
+      },
+      {
+        "src": "/images/13102/001.jpeg",
+        "room": "Living Room",
+        "width": 1285,
+        "height": 1023
+      },
+      {
+        "src": "/images/13102/20.jpeg",
+        "room": "Living Room",
+        "width": 659,
+        "height": 1023
+      },
+      {
+        "src": "/images/13102/22.jpeg",
+        "room": "Living Room",
+        "width": 1536,
+        "height": 856
+      },
+      {
+        "src": "/images/13102/23.jpeg",
+        "room": "Living Room",
+        "width": 923,
+        "height": 1023
+      },
+      {
+        "src": "/images/13102/19.jpeg",
+        "room": "Dining & Crockery",
+        "width": 1004,
+        "height": 1023
+      },
+      {
+        "src": "/images/13102/25.jpeg",
+        "room": "Kitchen",
+        "width": 912,
+        "height": 1023
+      },
+      {
+        "src": "/images/13102/26.jpeg",
+        "room": "Master Bedroom",
+        "width": 977,
+        "height": 1023
+      },
+      {
+        "src": "/images/13102/28.jpeg",
+        "room": "Master Bedroom",
+        "width": 837,
+        "height": 1023
+      },
+      {
+        "src": "/images/13102/30.jpeg",
+        "room": "Master Bedroom",
+        "width": 809,
+        "height": 1023
+      },
+      {
+        "src": "/images/13102/29.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 1500,
+        "height": 1000
+      },
+      {
+        "src": "/images/13102/29(1).PNG",
+        "room": "Kids' Bedroom",
+        "width": 1536,
+        "height": 1024
+      },
+      {
+        "src": "/images/13102/27.jpeg",
+        "room": "Guest Bedroom",
+        "width": 878,
+        "height": 1023
+      },
+      {
+        "src": "/images/13102/24.jpeg",
+        "room": "Details",
+        "width": 751,
+        "height": 1023
+      },
+      {
+        "src": "/images/13102/31.jpeg",
+        "room": "Details",
+        "width": 737,
+        "height": 1023
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "slug": "flat-13272-avlon-park",
+    "flatNo": "13272",
+    "configuration": "3 BHK",
+    "development": "Avlon Park",
+    "community": "The Prestige City",
+    "area": "195 m²",
+    "cover": {
+      "src": "/images/13272/1.jpg",
+      "room": "Living Room",
+      "width": 1500,
+      "height": 844
+    },
+    "images": [
+      {
+        "src": "/images/13272/14.jpeg",
+        "room": "Entrance & Foyer",
+        "width": 1430,
+        "height": 1079
+      },
+      {
+        "src": "/images/13272/1.jpg",
+        "room": "Living Room",
+        "width": 1500,
+        "height": 844
+      },
+      {
+        "src": "/images/13272/15.jpeg",
+        "room": "Living Room",
+        "width": 1600,
+        "height": 816
+      },
+      {
+        "src": "/images/13272/2.jpg",
+        "room": "Dining & Crockery",
+        "width": 900,
+        "height": 1600
+      },
+      {
+        "src": "/images/13272/3.jpg",
+        "room": "Kitchen",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/13272/4.jpg",
+        "room": "Kitchen",
+        "width": 1500,
+        "height": 1125
+      },
+      {
+        "src": "/images/13272/6.jpg",
+        "room": "Kitchen",
+        "width": 900,
+        "height": 1600
+      },
+      {
+        "src": "/images/13272/7.jpg",
+        "room": "Kitchen",
+        "width": 900,
+        "height": 1600
+      },
+      {
+        "src": "/images/13272/13.jpeg",
+        "room": "Master Bedroom",
+        "width": 1162,
+        "height": 1600
+      },
+      {
+        "src": "/images/13272/12.jpeg",
+        "room": "Master Bedroom",
+        "width": 915,
+        "height": 1600
+      },
+      {
+        "src": "/images/13272/9.jpg",
+        "room": "Kids' Bedroom",
+        "width": 900,
+        "height": 1600
+      },
+      {
+        "src": "/images/13272/10.jpg",
+        "room": "Kids' Bedroom",
+        "width": 900,
+        "height": 1600
+      },
+      {
+        "src": "/images/13272/16.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/images/13272/11.jpeg",
+        "room": "Guest Bedroom",
+        "width": 1189,
+        "height": 1600
+      },
+      {
+        "src": "/images/13262/5.jpg",
+        "room": "Guest Bedroom",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "/images/13262/8.jpg",
+        "room": "Guest Bedroom",
+        "width": 1448,
+        "height": 1086
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "slug": "flat-13262-avlon-park",
+    "flatNo": "13262",
+    "configuration": "3 BHK",
+    "development": "Avlon Park",
+    "community": "The Prestige City",
+    "area": "195 m²",
+    "cover": {
+      "src": "/images/13262/4.jpg",
+      "room": "Living Room",
+      "width": 1600,
+      "height": 900
+    },
+    "images": [
+      {
+        "src": "/images/13262/8.jpg",
+        "room": "Entrance & Foyer",
+        "width": 1448,
+        "height": 1086
+      },
+      {
+        "src": "/images/13262/1.jpg",
+        "room": "Wall Décor",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "/images/13262/4.jpg",
+        "room": "Living Room",
+        "width": 1600,
+        "height": 900
+      },
+      {
+        "src": "/images/13262/9.jpg",
+        "room": "Dining & Crockery",
+        "width": 1110,
+        "height": 1280
+      },
+      {
+        "src": "/images/13262/0.jpg",
+        "room": "Kitchen",
+        "width": 900,
+        "height": 1600
+      },
+      {
+        "src": "/images/13262/10.jpg",
+        "room": "Kitchen",
+        "width": 720,
+        "height": 1280
+      },
+      {
+        "src": "/images/13262/11.jpg",
+        "room": "Kitchen",
+        "width": 720,
+        "height": 1280
+      },
+      {
+        "src": "/images/13262/12.jpg",
+        "room": "Kitchen",
+        "width": 720,
+        "height": 1280
+      },
+      {
+        "src": "/images/13262/13.jpg",
+        "room": "Kitchen",
+        "width": 3120,
+        "height": 4160
+      },
+      {
+        "src": "/images/13262/2.jpg",
+        "room": "Master Bedroom",
+        "width": 956,
+        "height": 1280
+      },
+      {
+        "src": "/images/13262/3.jpg",
+        "room": "Kids' Bedroom",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "/images/13262/6.jpg",
+        "room": "Kids' Bedroom",
+        "width": 1448,
+        "height": 1086
+      },
+      {
+        "src": "/images/13262/7.jpg",
+        "room": "Details",
+        "width": 720,
+        "height": 1280
+      },
+      {
+        "src": "/images/13262/5.jpg",
+        "room": "Details",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "/images/13262/15.jpg",
+        "room": "Details",
+        "width": 1086,
+        "height": 1448
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "slug": "flat-11172-avlon-park",
+    "flatNo": "11172",
+    "configuration": "3 BHK",
+    "development": "Avlon Park",
+    "community": "The Prestige City",
+    "area": "195 m²",
+    "cover": {
+      "src": "/images/11172/12.jpg",
+      "room": "Master Bedroom",
+      "width": 1280,
+      "height": 853
+    },
+    "images": [
+      {
+        "src": "/images/11172/3.jpg",
+        "room": "Wall Décor",
+        "width": 853,
+        "height": 1280
+      },
+      {
+        "src": "/images/11172/13.jpg",
+        "room": "Living Room",
+        "width": 1280,
+        "height": 1096
+      },
+      {
+        "src": "/images/11172/6.jpg",
+        "room": "Living Room",
+        "width": 1280,
+        "height": 1116
+      },
+      {
+        "src": "/images/11172/2.jpg",
+        "room": "Kitchen",
+        "width": 499,
+        "height": 1280
+      },
+      {
+        "src": "/images/11172/7.jpg",
+        "room": "Kitchen",
+        "width": 499,
+        "height": 1280
+      },
+      {
+        "src": "/images/11172/1.jpg",
+        "room": "Master Bedroom",
+        "width": 1280,
+        "height": 853
+      },
+      {
+        "src": "/images/11172/12.jpg",
+        "room": "Master Bedroom",
+        "width": 1280,
+        "height": 853
+      },
+      {
+        "src": "/images/11172/11.jpg",
+        "room": "Master Bedroom",
+        "width": 1023,
+        "height": 1028
+      },
+      {
+        "src": "/images/11172/10.jpg",
+        "room": "Kids' Bedroom",
+        "width": 1280,
+        "height": 854
+      },
+      {
+        "src": "/images/11172/0.jpg",
+        "room": "Kids' Bedroom",
+        "width": 1280,
+        "height": 853
+      },
+      {
+        "src": "/images/11172/9.jpg",
+        "room": "Guest Bedroom",
+        "width": 1280,
+        "height": 853
+      },
+      {
+        "src": "/images/11172/4.jpg",
+        "room": "Details",
+        "width": 498,
+        "height": 449
+      },
+      {
+        "src": "/images/11172/5.jpg",
+        "room": "Details",
+        "width": 1280,
+        "height": 853
+      },
+      {
+        "src": "/images/11172/8.jpg",
+        "room": "Details",
+        "width": 1280,
+        "height": 853
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "slug": "flat-25147-avlon-park",
+    "flatNo": "25147",
+    "configuration": "3 BHK",
+    "development": "Avlon Park",
+    "community": "The Prestige City",
+    "area": "200 m²",
+    "cover": {
+      "src": "/images/25147/2.jpg",
+      "room": "Kitchen",
+      "width": 1200,
+      "height": 1600
+    },
+    "images": [
+      {
+        "src": "/images/25147/9.jpeg",
+        "room": "Wall Décor",
+        "width": 582,
+        "height": 1280
+      },
+      {
+        "src": "/images/25147/1.jpg",
+        "room": "Living Room",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/25147/2.jpg",
+        "room": "Kitchen",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/25147/4.jpg",
+        "room": "Kitchen",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/25147/5.jpg",
+        "room": "Master Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/25147/7.jpg",
+        "room": "Master Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/25147/6.jpg",
+        "room": "Kids' Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/25147/8.jpg",
+        "room": "Guest Bedroom",
+        "width": 1200,
+        "height": 1600
+      },
+      {
+        "src": "/images/25147/3.jpg",
+        "room": "Guest Bedroom",
+        "width": 1200,
+        "height": 1600
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "slug": "flat-12253-avlon-park",
+    "flatNo": "12253",
+    "configuration": "3 BHK",
+    "development": "Avlon Park",
+    "community": "The Prestige City",
+    "area": "200 m²",
+    "cover": {
+      "src": "/images/12253/5.jpeg",
+      "room": "Living Room",
+      "width": 1280,
+      "height": 960
+    },
+    "images": [
+      {
+        "src": "/images/12253/20.jpeg",
+        "room": "Entrance & Foyer",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/images/12253/8.jpeg",
+        "room": "Entrance & Foyer",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/images/12253/23.jpeg",
+        "room": "Wall Décor",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/7.jpeg",
+        "room": "Living Room",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/9.jpeg",
+        "room": "Living Room",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/24.jpeg",
+        "room": "Living Room",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/5.jpeg",
+        "room": "Living Room",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/images/12253/10.jpeg",
+        "room": "Dining & Crockery",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/13.jpeg",
+        "room": "Dining & Crockery",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/2.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/4.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/14.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/18.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/17.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/6.jpeg",
+        "room": "Master Bedroom",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/images/12253/1.jpeg",
+        "room": "Master Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/19.jpeg",
+        "room": "Master Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/22.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/25.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/26.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/16.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/3.jpeg",
+        "room": "Guest Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/11.jpeg",
+        "room": "Guest Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/12.jpeg",
+        "room": "Guest Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12253/15.jpeg",
+        "room": "Details",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/images/12253/21.jpeg",
+        "room": "Details",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "slug": "flat-12263-avlon-park",
+    "flatNo": "12263",
+    "configuration": "3 BHK",
+    "development": "Avlon Park",
+    "community": "The Prestige City",
+    "area": "200 m²",
+    "cover": {
+      "src": "/images/12263/1.jpeg",
+      "room": "Master Bedroom",
+      "width": 960,
+      "height": 1280
+    },
+    "images": [
+      {
+        "src": "/images/12263/11.jpeg",
+        "room": "Entrance & Foyer",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/25.jpeg",
+        "room": "Entrance & Foyer",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/2.jpeg",
+        "room": "Wall Décor",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/24.jpeg",
+        "room": "Wall Décor",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/23.jpeg",
+        "room": "Living Room",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/5.jpeg",
+        "room": "Living Room",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/8.jpeg",
+        "room": "Living Room",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/14.jpeg",
+        "room": "Living Room",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/12.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/17.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/20.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/21.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/22.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/26.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/29.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/3.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/4.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/13.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/18.jpeg",
+        "room": "Master Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/1.jpeg",
+        "room": "Master Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/19.jpeg",
+        "room": "Master Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/27.jpeg",
+        "room": "Master Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/28.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/6.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/16.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/7.jpeg",
+        "room": "Guest Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/9.jpeg",
+        "room": "Guest Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/10.jpeg",
+        "room": "Guest Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/12263/15.jpeg",
+        "room": "Details",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "slug": "flat-17024-avlon-park",
+    "flatNo": "17024",
+    "configuration": "3.5 BHK",
+    "development": "Avlon Park",
+    "community": "The Prestige City",
+    "area": "200 m²",
+    "cover": {
+      "src": "/images/17024/17.jpeg",
+      "room": "Living Room",
+      "width": 1280,
+      "height": 960
+    },
+    "images": [
+      {
+        "src": "/images/17024/1.jpeg",
+        "room": "Entrance & Foyer",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/24.jpeg",
+        "room": "Entrance & Foyer",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/28.jpeg",
+        "room": "Entrance & Foyer",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "src": "/images/17024/19.jpeg",
+        "room": "Wall Décor",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/29.jpeg",
+        "room": "Wall Décor",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/14.jpeg",
+        "room": "Living Room",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/17.jpeg",
+        "room": "Living Room",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/images/17024/12.jpeg",
+        "room": "Dining & Crockery",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/4.jpeg",
+        "room": "Dining & Crockery",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/images/17024/26.jpeg",
+        "room": "Dining & Crockery",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/23.jpeg",
+        "room": "Kitchen",
+        "width": 1448,
+        "height": 1086
+      },
+      {
+        "src": "/images/17024/8.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/9.jpeg",
+        "room": "Kitchen",
+        "width": 1086,
+        "height": 1448
+      },
+      {
+        "src": "/images/17024/5.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/3.jpeg",
+        "room": "Kitchen",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/10.jpeg",
+        "room": "Master Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/13.jpeg",
+        "room": "Master Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/15.jpeg",
+        "room": "Master Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/2.jpeg",
+        "room": "Master Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/22.jpeg",
+        "room": "Master Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/7.jpeg",
+        "room": "Master Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/20.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/6.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/images/17024/25.jpeg",
+        "room": "Kids' Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/21.jpeg",
+        "room": "Guest Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/27.jpeg",
+        "room": "Guest Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/18.jpeg",
+        "room": "Guest Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/16.jpeg",
+        "room": "Guest Bedroom",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/images/17024/11.jpeg",
+        "room": "Guest Bedroom",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  }
+]

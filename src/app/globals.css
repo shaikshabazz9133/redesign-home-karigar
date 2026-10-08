@@ -1,0 +1,314 @@
+@import "tailwindcss";
+
+/* ════════════════════════════════════════════════════════════
+   HOME KARIGAR — DESIGN TOKENS
+   Warm architectural palette: ivory canvas, espresso ink,
+   oxblood (from the brand mark) as the single action colour,
+   brass reserved for fine detail on dark surfaces.
+   ════════════════════════════════════════════════════════════ */
+@theme {
+  /* Surfaces */
+  --color-ivory: #f7f4ef;
+  --color-linen: #efe9e0;
+  --color-paper: #fdfcfa;
+  --color-espresso: #1d1815;
+  --color-espresso-soft: #2a231f;
+
+  /* Ink */
+  --color-ink: #1f1a17;
+  --color-ink-soft: #3d3530;
+  --color-muted: #6b625a;
+  --color-ivory-muted: #b9b0a6;
+
+  /* Lines */
+  --color-line: #e4ddd3;
+  --color-line-strong: #cfc5b8;
+  --color-line-dark: #3a322d;
+
+  /* Brand */
+  --color-oxblood: #6a1f2b;
+  --color-oxblood-deep: #511621;
+  --color-oxblood-tint: #f3e9e8;
+  --color-brass: #c2a06b;
+  --color-brass-ink: #7d5f33;
+
+  /* Feedback */
+  --color-danger: #a12a2a;
+  --color-success: #2f6b4f;
+
+  /* Type */
+  --font-display: var(--font-fraunces), "Times New Roman", serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+
+  --text-display: clamp(2.6rem, 1.6rem + 3.6vw, 4.75rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.025em;
+  --text-h1: clamp(2.5rem, 1.75rem + 2.8vw, 4.25rem);
+  --text-h1--line-height: 1.05;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h2: clamp(2rem, 1.5rem + 1.9vw, 3.25rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.015em;
+  --text-h3: clamp(1.375rem, 1.25rem + 0.45vw, 1.75rem);
+  --text-h3--line-height: 1.25;
+  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-lead--line-height: 1.65;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.16em;
+
+  /* Shape */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
+  /* Elevation */
+  --shadow-soft: 0 1px 2px rgb(31 26 23 / 0.04), 0 10px 30px -14px rgb(31 26 23 / 0.14);
+  --shadow-lift: 0 2px 6px rgb(31 26 23 / 0.05), 0 28px 56px -24px rgb(31 26 23 / 0.28);
+  --shadow-float: 0 18px 50px -18px rgb(0 0 0 / 0.45);
+
+  /* Motion */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --animate-rise: rise 1s var(--ease-premium) both;
+  --animate-fade: fade 1.2s var(--ease-premium) both;
+  --animate-kenburns: kenburns 9s linear both;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translate3d(0, 22px, 0); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes kenburns {
+    from { transform: scale(1.08); }
+    to { transform: scale(1); }
+  }
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 6rem;
+    overflow-x: clip;
+  }
+  body {
+    background: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 380;
+    font-optical-sizing: auto;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--color-oxblood); color: var(--color-ivory); }
+
+  :focus-visible {
+    outline: 2px solid var(--color-oxblood);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .on-dark :focus-visible { outline-color: var(--color-brass); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+}
+
+/* ── Typographic primitives ───────────────────────────────── */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  line-height: 1;
+  letter-spacing: var(--text-eyebrow--letter-spacing);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+@utility container-site {
+  width: 100%;
+  max-width: 82rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+@utility section-y {
+  padding-block: clamp(4.5rem, 3rem + 6vw, 9rem);
+}
+
+/* Animated underline for text links */
+@utility link-line {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s var(--ease-premium);
+  &:hover, &:focus-visible { background-size: 100% 1px; }
+}
+
+/* ── Scroll reveal (progressive enhancement) ──────────────────
+   Content is visible by default. Only when JS has booted
+   (html.js) do [data-reveal] elements start hidden and animate
+   in as they enter the viewport. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    transition:
+      opacity 0.9s var(--ease-premium),
+      transform 1.1s var(--ease-premium);
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+  html.js [data-reveal="fade"] { transform: none; }
+  html.js [data-reveal="image"] {
+    transform: none;
+    clip-path: inset(8% 8% 8% 8%);
+    transition:
+      opacity 0.9s var(--ease-premium),
+      clip-path 1.4s var(--ease-out-expo);
+  }
+  html.js [data-reveal="image"] img {
+    transform: scale(1.12);
+    transition: transform 1.8s var(--ease-out-expo);
+  }
+  html.js [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+  html.js [data-reveal="image"].is-in img { transform: none; }
+}
+
+/* ── Native dialog (lightbox / video) ─────────────────────── */
+dialog.hk-dialog {
+  max-width: 100vw;
+  max-height: 100dvh;
+  width: 100vw;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-ivory);
+}
+dialog.hk-dialog::backdrop {
+  background: rgb(14 11 10 / 0.94);
+}
+@media (prefers-reduced-motion: no-preference) {
+  dialog.hk-dialog[open] { animation: fade 0.35s var(--ease-premium); }
+  dialog.hk-dialog[open]::backdrop { animation: fade 0.35s var(--ease-premium); }
+}
+
+/* Native <details> accordion */
+details.hk-faq summary { list-style: none; }
+details.hk-faq summary::-webkit-details-marker { display: none; }
+details.hk-faq .hk-faq-icon::after {
+  transition: transform 0.4s var(--ease-premium);
+}
+details.hk-faq[open] .hk-faq-icon::after { transform: rotate(90deg); }
+@media (prefers-reduced-motion: no-preference) {
+  details.hk-faq::details-content {
+    block-size: 0;
+    overflow-y: clip;
+    transition: block-size 0.5s var(--ease-premium), content-visibility 0.5s allow-discrete;
+  }
+  details.hk-faq[open]::details-content { block-size: auto; }
+  :root { interpolate-size: allow-keywords; }
+}
+
+/* Hide scrollbars on horizontal tracks while keeping them scrollable */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* Success check — stroke draws in */
+@keyframes hk-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Hero progress bar — the animation end drives the slider */
+@keyframes hk-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ── Image loading states ─────────────────────────────────────
+   Unlayered on purpose: it must win over Tailwind transition
+   utilities so both the fade-in and the hover zoom animate. */
+.hk-img {
+  transition-property: opacity, transform, scale;
+  transition-duration: 0.8s, 1.4s, 1.4s;
+  transition-timing-function: var(--ease-premium), var(--ease-out-expo), var(--ease-out-expo);
+}
+html.js .hk-img:not([data-loaded]) { opacity: 0; }
+/* Photo overlays (gradients) wait for their photo */
+.hk-img ~ .hk-overlay { transition: opacity 0.8s var(--ease-premium); }
+html.js .hk-img:not([data-loaded]) ~ .hk-overlay { opacity: 0; }
+
+.hk-shimmer {
+  background-color: var(--color-linen);
+  background-image: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgb(255 255 255 / 0.55) 50%,
+    transparent 70%
+  );
+  background-size: 220% 100%;
+  animation: hk-shimmer 1.6s var(--ease-in-out-soft) infinite;
+}
+@keyframes hk-shimmer {
+  from { background-position: 130% 0; }
+  to { background-position: -90% 0; }
+}
+
+/* Brand mark loader: strokes draw in, hold, then retract */
+.hk-loader-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: hk-loader-draw 2.2s var(--ease-in-out-soft) infinite;
+}
+.hk-loader-window {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hk-loader-window 2.2s var(--ease-premium) infinite;
+}
+@keyframes hk-loader-draw {
+  0% { stroke-dashoffset: 1; opacity: 1; }
+  40%, 80% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes hk-loader-window {
+  0%, 30% { opacity: 0; transform: scale(0.4); }
+  45%, 80% { opacity: 1; transform: scale(1); fill: currentColor; }
+  100% { opacity: 0; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hk-loader-line { animation: none; stroke-dashoffset: 0; }
+  .hk-loader-window { animation: none; opacity: 1; transform: none; }
+  .hk-shimmer { animation: none; }
+}
