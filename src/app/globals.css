@@ -32,6 +32,11 @@
   --color-brass: #c2a06b;
   --color-brass-ink: #7d5f33;
 
+  /* Logo — sampled from the textured stone mark */
+  --color-sand: #c9b59e;
+  --color-taupe: #8f7763;
+  --color-umber: #33200d;
+
   /* Feedback */
   --color-danger: #a12a2a;
   --color-success: #2f6b4f;
@@ -39,6 +44,12 @@
   /* Type */
   --font-display: var(--font-fraunces), "Times New Roman", serif;
   --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-brand: var(--font-cormorant), Georgia, serif;
+  --font-hero: var(--font-cormorant-light), Georgia, serif;
+  --font-caps: var(--font-jost), "Futura", sans-serif;
+  --font-script: var(--font-imperial), cursive;
+  --font-grotesk: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  --font-tagline: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 
   --text-display: clamp(2.6rem, 1.6rem + 3.6vw, 4.75rem);
   --text-display--line-height: 1.02;
@@ -175,23 +186,11 @@
     transition-delay: calc(var(--i, 0) * 90ms);
   }
   html.js [data-reveal="fade"] { transform: none; }
-  html.js [data-reveal="image"] {
-    transform: none;
-    clip-path: inset(8% 8% 8% 8%);
-    transition:
-      opacity 0.9s var(--ease-premium),
-      clip-path 1.4s var(--ease-out-expo);
-  }
-  html.js [data-reveal="image"] img {
-    transform: scale(1.12);
-    transition: transform 1.8s var(--ease-out-expo);
-  }
   html.js [data-reveal].is-in {
     opacity: 1;
     transform: none;
     clip-path: inset(0 0 0 0);
   }
-  html.js [data-reveal="image"].is-in img { transform: none; }
 }
 
 /* ── Native dialog (lightbox / video) ─────────────────────── */
@@ -285,30 +284,279 @@ html.js .hk-img:not([data-loaded]) ~ .hk-overlay { opacity: 0; }
   to { background-position: -90% 0; }
 }
 
-/* Brand mark loader: strokes draw in, hold, then retract */
-.hk-loader-line {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: hk-loader-draw 2.2s var(--ease-in-out-soft) infinite;
+/* Brand mark loader: the two logo stones keep their balance */
+.hk-load-tall { animation: hk-balance-tall 2.4s var(--ease-in-out-soft) infinite; transform-origin: 18% 100%; }
+.hk-load-small { animation: hk-balance-small 2.4s var(--ease-in-out-soft) infinite; transform-origin: 55% 100%; }
+.hk-load .hk-sheen { animation: hki-sheen 2.4s var(--ease-in-out-soft) infinite; }
+.hk-load-shadow { animation: hk-shadow-breathe 2.4s var(--ease-in-out-soft) infinite; }
+@keyframes hk-balance-tall {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: translate3d(0, -4%, 0) rotate(-2deg); }
 }
-.hk-loader-window {
-  opacity: 0;
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: hk-loader-window 2.2s var(--ease-premium) infinite;
+@keyframes hk-balance-small {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: translate3d(3%, -6%, 0) rotate(5deg); }
 }
-@keyframes hk-loader-draw {
-  0% { stroke-dashoffset: 1; opacity: 1; }
-  40%, 80% { stroke-dashoffset: 0; opacity: 1; }
-  100% { stroke-dashoffset: 0; opacity: 0; }
-}
-@keyframes hk-loader-window {
-  0%, 30% { opacity: 0; transform: scale(0.4); }
-  45%, 80% { opacity: 1; transform: scale(1); fill: currentColor; }
-  100% { opacity: 0; transform: scale(1); }
+@keyframes hk-shadow-breathe {
+  0%, 100% { opacity: 1; transform: scaleX(1); }
+  50% { opacity: 0.55; transform: scaleX(0.82); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hk-loader-line { animation: none; stroke-dashoffset: 0; }
-  .hk-loader-window { animation: none; opacity: 1; transform: none; }
+  .hk-load-tall, .hk-load-small, .hk-load-shadow, .hk-load .hk-sheen { animation: none; }
   .hk-shimmer { animation: none; }
 }
+
+/* A soft light pass across the stones, masked to the mark's silhouette. */
+.hk-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  -webkit-mask: url(/brand/sm/mark.webp) center / 100% 100% no-repeat;
+  mask: url(/brand/sm/mark.webp) center / 100% 100% no-repeat;
+  background: linear-gradient(105deg, transparent 38%, rgb(255 250 242 / 0.75) 50%, transparent 62%) 150% 0 / 250% 100% no-repeat;
+  mix-blend-mode: soft-light;
+}
+@keyframes hki-sheen {
+  from { background-position: 150% 0; }
+  to { background-position: -50% 0; }
+}
+
+/* ── Intro preloader (every full page load) ──────────────── */
+/* Plays from server HTML before hydration; JS only decides when to lift it.
+   Only transform, opacity and clip-path animate, so nothing repaints. Entrance
+   animations fill "backwards" only: once done they drop their GPU layer and
+   the stones render pixel-sharp instead of as a resampled bitmap. */
+#hk-preloader {
+  /* Fail-safe: never trap the page if scripts stall. */
+  animation: hki-failsafe 0s linear 12s forwards;
+}
+#hk-preloader .hk-pre-glow { animation: hki-fade-in 1.6s var(--ease-premium) backwards; }
+
+/* 1 · Plan: guides draw in while the karigars walk on and mark out the outlines. */
+#hk-preloader .hk-pre-guide,
+#hk-preloader .hk-pre-outline {
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1 1;
+  stroke-linecap: round;
+}
+#hk-preloader .hk-pre-guide {
+  stroke-width: 1;
+  animation: hki-draw 1.4s var(--ease-in-out-soft) calc(0.1s + var(--i) * 90ms) both;
+}
+/* Outlines are traced on the karigars' SMIL clock, in step with their chalk strings. */
+#hk-preloader .hk-pre-outline { stroke-width: 1.4; }
+/* 2 · Build: each stone's colour spreads from the karigar's tool — the
+   carver's chisel on the tall stone, the painter's roller on the small one —
+   until it meets the traced outline: a feathered radial mask whose radius grows. The radius
+   rests at a fully open value, so the finished stone is unmasked in effect. */
+@property --hk-r { syntax: "<percentage>"; inherits: false; initial-value: 130%; }
+#hk-preloader .hk-pre-tall,
+#hk-preloader .hk-pre-small {
+  -webkit-mask: radial-gradient(circle at var(--hk-cx) var(--hk-cy), #000 var(--hk-r), transparent calc(var(--hk-r) + 22%));
+  mask: radial-gradient(circle at var(--hk-cx) var(--hk-cy), #000 var(--hk-r), transparent calc(var(--hk-r) + 22%));
+}
+#hk-preloader .hk-pre-tall {
+  --hk-cx: 2%;
+  --hk-cy: 81%;
+  animation: hki-bloom 2.4s cubic-bezier(0.33, 0, 0.2, 1) 2.8s backwards;
+}
+#hk-preloader .hk-pre-small {
+  --hk-cx: 100%;
+  --hk-cy: 76%;
+  animation: hki-bloom 2.4s cubic-bezier(0.33, 0, 0.2, 1) 3.1s backwards;
+}
+#hk-preloader .hk-pre-shadow { animation: hki-shadow-in 1.8s var(--ease-out-expo) 2.9s backwards; }
+/* 3 · Finish: the drawing lifts away and light crosses the finished stone. */
+#hk-preloader .hk-pre-plan,
+#hk-preloader .hk-pre-lines { animation: hki-plan-out 1s var(--ease-in-out-soft) 5.3s both; }
+#hk-preloader .hki-sheen { animation: hki-sheen 1.6s var(--ease-in-out-soft) 5.7s backwards; }
+/* Crew: the karigars walk on at the start (their legs step on the SMIL clock),
+   mark out and build the stones, then step back and leave the finished mark. */
+#hk-preloader .hk-pre-carver {
+  animation:
+    hki-carver-in 1s cubic-bezier(0.3, 0.5, 0.4, 1) 0.1s backwards,
+    hki-carver-out 0.9s var(--ease-in-out-soft) 5.5s forwards;
+}
+#hk-preloader .hk-pre-painter {
+  animation:
+    hki-painter-in 1s cubic-bezier(0.3, 0.5, 0.4, 1) 0.1s backwards,
+    hki-painter-out 0.9s var(--ease-in-out-soft) 5.6s forwards;
+}
+
+/* 5 · Name: letters unfold in 3D from the centre outward while the tracking
+   settles, a diamond seats on the rule, and a gold glint sweeps the name. */
+#hk-preloader .hk-pre-wordmark { animation: hki-tracking 2.2s var(--ease-out-expo) 5.6s backwards; }
+#hk-preloader .hk-pre-letter {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  animation: hki-unfold 1.5s var(--ease-out-expo) calc(5.6s + var(--d) * 75ms) backwards;
+}
+#hk-preloader .hk-pre-glint {
+  color: transparent;
+  background: linear-gradient(100deg, transparent 42%, rgb(255 238 205 / 0.95) 50%, transparent 58%) 160% 0 / 260% 100% no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: hki-glint 1.7s var(--ease-in-out-soft) 7.05s both;
+}
+#hk-preloader .hk-pre-rule { animation: hki-rule-in 1.4s var(--ease-out-expo) 6.15s backwards; }
+#hk-preloader .hk-pre-gem { animation: hki-gem-in 0.9s var(--ease-out-expo) 6.6s backwards; }
+#hk-preloader .hk-pre-word {
+  display: inline-block;
+  animation: hki-word-in 1.3s var(--ease-out-expo) calc(6.6s + var(--i) * 180ms) backwards;
+}
+#hk-preloader .hk-pre-foot { animation: hki-fade-in 1s var(--ease-premium) 0.4s backwards; }
+#hk-preloader .hk-pre-progress { animation: hki-progress 8.3s var(--ease-in-out-soft) 0.2s both; }
+
+/* A CSS-only counter that tracks the progress line. */
+@property --hk-n { syntax: "<integer>"; inherits: false; initial-value: 0; }
+#hk-preloader .hk-pre-count {
+  counter-reset: hk-n var(--hk-n);
+  animation: hki-count 8.3s var(--ease-in-out-soft) 0.2s both;
+}
+#hk-preloader .hk-pre-count::after { content: counter(hk-n, decimal-leading-zero) "%"; }
+
+/* Exit: content lifts away, then the ivory panel and the espresso one behind it slide up. */
+#hk-preloader.is-leaving { pointer-events: none; }
+#hk-preloader.is-leaving .hk-pre-content,
+#hk-preloader.is-leaving .hk-pre-foot { animation: hki-content-out 0.7s var(--ease-in-out-soft) both; }
+#hk-preloader.is-leaving .hk-pre-progress { animation: hki-progress-done 0.45s var(--ease-premium) both; }
+#hk-preloader.is-leaving .hk-pre-count { animation: hki-count-done 0.45s var(--ease-premium) both; }
+#hk-preloader.is-leaving .hk-pre-panel { animation: hki-panel-up 1.05s cubic-bezier(0.76, 0, 0.24, 1) 0.45s both; }
+#hk-preloader.is-leaving .hk-pre-panel-back { animation: hki-panel-up 1.05s cubic-bezier(0.76, 0, 0.24, 1) 0.6s both; }
+
+@keyframes hki-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+@keyframes hki-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hki-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes hki-bloom {
+  from { --hk-r: -22%; }
+  to { --hk-r: 100%; }
+}
+@keyframes hki-carver-in { from { opacity: 0; transform: translate3d(-110px, 0, 0); } }
+@keyframes hki-painter-in { from { opacity: 0; transform: translate3d(110px, 0, 0); } }
+@keyframes hki-carver-out { to { opacity: 0; transform: translate3d(-40px, 0, 0); } }
+@keyframes hki-painter-out { to { opacity: 0; transform: translate3d(40px, 0, 0); } }
+@keyframes hki-tracking { from { letter-spacing: 0.7em; } }
+@keyframes hki-unfold {
+  from { opacity: 0; transform: translate3d(0, 0.35em, 0) rotateX(-85deg); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hki-glint {
+  from { background-position: 160% 0; }
+  to { background-position: -60% 0; }
+}
+@keyframes hki-gem-in {
+  from { opacity: 0; transform: rotate(-180deg) scale(0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hki-word-in {
+  from { opacity: 0; letter-spacing: 0.6em; }
+  to { opacity: 1; letter-spacing: 0.28em; }
+}
+@keyframes hki-plan-out { to { opacity: 0; transform: scale(1.03); } }
+@keyframes hki-shadow-in {
+  from { opacity: 0; transform: scaleX(0.3); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hki-rise {
+  from { opacity: 0; transform: translate3d(0, 105%, 0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hki-rule-in {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes hki-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(0.9); }
+}
+@keyframes hki-progress-done { from { transform: scaleX(0.9); } to { transform: scaleX(1); } }
+@keyframes hki-count { from { --hk-n: 0; } to { --hk-n: 90; } }
+@keyframes hki-count-done { from { --hk-n: 90; } to { --hk-n: 100; } }
+@keyframes hki-content-out { to { opacity: 0; transform: translate3d(0, -32px, 0); } }
+@keyframes hki-panel-up {
+  from { transform: none; }
+  to { transform: translate3d(0, -100%, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #hk-preloader * { animation-delay: 0s !important; }
+}
+
+/* ── Landing page motion ──────────────────────────────────── */
+/* Immersive hero: hidden while the intro plays, then the photograph settles
+   and the words rise in. A 12s fallback (matching the intro's fail-safe)
+   reveals it even if the intro script never runs; without JS it simply shows. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .hk-hero-photo { animation: hk-hero-settle 2.6s var(--ease-premium) 12s both; }
+  html.js .hk-hero-in { animation: hk-hero-rise 1.2s var(--ease-premium) calc(12s + var(--d, 0ms)) both; }
+  html.js[data-intro="done"] .hk-hero-photo { animation-delay: 0.35s; }
+  html.js[data-intro="done"] .hk-hero-in { animation-delay: calc(0.9s + var(--d, 0ms)); }
+}
+@keyframes hk-hero-settle {
+  from { transform: scale(1.12); filter: brightness(0.75); }
+  to { transform: none; filter: none; }
+}
+@keyframes hk-hero-rise {
+  from { opacity: 0; transform: translate3d(0, 28px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Arch rises open from the floor line; the photo settles in */
+@media (prefers-reduced-motion: no-preference) {
+  .hk-arch-reveal { animation: hk-arch 1.4s var(--ease-out-expo) 0.1s both; }
+  .hk-arch-image { animation: hk-settle 2.2s var(--ease-out-expo) 0.1s both; }
+}
+@keyframes hk-arch {
+  from { clip-path: inset(18% 0 0 0 round 999px 999px 8px 8px); opacity: 0.4; }
+  to { clip-path: inset(0 0 0 0 round 999px 999px 8px 8px); opacity: 1; }
+}
+@keyframes hk-settle {
+  from { transform: scale(1.14); }
+  to { transform: scale(1); }
+}
+
+/* Rotating seal */
+.hk-spin-slow { animation: hk-spin 26s linear infinite; }
+@keyframes hk-spin { to { transform: rotate(360deg); } }
+
+/* Community marquee */
+.hk-marquee-track { animation: hk-marquee 48s linear infinite; }
+@keyframes hk-marquee { to { transform: translateX(-50%); } }
+
+/* Process connector draws left → right when revealed */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .hk-line-draw { transform: scaleX(0); transform-origin: left; transition: transform 1.6s var(--ease-out-expo) 0.2s, opacity 0.6s; }
+  html.js .hk-line-draw.is-in { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hk-spin-slow, .hk-marquee-track { animation: none; }
+}
+
+/* ── Curtain mask reveal (ImageFrame) ─────────────────────────
+   Frame stays put (so the observer measures it correctly); its mask
+   slides down from -100% while the photo slides up from +100% and
+   settles from 1.3× — the photo appears to be uncovered in place. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal="mask"] { opacity: 1; transform: none; transition: none; }
+  html.js [data-reveal="mask"] .hk-mask {
+    transform: translate3d(0, -100%, 0);
+    transition: transform 1.5s var(--ease-out-expo);
+    transition-delay: calc(var(--i, 0) * 120ms);
+  }
+  html.js [data-reveal="mask"] .hk-mask-inner {
+    transform: translate3d(0, 100%, 0) scale(1.3);
+    transition: transform 1.5s var(--ease-out-expo);
+    transition-delay: calc(var(--i, 0) * 120ms);
+  }
+  html.js [data-reveal="mask"].is-in .hk-mask,
+  html.js [data-reveal="mask"].is-in .hk-mask-inner { transform: none; }
+}
+
+/* ── Lenis smooth scrolling ───────────────────────────────── */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: clip; }

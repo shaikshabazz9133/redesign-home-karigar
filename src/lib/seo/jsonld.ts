@@ -16,7 +16,7 @@ export function organizationSchema(): Json {
     slogan: site.tagline,
     description: site.description,
     url: site.url,
-    logo: absoluteUrl("/icon.png"),
+    logo: { "@type": "ImageObject", url: absoluteUrl("/brand/logo.png"), width: 1200, height: 856 },
     image: absoluteUrl("/images/home/1.png"),
     email: site.email,
     telephone: site.phones[0].e164,

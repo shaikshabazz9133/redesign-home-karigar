@@ -7,7 +7,7 @@ import { ProjectGrid, ProjectsExplorer } from "@/components/projects/ProjectsExp
 import { CtaBand } from "@/components/sections/CtaBand";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Projects — Completed Homes at The Prestige City",
+  title: "Homes — Completed Interiors at The Prestige City",
   description:
     "Browse 3 BHK and 3.5 BHK homes designed and delivered by Home Karigar at Avlon Park and Meridian Park, The Prestige City, Bengaluru — photographed room by room.",
   path: "/projects",
@@ -20,7 +20,7 @@ export default function ProjectsPage() {
   return (
     <>
       <PageHero
-        crumbs={[{ name: "Projects", path: "/projects" }]}
+        crumbs={[{ name: "Homes", path: "/projects" }]}
         eyebrow="Portfolio"
         title="Homes, exactly as delivered"
         intro={`${projects.length} homes and ${photos} photographs from The Prestige City — every one taken after handover, never a render.`}

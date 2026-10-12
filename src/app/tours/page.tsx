@@ -11,7 +11,7 @@ import { ButtonAnchor } from "@/components/ui/Button";
 import { EmptyState } from "@/components/common/EmptyState";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Home Tours — Video Walkthroughs of Finished Homes",
+  title: "Films — Video Walkthroughs of Finished Homes in Bengaluru",
   description:
     "Watch video tours of 3, 3.5 and 4.5 BHK homes designed by Home Karigar at The Prestige City, Bengaluru — and hear directly from the homeowners.",
   path: "/tours",
@@ -22,8 +22,8 @@ export default function ToursPage() {
   return (
     <>
       <PageHero
-        crumbs={[{ name: "Home Tours", path: "/tours" }]}
-        eyebrow="Home tours"
+        crumbs={[{ name: "Films", path: "/tours" }]}
+        eyebrow="Films"
         title="Walk through the homes we've handed over"
         intro="Unedited walkthroughs and homeowner stories, filmed after handover."
         aside={

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ImageFrame } from "@/components/motion/ImageFrame";
 import { LoadingImage } from "@/components/ui/LoadingImage";
 import { notFound } from "next/navigation";
 import {
@@ -71,7 +72,7 @@ export default async function ProjectPage({ params }: Props) {
     <>
       <header className="pt-32 md:pt-40">
         <div className="container-site">
-          <Breadcrumbs items={[{ name: "Projects", path: "/projects" }, { name: `Flat ${p.flatNo}`, path: `/projects/${p.slug}` }]} />
+          <Breadcrumbs items={[{ name: "Homes", path: "/projects" }, { name: `Flat ${p.flatNo}`, path: `/projects/${p.slug}` }]} />
           <div className="mt-10 grid gap-8 md:mt-14 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
               <div className="animate-rise"><Eyebrow>{p.configuration} residence</Eyebrow></div>
@@ -93,6 +94,7 @@ export default async function ProjectPage({ params }: Props) {
 
         <div className="container-site mt-12 md:mt-16">
           <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-linen md:aspect-[21/9]">
+            <ImageFrame fill reveal={false} parallax={0.12}>
             <LoadingImage
               src={p.cover.src}
               alt={imageAlt(p, p.cover)}
@@ -101,6 +103,7 @@ export default async function ProjectPage({ params }: Props) {
               sizes="(min-width: 1320px) 1240px, 100vw"
               className="object-cover"
             />
+            </ImageFrame>
           </div>
         </div>
       </header>

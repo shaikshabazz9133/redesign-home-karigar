@@ -1,5 +1,5 @@
 {
-  "name": "home-karigar-redesign",
+  "name": "home-karigar-v3",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -11,10 +11,11 @@
     "sync-content": "node scripts/sync-content.mjs"
   },
   "dependencies": {
+    "lenis": "^1.3.26",
+    "motion": "^12.23.0",
     "next": "16.2.2",
     "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "motion": "^12.23.0"
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

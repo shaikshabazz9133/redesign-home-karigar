@@ -19,7 +19,8 @@ export function SiteHeader() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
 
-  const overHero = pathname === "/" && !scrolled && !open;
+  /* Over the home page's full-bleed hero the bar starts transparent with light type, then turns solid. */
+  const atTop = pathname === "/" && !scrolled && !open;
 
   /* The header stays put; it only turns solid once the page leaves the top.
      State changes once per threshold crossing, so scrolling never flickers. */
@@ -63,7 +64,7 @@ export function SiteHeader() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,color] duration-500 ease-[var(--ease-premium)]",
-          overHero
+          atTop
             ? "on-dark border-b border-transparent text-ivory"
             : open
               ? "on-dark border-b border-transparent bg-espresso text-ivory"
@@ -71,11 +72,12 @@ export function SiteHeader() {
         )}
       >
         <div className="container-site flex h-[4.5rem] items-center justify-between gap-6 md:h-20">
+          {/* Full lockup on larger screens; on mobile, the transparent stone mark alone. */}
           <Link href="/" aria-label={`${site.name} — home`} className="relative z-10 -m-2 rounded-sm p-2">
-            <Logo />
+            <Logo markOnlyOnMobile />
           </Link>
 
-          <nav aria-label="Primary" className="hidden lg:block">
+          <nav aria-label="Primary" className="hidden xl:block">
             <ul className="flex items-center gap-1">
               {primaryNav.map((item) => {
                 const active = isActive(item.href);
@@ -85,7 +87,7 @@ export function SiteHeader() {
                       href={item.href}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "group relative inline-flex h-10 items-center rounded-full px-4 text-[0.9375rem] transition-colors duration-300",
+                        "group relative inline-flex h-10 items-center whitespace-nowrap rounded-full px-3 text-[0.9375rem] transition-colors duration-300 2xl:px-4",
                         active ? "opacity-100" : "opacity-75 hover:opacity-100",
                       )}
                     >
@@ -93,7 +95,7 @@ export function SiteHeader() {
                       <span
                         aria-hidden
                         className={cn(
-                          "absolute inset-x-4 bottom-1.5 h-px origin-left bg-current transition-transform duration-500 ease-[var(--ease-premium)]",
+                          "absolute inset-x-3 bottom-1.5 h-px origin-left bg-current transition-transform duration-500 ease-[var(--ease-premium)] 2xl:inset-x-4",
                           active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
                         )}
                       />
@@ -107,31 +109,39 @@ export function SiteHeader() {
           <div className="flex items-center gap-3">
             <ButtonLink
               href="/contact"
-              variant={overHero ? "light" : "primary"}
+              variant="timber"
+              icon="arrowUpRight"
               className="max-sm:hidden"
             >
-              Book a consultation
+              Begin Your Project
             </ButtonLink>
             <button
               ref={toggleRef}
               type="button"
-              className="relative z-10 -mr-2 grid size-11 place-items-center rounded-full lg:hidden"
+              className="relative z-10 -mr-2 grid size-11 place-items-center rounded-full xl:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Close menu" : "Open menu"}
               onClick={() => setOpen((o) => !o)}
             >
-              <span className="relative block h-3 w-6" aria-hidden>
+              {/* Three lines; the middle one slips away and the outer two cross into an X. */}
+              <span className="relative block h-3.5 w-6" aria-hidden>
                 <span
                   className={cn(
                     "absolute left-0 top-0 h-[1.5px] w-full bg-current transition-transform duration-500 ease-[var(--ease-premium)]",
-                    open && "translate-y-[5px] rotate-45",
+                    open && "translate-y-[6.25px] rotate-45",
                   )}
                 />
                 <span
                   className={cn(
-                    "absolute bottom-0 left-0 h-[1.5px] bg-current transition-[transform,width] duration-500 ease-[var(--ease-premium)]",
-                    open ? "w-full -translate-y-[5px] -rotate-45" : "w-4",
+                    "absolute left-0 top-1/2 h-[1.5px] w-full -translate-y-1/2 bg-current transition-[opacity,transform] duration-300 ease-[var(--ease-premium)]",
+                    open && "translate-x-2 opacity-0",
+                  )}
+                />
+                <span
+                  className={cn(
+                    "absolute bottom-0 left-0 h-[1.5px] w-full bg-current transition-transform duration-500 ease-[var(--ease-premium)]",
+                    open && "-translate-y-[6.25px] -rotate-45",
                   )}
                 />
               </span>
@@ -148,7 +158,7 @@ export function SiteHeader() {
             role="dialog"
             aria-modal="true"
             aria-label="Site menu"
-            className="on-dark fixed inset-0 z-40 flex flex-col overflow-y-auto bg-espresso pt-24 text-ivory lg:hidden"
+            className="on-dark fixed inset-0 z-40 flex flex-col overflow-y-auto bg-espresso pt-24 text-ivory xl:hidden"
             initial={{ clipPath: "inset(0 0 100% 0)" }}
             animate={{ clipPath: "inset(0 0 0% 0)" }}
             exit={{ clipPath: "inset(0 0 100% 0)" }}
@@ -183,7 +193,7 @@ export function SiteHeader() {
               transition={{ duration: 0.6, delay: 0.5 }}
             >
               <ButtonLink href="/contact" variant="light" size="lg" className="w-full">
-                Book a consultation
+                Begin your project
               </ButtonLink>
               <div className="grid grid-cols-2 gap-3 text-sm">
                 <a href={`tel:${site.phones[0].e164}`} className="flex h-12 items-center justify-center gap-2 rounded-full border border-line-dark">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ImageFrame } from "@/components/motion/ImageFrame";
 import { LoadingImage } from "@/components/ui/LoadingImage";
 import Link from "next/link";
 import { services } from "@/content/studio";
@@ -13,7 +14,7 @@ import { Icon } from "@/components/ui/Icon";
 import { cn, pad2 } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Interior Design Services — Kitchens, Wardrobes, Ceilings",
+  title: "What We Do — Interior Design Services: Kitchens, Wardrobes, Ceilings",
   description:
     "Modular kitchens on BWP 710 ply with Hettich, Häfele or Ebco hardware, wardrobes, false ceilings, TV units, foyers and pooja units — complete home interiors in Bengaluru by Home Karigar.",
   path: "/services",
@@ -30,8 +31,8 @@ export default function ServicesPage() {
   return (
     <>
       <PageHero
-        crumbs={[{ name: "Services", path: "/services" }]}
-        eyebrow="Services"
+        crumbs={[{ name: "What We Do", path: "/services" }]}
+        eyebrow="What we do"
         title="Every surface, every fitting — designed as one home"
         intro="A single studio for ceilings, kitchens, wardrobes and every built-in, so materials, proportions and light stay consistent from the foyer to the bedroom."
         aside={<ButtonLink href="/contact">Discuss your home</ButtonLink>}
@@ -40,9 +41,9 @@ export default function ServicesPage() {
       <section aria-label="Service details" className="container-site section-y flex flex-col gap-24 md:gap-32">
         {services.map((s, i) => (
           <article key={s.slug} id={s.slug} className="grid scroll-mt-28 items-center gap-10 lg:grid-cols-12 lg:gap-16">
-            <div className={cn("relative aspect-[4/3] overflow-hidden rounded-sm bg-linen lg:col-span-7", i % 2 && "lg:order-2")} data-reveal="image">
+            <ImageFrame parallax={0.1} className={cn("aspect-[4/3] rounded-sm bg-linen lg:col-span-7", i % 2 && "lg:order-2")}>
               <LoadingImage src={s.image.src} alt={s.image.alt} fill sizes="(min-width: 1024px) 56vw, 92vw" className="object-cover" />
-            </div>
+            </ImageFrame>
             <div className="lg:col-span-5">
               <p className="font-display text-lg text-brass-ink tabular-nums" data-reveal>{pad2(i + 1)}</p>
               <h2 className="mt-4 text-h2" data-reveal>{s.title}</h2>
@@ -76,7 +77,9 @@ export default function ServicesPage() {
                 <li key={room} data-reveal style={{ "--i": i % 3 } as React.CSSProperties}>
                   <Link href={`${projectHref(project)}#${roomSlug(room)}`} className="group relative block overflow-hidden rounded-sm bg-linen">
                     <div className="relative aspect-[4/3]">
-                      <LoadingImage src={image.src} alt={imageAlt(project, image)} fill sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 92vw" className="object-cover transition-transform duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-[1.05]" />
+                      <ImageFrame fill index={i % 3}>
+                        <LoadingImage src={image.src} alt={imageAlt(project, image)} fill sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 92vw" className="object-cover group-hover:scale-[1.05]" />
+                      </ImageFrame>
                       <div aria-hidden className="hk-overlay absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
                     </div>
                     <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-5 text-ivory">

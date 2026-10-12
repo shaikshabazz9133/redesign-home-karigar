@@ -1,3 +1,4 @@
+import { ImageFrame } from "@/components/motion/ImageFrame";
 import { LoadingImage } from "@/components/ui/LoadingImage";
 import Link from "next/link";
 import { imageAlt, projectHref, type Project } from "@/content/projects";
@@ -27,17 +28,19 @@ export function ProjectCard({
           aspect === "portrait" ? "aspect-[4/5]" : "aspect-[4/3]",
         )}
       >
-        <LoadingImage
-          src={p.cover.src}
-          alt={imageAlt(p, p.cover)}
-          fill
-          sizes={sizes}
-          className="object-cover transition-transform duration-[1.4s] ease-[var(--ease-out-expo)] group-hover:scale-[1.045]"
-        />
-        <div
-          aria-hidden
-          className="hk-overlay absolute inset-0 bg-gradient-to-t from-black/45 via-black/0 to-black/0 opacity-70 transition-opacity duration-700 group-hover:opacity-100"
-        />
+        <ImageFrame fill parallax={0.08}>
+          <LoadingImage
+            src={p.cover.src}
+            alt={imageAlt(p, p.cover)}
+            fill
+            sizes={sizes}
+            className="object-cover group-hover:scale-[1.045]"
+          />
+          <div
+            aria-hidden
+            className="hk-overlay absolute inset-0 bg-gradient-to-t from-black/45 via-black/0 to-black/0 opacity-70 transition-opacity duration-700 group-hover:opacity-100"
+          />
+        </ImageFrame>
         <span className="absolute left-4 top-4 rounded-full bg-ivory/90 px-3 py-1.5 text-xs font-medium text-ink backdrop-blur-sm">
           {p.configuration}
         </span>

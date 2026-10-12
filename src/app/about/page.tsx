@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ImageFrame } from "@/components/motion/ImageFrame";
 import { LoadingImage } from "@/components/ui/LoadingImage";
 import { pillars, team } from "@/content/studio";
 import { deliveryStats, site } from "@/content/site";
@@ -10,7 +11,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { pad2 } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
-  title: "The Studio — Architects & Interior Designers in Bengaluru",
+  title: "Studio — Architect-led Interior Designers in Bengaluru",
   description:
     "Meet Home Karigar: an architect-led interior design studio with over a decade of residential practice and 400+ homes delivered across Bengaluru.",
   path: "/about",
@@ -28,9 +29,9 @@ export default function AboutPage() {
       />
 
       <section aria-labelledby="story-title" className="container-site section-y grid gap-14 lg:grid-cols-12 lg:gap-16">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-linen lg:col-span-5" data-reveal="image">
+        <ImageFrame parallax={0.1} className="aspect-[4/5] rounded-sm bg-linen lg:col-span-5">
           <LoadingImage src="/images/about_us_01.jpeg" alt="Home Karigar designers reviewing a home interior" fill sizes="(min-width: 1024px) 38vw, 92vw" className="object-cover" />
-        </div>
+        </ImageFrame>
         <div className="flex flex-col justify-center lg:col-span-6 lg:col-start-7">
           <div data-reveal><Eyebrow>Our story</Eyebrow></div>
           <h2 id="story-title" className="mt-6 text-h2" data-reveal>Share how you live. We&apos;ll do the rest.</h2>
@@ -80,8 +81,10 @@ export default function AboutPage() {
             intro="Architects, interior designers and site managers who work on your project from the first meeting to handover."
             action={<ButtonLink href="/contact" variant="secondary">Work with us</ButtonLink>}
           />
-          <figure className="relative mt-14 overflow-hidden rounded-sm bg-linen" data-reveal="image">
-            <LoadingImage src="/images/Home_Karigar_Team.png" alt="The Home Karigar team of architects, designers and site managers" width={1536} height={1024} sizes="(min-width: 1320px) 1240px, 100vw" className="h-auto w-full" />
+          <figure className="mt-14">
+            <ImageFrame parallax={0.08} className="aspect-[3/2] rounded-sm bg-linen">
+              <LoadingImage src="/images/Home_Karigar_Team.png" alt="The Home Karigar team of architects, designers and site managers" fill sizes="(min-width: 1320px) 1240px, 100vw" className="object-cover" />
+            </ImageFrame>
           </figure>
           <ul className="mt-14 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((m, i) => (

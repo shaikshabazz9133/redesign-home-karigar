@@ -108,7 +108,7 @@ function TourCard({ tour, onPlay, headingLevel: H = "h3" }: { tour: Tour; onPlay
   );
 }
 
-function VideoDialog({ tour, onClose }: { tour: Tour | null; onClose: () => void }) {
+export function VideoDialog({ tour, onClose }: { tour: Tour | null; onClose: () => void }) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     const d = ref.current;

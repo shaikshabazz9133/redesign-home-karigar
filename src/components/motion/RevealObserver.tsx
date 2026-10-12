@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { createHydrationBinder } from "./hydrated";
 
 /**
  * One shared IntersectionObserver for every `[data-reveal]` element.
@@ -28,21 +29,17 @@ export function RevealObserver() {
       { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
     );
 
-    const scan = () =>
-      document.querySelectorAll("[data-reveal]:not(.is-in)").forEach((el) => io.observe(el));
-
-    scan();
-    let frame = 0;
-    const mo = new MutationObserver(() => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(scan);
-    });
+    /* Only observe elements React has hydrated, so the class we add
+       never collides with hydration. */
+    const binder = createHydrationBinder("[data-reveal]:not(.is-in)", (el) => io.observe(el));
+    binder.kick();
+    const mo = new MutationObserver(() => binder.kick());
     mo.observe(document.body, { childList: true, subtree: true });
 
     return () => {
       io.disconnect();
       mo.disconnect();
-      cancelAnimationFrame(frame);
+      binder.stop();
     };
   }, [pathname]);
 

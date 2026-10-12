@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Instrument_Sans } from "next/font/google";
+import { Cormorant_Garamond, Fraunces, Imperial_Script, Instrument_Sans, Inter, Jost, Montserrat } from "next/font/google";
 import { site } from "@/content/site";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { Preloader } from "@/components/layout/Preloader";
 import { RevealObserver } from "@/components/motion/RevealObserver";
+import { ParallaxController } from "@/components/motion/ParallaxController";
+import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { JsonLd } from "@/components/common/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/seo/jsonld";
 import "./globals.css";
@@ -21,6 +24,17 @@ const instrument = Instrument_Sans({
   variable: "--font-instrument",
   display: "swap",
 });
+
+/* Logo faces: Cormorant Garamond for the wordmark, Montserrat standing in for Gotham on the tagline. */
+const brand = Cormorant_Garamond({ subsets: ["latin"], weight: "700", variable: "--font-cormorant", display: "swap" });
+/* Light Cormorant, upright and italic, for the home hero's headline. */
+const heroSerif = Cormorant_Garamond({ subsets: ["latin"], weight: ["300", "400"], style: ["normal", "italic"], variable: "--font-cormorant-light", display: "swap" });
+/* Hero line one: light Jost capitals with Imperial Script copperplate capitals for the D and S. */
+const heroCaps = Jost({ subsets: ["latin"], weight: "300", variable: "--font-jost", display: "swap" });
+const heroScript = Imperial_Script({ subsets: ["latin"], weight: "400", variable: "--font-imperial", display: "swap" });
+/* Heavy grotesk for the full-bleed HOME KARIGAR’S wordmark at the foot of the home hero. */
+const grotesk = Inter({ subsets: ["latin"], weight: "700", variable: "--font-inter", display: "swap" });
+const tagline = Montserrat({ subsets: ["latin"], weight: "400", variable: "--font-montserrat", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -61,12 +75,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-IN" className={`${fraunces.variable} ${instrument.variable}`} suppressHydrationWarning>
+    <html lang="en-IN" className={`${fraunces.variable} ${instrument.variable} ${brand.variable} ${heroSerif.variable} ${heroCaps.variable} ${heroScript.variable} ${grotesk.variable} ${tagline.variable}`} suppressHydrationWarning>
       <head>
         {/* Enables scroll-reveal styles only once JS is available. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        <noscript>
+          <style>{"#hk-preloader{display:none}"}</style>
+        </noscript>
       </head>
       <body>
+        <Preloader />
         <a
           href="#main-content"
           className="fixed left-4 top-4 z-[100] -translate-y-24 rounded-full bg-ink px-5 py-3 text-sm text-ivory transition-transform focus:translate-y-0"
@@ -79,6 +97,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </main>
         <SiteFooter />
         <RevealObserver />
+        <ParallaxController />
+        <SmoothScroll />
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
       </body>
     </html>
