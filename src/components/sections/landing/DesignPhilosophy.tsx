@@ -1,77 +1,105 @@
-/** The studio's three working beliefs, each grounded in what the site already promises. */
-const PRINCIPLES = [
-  {
-    title: "Honest materials",
-    body: "BWP plywood, branded hardware and finishes you can inspect on site — chosen for how they age, not how they photograph.",
-  },
-  {
-    title: "Light before décor",
-    body: "Ceilings, coves and spots are drawn around the furniture plan, so every room is lit for the way you live in it.",
-  },
-  {
-    title: "Designed as one",
-    body: "Every ceiling, cabinet and corner is approved together in 3D, then built exactly as drawn — one home, not a set of pieces.",
-  },
+import Image from "next/image";
+import Link from "next/link";
+import { ImageFrame } from "@/components/motion/ImageFrame";
+import { Icon } from "@/components/ui/Icon";
+import { CountUp } from "./CountUp";
+import { deliveryStats } from "@/content/site";
+
+/** The studio's record, each figure set large beside the sentence it completes. */
+const STATS = [
+  { value: 6, suffix: "+", label: "years of architect-led residential Home Design & Execution Experience." },
+  { value: parseInt(deliveryStats.homesDelivered, 10), suffix: "+", label: "Homes Designed, Crafted & Delivered." },
+  { value: 200, suffix: "+", label: "Prestige Specialists Across Multiple Communities." },
 ];
 
 /**
- * Two halves under the hero: "Design / Philosophy" on the left, in the hero's display
- * capitals with a small "Our" set at their foot, and the studio's beliefs on the right.
+ * "The Home Karigar Way": an editorial spread under the hero. Left, the title set like the hero's headline,
+ * the studio's belief and a photograph. Right, a ruled grid of the studio's record, its top rule level with
+ * the title, closing on a dark card carrying its credo.
  */
 export function DesignPhilosophy() {
   return (
-    <section aria-labelledby="philosophy-title" className="relative bg-ivory pt-20 pb-6 md:pt-28 md:pb-8">
-      <div className="container-site grid gap-12 lg:grid-cols-12 lg:gap-10">
-        {/* Left: the title, in the hero's display capitals. */}
-        <div className="lg:col-span-6">
+    <section aria-labelledby="philosophy-title" className="relative bg-ivory pt-20 pb-16 md:pt-28 md:pb-24">
+      {/* Two columns sharing two rows: the title block and the photograph on the left, the record grid on the
+          right as a subgrid — so the photograph's top edge sits exactly on the grid's middle rule. */}
+      <div className="container-site grid gap-14 lg:grid-cols-2 lg:grid-rows-[auto_auto] lg:gap-x-12 lg:gap-y-0">
+        {/* Left, row one: title and belief */}
+        <div className="flex flex-col lg:col-start-1 lg:row-start-1 lg:pb-14">
+          {/* Set like the hero's headline: light, tight capitals with the copperplate script for the closing
+              word. A two-column grid hangs KARIGAR under HOME, so the second line starts where THE ends. */}
           <h2
             id="philosophy-title"
-            className="caps font-display text-display font-medium text-ink lg:sticky lg:top-32"
+            className="caps -ml-[0.045em] grid w-fit grid-cols-[auto_auto] gap-x-[0.24em] font-display text-[clamp(2.6rem,1rem+4vw,4.75rem)] leading-[0.86] font-normal tracking-[-0.055em] text-ink [clip-path:none]!"
             data-reveal
           >
-            <span className="block">
-              <span className="mr-[0.4em] align-baseline font-sans text-[0.8125rem] font-medium tracking-[0.04em]">Our</span>
-              Design
+            <span>The</span>
+            <span className="sr-only"> </span>
+            <span>Home</span>
+            <span className="sr-only"> </span>
+            <span className="col-start-2 whitespace-nowrap">
+              Karigar{" "}
+              <em className="ml-[0.06em] inline-block font-script text-[1.3em] not-italic font-normal leading-[0] tracking-normal text-oxblood">
+                Way.
+              </em>
             </span>
-            <span className="block pl-[0.5em]">Philosophy</span>
           </h2>
+
+          <p className="mt-10 max-w-lg text-lead text-ink-soft" data-reveal>
+            Luxury isn&apos;t defined by excess. It&apos;s found in thoughtful proportions, enduring materials, and
+            spaces that quietly enrich everyday living. At Home Karigar, we create homes that reflect the people who
+            live in them—timeless in character and purposeful in every detail.
+          </p>
         </div>
 
-        {/* Right: the belief and the three principles */}
-        <div className="lg:col-span-6 lg:pt-4">
-          <p className="eyebrow flex items-center gap-3 text-brass-ink" data-reveal>
-            <span aria-hidden className="h-px w-8 bg-brass-ink/50" />
-            How we work
-          </p>
-          <p
-            className="mt-6 font-display text-[clamp(1.6rem,1rem+1.8vw,2.5rem)] font-medium leading-[1.08] tracking-[-0.03em] text-ink text-balance"
-            data-reveal
-          >
-            We build homes the way a karigar works — <em className="font-accent text-[1.08em] font-normal italic tracking-[-0.01em] text-oxblood">slowly, honestly, and to last.</em>
-          </p>
-          <p className="text-lead mt-6 max-w-2xl text-muted" data-reveal>
-            A beautiful room on handover day is the easy part. We design for the tenth year: proportions that stay calm,
-            materials that wear in rather than out, and details you only notice because nothing ever goes wrong.
-          </p>
+        {/* Left, row two: the photograph */}
+        <ImageFrame className="aspect-[4/3] w-full overflow-hidden rounded-sm bg-linen lg:col-start-1 lg:row-start-2" parallax={0.08}>
+          <Image
+            src="/images/philosophy/walk-in-wardrobe.jpg"
+            alt="Walk-in wardrobe with lit glass-fronted shutters, fluted drawers and an upholstered bench, designed by Home Karigar"
+            fill
+            sizes="(min-width: 1024px) 45vw, 92vw"
+            className="object-cover"
+          />
+        </ImageFrame>
 
-          <ol className="mt-12 border-t border-line">
-            {PRINCIPLES.map((p, i) => (
-              <li
-                key={p.title}
-                className="grid gap-3 border-b border-line py-8 sm:grid-cols-[4rem_1fr] sm:gap-6"
-                data-reveal
-                style={{ "--i": i } as React.CSSProperties}
-              >
-                <span className="numeral text-3xl leading-none text-brass-ink">0{i + 1}</span>
-                <div className="flex flex-col gap-3">
-                  <h3 className="text-[0.8125rem] font-medium uppercase tracking-[0.08em] text-ink">{p.title}</h3>
-                  <p className="text-muted">{p.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+        {/* Right: the record as a ruled grid, closing on a dark credo card */}
+        <div className="grid grid-cols-1 border-t border-line sm:grid-cols-2 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:grid-rows-subgrid">
+          {STATS.map((s, i) => (
+            <div
+              key={s.label}
+              data-reveal
+              style={{ "--i": i } as React.CSSProperties}
+              className={`flex items-end justify-between gap-6 border-b border-line py-6 sm:min-h-56 sm:py-7 sm:px-6 lg:min-h-64 ${
+                i % 2 === 0 ? "sm:border-r sm:pl-0" : "sm:pr-0"
+              }`}
+            >
+              <p className="min-w-0 max-w-[13rem] text-[0.9375rem] leading-snug text-ink-soft">{s.label}</p>
+              <p className="shrink-0 font-display text-[clamp(3rem,2rem+2vw,4rem)] leading-[0.8] font-normal tracking-[-0.05em] text-ink">
+                <CountUp to={s.value} suffix={s.suffix} delay={i * 180} duration={s.value < 10 ? 1300 : 2000} align="end" />
+              </p>
+            </div>
+          ))}
+
+          <div
+            data-reveal
+            style={{ "--i": 3 } as React.CSSProperties}
+            className="on-dark flex min-h-48 flex-col justify-between gap-10 bg-[#3a2418] p-7 text-ivory lg:min-h-64"
+          >
+            <p className="max-w-[16rem] text-lg leading-snug">
+              Design isn&apos;t just what you see — it&apos;s how a space <em className="font-accent text-[1.15em] italic">lives</em>{" "}
+              with you.
+            </p>
+            <Link
+              href="/about"
+              className="group inline-flex w-fit items-center gap-2 text-sm font-medium text-ivory/90 hover:text-ivory"
+            >
+              <span className="link-line">Learn more about the studio</span>
+              <Icon name="arrowRight" size={16} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+            </Link>
+          </div>
         </div>
       </div>
+
     </section>
   );
 }

@@ -5,6 +5,9 @@ import { getProject, imageAlt, projectHref, type Project } from "@/content/proje
 import { pageMetadata } from "@/lib/seo/metadata";
 import { ImmersiveHero } from "@/components/sections/landing/ImmersiveHero";
 import { DesignPhilosophy } from "@/components/sections/landing/DesignPhilosophy";
+import { ArtOfHomemaking } from "@/components/sections/landing/ArtOfHomemaking";
+import { CuratedStatement } from "@/components/sections/landing/CuratedStatement";
+import { DesignJournal } from "@/components/sections/landing/DesignJournal";
 import { ArchHero } from "@/components/sections/landing/ArchHero";
 import { CommunityMarquee } from "@/components/sections/landing/CommunityMarquee";
 import { RoomExplorer, type ExplorerRoom } from "@/components/sections/landing/RoomExplorer";
@@ -58,6 +61,9 @@ export default function HomePage() {
     <>
       <ImmersiveHero />
       <DesignPhilosophy />
+      <ArtOfHomemaking />
+      <CuratedStatement />
+      <DesignJournal />
       <ArchHero />
       <CommunityMarquee />
 

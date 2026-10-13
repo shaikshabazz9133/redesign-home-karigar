@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Inter, Inter_Tight, Pinyon_Script } from "next/font
 import { site } from "@/content/site";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SocialRail } from "@/components/layout/SocialRail";
 import { Preloader } from "@/components/layout/Preloader";
 import { RevealObserver } from "@/components/motion/RevealObserver";
 import { ParallaxController } from "@/components/motion/ParallaxController";
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {children}
         </main>
         <SiteFooter />
+        <SocialRail />
         <RevealObserver />
         <ParallaxController />
         <SmoothScroll />
