@@ -7,7 +7,7 @@ import { ProjectGrid, ProjectsExplorer } from "@/components/projects/ProjectsExp
 import { CtaBand } from "@/components/sections/CtaBand";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Homes — Completed Interiors at The Prestige City",
+  title: "Completed Home Interiors in Bengaluru",
   description:
     "Browse 3 BHK and 3.5 BHK homes designed and delivered by Home Karigar at Avlon Park and Meridian Park, The Prestige City, Bengaluru — photographed room by room.",
   path: "/projects",

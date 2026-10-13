@@ -11,7 +11,7 @@ import { ButtonAnchor } from "@/components/ui/Button";
 import { EmptyState } from "@/components/common/EmptyState";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Films — Video Walkthroughs of Finished Homes in Bengaluru",
+  title: "Home Interior Video Tours, Bengaluru",
   description:
     "Watch video tours of 3, 3.5 and 4.5 BHK homes designed by Home Karigar at The Prestige City, Bengaluru — and hear directly from the homeowners.",
   path: "/tours",

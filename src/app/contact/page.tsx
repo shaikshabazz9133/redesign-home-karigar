@@ -8,7 +8,7 @@ import { Eyebrow } from "@/components/ui/Typography";
 import { BrandIcon, Icon, type IconName } from "@/components/ui/Icon";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Contact — Book an Interior Design Consultation",
+  title: "Contact Interior Designers in Bengaluru",
   description: `Book a consultation with Home Karigar in Bengaluru. Call ${site.phones[0].display}, WhatsApp the studio or send an enquiry — open ${site.hours.display}.`,
   path: "/contact",
 });

@@ -19,6 +19,17 @@ export interface JournalArticle {
   readMinutes: number;
   image: JournalImage;
   sections: { heading: string; body: string[] }[];
+  /** A line from the article, set large as the pull quote. */
+  quote: string;
+  /** Which magazine page the article is laid out as (see components/journal/ArticleLayouts). */
+  layout: "reshuffle" | "monograph" | "maison" | "beauty" | "character";
+  /** The short headline set large on the page, line by line; `script` is a word set in the copperplate. */
+  display: { script?: string; lines: string[] };
+  /**
+   * Photographs for the page beyond the cover image, in the order its layout places them. These are
+   * stand-ins from delivered homes until the client's own photographs arrive.
+   */
+  gallery: JournalImage[];
   /** Where a reader who wants this for their own home should go next. */
   next: { label: string; href: string };
 }
@@ -60,6 +71,13 @@ export const journal: JournalArticle[] = [
         ],
       },
     ],
+    quote: "You should be able to see what your kitchen is made of before you pay for it to be built.",
+    layout: "reshuffle",
+    display: { lines: ["Behind the", "Shutters"] },
+    gallery: [
+      { src: "/images/17242/24.jpeg", alt: "Tall kitchen unit with built-in oven, glass-fronted uppers and handle-less drawers", width: 781, height: 1080 },
+      { src: "/images/12263/13.jpeg", alt: "Pull-out wicker basket on soft-close runners inside a kitchen cabinet", width: 960, height: 1280 },
+    ],
     next: { label: "Explore our kitchens", href: "/services#modular-kitchen" },
   },
   {
@@ -98,6 +116,13 @@ export const journal: JournalArticle[] = [
         ],
       },
     ],
+    quote: "Good lighting is three layers, not one fixture — one gesture per room, done well.",
+    layout: "monograph",
+    display: { lines: ["The", "Layered", "Ceiling"] },
+    gallery: [
+      { src: "/images/12263/15.jpeg", alt: "Curved false ceiling edged with a band of warm cove light", width: 960, height: 1280 },
+      { src: "/images/17242/2.jpeg", alt: "Hallway lit by linear ceiling lights running towards the living room", width: 1200, height: 1600 },
+    ],
     next: { label: "See false ceilings & lighting", href: "/services#false-ceiling-and-lighting" },
   },
   {
@@ -133,6 +158,12 @@ export const journal: JournalArticle[] = [
           "A wardrobe is often the largest surface in a bedroom. Running it floor to ceiling, or wrapping it around a window seat, turns storage into architecture instead of furniture pushed against a wall.",
         ],
       },
+    ],
+    quote: "Storage should read as architecture, not furniture pushed against a wall.",
+    layout: "maison",
+    display: { lines: ["A", "Wardrobe", "for", "Ten Years"] },
+    gallery: [
+      { src: "/images/12263/27.jpeg", alt: "Floor-to-ceiling wardrobe with a lit dressing niche and oval mirror", width: 960, height: 1280 },
     ],
     next: { label: "Explore wardrobes & storage", href: "/services#wardrobes-and-storage" },
   },
@@ -173,6 +204,14 @@ export const journal: JournalArticle[] = [
         ],
       },
     ],
+    quote: "The 3D you approve is the yardstick the finished home is measured against.",
+    layout: "beauty",
+    display: { script: "The", lines: ["Design", "You Approve"] },
+    gallery: [
+      { src: "/images/12263/14.jpeg", alt: "Living room under a stepped false ceiling with cove lighting", width: 960, height: 1280 },
+      { src: "/images/17242/3.jpeg", alt: "Dining room with a crockery unit backed in mirror and lit shelving", width: 1200, height: 1600 },
+      { src: "/images/12263/23.jpeg", alt: "TV wall in veined marble-effect panels with a timber console", width: 960, height: 1280 },
+    ],
     next: { label: "How a project runs", href: "/services" },
   },
   {
@@ -208,6 +247,13 @@ export const journal: JournalArticle[] = [
           "A pooja unit should feel deliberate rather than squeezed in — with its own light, a considered backdrop and storage for everything used in daily prayer kept close at hand.",
         ],
       },
+    ],
+    quote: "Designed separately, they are nice objects. Designed as one, they become a home.",
+    layout: "character",
+    display: { script: "A", lines: ["Home", "Composed as One."] },
+    gallery: [
+      { src: "/images/17242/19.jpeg", alt: "Entrance foyer with a photo wall above a timber shoe unit", width: 1200, height: 1600 },
+      { src: "/images/17242/6.jpeg", alt: "TV wall with lit display shelving above a round timber coffee table", width: 1200, height: 1600 },
     ],
     next: { label: "See TV units, foyers & pooja", href: "/services#tv-unit-foyer-and-pooja" },
   },

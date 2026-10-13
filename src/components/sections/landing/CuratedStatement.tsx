@@ -1,138 +1,128 @@
-import Link from "next/link";
-import { ImageFrame } from "@/components/motion/ImageFrame";
-import { LoadingImage } from "@/components/ui/LoadingImage";
-import { getProject, projectHref } from "@/content/projects";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-type Print = { slug: string; src: string; alt: string; ratio: string };
+type Tile = { src: string; alt: string; width: number; height: number; shape: string; position?: string };
 
-/** Details from delivered homes, each mounted like a print and linking to its home. */
-const PRINTS = {
-  emerald: {
-    slug: "flat-59051-meridian-park",
-    src: "/images/59051/7.jpeg",
-    alt: "Master bedroom with emerald panelled walls and brass-framed mouldings",
-    ratio: "aspect-[16/10]",
+/** The studio's craft and material references, laid between the words like tiles on a table. */
+const TILES = {
+  tile: {
+    src: "/images/journal1.jpeg",
+    alt: "Oxblood floor tiles meeting at a pale four-petal inlay",
+    width: 640,
+    height: 640,
+    shape: "aspect-[3/2]",
   },
-  foyer: {
-    slug: "flat-13272-avlon-park",
-    src: "/images/13272/14.jpeg",
-    alt: "Entrance foyer in fluted wood with brass discs and a floating shoe unit",
-    ratio: "aspect-square",
+  swatches: {
+    src: "/images/journal2.jpeg",
+    alt: "Moodboard of indigo and block-printed fabric swatches with ceramic dishes",
+    width: 1179,
+    height: 1454,
+    shape: "aspect-[4/5]",
   },
-  kitchen: {
-    slug: "flat-17193-avlon-park",
-    src: "/images/17193/6.jpeg",
-    alt: "Modular kitchen with handle-less cabinets and glass-fronted uppers",
-    ratio: "aspect-[2/1]",
+  karigar: {
+    src: "/images/journal3.jpeg",
+    alt: "Painting of a karigar carving a wooden daybed in a courtyard, under the Home Karigar name",
+    width: 1536,
+    height: 1024,
+    shape: "aspect-[3/2]",
   },
-  pooja: {
-    slug: "flat-59051-meridian-park",
-    src: "/images/59051/3.jpeg",
-    alt: "Hand-painted pooja arch panel framed by wall sconces",
-    ratio: "aspect-[3/4]",
+  daybed: {
+    src: "/images/journal4.jpeg",
+    alt: "Carved ebony daybed with cane back and block-printed cushions",
+    width: 1200,
+    height: 1500,
+    shape: "aspect-[11/20]",
+    // The photograph carries a caption on its left and a white margin; the crop keeps to the daybed.
+    position: "object-[100%_55%] scale-[1.14] origin-[80%_55%]",
   },
-  lavender: {
-    slug: "flat-13104-avlon-park",
-    src: "/images/13104/10.jpg",
-    alt: "Kids' bedroom in soft lavender panelling with an upholstered headboard",
-    ratio: "aspect-[16/10]",
+  mural: {
+    src: "/images/journal5.jpeg",
+    alt: "Temple mural of celestial figures over an indigo ground",
+    width: 799,
+    height: 405,
+    shape: "aspect-[2/1]",
   },
-} satisfies Record<string, Print>;
+} satisfies Record<string, Tile>;
 
-/**
- * A photograph mounted on a white card like a print. It takes its row's height and its own shape, so every
- * print in a row stands exactly as tall as the words beside it. It lifts and tilts a touch on hover.
- */
-function PrintCard({ print, index }: { print: Print; index: number }) {
-  const p = getProject(print.slug);
+/** One picture, as tall as its row, in its own shape; it rises a touch on hover. */
+function TileImage({ tile, index }: { tile: Tile; index: number }) {
   return (
-    <Link
-      href={p ? projectHref(p) : "/projects"}
-      aria-label={p ? `${print.alt} — see the home` : print.alt}
+    <figure
+      data-reveal
+      style={{ "--i": index } as React.CSSProperties}
       className={cn(
-        "group block h-full shrink-0 rounded-[3px] bg-white p-1 shadow-[0_18px_36px_-22px_rgb(29_24_21/0.45)] transition-[transform,box-shadow] duration-700 ease-out-expo hover:-translate-y-1 hover:-rotate-1 hover:shadow-[0_26px_50px_-24px_rgb(29_24_21/0.55)] sm:p-1.5",
-        print.ratio,
+        "relative h-full shrink-0 overflow-hidden rounded-[2px] bg-linen shadow-[0_14px_30px_-18px_rgb(29_24_21/0.45)] transition-[translate,box-shadow] duration-700 ease-out-expo hover:-translate-y-1 hover:shadow-[0_22px_40px_-20px_rgb(29_24_21/0.55)]",
+        tile.shape,
       )}
     >
-      <ImageFrame className="h-full w-full bg-linen" parallax={0.06} index={index}>
-        <LoadingImage src={print.src} alt={print.alt} fill sizes="(min-width: 1024px) 22vw, 45vw" className="object-cover" />
-      </ImageFrame>
-    </Link>
+      <Image src={tile.src} alt={tile.alt} fill sizes="(min-width: 1024px) 24vw, 45vw" className={cn("object-cover", tile.position)} />
+    </figure>
   );
 }
 
-/** The light, tight capitals the section titles use. */
-const caps = "caps block font-display text-[clamp(2rem,0.9rem+2.6vw,3.6rem)] leading-[0.86] font-normal tracking-[-0.055em] text-ink";
-
 /**
- * Every row is one fixed height: the words fill it and each print matches it, so the three rows pack
- * tight and evenly, as in a printed spread. From lg the words and prints share one line, spread across a
- * narrow centred column; below that the words take their own line with the prints in a pair beneath.
+ * Set like the reference: sentence case in a firm, tightly tracked grotesk. From lg its size follows the
+ * row height, so words and pictures always stand the same height.
  */
-const row = "flex flex-wrap items-center justify-between gap-x-6 gap-y-4 lg:h-[clamp(7.5rem,3rem+5.6vw,9.5rem)] lg:flex-nowrap";
-const prints = "flex h-[clamp(5.5rem,22vw,8rem)] gap-3 sm:gap-4 lg:contents";
+const words =
+  "font-display text-[clamp(2.4rem,9vw,3.4rem)] leading-[0.92] font-medium tracking-[-0.05em] text-ink lg:text-[calc(var(--row)*0.47)]";
+
+/** A row: words and pictures share one line from lg, spread across the block; below, words then pictures. */
+const row = "flex flex-wrap items-center justify-start gap-x-3 gap-y-4 lg:justify-between lg:gap-x-4 lg:h-(--row) lg:flex-nowrap";
+const pictures = "flex h-[clamp(6rem,30vw,9rem)] gap-3 lg:contents";
 
 /**
- * A short statement before the journal — "Your space isn't plain. It's curated." — in three tight rows,
- * with photographs from delivered homes mounted like prints between the words and a stamp of the year.
- * The sentence is one h2 for search engines and screen readers; the visible pieces are decorative.
+ * "Your space isn't plain. It's curated." — three rows of words interleaved with the studio's craft
+ * references, after the editorial poster it is modelled on. Everything is sized
+ * from one row height (`--row`): the type, the pictures and the block's width, so the gaps stay small and
+ * even at every screen size. The block sits centred. The sentence is one h2 for search engines and screen
+ * readers; the visible words are its decorative copy.
  */
 export function CuratedStatement() {
   return (
-    <section aria-labelledby="curated-title" className="bg-ivory pt-4 pb-14 md:pb-20">
+    <section
+      aria-labelledby="curated-title"
+      className="bg-ivory pt-4 pb-14 [--row:clamp(7.5rem,2rem+7.5vw,11rem)] md:pb-20"
+    >
       <h2 id="curated-title" className="sr-only">
         Your space isn&apos;t plain. It&apos;s curated.
       </h2>
 
-      <div className="container-site flex flex-col gap-6 lg:max-w-[calc(clamp(44rem,30rem+18vw,58rem)+5rem)] lg:gap-5">
+      <div className="container-site flex flex-col gap-6 lg:max-w-[calc(var(--row)*3.8+5rem)] lg:gap-[calc(var(--row)*0.14)]">
         <div className={row}>
-          <p aria-hidden className="w-full lg:w-auto" data-reveal>
-            <span className={caps}>Your</span>
-            <span className={caps}>space</span>
+          <p aria-hidden className={cn(words, "w-full lg:w-auto")} data-reveal>
+            Your
+            <br />
+            space
           </p>
-          <div className={prints}>
-            <PrintCard print={PRINTS.emerald} index={1} />
-            <PrintCard print={PRINTS.foyer} index={2} />
+          <div className={pictures}>
+            <TileImage tile={TILES.tile} index={1} />
+            <TileImage tile={TILES.swatches} index={2} />
           </div>
         </div>
 
         <div className={row}>
-          <div className={cn(prints, "max-lg:order-last")}>
-            <PrintCard print={PRINTS.kitchen} index={1} />
+          <div className={cn(pictures, "max-lg:order-last")}>
+            <TileImage tile={TILES.karigar} index={1} />
           </div>
-          <p aria-hidden className="w-full text-right lg:w-auto" data-reveal>
-            <span className={caps}>isn&apos;t</span>
-            <span className={caps}>plain.</span>
+          <p aria-hidden className={cn(words, "w-full text-right lg:w-auto lg:text-left")} data-reveal>
+            isn&apos;t
+            <br />
+            plain.
           </p>
-          <div className={cn(prints, "max-lg:order-last")}>
-            <PrintCard print={PRINTS.pooja} index={2} />
+          <div className={cn(pictures, "max-lg:order-last")}>
+            <TileImage tile={TILES.daybed} index={2} />
           </div>
         </div>
 
         <div className={row}>
-          <p aria-hidden className="w-full lg:w-auto [clip-path:none]!" data-reveal>
-            <span className={caps}>It&apos;s</span>
-            <em className="-mt-[0.12em] block pl-[0.04em] font-script text-[clamp(2.7rem,1.2rem+3.6vw,5rem)] leading-[1] not-italic font-normal text-oxblood">
-              Curated.
-            </em>
+          <p aria-hidden className={cn(words, "w-full lg:w-auto")} data-reveal>
+            It&apos;s
+            <br />
+            curated.
           </p>
-          <div className={prints}>
-            <PrintCard print={PRINTS.lavender} index={1} />
-            {/* The year, as a stamp of stacked rings. */}
-            <div aria-hidden className="flex h-full flex-col items-center justify-center" data-reveal>
-              {["", "20", "26", ""].map((t, i) => (
-                <span
-                  key={i}
-                  className={cn(
-                    "-mt-px grid size-[clamp(1.35rem,5vw,1.9rem)] place-items-center rounded-full border border-ink text-[0.6875rem] tracking-[-0.02em] text-ink first:mt-0 lg:size-[clamp(1.6rem,0.8rem+1.1vw,2.2rem)] lg:text-[0.75rem]",
-                    i === 0 && "border-oxblood bg-oxblood",
-                  )}
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
+          <div className={pictures}>
+            <TileImage tile={TILES.mural} index={1} />
           </div>
         </div>
       </div>

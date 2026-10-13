@@ -1,6 +1,21 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
 
+/** The searches the studio wants to be found for, carried by every page. */
+export const SITE_KEYWORDS = [
+  "interior designers in Bengaluru",
+  "interior design Bangalore",
+  "home interiors Bengaluru",
+  "luxury interior design Bengaluru",
+  "modular kitchen Bengaluru",
+  "wardrobe design Bengaluru",
+  "false ceiling Bengaluru",
+  "interior designers Sarjapur Road",
+  "The Prestige City interiors",
+  "3BHK interior design Bengaluru",
+  "Home Karigar",
+];
+
 interface PageMetaInput {
   title: string;
   description: string;
@@ -10,6 +25,10 @@ interface PageMetaInput {
   noIndex?: boolean;
   /** Use the title as-is instead of applying the "| Home Karigar" template. */
   absoluteTitle?: boolean;
+  /** "article" for Design Journal notes, so link previews and crawlers treat them as articles. */
+  type?: "website" | "article";
+  /** Extra search phrases for this page, added to the site-wide set. */
+  keywords?: string[];
 }
 
 /**
@@ -24,6 +43,8 @@ export function pageMetadata({
   image,
   noIndex,
   absoluteTitle,
+  type = "website",
+  keywords,
 }: PageMetaInput): Metadata {
   const ogImages = image
     ? [{ url: image.src, alt: image.alt, width: image.width, height: image.height }]
@@ -32,9 +53,10 @@ export function pageMetadata({
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
+    ...(keywords && { keywords: [...keywords, ...SITE_KEYWORDS] }),
     alternates: { canonical: path },
     openGraph: {
-      type: "website",
+      type,
       locale: site.locale,
       siteName: site.name,
       url: path,

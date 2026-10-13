@@ -8,19 +8,25 @@ const WORDMARK = "HOME KARIGAR";
 const MID = (WORDMARK.length - 1) / 2;
 
 /** Intro styles that can be previewed with `?intro=<name>`; the first is the default. */
-export const INTRO_STYLES = ["arch", "doors", "monolith"] as const;
+export const INTRO_STYLES = ["blueprint", "arch", "doors", "monolith"] as const;
 type IntroStyle = (typeof INTRO_STYLES)[number];
 
 /** How long each intro's entrance runs before it may lift (ms since navigation start). */
-const MIN_END: Record<IntroStyle, number> = { arch: 5000, doors: 4600, monolith: 4700 };
+const MIN_END: Record<IntroStyle, number> = { blueprint: 8900, arch: 5000, doors: 4600, monolith: 4700 };
 
 type Vars = React.CSSProperties & Record<`--${string}`, number>;
 
 /**
- * Intro on every full page load. Three styles share the timing logic below;
+ * Intro on every full page load. Four styles share the timing logic below;
  * the one shown is chosen before first paint by an inline script in the root
- * layout (`?intro=doors`, `?intro=monolith`; otherwise the arch).
+ * layout (`?intro=arch`, `?intro=doors`, `?intro=monolith`; otherwise the blueprint).
  *
+ *   blueprint — "drawing the home": the stone mark is traced in a fine brass line,
+ *              then its colour blooms through each stone like pigment soaking into
+ *              paper while the name appears; an architect's sheet is then ruled across
+ *              the whole screen one line at a time, a spark of light at each line's tip,
+ *              and once every line is drawn the sheet opens like louvres —
+ *              strips lifting away in a wave from the centre — onto the page.
  *   arch     — "entering the home": a brass arch draws itself and warm light
  *              glows inside it; the stone mark is sketched there in brass and
  *              its texture appears within the line; on exit the doorway grows
@@ -42,9 +48,9 @@ export function Preloader() {
     const el = ref.current;
     if (!el) return;
 
-    const style = (root.dataset.introStyle as IntroStyle | undefined) ?? "arch";
+    const style = (root.dataset.introStyle as IntroStyle | undefined) ?? "blueprint";
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const minEnd = reduced ? 300 : MIN_END[style] ?? MIN_END.arch;
+    const minEnd = reduced ? 300 : MIN_END[style] ?? MIN_END.blueprint;
     const timers: number[] = [];
     let cancelled = false;
     root.style.overflow = "hidden";
@@ -76,6 +82,7 @@ export function Preloader() {
 
   return (
     <div id="hk-preloader" ref={ref} role="status" aria-label="Loading Home Karigar" data-lenis-prevent className="fixed inset-0 z-[200]">
+      <BlueprintIntro />
       <ArchIntro />
       <DoorsIntro />
       <MonolithIntro />
@@ -119,6 +126,124 @@ function Tagline() {
         ))}
       </p>
     </>
+  );
+}
+
+/* The lines are ruled on a 1600 × 1000 sheet that covers the screen; strokes keep their width at any size. */
+const W = 1600;
+const H = 1000;
+const CX = W / 2;
+const CY = H / 2;
+
+type Line = { d: string; delay: number; tone: "main" | "fine" | "arc" };
+
+/** Seconds between one line starting and the next. */
+const STEP = 0.2;
+
+/**
+ * An architect's sheet ruled across the whole screen, one line at a time so the eye can follow each:
+ * the centre cross first, then horizontals and verticals in pairs working outward — each drawn edge to
+ * edge, alternating direction — then the long diagonals, then compass arcs struck from the corners.
+ */
+const LINES: Line[] = (() => {
+  const seq: Omit<Line, "delay">[] = [
+    { d: `M-10 ${CY}H${W + 10}`, tone: "main" },
+    { d: `M${CX} -10V${H + 10}`, tone: "main" },
+  ];
+  const rows = [300, 700, 190, 810, 400, 600, 80, 920];
+  const cols = [580, 1020, 420, 1180, 260, 1340, 100, 1500];
+  rows.forEach((y, k) => {
+    seq.push({ d: k % 2 ? `M${W + 10} ${y}H-10` : `M-10 ${y}H${W + 10}`, tone: "fine" });
+    const x = cols[k];
+    seq.push({ d: k % 2 ? `M${x} ${H + 10}V-10` : `M${x} -10V${H + 10}`, tone: "fine" });
+  });
+  seq.push(
+    { d: `M-10 -6L${W + 10} ${H + 6}`, tone: "fine" },
+    { d: `M${W + 10} -6L-10 ${H + 6}`, tone: "fine" },
+    { d: `M0 360A360 360 0 0 0 360 0`, tone: "arc" },
+    { d: `M${W - 360} 0A360 360 0 0 0 ${W} 360`, tone: "arc" },
+    { d: `M${W} ${H - 360}A360 360 0 0 0 ${W - 360} ${H}`, tone: "arc" },
+    { d: `M360 ${H}A360 360 0 0 0 0 ${H - 360}`, tone: "arc" },
+  );
+  return seq.map((l, k) => ({ ...l, delay: k * STEP }));
+})();
+
+/** When the last line finishes, relative to the start of the ruling (seconds). */
+const RULED = (LINES.length - 1) * STEP + 1.4;
+
+/** Brass points where the ruled lines cross around the mark, set once the whole sheet is drawn. */
+const NODES = [
+  [580, 300], [1020, 300], [580, 700], [1020, 700],
+  [420, 400], [1180, 400], [420, 600], [1180, 600],
+  [CX, 190], [CX, 810], [260, CY], [1340, CY],
+].map(([x, y], k) => ({ x, y, delay: RULED - 0.3 + k * 0.05 }));
+
+/** The sheet is cut into louvres along its verticals; on exit they lift away in a wave from the centre. */
+const STRIPS = 8;
+
+function BlueprintIntro() {
+  return (
+    <div aria-hidden className="hk-intro hk-intro-blueprint absolute inset-0 items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 flex">
+        {Array.from({ length: STRIPS }, (_, i) => (
+          <span
+            key={i}
+            className="hk-bp-strip relative -mx-px h-full flex-1 bg-ivory"
+            style={{ "--s": Math.abs(i - (STRIPS - 1) / 2) - 0.5 } as Vars}
+          />
+        ))}
+      </div>
+
+      {/* The sheet, ruled once the mark is coloured; the lines soften away around the mark. */}
+      <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" className="hk-bp-lines absolute inset-0 size-full" fill="none">
+        <defs>
+          {/* A warm gold halo around each spark: blurred twice over, under the sharp core. */}
+          <filter id="hk-bp-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="wide" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="near" />
+            <feMerge>
+              <feMergeNode in="wide" />
+              <feMergeNode in="wide" />
+              <feMergeNode in="near" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        {LINES.map((l) => (
+          <path key={l.d} d={l.d} pathLength={1} className={`hk-bp-line hk-bp-line-${l.tone}`} style={{ "--d": `${l.delay.toFixed(2)}s` } as React.CSSProperties} />
+        ))}
+        {/* A spark of light travelling at the tip of each line as it is drawn. */}
+        <g filter="url(#hk-bp-glow)">
+          {LINES.map((l) => (
+            <path key={l.d} d={l.d} pathLength={1} className="hk-bp-spark" style={{ "--d": `${l.delay.toFixed(2)}s` } as React.CSSProperties} />
+          ))}
+        </g>
+        {NODES.map((n) => (
+          <g key={`${n.x}-${n.y}`} className="hk-bp-node" style={{ "--d": `${n.delay.toFixed(2)}s`, transformOrigin: `${n.x}px ${n.y}px` } as React.CSSProperties}>
+            <circle cx={n.x} cy={n.y} r={9} className="hk-bp-node-halo" />
+            <circle cx={n.x} cy={n.y} r={3.2} className="hk-bp-node-dot" />
+          </g>
+        ))}
+      </svg>
+
+      {/* The mark: traced in brass, then coloured as if the pigment were soaking into paper. */}
+      <div className="relative z-10">
+        {/* Warm light that rises behind the mark as its colour blooms, then breathes. */}
+        <span className="hk-bp-glow pointer-events-none absolute top-1/2 left-1/2 size-[clamp(16rem,36vw,26rem)] rounded-full bg-[radial-gradient(circle,rgb(236_214_178/0.55),rgb(236_214_178/0.18)_45%,transparent_70%)]" />
+        <div className="hk-pre-mark relative">
+          <LogoMark size="lg" preload className="h-[clamp(6.5rem,15vw,9rem)]" tallClassName="hk-bp-tall" smallClassName="hk-bp-small">
+            <svg viewBox={STONE_VIEWBOX} className="pointer-events-none absolute inset-0 size-full overflow-visible" fill="none">
+              <path d={STONE_TALL_PATH} pathLength={1} className="hk-bp-trace stroke-brass-ink" style={{ "--i": 0 } as Vars} />
+              <path d={STONE_SMALL_PATH} pathLength={1} className="hk-bp-trace stroke-brass-ink" style={{ "--i": 1 } as Vars} />
+            </svg>
+            <span className="hk-sheen" />
+          </LogoMark>
+        </div>
+        <div className="hk-pre-content absolute top-full left-1/2 mt-8 flex -translate-x-1/2 flex-col items-center text-center">
+          <Wordmark />
+        </div>
+      </div>
+    </div>
   );
 }
 

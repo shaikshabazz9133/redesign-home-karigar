@@ -11,7 +11,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { pad2 } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Studio — Architect-led Interior Designers in Bengaluru",
+  title: "Architect-led Interior Designers in Bengaluru",
   description:
     "Meet Home Karigar: an architect-led interior design studio with over a decade of residential practice and 400+ homes delivered across Bengaluru.",
   path: "/about",

@@ -10,7 +10,7 @@ import { Icon } from "@/components/ui/Icon";
 import { cn, pad2 } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Design Journal — Notes on Materials, Light and Craft",
+  title: "Interior Design Journal & Home Ideas",
   description:
     "The Home Karigar design journal: why we build kitchens on BWP 710 plywood, how we plan false ceilings and lighting, wardrobes that last, and what to approve in 3D before you pay.",
   path: "/journal",

@@ -1,4 +1,5 @@
-import { site } from "@/content/site";
+import { deliveryStats, site } from "@/content/site";
+import { services } from "@/content/studio";
 import { absoluteUrl } from "./metadata";
 
 type Json = Record<string, unknown>;
@@ -17,7 +18,7 @@ export function organizationSchema(): Json {
     description: site.description,
     url: site.url,
     logo: { "@type": "ImageObject", url: absoluteUrl("/brand/logo.png"), width: 1200, height: 856 },
-    image: absoluteUrl("/images/home/1.png"),
+    image: [absoluteUrl("/images/home/1.png"), absoluteUrl("/images/home/2.png"), absoluteUrl("/images/home/3.png")],
     email: site.email,
     telephone: site.phones[0].e164,
     priceRange: "₹₹₹",
@@ -28,7 +29,39 @@ export function organizationSchema(): Json {
       addressRegion: site.address.region,
       addressCountry: site.address.country,
     },
-    areaServed: { "@type": "City", name: "Bengaluru" },
+    // Where the studio works: the city, and the communities it has delivered in (deliveryStats).
+    areaServed: [
+      { "@type": "City", name: "Bengaluru" },
+      { "@type": "Place", name: "Sarjapur Road, Bengaluru" },
+      ...deliveryStats.communities.map((c) => ({ "@type": "Place", name: `${c.name}, Bengaluru` })),
+    ],
+    hasMap: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.mapQuery)}`,
+    contactPoint: site.phones.map((p) => ({
+      "@type": "ContactPoint",
+      telephone: p.e164,
+      contactType: "customer service",
+      areaServed: "IN",
+      availableLanguage: ["English"],
+    })),
+    knowsAbout: [
+      "Interior design",
+      "Home interiors",
+      "Modular kitchens",
+      "Wardrobes",
+      "False ceilings",
+      "Lighting design",
+      "TV units",
+      "Pooja units",
+      "3D interior design",
+    ],
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Interior design services",
+      itemListElement: services.map((sv) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: sv.title, description: sv.summary, url: absoluteUrl(`/services#${sv.slug}`) },
+      })),
+    },
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -110,5 +143,57 @@ export function videoListSchema(videos: { youtubeId: string; title: string; thum
       name: v.title,
       image: v.thumb,
     })),
+  };
+}
+
+/** The studio's services, each as a schema.org Service offered in Bengaluru. */
+export function servicesSchema(): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${site.name} interior design services`,
+    itemListElement: services.map((sv, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Service",
+        "@id": absoluteUrl(`/services#${sv.slug}`),
+        name: sv.title,
+        serviceType: sv.title,
+        description: `${sv.summary} ${sv.details.join(". ")}.`,
+        image: absoluteUrl(sv.image.src),
+        url: absoluteUrl(`/services#${sv.slug}`),
+        areaServed: { "@type": "City", name: "Bengaluru" },
+        provider: { "@id": ORG_ID },
+      },
+    })),
+  };
+}
+
+/** A Design Journal article, published by the studio. */
+export function articleSchema(input: {
+  title: string;
+  description: string;
+  path: string;
+  section: string;
+  images: string[];
+  readMinutes: number;
+  keywords: string[];
+}): Json {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: input.title,
+    description: input.description,
+    articleSection: input.section,
+    keywords: input.keywords.join(", "),
+    inLanguage: "en-IN",
+    image: input.images.map((i) => absoluteUrl(i)),
+    url: absoluteUrl(input.path),
+    mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl(input.path) },
+    timeRequired: `PT${input.readMinutes}M`,
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+    isPartOf: { "@id": `${site.url}/#website` },
   };
 }

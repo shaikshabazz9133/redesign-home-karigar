@@ -5,6 +5,8 @@ import Link from "next/link";
 import { services } from "@/content/studio";
 import { findRoomImage, groupByRoom, getProjects, imageAlt, projectHref, roomSlug } from "@/content/projects";
 import { pageMetadata } from "@/lib/seo/metadata";
+import { servicesSchema } from "@/lib/seo/jsonld";
+import { JsonLd } from "@/components/common/JsonLd";
 import { PageHero } from "@/components/common/PageHero";
 import { ProcessPromise } from "@/components/sections/ProcessPromise";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -14,10 +16,11 @@ import { Icon } from "@/components/ui/Icon";
 import { cn, pad2 } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
-  title: "What We Do — Interior Design Services: Kitchens, Wardrobes, Ceilings",
+  title: "Interior Design Services in Bengaluru",
   description:
-    "Modular kitchens on BWP 710 ply with Hettich, Häfele or Ebco hardware, wardrobes, false ceilings, TV units, foyers and pooja units — complete home interiors in Bengaluru by Home Karigar.",
+    "Modular kitchens, wardrobes, false ceilings, TV units, foyers and pooja units — complete home interiors in Bengaluru, built on BWP 710 ply with branded hardware.",
   path: "/services",
+  keywords: ["modular kitchen designers Bengaluru", "wardrobe makers Bengaluru", "false ceiling designers Bengaluru", "TV unit design", "pooja unit design"],
   image: { src: services[0].image.src, alt: services[0].image.alt, width: services[0].image.width, height: services[0].image.height },
 });
 
@@ -100,6 +103,7 @@ export default function ServicesPage() {
       </section>
 
       <CtaBand />
+      <JsonLd data={servicesSchema()} />
     </>
   );
 }

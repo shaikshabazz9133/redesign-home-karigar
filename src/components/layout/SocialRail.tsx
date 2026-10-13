@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { site, whatsappLink } from "@/content/site";
 import { BrandIcon, Icon } from "@/components/ui/Icon";
 import { cn } from "@/lib/utils";
@@ -56,17 +57,34 @@ export function SocialLinks({ layout, className }: { layout: "row" | "rail"; cla
  */
 export function SocialRail() {
   const [shown, setShown] = useState(false);
+  // The rail lives in the layout and survives client-side navigation, so look for the hero again on every
+  // page — otherwise arriving on the home page from elsewhere would leave the rail out over the hero.
+  const pathname = usePathname();
 
   useEffect(() => {
-    const hero = document.querySelector("[data-hero]");
-    if (!hero) {
-      const t = window.setTimeout(() => setShown(true), 600);
-      return () => clearTimeout(t);
-    }
-    const io = new IntersectionObserver(([entry]) => setShown(!entry.isIntersecting), { rootMargin: "-25% 0px 0px 0px" });
-    io.observe(hero);
-    return () => io.disconnect();
-  }, []);
+    let frame = 0;
+    let timer = 0;
+    const update = () => {
+      frame = 0;
+      const hero = document.querySelector("[data-hero]");
+      // Out once three quarters of the hero has scrolled away; on pages without one, straight away.
+      setShown(!hero || hero.getBoundingClientRect().bottom < window.innerHeight * 0.25);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    // Check on the next frame, and again shortly after in case the page's hero renders late.
+    frame = requestAnimationFrame(update);
+    timer = window.setTimeout(update, 600);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      clearTimeout(timer);
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [pathname]);
 
   return (
     <nav

@@ -10,6 +10,7 @@ import { ParallaxController } from "@/components/motion/ParallaxController";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { JsonLd } from "@/components/common/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/seo/jsonld";
+import { SITE_KEYWORDS } from "@/lib/seo/metadata";
 import "./globals.css";
 
 /* The whole site is set in three faces:
@@ -17,7 +18,7 @@ import "./globals.css";
    Text    — Inter: body copy, navigation, buttons and small uppercase labels.
    Accent  — Cormorant Garamond: the logo wordmark and italic emphasis inside headings.
    Plus one flourish: Pinyon Script, a copperplate hand, for the hero's "beautifully." alone. */
-const display = Inter_Tight({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-inter-tight", display: "swap" });
+const display = Inter_Tight({ subsets: ["latin"], weight: ["300", "400", "500", "600"], variable: "--font-inter-tight", display: "swap" });
 const text = Inter({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-inter", display: "swap" });
 const accent = Cormorant_Garamond({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  keywords: SITE_KEYWORDS,
   applicationName: site.name,
   authors: [{ name: site.legalName, url: site.url }],
   creator: site.name,
@@ -54,6 +56,13 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
   category: "Interior design",
+  // Search Console and Bing Webmaster verification codes, set per deployment.
+  verification: {
+    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }),
+    ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION && { other: { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } }),
+  },
+  // Regional signals for local search.
+  other: { "geo.region": "IN-KA", "geo.placename": "Bengaluru" },
 };
 
 export const viewport: Viewport = {
@@ -70,11 +79,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en-IN" className={`${display.variable} ${text.variable} ${accent.variable} ${script.variable}`} suppressHydrationWarning>
       <head>
         {/* Enables scroll-reveal styles only once JS is available, and picks the intro style to preview
-            (`?intro=doors` / `?intro=monolith`) before first paint. */}
+            (`?intro=arch` / `?intro=doors` / `?intro=monolith`) before first paint. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "(function(){var d=document.documentElement;d.classList.add('js');var s=new URLSearchParams(location.search).get('intro');if(s==='doors'||s==='monolith')d.dataset.introStyle=s})()",
+              "(function(){var d=document.documentElement;d.classList.add('js');var s=new URLSearchParams(location.search).get('intro');if(s==='arch'||s==='doors'||s==='monolith')d.dataset.introStyle=s})()",
           }}
         />
         <noscript>
