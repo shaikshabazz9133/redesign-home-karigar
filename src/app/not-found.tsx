@@ -10,7 +10,7 @@ export default function NotFound() {
   return (
     <section className="container-site flex min-h-[80svh] flex-col justify-center pt-32 pb-20">
       <Eyebrow>Error 404</Eyebrow>
-      <h1 className="mt-6 max-w-2xl text-h1">This room hasn&apos;t been designed yet.</h1>
+      <h1 className="mt-6 max-w-2xl text-h1 caps">This room hasn&apos;t been designed yet.</h1>
       <p className="text-lead mt-6 max-w-xl text-muted">
         The page you were looking for may have moved. Here are a few places to continue.
       </p>

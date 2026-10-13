@@ -23,7 +23,7 @@ export function CtaBand({
         />
         <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-espresso via-espresso/85 to-espresso/40" />
         <div className="max-w-2xl">
-          <h2 id="cta-title" className="text-h2 text-ivory">{title}</h2>
+          <h2 id="cta-title" className="text-h2 caps text-ivory">{title}</h2>
           <p className="text-lead mt-6 text-ivory-muted">{body}</p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <ButtonLink href="/contact" variant="light" size="lg">

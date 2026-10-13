@@ -71,7 +71,7 @@ export function RoomExplorer({ rooms }: { rooms: ExplorerRoom[] }) {
               )}
             >
               <span className="flex items-baseline gap-5">
-                <span className="hidden font-display text-sm tabular-nums text-brass-ink lg:inline">{pad2(i + 1)}</span>
+                <span className="hidden numeral text-lg text-brass-ink lg:inline">{pad2(i + 1)}</span>
                 <span className="lg:font-display lg:text-[1.75rem] lg:leading-tight">{r.room}</span>
                 <Icon
                   name="arrowRight"

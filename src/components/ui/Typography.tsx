@@ -41,7 +41,7 @@ export function SectionHeading({ eyebrow, title, intro, tone = "dark", align = "
     >
       <div className={cn("flex max-w-2xl flex-col gap-5", align === "center" && "items-center")} data-reveal>
         {eyebrow && <Eyebrow tone={tone}>{eyebrow}</Eyebrow>}
-        <Tag className={cn(Tag === "h1" ? "text-h1" : "text-h2", tone === "dark" ? "text-ink" : "text-ivory")}>{title}</Tag>
+        <Tag className={cn("caps", Tag === "h1" ? "text-h1" : "text-h2", tone === "dark" ? "text-ink" : "text-ivory")}>{title}</Tag>
         {intro && (
           <p className={cn("text-lead max-w-xl", tone === "dark" ? "text-muted" : "text-ivory-muted")}>{intro}</p>
         )}

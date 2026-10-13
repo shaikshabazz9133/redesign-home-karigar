@@ -48,10 +48,10 @@ export function Logo({ className, markOnlyOnMobile = false }: { className?: stri
         smallClassName="origin-bottom transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover/logo:translate-x-[4%] group-hover/logo:rotate-6"
       />
       <span className={cn("flex flex-col leading-none text-umber [.on-dark_&]:text-ivory", markOnlyOnMobile && "max-md:hidden")}>
-        <span className="whitespace-nowrap font-brand text-[0.95rem] font-bold uppercase tracking-[0.22em] min-[380px]:text-[1.05rem] min-[380px]:tracking-[0.28em] md:text-[1.15rem]">
+        <span className="whitespace-nowrap font-accent text-[0.95rem] font-bold uppercase tracking-[0.22em] min-[380px]:text-[1.05rem] min-[380px]:tracking-[0.28em] md:text-[1.15rem]">
           Home Karigar
         </span>
-        <span className="mt-1.5 whitespace-nowrap font-tagline text-[0.5625rem] tracking-[0.2em] text-taupe max-[379px]:hidden md:text-[0.625rem] [.on-dark_&]:text-brass">
+        <span className="mt-1.5 whitespace-nowrap font-sans text-[0.5625rem] tracking-[0.2em] text-taupe max-[379px]:hidden md:text-[0.625rem] [.on-dark_&]:text-brass">
           {TAGLINE.join(" ")}
         </span>
       </span>

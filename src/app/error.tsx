@@ -13,7 +13,7 @@ export default function ErrorPage({ error, reset }: { error: Error & { digest?: 
   return (
     <section className="container-site flex min-h-[80svh] flex-col justify-center pt-32 pb-20" role="alert">
       <Eyebrow>Something went wrong</Eyebrow>
-      <h1 className="mt-6 max-w-2xl text-h1">We couldn&apos;t load this page.</h1>
+      <h1 className="mt-6 max-w-2xl text-h1 caps">We couldn&apos;t load this page.</h1>
       <p className="text-lead mt-6 max-w-xl text-muted">
         It&apos;s likely a temporary hiccup. Try again, or reach the studio directly on {site.phones[0].display}.
       </p>

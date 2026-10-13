@@ -45,8 +45,8 @@ export default function ServicesPage() {
               <LoadingImage src={s.image.src} alt={s.image.alt} fill sizes="(min-width: 1024px) 56vw, 92vw" className="object-cover" />
             </ImageFrame>
             <div className="lg:col-span-5">
-              <p className="font-display text-lg text-brass-ink tabular-nums" data-reveal>{pad2(i + 1)}</p>
-              <h2 className="mt-4 text-h2" data-reveal>{s.title}</h2>
+              <p className="numeral text-xl text-brass-ink tabular-nums" data-reveal>{pad2(i + 1)}</p>
+              <h2 className="mt-4 text-h2 caps" data-reveal>{s.title}</h2>
               <p className="text-lead mt-5 text-muted" data-reveal>{s.summary}</p>
               <ul className="mt-8 flex flex-col border-t border-line" data-reveal>
                 {s.details.map((d) => (

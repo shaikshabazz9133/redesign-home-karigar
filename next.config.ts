@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
   // This app lives inside the legacy repo; pin the root so Turbopack ignores the parent lockfile.
   turbopack: { root: path.join(__dirname) },
   outputFileTracingRoot: path.join(__dirname),
+  // The persistent dev cache kept serving stale server renders after edits (old markup with new client
+  // code → hydration mismatches), so dev rebuilds from source each start. Production builds are unaffected.
+  experimental: { turbopackFileSystemCacheForDev: false },
   images: {
     formats: ["image/avif", "image/webp"],
     qualities: [60, 75, 85],

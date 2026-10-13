@@ -76,7 +76,7 @@ export default async function ProjectPage({ params }: Props) {
           <div className="mt-10 grid gap-8 md:mt-14 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
               <div className="animate-rise"><Eyebrow>{p.configuration} residence</Eyebrow></div>
-              <h1 className="mt-6 text-h1 animate-rise [animation-delay:80ms]">
+              <h1 className="mt-6 text-h1 caps animate-rise [animation-delay:80ms]">
                 Flat {p.flatNo}
                 <span className="block text-muted">{p.development}</span>
               </h1>
@@ -134,7 +134,7 @@ export default async function ProjectPage({ params }: Props) {
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <div data-reveal>
                 <Eyebrow>Keep exploring</Eyebrow>
-                <h2 id="related-title" className="mt-5 text-h2">
+                <h2 id="related-title" className="mt-5 text-h2 caps">
                   More homes at {p.development}
                 </h2>
               </div>

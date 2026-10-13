@@ -12,7 +12,7 @@ export function CommunityMarquee() {
   const row = (hidden: boolean) => (
     <ul className="flex shrink-0 items-center" aria-hidden={hidden || undefined}>
       {NAMES.map((n) => (
-        <li key={n} className="flex items-center whitespace-nowrap font-display text-[clamp(1.5rem,1.1rem+1.6vw,2.5rem)] italic text-ink-soft">
+        <li key={n} className="flex items-center whitespace-nowrap font-accent text-[clamp(1.75rem,1.2rem+1.9vw,2.875rem)] italic text-ink-soft">
           <span className="px-8 md:px-12">{n}</span>
           <span aria-hidden className="size-1.5 rotate-45 bg-brass-ink/70" />
         </li>

@@ -25,7 +25,7 @@ export function PromiseBento() {
             <span aria-hidden className="absolute -right-4 -top-4 size-40 rounded-full border border-ivory/10" />
             <p className="eyebrow text-ivory/70">Our first promise</p>
             <div className="mt-16 md:mt-24">
-              <p className="font-display text-[clamp(5rem,3rem+7vw,9rem)] leading-[0.85] tracking-tight">₹0</p>
+              <p className="font-display text-[clamp(5rem,3rem+7vw,9rem)] font-medium leading-[0.85] tracking-[-0.06em]">₹0</p>
               <p className="mt-6 max-w-sm text-lead text-ivory/85">
                 advance until your 3D designs are approved and branded materials are delivered to your site.
               </p>
@@ -37,7 +37,7 @@ export function PromiseBento() {
           </BentoCard>
 
           <li data-reveal style={{ "--i": 1 } as React.CSSProperties} className="flex flex-col justify-between rounded-lg border border-line bg-paper p-7 md:col-span-2">
-            <p className="font-display text-6xl leading-none text-ink">10%</p>
+            <p className="font-display text-7xl font-medium leading-none tracking-[-0.05em] text-ink">10%</p>
             <p className="mt-6 text-muted">of the project value stays with you until the final inspection is signed off.</p>
           </li>
 
@@ -50,13 +50,13 @@ export function PromiseBento() {
 
         <ul className="mt-4 grid gap-4 md:grid-cols-3">
           <li data-reveal className="flex flex-col justify-between rounded-lg border border-line bg-paper p-7">
-            <p className="font-display text-6xl leading-none text-oxblood">
+            <p className="font-display text-7xl font-medium leading-none tracking-[-0.05em] text-oxblood">
               <CountUp to={400} suffix="+" />
             </p>
             <p className="mt-6 text-muted">homes delivered across Bengaluru&apos;s Prestige communities.</p>
           </li>
           <li data-reveal style={{ "--i": 1 } as React.CSSProperties} className="flex flex-col justify-between rounded-lg border border-line bg-paper p-7">
-            <p className="font-display text-6xl leading-none text-oxblood">
+            <p className="font-display text-7xl font-medium leading-none tracking-[-0.05em] text-oxblood">
               <CountUp to={site.foundedYearsAgo} suffix="+" />
             </p>
             <p className="mt-6 text-muted">years of architect-led residential practice.</p>

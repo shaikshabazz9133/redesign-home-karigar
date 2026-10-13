@@ -11,7 +11,7 @@ export function PageHero({ crumbs, eyebrow, title, intro, aside }: { crumbs: Cru
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="flex flex-col gap-6 lg:col-span-8">
             <div className="animate-rise"><Eyebrow>{eyebrow}</Eyebrow></div>
-            <h1 className="text-h1 animate-rise [animation-delay:80ms]">{title}</h1>
+            <h1 className="text-h1 caps animate-rise [animation-delay:80ms]">{title}</h1>
           </div>
           <div className="flex flex-col gap-6 lg:col-span-4 lg:pb-2">
             <p className="text-lead text-muted animate-rise [animation-delay:160ms]">{intro}</p>

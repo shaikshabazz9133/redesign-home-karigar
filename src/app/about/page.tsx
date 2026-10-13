@@ -34,7 +34,7 @@ export default function AboutPage() {
         </ImageFrame>
         <div className="flex flex-col justify-center lg:col-span-6 lg:col-start-7">
           <div data-reveal><Eyebrow>Our story</Eyebrow></div>
-          <h2 id="story-title" className="mt-6 text-h2" data-reveal>Share how you live. We&apos;ll do the rest.</h2>
+          <h2 id="story-title" className="mt-6 text-h2 caps" data-reveal>Share how you live. We&apos;ll do the rest.</h2>
           <div className="mt-8 flex flex-col gap-5 text-lead text-muted" data-reveal>
             <p>
               Tell us how you see your dream space. We audit the layout, propose several concept directions and bring a
@@ -48,11 +48,11 @@ export default function AboutPage() {
           <dl className="mt-12 grid grid-cols-2 gap-8 border-t border-line pt-8" data-reveal>
             <div className="flex flex-col gap-2">
               <dt className="text-sm text-muted">Homes delivered</dt>
-              <dd className="order-first font-display text-5xl text-oxblood">{deliveryStats.homesDelivered}</dd>
+              <dd className="order-first font-display text-6xl font-medium tracking-[-0.05em] text-oxblood">{deliveryStats.homesDelivered}</dd>
             </div>
             <div className="flex flex-col gap-2">
               <dt className="text-sm text-muted">Years of practice</dt>
-              <dd className="order-first font-display text-5xl text-oxblood">{site.foundedYearsAgo}+</dd>
+              <dd className="order-first font-display text-6xl font-medium tracking-[-0.05em] text-oxblood">{site.foundedYearsAgo}+</dd>
             </div>
           </dl>
         </div>
@@ -64,7 +64,7 @@ export default function AboutPage() {
           <ol className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
             {pillars.map((p, i) => (
               <li key={p.title} className="border-t border-line-strong pt-8" data-reveal style={{ "--i": i } as React.CSSProperties}>
-                <span className="font-display text-lg text-brass-ink">{pad2(i + 1)}</span>
+                <span className="numeral text-xl text-brass-ink">{pad2(i + 1)}</span>
                 <h3 className="mt-4 text-h3">{p.title}</h3>
                 <p className="mt-4 text-muted">{p.body}</p>
               </li>

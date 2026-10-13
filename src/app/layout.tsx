@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Fraunces, Imperial_Script, Instrument_Sans, Inter, Jost, Montserrat } from "next/font/google";
+import { Cormorant_Garamond, Inter, Inter_Tight, Pinyon_Script } from "next/font/google";
 import { site } from "@/content/site";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -11,30 +11,21 @@ import { JsonLd } from "@/components/common/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/seo/jsonld";
 import "./globals.css";
 
-const fraunces = Fraunces({
+/* The whole site is set in three faces:
+   Display — Inter Tight: headings, numerals and the hero, in tight grotesk capitals.
+   Text    — Inter: body copy, navigation, buttons and small uppercase labels.
+   Accent  — Cormorant Garamond: the logo wordmark and italic emphasis inside headings.
+   Plus one flourish: Pinyon Script, a copperplate hand, for the hero's "beautifully." alone. */
+const display = Inter_Tight({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-inter-tight", display: "swap" });
+const text = Inter({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-inter", display: "swap" });
+const accent = Cormorant_Garamond({
   subsets: ["latin"],
-  axes: ["opsz", "SOFT"],
+  weight: ["400", "500", "700"],
   style: ["normal", "italic"],
-  variable: "--font-fraunces",
+  variable: "--font-cormorant",
   display: "swap",
 });
-
-const instrument = Instrument_Sans({
-  subsets: ["latin"],
-  variable: "--font-instrument",
-  display: "swap",
-});
-
-/* Logo faces: Cormorant Garamond for the wordmark, Montserrat standing in for Gotham on the tagline. */
-const brand = Cormorant_Garamond({ subsets: ["latin"], weight: "700", variable: "--font-cormorant", display: "swap" });
-/* Light Cormorant, upright and italic, for the home hero's headline. */
-const heroSerif = Cormorant_Garamond({ subsets: ["latin"], weight: ["300", "400"], style: ["normal", "italic"], variable: "--font-cormorant-light", display: "swap" });
-/* Hero line one: light Jost capitals with Imperial Script copperplate capitals for the D and S. */
-const heroCaps = Jost({ subsets: ["latin"], weight: "300", variable: "--font-jost", display: "swap" });
-const heroScript = Imperial_Script({ subsets: ["latin"], weight: "400", variable: "--font-imperial", display: "swap" });
-/* Heavy grotesk for the full-bleed HOME KARIGAR’S wordmark at the foot of the home hero. */
-const grotesk = Inter({ subsets: ["latin"], weight: "700", variable: "--font-inter", display: "swap" });
-const tagline = Montserrat({ subsets: ["latin"], weight: "400", variable: "--font-montserrat", display: "swap" });
+const script = Pinyon_Script({ subsets: ["latin"], weight: "400", variable: "--font-pinyon", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -75,10 +66,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-IN" className={`${fraunces.variable} ${instrument.variable} ${brand.variable} ${heroSerif.variable} ${heroCaps.variable} ${heroScript.variable} ${grotesk.variable} ${tagline.variable}`} suppressHydrationWarning>
+    <html lang="en-IN" className={`${display.variable} ${text.variable} ${accent.variable} ${script.variable}`} suppressHydrationWarning>
       <head>
-        {/* Enables scroll-reveal styles only once JS is available. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        {/* Enables scroll-reveal styles only once JS is available, and picks the intro style to preview
+            (`?intro=doors` / `?intro=monolith`) before first paint. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){var d=document.documentElement;d.classList.add('js');var s=new URLSearchParams(location.search).get('intro');if(s==='doors'||s==='monolith')d.dataset.introStyle=s})()",
+          }}
+        />
         <noscript>
           <style>{"#hk-preloader{display:none}"}</style>
         </noscript>

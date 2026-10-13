@@ -18,7 +18,7 @@ export default function LoginPage() {
       <div className="flex items-center px-4 pt-32 pb-20 sm:px-10 lg:px-20">
         <div className="mx-auto w-full max-w-md">
           <Eyebrow>Client portal</Eyebrow>
-          <h1 className="mt-6 text-h2">Welcome back</h1>
+          <h1 className="mt-6 text-h2 caps">Welcome back</h1>
           <p className="mt-4 text-muted">Track designs, approvals and site progress for your home.</p>
           <div className="mt-10">
             <LoginForm />

@@ -34,7 +34,7 @@ export default function ContactPage() {
         <div className="mt-10 grid gap-14 md:mt-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <div className="animate-rise"><Eyebrow>Contact</Eyebrow></div>
-            <h1 id="contact-title" className="mt-6 text-h1 animate-rise [animation-delay:80ms]">Let&apos;s talk about your home</h1>
+            <h1 id="contact-title" className="mt-6 text-h1 caps animate-rise [animation-delay:80ms]">Let&apos;s talk about your home</h1>
             <p className="text-lead mt-6 text-muted animate-rise [animation-delay:160ms]">
               Tell us a little about your space. A designer will get back to you within studio hours — the first consultation
               carries no obligation.
@@ -80,7 +80,7 @@ export default function ContactPage() {
 
       <section aria-labelledby="visit-title" className="container-site pb-20 md:pb-28">
         <div className="mb-8 flex items-end justify-between gap-6" data-reveal>
-          <h2 id="visit-title" className="text-h2">Visit the studio</h2>
+          <h2 id="visit-title" className="text-h2 caps">Visit the studio</h2>
         </div>
         <div data-reveal><MapEmbed /></div>
       </section>

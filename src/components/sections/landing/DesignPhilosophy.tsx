@@ -1,5 +1,3 @@
-import { Swash } from "./ImmersiveHero";
-
 /** The studio's three working beliefs, each grounded in what the site already promises. */
 const PRINCIPLES = [
   {
@@ -17,27 +15,25 @@ const PRINCIPLES = [
 ];
 
 /**
- * Two halves under the hero's cropped wordmark: "Design / Philosophy" on the left, in the hero's swash
- * capitals style, and the studio's beliefs on the right.
+ * Two halves under the hero: "Design / Philosophy" on the left, in the hero's display
+ * capitals with a small "Our" set at their foot, and the studio's beliefs on the right.
  */
 export function DesignPhilosophy() {
   return (
-    <section aria-labelledby="philosophy-title" className="relative bg-ivory pt-10 pb-6 md:pt-14 md:pb-8">
+    <section aria-labelledby="philosophy-title" className="relative bg-ivory pt-20 pb-6 md:pt-28 md:pb-8">
       <div className="container-site grid gap-12 lg:grid-cols-12 lg:gap-10">
-        {/* Left: the title, set like the hero's "Designing Spaces" — light Jost capitals with swash D, P and S.
-            The reveal's clip-path would crop the swash flourishes, which rise above the line box. */}
-        <div className="lg:col-span-6 lg:-ml-[min(calc(max(0px,(100vw_-_82rem)/2)_-_0.5rem),4.5rem)]">
+        {/* Left: the title, in the hero's display capitals. */}
+        <div className="lg:col-span-6">
           <h2
             id="philosophy-title"
-            className="font-caps text-[clamp(2.9rem,1rem+4.3vw,5.25rem)] whitespace-nowrap font-light uppercase leading-[1.25] tracking-[0.03em] text-ink [clip-path:none]! lg:sticky lg:top-32"
+            className="caps font-display text-display font-medium text-ink lg:sticky lg:top-32"
             data-reveal
           >
             <span className="block">
-              <Swash>D</Swash>esign
+              <span className="mr-[0.4em] align-baseline font-sans text-[0.8125rem] font-medium tracking-[0.04em]">Our</span>
+              Design
             </span>
-            <span className="mt-[0.22em] block pl-[0.4em]">
-              <Swash className="-ml-[0.02em] mr-[0.04em]">P</Swash>hilo<Swash className="mx-[0.03em]">S</Swash>ophy
-            </span>
+            <span className="block pl-[0.5em]">Philosophy</span>
           </h2>
         </div>
 
@@ -48,10 +44,10 @@ export function DesignPhilosophy() {
             How we work
           </p>
           <p
-            className="mt-6 font-hero text-[clamp(1.6rem,1rem+1.9vw,2.6rem)] font-light leading-[1.18] text-ink text-balance"
+            className="mt-6 font-display text-[clamp(1.6rem,1rem+1.8vw,2.5rem)] font-medium leading-[1.08] tracking-[-0.03em] text-ink text-balance"
             data-reveal
           >
-            We build homes the way a karigar works — <em className="text-oxblood">slowly, honestly, and to last.</em>
+            We build homes the way a karigar works — <em className="font-accent text-[1.08em] font-normal italic tracking-[-0.01em] text-oxblood">slowly, honestly, and to last.</em>
           </p>
           <p className="text-lead mt-6 max-w-2xl text-muted" data-reveal>
             A beautiful room on handover day is the easy part. We design for the tenth year: proportions that stay calm,
@@ -66,9 +62,9 @@ export function DesignPhilosophy() {
                 data-reveal
                 style={{ "--i": i } as React.CSSProperties}
               >
-                <span className="font-hero text-3xl italic leading-none text-brass-ink">0{i + 1}</span>
+                <span className="numeral text-3xl leading-none text-brass-ink">0{i + 1}</span>
                 <div className="flex flex-col gap-3">
-                  <h3 className="font-caps text-sm uppercase tracking-[0.18em] text-ink">{p.title}</h3>
+                  <h3 className="text-[0.8125rem] font-medium uppercase tracking-[0.08em] text-ink">{p.title}</h3>
                   <p className="text-muted">{p.body}</p>
                 </div>
               </li>

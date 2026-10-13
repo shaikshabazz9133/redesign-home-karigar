@@ -26,9 +26,9 @@ export function ArchHero() {
             <span aria-hidden className="h-px w-7 shrink-0 bg-brass-ink/60" />
             Complete home interiors
           </p>
-          <h2 id="intro-title" className="mt-8 font-display text-[clamp(2.1rem,1rem+4.6vw,4.25rem)] leading-[1.04] tracking-[-0.03em] text-ink" data-reveal>
+          <h2 id="intro-title" className="caps mt-8 text-[clamp(2.25rem,1rem+4.8vw,4.75rem)] leading-[0.92] tracking-[-0.045em] text-ink" data-reveal>
             <span className="block">Every surface, every fitting —</span>
-            <span className="block italic text-oxblood [font-variation-settings:'SOFT'_100]">designed as one home.</span>
+            <em className="block text-oxblood">designed as one home.</em>
           </h2>
           <p className="text-lead mt-8 max-w-lg text-muted" data-reveal>
             We design and build complete homes — every ceiling, cabinet and corner — and hand them over exactly as you
@@ -117,7 +117,7 @@ function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="flex flex-col gap-1.5">
       <dt className="order-2 text-sm text-muted">{label}</dt>
-      <dd className="order-1 font-display text-[2rem] leading-none text-ink">{value}</dd>
+      <dd className="order-1 font-display text-[2.25rem] font-medium leading-none tracking-[-0.04em] text-ink">{value}</dd>
     </div>
   );
 }

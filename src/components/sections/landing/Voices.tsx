@@ -18,7 +18,7 @@ export function Voices({ featured, more }: { featured: Tour; more: Tour[] }) {
       <div className="container-site grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
           <div data-reveal><Eyebrow tone="light">In their words</Eyebrow></div>
-          <h2 id="voices-title" className="mt-6 text-h2 text-ivory" data-reveal>
+          <h2 id="voices-title" className="mt-6 text-h2 caps text-ivory" data-reveal>
             Ask the people who live there.
           </h2>
           <p className="text-lead mt-6 text-ivory-muted" data-reveal>

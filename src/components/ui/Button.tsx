@@ -7,7 +7,7 @@ type Variant = "primary" | "secondary" | "light" | "outline-light" | "text" | "l
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "group/btn relative inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full font-medium tracking-[0.01em] " +
+  "group/btn relative inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full font-medium uppercase tracking-[0.08em] " +
   "transition-[background-color,color,border-color,box-shadow,transform] duration-300 ease-[var(--ease-premium)] " +
   "active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50";
 
@@ -31,9 +31,9 @@ const variants: Record<Variant, string> = {
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-10 gap-2! px-4 text-[0.8125rem]",
-  md: "h-11 px-5 text-[0.9375rem]",
-  lg: "h-13 px-7 text-base",
+  sm: "h-10 gap-2! px-4 text-[0.6875rem]",
+  md: "h-11 px-6 text-[0.75rem]",
+  lg: "h-13 px-8 text-[0.8125rem]",
 };
 
 interface CommonProps {

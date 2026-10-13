@@ -63,7 +63,7 @@ export default async function ArticlePage({ params }: Props) {
           <div className="mx-auto flex max-w-2xl flex-col gap-14 md:gap-16">
             {a.sections.map((s, i) => (
               <section key={s.heading} data-reveal>
-                <p className="font-display text-lg text-brass-ink tabular-nums">{pad2(i + 1)}</p>
+                <p className="numeral text-xl text-brass-ink tabular-nums">{pad2(i + 1)}</p>
                 <h2 className="mt-3 text-h3">{s.heading}</h2>
                 <div className="mt-5 flex flex-col gap-5 text-[1.0625rem] leading-[1.8] text-ink-soft">
                   {s.body.map((p) => (

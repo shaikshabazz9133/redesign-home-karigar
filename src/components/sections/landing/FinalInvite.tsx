@@ -17,7 +17,7 @@ export function FinalInvite() {
       <div className="container-site flex min-h-[38rem] items-center justify-end py-20 md:min-h-[44rem]">
         <div className="w-full max-w-lg rounded-lg bg-ivory/95 p-8 shadow-float backdrop-blur-md md:p-12" data-reveal>
           <p className="eyebrow text-muted">Begin with a conversation</p>
-          <h2 id="invite-title" className="mt-5 text-h2">
+          <h2 id="invite-title" className="mt-5 text-h2 caps">
             Your home, <em className="italic text-oxblood">considered</em> from the first line.
           </h2>
           <p className="mt-5 text-muted">

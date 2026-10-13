@@ -21,9 +21,9 @@ export function ProjectSpotlight({ slug }: { slug: string }) {
           <div className="flex flex-col justify-between gap-10 lg:col-span-4">
             <div>
               <div data-reveal><Eyebrow>Recently handed over</Eyebrow></div>
-              <h2 id="spotlight-title" className="mt-6 text-h2" data-reveal>
+              <h2 id="spotlight-title" className="mt-6 text-h2 caps" data-reveal>
                 Flat {p.flatNo}
-                <span className="block italic text-muted">{p.development}</span>
+                <em className="block text-muted">{p.development}</em>
               </h2>
               <p className="mt-6 text-muted" data-reveal>
                 A {p.area} {p.configuration} at {p.community}, designed room by room — {rooms.length} spaces and{" "}

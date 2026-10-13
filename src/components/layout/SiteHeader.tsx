@@ -61,17 +61,19 @@ export function SiteHeader() {
 
   return (
     <LazyMotion features={domAnimation} strict>
-      <header
-        className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,color] duration-500 ease-[var(--ease-premium)]",
-          atTop
-            ? "on-dark border-b border-transparent text-ivory"
-            : open
-              ? "on-dark border-b border-transparent bg-espresso text-ivory"
-              : "border-b border-line/80 bg-ivory/85 text-ink backdrop-blur-xl backdrop-saturate-150",
-        )}
-      >
-        <div className="container-site flex h-[4.5rem] items-center justify-between gap-6 md:h-20">
+      {/* From md: a floating glass bar, inset from the screen edges. Over the home hero it starts clear with
+          light type; everywhere else (and once the page scrolls) it frosts over whatever passes beneath. Its
+          inner edges line up with `.container-site`, so the logo and nav never shift when it changes state.
+          Phones: no bar at all — just the stone mark and the menu button floating over the page. */}
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-50 pt-3">
+        <div
+          className={cn(
+            "hk-header-bar pointer-events-auto mx-auto flex h-16 w-full max-w-[81rem] items-center justify-between gap-6 border max-md:border-transparent px-[clamp(1rem,4vw,2.5rem)] md:h-[4.25rem] md:w-[calc(100%-1rem)] md:rounded-[1.25rem] md:px-[calc(clamp(1rem,4vw,2.5rem)-0.5rem)]",
+            atTop || open
+              ? "on-dark border-transparent text-ivory"
+              : "hk-glass text-ink",
+          )}
+        >
           {/* Full lockup on larger screens; on mobile, the transparent stone mark alone. */}
           <Link href="/" aria-label={`${site.name} — home`} className="relative z-10 -m-2 rounded-sm p-2">
             <Logo markOnlyOnMobile />
@@ -87,7 +89,7 @@ export function SiteHeader() {
                       href={item.href}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "group relative inline-flex h-10 items-center whitespace-nowrap rounded-full px-3 text-[0.9375rem] transition-colors duration-300 2xl:px-4",
+                        "group relative inline-flex h-10 items-center whitespace-nowrap rounded-full px-3 text-[0.75rem] font-medium uppercase tracking-[0.08em] transition-colors duration-300 2xl:px-4",
                         active ? "opacity-100" : "opacity-75 hover:opacity-100",
                       )}
                     >
@@ -118,7 +120,13 @@ export function SiteHeader() {
             <button
               ref={toggleRef}
               type="button"
-              className="relative z-10 -mr-2 grid size-11 place-items-center rounded-full xl:hidden"
+              className={cn(
+                "relative z-10 -mr-2 grid size-11 place-items-center rounded-full transition-[background-color,box-shadow,color] duration-500 xl:hidden",
+                /* Phones have no bar behind the button, so once off the hero it carries its own small
+                   dark glass disc — legible over photographs and ivory sections alike. */
+                !(atTop || open) &&
+                  "max-md:mr-0 max-md:bg-espresso/45 max-md:text-ivory max-md:shadow-[inset_0_1px_0_rgb(255_255_255/0.15),0_8px_24px_-10px_rgb(29_24_21/0.5)] max-md:backdrop-blur-md",
+              )}
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Close menu" : "Open menu"}
@@ -177,7 +185,7 @@ export function SiteHeader() {
                     <Link
                       href={item.href}
                       aria-current={pathname === item.href ? "page" : undefined}
-                      className="group flex items-center justify-between py-4 font-display text-[2rem] leading-tight"
+                      className="group flex items-center justify-between py-4 caps font-display text-[2.25rem] font-medium leading-none tracking-[-0.04em]"
                     >
                       <span className={cn(pathname === item.href ? "text-brass" : "text-ivory")}>{item.label}</span>
                       <Icon name="arrowRight" className="opacity-40 transition-transform duration-300 group-hover:translate-x-1 group-hover:opacity-100" />

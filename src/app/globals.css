@@ -41,32 +41,37 @@
   --color-danger: #a12a2a;
   --color-success: #2f6b4f;
 
-  /* Type */
-  --font-display: var(--font-fraunces), "Times New Roman", serif;
-  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
-  --font-brand: var(--font-cormorant), Georgia, serif;
-  --font-hero: var(--font-cormorant-light), Georgia, serif;
-  --font-caps: var(--font-jost), "Futura", sans-serif;
-  --font-script: var(--font-imperial), cursive;
-  --font-grotesk: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
-  --font-tagline: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  /* Type — three faces, one voice (see layout.tsx).
+     Display: tight grotesk capitals, as in an architectural monograph.
+     Text:    a quiet, legible grotesk for reading and UI.
+     Accent:  a classical italic, used sparingly for emphasis and the wordmark. */
+  --font-display: var(--font-inter-tight), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  --font-accent: var(--font-cormorant), Georgia, serif;
+  --font-script: var(--font-pinyon), "Snell Roundhand", cursive;
 
-  --text-display: clamp(2.6rem, 1.6rem + 3.6vw, 4.75rem);
-  --text-display--line-height: 1.02;
-  --text-display--letter-spacing: -0.025em;
-  --text-h1: clamp(2.5rem, 1.75rem + 2.8vw, 4.25rem);
-  --text-h1--line-height: 1.05;
-  --text-h1--letter-spacing: -0.02em;
-  --text-h2: clamp(2rem, 1.5rem + 1.9vw, 3.25rem);
-  --text-h2--line-height: 1.1;
-  --text-h2--letter-spacing: -0.015em;
-  --text-h3: clamp(1.375rem, 1.25rem + 0.45vw, 1.75rem);
-  --text-h3--line-height: 1.25;
-  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
-  --text-lead--line-height: 1.65;
-  --text-eyebrow: 0.75rem;
+  /* Scale — three tiers: display (statements), heading (sections), text (reading).
+     Large sizes run tight and close-leaded; small labels open up. */
+  --text-hero: clamp(2.8rem, 0.5rem + 8vw, 7.5rem);
+  --text-hero--line-height: 0.86;
+  --text-hero--letter-spacing: -0.055em;
+  --text-display: clamp(2.75rem, 1.4rem + 5vw, 6rem);
+  --text-display--line-height: 0.9;
+  --text-display--letter-spacing: -0.045em;
+  --text-h1: clamp(2.5rem, 1.5rem + 3.6vw, 5rem);
+  --text-h1--line-height: 0.94;
+  --text-h1--letter-spacing: -0.04em;
+  --text-h2: clamp(2rem, 1.35rem + 2.5vw, 3.75rem);
+  --text-h2--line-height: 0.98;
+  --text-h2--letter-spacing: -0.035em;
+  --text-h3: clamp(1.25rem, 1.12rem + 0.5vw, 1.625rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.02em;
+  --text-lead: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --text-lead--line-height: 1.6;
+  --text-eyebrow: 0.6875rem;
   --text-eyebrow--line-height: 1;
-  --text-eyebrow--letter-spacing: 0.16em;
+  --text-eyebrow--letter-spacing: 0.1em;
 
   /* Shape */
   --radius-xs: 2px;
@@ -115,16 +120,26 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 1rem;
-    line-height: 1.7;
+    line-height: 1.65;
+    letter-spacing: -0.006em;
+    font-feature-settings: "cv11", "ss01";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: clip;
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    font-weight: 380;
-    font-optical-sizing: auto;
+    font-weight: 500;
     text-wrap: balance;
+  }
+  /* Accent: emphasis inside a heading turns to the classical italic, in its natural case. */
+  :is(h1, h2, h3, .text-hero, .text-display) em {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    font-size: 1.08em;
   }
   p { text-wrap: pretty; }
   ::selection { background: var(--color-oxblood); color: var(--color-ivory); }
@@ -148,7 +163,21 @@
   line-height: 1;
   letter-spacing: var(--text-eyebrow--letter-spacing);
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
+}
+
+/* Headline capitals — the display face as set in the hero and section titles. */
+@utility caps {
+  text-transform: uppercase;
+  font-feature-settings: "case", "ss01";
+}
+
+/* Accent numerals and small italic notes. */
+@utility numeral {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 @utility container-site {
@@ -323,150 +352,194 @@ html.js .hk-img:not([data-loaded]) ~ .hk-overlay { opacity: 0; }
 
 /* ── Intro preloader (every full page load) ──────────────── */
 /* Plays from server HTML before hydration; JS only decides when to lift it.
-   Only transform, opacity and clip-path animate, so nothing repaints. Entrance
-   animations fill "backwards" only: once done they drop their GPU layer and
-   the stones render pixel-sharp instead of as a resampled bitmap. */
+   Entrance animations fill "backwards" only, so once done they drop their layers
+   and the stones render pixel-sharp instead of as a resampled bitmap. */
 #hk-preloader {
   /* Fail-safe: never trap the page if scripts stall. */
-  animation: hki-failsafe 0s linear 12s forwards;
+  animation: hki-failsafe 0s linear 9s forwards;
 }
-#hk-preloader .hk-pre-glow { animation: hki-fade-in 1.6s var(--ease-premium) backwards; }
 
-/* 1 · Plan: guides draw in while the karigars walk on and mark out the outlines. */
-#hk-preloader .hk-pre-guide,
+/* 1 · Doorway: the arch is drawn in a single brass line, up one side, over and down. */
 #hk-preloader .hk-pre-outline {
-  vector-effect: non-scaling-stroke;
-  stroke-dasharray: 1 1;
+  stroke-width: 0.6;
   stroke-linecap: round;
-}
-#hk-preloader .hk-pre-guide {
-  stroke-width: 1;
-  animation: hki-draw 1.4s var(--ease-in-out-soft) calc(0.1s + var(--i) * 90ms) both;
-}
-/* Outlines are traced on the karigars' SMIL clock, in step with their chalk strings. */
-#hk-preloader .hk-pre-outline { stroke-width: 1.4; }
-/* 2 · Build: each stone's colour spreads from the karigar's tool — the
-   carver's chisel on the tall stone, the painter's roller on the small one —
-   until it meets the traced outline: a feathered radial mask whose radius grows. The radius
-   rests at a fully open value, so the finished stone is unmasked in effect. */
-@property --hk-r { syntax: "<percentage>"; inherits: false; initial-value: 130%; }
-#hk-preloader .hk-pre-tall,
-#hk-preloader .hk-pre-small {
-  -webkit-mask: radial-gradient(circle at var(--hk-cx) var(--hk-cy), #000 var(--hk-r), transparent calc(var(--hk-r) + 22%));
-  mask: radial-gradient(circle at var(--hk-cx) var(--hk-cy), #000 var(--hk-r), transparent calc(var(--hk-r) + 22%));
-}
-#hk-preloader .hk-pre-tall {
-  --hk-cx: 2%;
-  --hk-cy: 81%;
-  animation: hki-bloom 2.4s cubic-bezier(0.33, 0, 0.2, 1) 2.8s backwards;
-}
-#hk-preloader .hk-pre-small {
-  --hk-cx: 100%;
-  --hk-cy: 76%;
-  animation: hki-bloom 2.4s cubic-bezier(0.33, 0, 0.2, 1) 3.1s backwards;
-}
-#hk-preloader .hk-pre-shadow { animation: hki-shadow-in 1.8s var(--ease-out-expo) 2.9s backwards; }
-/* 3 · Finish: the drawing lifts away and light crosses the finished stone. */
-#hk-preloader .hk-pre-plan,
-#hk-preloader .hk-pre-lines { animation: hki-plan-out 1s var(--ease-in-out-soft) 5.3s both; }
-#hk-preloader .hki-sheen { animation: hki-sheen 1.6s var(--ease-in-out-soft) 5.7s backwards; }
-/* Crew: the karigars walk on at the start (their legs step on the SMIL clock),
-   mark out and build the stones, then step back and leave the finished mark. */
-#hk-preloader .hk-pre-carver {
-  animation:
-    hki-carver-in 1s cubic-bezier(0.3, 0.5, 0.4, 1) 0.1s backwards,
-    hki-carver-out 0.9s var(--ease-in-out-soft) 5.5s forwards;
-}
-#hk-preloader .hk-pre-painter {
-  animation:
-    hki-painter-in 1s cubic-bezier(0.3, 0.5, 0.4, 1) 0.1s backwards,
-    hki-painter-out 0.9s var(--ease-in-out-soft) 5.6s forwards;
+  stroke-dasharray: 1 1;
+  animation: hki-draw 1.7s var(--ease-in-out-soft) 0.15s both;
 }
 
-/* 5 · Name: letters unfold in 3D from the centre outward while the tracking
-   settles, a diamond seats on the rule, and a gold glint sweeps the name. */
-#hk-preloader .hk-pre-wordmark { animation: hki-tracking 2.2s var(--ease-out-expo) 5.6s backwards; }
-#hk-preloader .hk-pre-letter {
-  display: inline-block;
-  transform-origin: 50% 100%;
-  animation: hki-unfold 1.5s var(--ease-out-expo) calc(5.6s + var(--d) * 75ms) backwards;
+/* 2 · Light: warm linen light glows up inside the doorway; the mark comes into focus on its
+   threshold, and a soft light crosses the stones. */
+#hk-preloader .hk-pre-archfill { animation: hki-glow 1.6s var(--ease-premium) 0.5s backwards; }
+#hk-preloader .hk-pre-mark > span { animation: hki-focus 1.4s var(--ease-premium) 1.05s backwards; }
+#hk-preloader .hk-sheen { animation: hki-sheen 1.5s var(--ease-in-out-soft) 2.1s backwards; }
+
+/* In the arch, the mark is sketched rather than focused: each stone is traced in brass, its texture
+   then appears softly within the line, and the line melts away. The name follows a beat later. */
+#hk-preloader .hk-intro-arch .hk-pre-mark > span { animation: none; }
+#hk-preloader .hk-arch-trace {
+  vector-effect: non-scaling-stroke;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1 1;
+  animation:
+    hki-draw 1.4s var(--ease-in-out-soft) calc(0.9s + var(--i) * 0.3s) both,
+    hki-fade-out 0.8s var(--ease-premium) calc(2.6s + var(--i) * 0.2s) forwards;
 }
-#hk-preloader .hk-pre-glint {
+#hk-preloader .hk-arch-tall { animation: hki-ink 1.3s var(--ease-premium) 2.05s backwards; }
+#hk-preloader .hk-arch-small { animation: hki-ink 1.3s var(--ease-premium) 2.3s backwards; }
+#hk-preloader .hk-intro-arch .hk-sheen { animation-delay: 3s; }
+#hk-preloader .hk-intro-arch .hk-pre-letter { animation-delay: calc(2.5s + var(--d) * 70ms); }
+#hk-preloader .hk-intro-arch .hk-pre-shine { animation-delay: 3.55s; }
+#hk-preloader .hk-intro-arch .hk-pre-rule { animation-delay: 3.15s; }
+#hk-preloader .hk-intro-arch .hk-pre-word { animation-delay: calc(3.35s + var(--i) * 130ms); }
+@keyframes hki-ink {
+  from { opacity: 0; filter: blur(6px) saturate(0.6); }
+  to { opacity: 1; filter: blur(0) saturate(1); }
+}
+
+/* 3 · Name: letters appear from the centre outward; a gold shine sweeps the name; rule and tagline. */
+#hk-preloader .hk-pre-letter { animation: hki-letter 1s var(--ease-premium) calc(1.65s + var(--d) * 70ms) backwards; }
+#hk-preloader .hk-pre-shine {
   color: transparent;
-  background: linear-gradient(100deg, transparent 42%, rgb(255 238 205 / 0.95) 50%, transparent 58%) 160% 0 / 260% 100% no-repeat;
+  background: linear-gradient(100deg, transparent 40%, rgb(214 176 112 / 0.95) 50%, transparent 60%) 160% 0 / 260% 100% no-repeat;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: hki-glint 1.7s var(--ease-in-out-soft) 7.05s both;
+  animation: hki-shine 1.5s var(--ease-in-out-soft) 2.75s both;
 }
-#hk-preloader .hk-pre-rule { animation: hki-rule-in 1.4s var(--ease-out-expo) 6.15s backwards; }
-#hk-preloader .hk-pre-gem { animation: hki-gem-in 0.9s var(--ease-out-expo) 6.6s backwards; }
-#hk-preloader .hk-pre-word {
-  display: inline-block;
-  animation: hki-word-in 1.3s var(--ease-out-expo) calc(6.6s + var(--i) * 180ms) backwards;
-}
-#hk-preloader .hk-pre-foot { animation: hki-fade-in 1s var(--ease-premium) 0.4s backwards; }
-#hk-preloader .hk-pre-progress { animation: hki-progress 8.3s var(--ease-in-out-soft) 0.2s both; }
+#hk-preloader .hk-pre-rule { animation: hki-rule-in 1.3s var(--ease-out-expo) 2.35s backwards; }
+#hk-preloader .hk-pre-word { animation: hki-word-in 1s var(--ease-out-expo) calc(2.55s + var(--i) * 130ms) backwards; }
 
+#hk-preloader .hk-pre-progress { animation: hki-progress 4.6s var(--ease-in-out-soft) 0.1s both; }
 /* A CSS-only counter that tracks the progress line. */
 @property --hk-n { syntax: "<integer>"; inherits: false; initial-value: 0; }
 #hk-preloader .hk-pre-count {
   counter-reset: hk-n var(--hk-n);
-  animation: hki-count 8.3s var(--ease-in-out-soft) 0.2s both;
+  animation: hki-count 4.6s var(--ease-in-out-soft) 0.1s both;
 }
 #hk-preloader .hk-pre-count::after { content: counter(hk-n, decimal-leading-zero) "%"; }
 
-/* Exit: content lifts away, then the ivory panel and the espresso one behind it slide up. */
+/* 4 · Step through: the name and mark fade, the doorway clears onto the page beyond, then the arch —
+   whose ivory shadow is the rest of the screen — grows until it fills the view. */
 #hk-preloader.is-leaving { pointer-events: none; }
-#hk-preloader.is-leaving .hk-pre-content,
-#hk-preloader.is-leaving .hk-pre-foot { animation: hki-content-out 0.7s var(--ease-in-out-soft) both; }
-#hk-preloader.is-leaving .hk-pre-progress { animation: hki-progress-done 0.45s var(--ease-premium) both; }
-#hk-preloader.is-leaving .hk-pre-count { animation: hki-count-done 0.45s var(--ease-premium) both; }
-#hk-preloader.is-leaving .hk-pre-panel { animation: hki-panel-up 1.05s cubic-bezier(0.76, 0, 0.24, 1) 0.45s both; }
-#hk-preloader.is-leaving .hk-pre-panel-back { animation: hki-panel-up 1.05s cubic-bezier(0.76, 0, 0.24, 1) 0.6s both; }
+#hk-preloader.is-leaving .hk-sheen { display: none; }
+#hk-preloader.is-leaving :is(.hk-pre-content, .hk-pre-mark, .hk-pre-outline) { animation: hki-fade-out 0.5s var(--ease-premium) both; }
+#hk-preloader.is-leaving .hk-pre-progress { animation: hki-progress-done 0.4s var(--ease-premium) both; }
+#hk-preloader.is-leaving .hk-pre-count { animation: hki-count-done 0.4s var(--ease-premium) both; }
+#hk-preloader.is-leaving .hk-pre-track,
+#hk-preloader.is-leaving .hk-pre-count { animation: hki-fade-out 0.4s var(--ease-premium) 0.3s both; }
+#hk-preloader.is-leaving :is(.hk-pre-archfill, .hk-pre-archbase) { animation: hki-fade-out 0.7s var(--ease-premium) 0.2s both; }
+#hk-preloader.is-leaving .hk-pre-arch { animation: hki-step-through 1.35s cubic-bezier(0.7, 0, 0.2, 1) 0.6s both; }
+
+/* ── Intro styles ─────────────────────────────────────────
+   Only the chosen intro renders (see the inline script in layout.tsx); the others stay display:none,
+   so their animations never run. Default: the arch. */
+#hk-preloader .hk-intro { display: none; }
+html:not([data-intro-style]) #hk-preloader .hk-intro-arch,
+html[data-intro-style="doors"] #hk-preloader .hk-intro-doors,
+html[data-intro-style="monolith"] #hk-preloader .hk-intro-monolith { display: flex; }
+
+/* Doors: mouldings and pulls settle onto two closed doors carrying the lockup across their seam;
+   warm light glows through the gap; then both swing open, inward, into the home. */
+#hk-preloader .hk-intro-doors { perspective: 2200px; }
+#hk-preloader .hk-door { backface-visibility: hidden; }
+#hk-preloader .hk-door-panel { animation: hki-panel-in 1.4s var(--ease-out-expo) 0.1s backwards; }
+#hk-preloader .hk-door-pull { animation: hki-fade-in 0.9s var(--ease-premium) 0.9s backwards; }
+#hk-preloader .hk-door-shade { opacity: 0; }
+#hk-preloader .hk-door-light { opacity: 0; animation: hki-seam 1.3s var(--ease-in-out-soft) 3.1s forwards; }
+#hk-preloader.is-leaving .hk-intro-doors :is(.hk-pre-content, .hk-pre-mark) { animation: none; }
+#hk-preloader.is-leaving .hk-door-left { animation: hki-door-left 1.6s cubic-bezier(0.65, 0, 0.25, 1) 0.15s both; }
+#hk-preloader.is-leaving .hk-door-right { animation: hki-door-right 1.6s cubic-bezier(0.65, 0, 0.25, 1) 0.15s both; }
+#hk-preloader.is-leaving .hk-door-shade { animation: hki-shade 1.6s cubic-bezier(0.65, 0, 0.25, 1) 0.15s both; }
+#hk-preloader.is-leaving .hk-door-light { animation: hki-flood 1s var(--ease-out-expo) both; }
+
+/* Monolith: the mark as a carved stone turns in on a turntable and sways to show its depth;
+   the name's letters flip round like cards; on exit the whole screen turns away like a page. */
+#hk-preloader .hk-mono-stage { animation: hki-fade-in 0.9s var(--ease-premium) 0.15s backwards; }
+#hk-preloader .hk-mono {
+  animation:
+    hki-turntable 2.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards,
+    hki-sway 2.4s var(--ease-in-out-soft) 2.9s;
+}
+#hk-preloader .hk-mono-floor { animation: hki-floor 2.4s var(--ease-out-expo) 0.4s backwards; }
+#hk-preloader .hk-mono-letter {
+  transform-origin: 50% 50%;
+  animation: hki-flip 1s var(--ease-out-expo) calc(1.85s + var(--d) * 65ms) backwards;
+}
+#hk-preloader.is-leaving .hk-intro-monolith .hk-pre-content { animation: none; }
+#hk-preloader.is-leaving .hk-intro-monolith {
+  transform-origin: 0 50%;
+  animation: hki-page-turn 1.35s cubic-bezier(0.65, 0, 0.35, 1) 0.1s both;
+}
+
+@keyframes hki-panel-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hki-seam {
+  0% { opacity: 0; transform: scaleY(0.2); }
+  60% { opacity: 1; transform: none; }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes hki-flood {
+  from { opacity: 1; transform: scaleX(1); }
+  to { opacity: 0; transform: scaleX(80); }
+}
+@keyframes hki-door-left { to { transform: rotateY(100deg); } }
+@keyframes hki-door-right { to { transform: rotateY(-100deg); } }
+@keyframes hki-shade { to { opacity: 0.45; } }
+@keyframes hki-turntable {
+  from { transform: rotateX(14deg) rotateY(-210deg) scale(0.85); }
+  to { transform: none; }
+}
+@keyframes hki-sway {
+  0%, 100% { transform: none; }
+  50% { transform: rotateX(6deg) rotateY(-24deg); }
+}
+@keyframes hki-floor {
+  from { opacity: 0; transform: scaleX(0.4); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hki-flip {
+  from { opacity: 0; transform: perspective(500px) rotateY(-95deg); }
+  40% { opacity: 1; }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hki-page-turn {
+  to { transform: perspective(2000px) rotateY(-100deg); filter: brightness(0.75); }
+}
+@keyframes hki-fade-in { from { opacity: 0; } to { opacity: 1; } }
 
 @keyframes hki-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
-@keyframes hki-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hki-fade-out { to { opacity: 0; } }
 @keyframes hki-draw {
   from { stroke-dashoffset: 1; }
   to { stroke-dashoffset: 0; }
 }
-@keyframes hki-bloom {
-  from { --hk-r: -22%; }
-  to { --hk-r: 100%; }
-}
-@keyframes hki-carver-in { from { opacity: 0; transform: translate3d(-110px, 0, 0); } }
-@keyframes hki-painter-in { from { opacity: 0; transform: translate3d(110px, 0, 0); } }
-@keyframes hki-carver-out { to { opacity: 0; transform: translate3d(-40px, 0, 0); } }
-@keyframes hki-painter-out { to { opacity: 0; transform: translate3d(40px, 0, 0); } }
-@keyframes hki-tracking { from { letter-spacing: 0.7em; } }
-@keyframes hki-unfold {
-  from { opacity: 0; transform: translate3d(0, 0.35em, 0) rotateX(-85deg); }
+@keyframes hki-glow {
+  from { opacity: 0; transform: scale(0.97); }
   to { opacity: 1; transform: none; }
 }
-@keyframes hki-glint {
+@keyframes hki-focus {
+  from { opacity: 0; filter: blur(10px); transform: scale(0.92); }
+  60% { opacity: 1; }
+  to { opacity: 1; filter: blur(0); transform: none; }
+}
+@keyframes hki-letter {
+  from { opacity: 0; filter: blur(8px); }
+  to { opacity: 1; filter: blur(0); }
+}
+@keyframes hki-shine {
   from { background-position: 160% 0; }
   to { background-position: -60% 0; }
 }
-@keyframes hki-gem-in {
-  from { opacity: 0; transform: rotate(-180deg) scale(0); }
-  to { opacity: 1; transform: none; }
+@keyframes hki-rule-in {
+  from { transform: scaleX(0); opacity: 0; }
+  to { transform: scaleX(1); opacity: 1; }
 }
 @keyframes hki-word-in {
-  from { opacity: 0; letter-spacing: 0.6em; }
-  to { opacity: 1; letter-spacing: 0.28em; }
-}
-@keyframes hki-plan-out { to { opacity: 0; transform: scale(1.03); } }
-@keyframes hki-shadow-in {
-  from { opacity: 0; transform: scaleX(0.3); }
-  to { opacity: 1; transform: none; }
-}
-@keyframes hki-rise {
-  from { opacity: 0; transform: translate3d(0, 105%, 0); }
-  to { opacity: 1; transform: none; }
-}
-@keyframes hki-rule-in {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
+  from { opacity: 0; filter: blur(4px); }
+  to { opacity: 1; filter: blur(0); }
 }
 @keyframes hki-progress {
   from { transform: scaleX(0); }
@@ -475,10 +548,9 @@ html.js .hk-img:not([data-loaded]) ~ .hk-overlay { opacity: 0; }
 @keyframes hki-progress-done { from { transform: scaleX(0.9); } to { transform: scaleX(1); } }
 @keyframes hki-count { from { --hk-n: 0; } to { --hk-n: 90; } }
 @keyframes hki-count-done { from { --hk-n: 90; } to { --hk-n: 100; } }
-@keyframes hki-content-out { to { opacity: 0; transform: translate3d(0, -32px, 0); } }
-@keyframes hki-panel-up {
+@keyframes hki-step-through {
   from { transform: none; }
-  to { transform: translate3d(0, -100%, 0); }
+  to { transform: scale(9); }
 }
 @media (prefers-reduced-motion: reduce) {
   #hk-preloader * { animation-delay: 0s !important; }
@@ -486,13 +558,13 @@ html.js .hk-img:not([data-loaded]) ~ .hk-overlay { opacity: 0; }
 
 /* ── Landing page motion ──────────────────────────────────── */
 /* Immersive hero: hidden while the intro plays, then the photograph settles
-   and the words rise in. A 12s fallback (matching the intro's fail-safe)
+   and the words rise in. A 9s fallback (matching the intro's fail-safe)
    reveals it even if the intro script never runs; without JS it simply shows. */
 @media (prefers-reduced-motion: no-preference) {
-  html.js .hk-hero-photo { animation: hk-hero-settle 2.6s var(--ease-premium) 12s both; }
-  html.js .hk-hero-in { animation: hk-hero-rise 1.2s var(--ease-premium) calc(12s + var(--d, 0ms)) both; }
-  html.js[data-intro="done"] .hk-hero-photo { animation-delay: 0.35s; }
-  html.js[data-intro="done"] .hk-hero-in { animation-delay: calc(0.9s + var(--d, 0ms)); }
+  html.js .hk-hero-photo { animation: hk-hero-settle 2.6s var(--ease-premium) 9s both; }
+  html.js .hk-hero-in { animation: hk-hero-rise 1.2s var(--ease-premium) calc(9s + var(--d, 0ms)) both; }
+  html.js[data-intro="done"] .hk-hero-photo { animation-delay: 0.2s; }
+  html.js[data-intro="done"] .hk-hero-in { animation-delay: calc(0.75s + var(--d, 0ms)); }
 }
 @keyframes hk-hero-settle {
   from { transform: scale(1.12); filter: brightness(0.75); }
@@ -501,6 +573,34 @@ html.js .hk-img:not([data-loaded]) ~ .hk-overlay { opacity: 0; }
 @keyframes hk-hero-rise {
   from { opacity: 0; transform: translate3d(0, 28px, 0); }
   to { opacity: 1; transform: none; }
+}
+
+/* ── Glass ─────────────────────────────────────────────────
+   Frosted ivory: a translucent tint, heavy blur and lifted saturation so photographs
+   passing beneath read as soft colour, with a bright top edge and a deep, soft shadow. */
+.hk-header-bar {
+  transition:
+    background-color 0.5s var(--ease-premium),
+    border-color 0.5s var(--ease-premium),
+    box-shadow 0.5s var(--ease-premium),
+    color 0.5s var(--ease-premium),
+    backdrop-filter 0.5s var(--ease-premium);
+}
+/* Phones skip the bar entirely (see SiteHeader), so the glass starts at md. */
+@media (min-width: 48rem) {
+  .hk-glass {
+    background-color: rgb(250 247 242 / 0.62);
+    border-color: rgb(255 255 255 / 0.55);
+    -webkit-backdrop-filter: blur(22px) saturate(1.7);
+    backdrop-filter: blur(22px) saturate(1.7);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.7),
+      0 1px 2px rgb(29 24 21 / 0.04),
+      0 18px 40px -20px rgb(29 24 21 / 0.35);
+  }
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .hk-glass { background-color: rgb(250 247 242 / 0.94); }
+  }
 }
 
 /* Arch rises open from the floor line; the photo settles in */

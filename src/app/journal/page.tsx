@@ -60,7 +60,7 @@ export default function JournalPage() {
           </div>
           <div className="flex flex-col justify-between gap-10 p-8 md:p-12 lg:col-span-5">
             <div className="flex flex-col gap-6">
-              <p className="font-display text-lg text-brass-ink tabular-nums">{pad2(1)} · Featured</p>
+              <p className="numeral text-xl text-brass-ink tabular-nums">{pad2(1)} · Featured</p>
               <h2 className="text-h2 text-balance">{featured.title}</h2>
               <p className="text-lead text-muted">{featured.excerpt}</p>
             </div>
@@ -94,7 +94,7 @@ export default function JournalPage() {
                 <div className="flex flex-1 flex-col gap-4">
                   <div className="flex items-baseline justify-between gap-4">
                     <Meta article={a} />
-                    <span className="font-display text-brass-ink tabular-nums">{pad2(i + 2)}</span>
+                    <span className="numeral text-lg text-brass-ink">{pad2(i + 2)}</span>
                   </div>
                   <h2 className="text-h3 text-balance transition-colors duration-300 group-hover:text-oxblood">{a.title}</h2>
                   <p className="text-muted">{a.excerpt}</p>
