@@ -3,7 +3,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { SocialLinks } from "@/components/layout/SocialRail";
 
 /**
- * Full-bleed opening frame, exactly one screen tall on every device: a double-height living room with
+ * Full-bleed opening frame, one screen tall on every device (taller only if a screen is too short to hold it): a double-height living room with
  * the studio's promise stepped across its top left, as in an architectural monograph, and the call to
  * action at its foot. The kicker sits inside the h1, so the page's main heading carries the search
  * phrase ("Luxury interior design studio in Bengaluru") as well as the promise.
@@ -16,7 +16,7 @@ export function ImmersiveHero() {
     <section
       aria-labelledby="hero-title"
       data-hero
-      className="on-dark relative isolate flex h-[100svh] min-h-[36rem] overflow-hidden bg-espresso text-ivory"
+      className="on-dark relative isolate flex min-h-[max(100svh,36rem)] overflow-hidden bg-espresso text-ivory"
     >
       <div className="hk-hero-photo absolute inset-0 -z-20">
         <Image
@@ -40,7 +40,7 @@ export function ImmersiveHero() {
         className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-espresso/65 to-transparent"
       />
 
-      <div className="container-site flex w-full flex-col justify-between gap-10 pb-[clamp(1.75rem,5vh,3rem)] pt-[clamp(6.5rem,14vh,9rem)] lg:gap-0 lg:pb-[clamp(2.5rem,6vh,4.5rem)] lg:pt-[clamp(8rem,17vh,11rem)]">
+      <div className="container-site flex w-full flex-col justify-between gap-10 pb-[clamp(1.75rem,5vh,3rem)] pt-[clamp(6.5rem,14vh,9rem)] lg:gap-14 lg:pb-[clamp(2.5rem,6vh,4.5rem)] lg:pt-[clamp(8rem,17vh,11rem)]">
         {/* Phones: a centred composition — an uppercase kicker, the capitals stacked on the centre line and the
             script flourish on its own line beneath. From sm up: left-aligned, stair-stepped capitals. */}
         <h1 id="hero-title" className="font-display font-normal text-white max-sm:text-center">
@@ -48,8 +48,10 @@ export function ImmersiveHero() {
             Luxury interior design studio in Bengaluru
           </span>
           <span className="sr-only"> — </span>
-          {/* The small negative margin cancels the D's side bearing, so it lines up with the kicker above. */}
-          <span className="caps mt-1 block text-hero sm:-ml-[0.045em] max-sm:mt-4 max-sm:text-[clamp(2.6rem,13vw,3.5rem)] max-sm:leading-[0.92] md:whitespace-nowrap [text-shadow:0_2px_40px_rgb(29_24_21/0.35)]">
+          {/* The small negative margin cancels the D's side bearing, so it lines up with the kicker above.
+              From sm up the size is the smaller of a width-based and a height-based measure, so on wide but
+              short screens (laptops, zoomed browsers) the three lines still fit above the call to action. */}
+          <span className="caps mt-1 block text-hero sm:-ml-[0.045em] sm:text-[min(clamp(2.8rem,0.5rem+8vw,7.5rem),max(2.6rem,calc((100svh_-_20rem)/3.15)))] max-sm:mt-4 max-sm:text-[clamp(2.6rem,13vw,3.5rem)] max-sm:leading-[0.92] md:whitespace-nowrap [text-shadow:0_2px_40px_rgb(29_24_21/0.35)]">
             <span className="hk-hero-in block [--d:120ms]">Designing</span>
             <span className="hk-hero-in block sm:pl-[0.55em] [--d:220ms]">spaces that</span>
             <span className="hk-hero-in block whitespace-nowrap sm:pl-[1.6em] [--d:320ms]">

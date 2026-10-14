@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LogoMark, TAGLINE } from "@/components/ui/Logo";
 import { STONE_SMALL_PATH, STONE_TALL_PATH, STONE_VIEWBOX } from "@/components/ui/stonePaths";
 
@@ -12,7 +12,7 @@ export const INTRO_STYLES = ["blueprint", "arch", "doors", "monolith"] as const;
 type IntroStyle = (typeof INTRO_STYLES)[number];
 
 /** How long each intro's entrance runs before it may lift (ms since navigation start). */
-const MIN_END: Record<IntroStyle, number> = { blueprint: 8900, arch: 5000, doors: 4600, monolith: 4700 };
+const MIN_END: Record<IntroStyle, number> = { blueprint: 7700, arch: 5000, doors: 4600, monolith: 4700 };
 
 type Vars = React.CSSProperties & Record<`--${string}`, number>;
 
@@ -21,12 +21,10 @@ type Vars = React.CSSProperties & Record<`--${string}`, number>;
  * the one shown is chosen before first paint by an inline script in the root
  * layout (`?intro=arch`, `?intro=doors`, `?intro=monolith`; otherwise the blueprint).
  *
- *   blueprint — "drawing the home": the stone mark is traced in a fine brass line,
- *              then its colour blooms through each stone like pigment soaking into
- *              paper while the name appears; an architect's sheet is then ruled across
- *              the whole screen one line at a time, a spark of light at each line's tip,
- *              and once every line is drawn the sheet opens like louvres —
- *              strips lifting away in a wave from the centre — onto the page.
+ *   blueprint — "drawing the home", after the client's sketch: a small lattice is
+ *              ruled at the centre; the stone mark is traced inside it and coloured;
+ *              then every lattice line extends to the screen's edges — verticals up and
+ *              down, horizontals left and right — and the sheet opens onto the page.
  *   arch     — "entering the home": a brass arch draws itself and warm light
  *              glows inside it; the stone mark is sketched there in brass and
  *              its texture appears within the line; on exit the doorway grows
@@ -129,59 +127,88 @@ function Tagline() {
   );
 }
 
-/* The lines are ruled on a 1600 × 1000 sheet that covers the screen; strokes keep their width at any size. */
-const W = 1600;
-const H = 1000;
-const CX = W / 2;
-const CY = H / 2;
-
-type Line = { d: string; delay: number; tone: "main" | "fine" | "arc" };
-
-/** Seconds between one line starting and the next. */
-const STEP = 0.2;
-
-/**
- * An architect's sheet ruled across the whole screen, one line at a time so the eye can follow each:
- * the centre cross first, then horizontals and verticals in pairs working outward — each drawn edge to
- * edge, alternating direction — then the long diagonals, then compass arcs struck from the corners.
+/*
+ * The client's drawing, set on a 600 × 600 plate centred on the screen:
+ *   1. a small lattice of lines is ruled around where the mark will sit;
+ *   2. the two stones are traced inside it, standing on its baseline, their edges on its lines;
+ *   3. colour blooms into the stones;
+ *   4. every lattice line extends outward to the edge of the screen — verticals up and down,
+ *      horizontals left and right — a spark of light at each tip;
+ *   5. the sheet opens like louvres onto the page.
+ * The plate is measured on mount so each extension ends exactly at the screen's edge.
  */
-const LINES: Line[] = (() => {
-  const seq: Omit<Line, "delay">[] = [
-    { d: `M-10 ${CY}H${W + 10}`, tone: "main" },
-    { d: `M${CX} -10V${H + 10}`, tone: "main" },
-  ];
-  const rows = [300, 700, 190, 810, 400, 600, 80, 920];
-  const cols = [580, 1020, 420, 1180, 260, 1340, 100, 1500];
-  rows.forEach((y, k) => {
-    seq.push({ d: k % 2 ? `M${W + 10} ${y}H-10` : `M-10 ${y}H${W + 10}`, tone: "fine" });
-    const x = cols[k];
-    seq.push({ d: k % 2 ? `M${x} ${H + 10}V-10` : `M${x} -10V${H + 10}`, tone: "fine" });
-  });
-  seq.push(
-    { d: `M-10 -6L${W + 10} ${H + 6}`, tone: "fine" },
-    { d: `M${W + 10} -6L-10 ${H + 6}`, tone: "fine" },
-    { d: `M0 360A360 360 0 0 0 360 0`, tone: "arc" },
-    { d: `M${W - 360} 0A360 360 0 0 0 ${W} 360`, tone: "arc" },
-    { d: `M${W} ${H - 360}A360 360 0 0 0 ${W - 360} ${H}`, tone: "arc" },
-    { d: `M360 ${H}A360 360 0 0 0 0 ${H - 360}`, tone: "arc" },
-  );
-  return seq.map((l, k) => ({ ...l, delay: k * STEP }));
+const PLATE = 600;
+/** The mark on the plate: 260 units tall, standing on the lattice's baseline. */
+const MARK = { x: 194, y: 170, h: 260 } as const;
+const MARK_W = (MARK.h * 700) / 858;
+const MARK_SCALE = MARK.h / 858;
+/** Lattice verticals, keyed to the stones: their outer edges, inner edges and a line either side. */
+const VERTICALS = [150, 197, 234, 268, 332, 368, 406, 450];
+/** Lattice horizontals: the tall stone's top, the small stone's top, the baseline, and lines between. */
+const HORIZONTALS = [170, 234, 297, 368, 430, 476];
+/** How far the lattice reaches before it extends. */
+const LATTICE = { top: 120, bottom: 520, left: 110, right: 490 } as const;
+
+/** Lattice lines in drawing order: the baseline first, then horizontals and verticals in turn, each
+    ruled in the opposite direction to the last. */
+const LATTICE_LINES = (() => {
+  const h = HORIZONTALS.map((y, k) => ({ d: k % 2 ? `M${LATTICE.right} ${y}H${LATTICE.left}` : `M${LATTICE.left} ${y}H${LATTICE.right}`, base: y === 430 }));
+  const v = VERTICALS.map((x, k) => ({ d: k % 2 ? `M${x} ${LATTICE.bottom}V${LATTICE.top}` : `M${x} ${LATTICE.top}V${LATTICE.bottom}`, base: false }));
+  const rest = h.filter((l) => !l.base);
+  const order = [h.find((l) => l.base)!];
+  for (let k = 0; k < Math.max(rest.length, v.length); k++) {
+    if (v[k]) order.push(v[k]);
+    if (rest[k]) order.push(rest[k]);
+  }
+  return order.map((l, k) => ({ ...l, delay: k * 0.09 }));
 })();
 
-/** When the last line finishes, relative to the start of the ruling (seconds). */
-const RULED = (LINES.length - 1) * STEP + 1.4;
+type Edges = { top: number; bottom: number; left: number; right: number };
+/** A generous guess at the screen's edges in plate units, used until the plate is measured. */
+const DEFAULT_EDGES: Edges = { top: -900, bottom: 1500, left: -1500, right: 2100 };
 
-/** Brass points where the ruled lines cross around the mark, set once the whole sheet is drawn. */
-const NODES = [
-  [580, 300], [1020, 300], [580, 700], [1020, 700],
-  [420, 400], [1180, 400], [420, 600], [1180, 600],
-  [CX, 190], [CX, 810], [260, CY], [1340, CY],
-].map(([x, y], k) => ({ x, y, delay: RULED - 0.3 + k * 0.05 }));
+/** Extensions: each lattice line continued from its ends to the screen's edges. */
+function extensions(e: Edges) {
+  const lines: { d: string; delay: number }[] = [];
+  VERTICALS.forEach((x, k) => {
+    lines.push({ d: `M${x} ${LATTICE.top}V${e.top}`, delay: k * 0.09 });
+    lines.push({ d: `M${x} ${LATTICE.bottom}V${e.bottom}`, delay: k * 0.09 + 0.04 });
+  });
+  HORIZONTALS.forEach((y, k) => {
+    lines.push({ d: `M${LATTICE.left} ${y}H${e.left}`, delay: 0.2 + k * 0.09 });
+    lines.push({ d: `M${LATTICE.right} ${y}H${e.right}`, delay: 0.2 + k * 0.09 + 0.04 });
+  });
+  return lines;
+}
 
 /** The sheet is cut into louvres along its verticals; on exit they lift away in a wave from the centre. */
 const STRIPS = 8;
 
 function BlueprintIntro() {
+  const plate = useRef<SVGSVGElement>(null);
+  const [edges, setEdges] = useState<Edges>(DEFAULT_EDGES);
+
+  // Measure where the screen's edges fall in plate units, so the extensions end exactly there.
+  useEffect(() => {
+    const measure = () => {
+      const r = plate.current?.getBoundingClientRect();
+      if (!r || !r.width) return;
+      const k = r.width / PLATE;
+      setEdges({
+        top: Math.floor(-r.top / k) - 4,
+        bottom: Math.ceil((window.innerHeight - r.top) / k) + 4,
+        left: Math.floor(-r.left / k) - 4,
+        right: Math.ceil((window.innerWidth - r.left) / k) + 4,
+      });
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  const ext = extensions(edges);
+  const markBox = { x: MARK.x, y: MARK.y, width: MARK_W, height: MARK.h };
+
   return (
     <div aria-hidden className="hk-intro hk-intro-blueprint absolute inset-0 items-center justify-center overflow-hidden">
       <div className="absolute inset-0 flex">
@@ -194,13 +221,20 @@ function BlueprintIntro() {
         ))}
       </div>
 
-      {/* The sheet, ruled once the mark is coloured; the lines soften away around the mark. */}
-      <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" className="hk-bp-lines absolute inset-0 size-full" fill="none">
+      {/* Warm light that rises behind the mark as its colour blooms, then breathes. */}
+      <span className="hk-bp-glow pointer-events-none absolute top-1/2 left-1/2 size-[clamp(16rem,40vmin,28rem)] rounded-full bg-[radial-gradient(circle,rgb(236_214_178/0.55),rgb(236_214_178/0.18)_45%,transparent_70%)]" />
+
+      <svg
+        ref={plate}
+        viewBox={`0 0 ${PLATE} ${PLATE}`}
+        className="hk-bp-plate relative size-[clamp(19rem,64vmin,34rem)] overflow-visible"
+        fill="none"
+      >
         <defs>
-          {/* A warm gold halo around each spark: blurred twice over, under the sharp core. */}
+          {/* A warm gold halo around each spark. */}
           <filter id="hk-bp-glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="6" result="wide" />
-            <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="near" />
+            <feGaussianBlur stdDeviation="5" result="wide" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="near" />
             <feMerge>
               <feMergeNode in="wide" />
               <feMergeNode in="wide" />
@@ -208,41 +242,48 @@ function BlueprintIntro() {
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          {/* Soft-edged discs that grow from one point in each stone, so its colour blooms like pigment. */}
+          <radialGradient id="hk-bp-soft">
+            <stop offset="0.62" stopColor="#fff" />
+            <stop offset="1" stopColor="#fff" stopOpacity="0" />
+          </radialGradient>
+          <mask id="hk-bp-mask-tall" maskUnits="userSpaceOnUse" x="0" y="0" width={PLATE} height={PLATE}>
+            <circle cx={232} cy={205} r={300} fill="url(#hk-bp-soft)" className="hk-bp-bloom hk-bp-bloom-tall" />
+          </mask>
+          <mask id="hk-bp-mask-small" maskUnits="userSpaceOnUse" x="0" y="0" width={PLATE} height={PLATE}>
+            <circle cx={382} cy={402} r={230} fill="url(#hk-bp-soft)" className="hk-bp-bloom hk-bp-bloom-small" />
+          </mask>
         </defs>
-        {LINES.map((l) => (
-          <path key={l.d} d={l.d} pathLength={1} className={`hk-bp-line hk-bp-line-${l.tone}`} style={{ "--d": `${l.delay.toFixed(2)}s` } as React.CSSProperties} />
-        ))}
-        {/* A spark of light travelling at the tip of each line as it is drawn. */}
+
+        {/* 1 · The lattice, ruled around where the mark will stand. */}
+        <g className="hk-bp-lattice">
+          {LATTICE_LINES.map((l) => (
+            <path key={l.d} d={l.d} pathLength={1} className={l.base ? "hk-bp-rule hk-bp-rule-base" : "hk-bp-rule"} style={{ "--d": `${l.delay.toFixed(2)}s` } as React.CSSProperties} />
+          ))}
+        </g>
+
+        {/* 4 · The extensions, out to every edge, each with a spark at its tip. */}
+        <g className="hk-bp-ext">
+          {ext.map((l) => (
+            <path key={l.d} d={l.d} pathLength={1} className="hk-bp-extline" style={{ "--d": `${l.delay.toFixed(2)}s` } as React.CSSProperties} />
+          ))}
+        </g>
         <g filter="url(#hk-bp-glow)">
-          {LINES.map((l) => (
+          {ext.map((l) => (
             <path key={l.d} d={l.d} pathLength={1} className="hk-bp-spark" style={{ "--d": `${l.delay.toFixed(2)}s` } as React.CSSProperties} />
           ))}
         </g>
-        {NODES.map((n) => (
-          <g key={`${n.x}-${n.y}`} className="hk-bp-node" style={{ "--d": `${n.delay.toFixed(2)}s`, transformOrigin: `${n.x}px ${n.y}px` } as React.CSSProperties}>
-            <circle cx={n.x} cy={n.y} r={9} className="hk-bp-node-halo" />
-            <circle cx={n.x} cy={n.y} r={3.2} className="hk-bp-node-dot" />
-          </g>
-        ))}
-      </svg>
 
-      {/* The mark: traced in brass, then coloured as if the pigment were soaking into paper. */}
-      <div className="relative z-10">
-        {/* Warm light that rises behind the mark as its colour blooms, then breathes. */}
-        <span className="hk-bp-glow pointer-events-none absolute top-1/2 left-1/2 size-[clamp(16rem,36vw,26rem)] rounded-full bg-[radial-gradient(circle,rgb(236_214_178/0.55),rgb(236_214_178/0.18)_45%,transparent_70%)]" />
-        <div className="hk-pre-mark relative">
-          <LogoMark size="lg" preload className="h-[clamp(6.5rem,15vw,9rem)]" tallClassName="hk-bp-tall" smallClassName="hk-bp-small">
-            <svg viewBox={STONE_VIEWBOX} className="pointer-events-none absolute inset-0 size-full overflow-visible" fill="none">
-              <path d={STONE_TALL_PATH} pathLength={1} className="hk-bp-trace stroke-brass-ink" style={{ "--i": 0 } as Vars} />
-              <path d={STONE_SMALL_PATH} pathLength={1} className="hk-bp-trace stroke-brass-ink" style={{ "--i": 1 } as Vars} />
-            </svg>
-            <span className="hk-sheen" />
-          </LogoMark>
-        </div>
-        <div className="hk-pre-content absolute top-full left-1/2 mt-8 flex -translate-x-1/2 flex-col items-center text-center">
-          <Wordmark />
-        </div>
-      </div>
+        {/* 3 · The stones in colour, each revealed by its blooming disc. */}
+        <image href="/brand/stone-tall.webp" {...markBox} mask="url(#hk-bp-mask-tall)" className="hk-bp-stone" />
+        <image href="/brand/stone-small.webp" {...markBox} mask="url(#hk-bp-mask-small)" className="hk-bp-stone" />
+
+        {/* 2 · The stones traced in brass. */}
+        <g transform={`translate(${MARK.x} ${MARK.y}) scale(${MARK_SCALE})`}>
+          <path d={STONE_TALL_PATH} pathLength={1} className="hk-bp-trace" style={{ "--i": 0 } as Vars} />
+          <path d={STONE_SMALL_PATH} pathLength={1} className="hk-bp-trace" style={{ "--i": 1 } as Vars} />
+        </g>
+      </svg>
     </div>
   );
 }

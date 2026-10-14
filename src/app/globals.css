@@ -440,101 +440,85 @@ html[data-intro-style="arch"] #hk-preloader .hk-intro-arch,
 html[data-intro-style="doors"] #hk-preloader .hk-intro-doors,
 html[data-intro-style="monolith"] #hk-preloader .hk-intro-monolith { display: flex; }
 
-/* Blueprint: drawing the mark, then ruling the sheet and opening it like louvres.
-   0.3s  each stone is traced in a fine brass line
-   1.5s  colour blooms through each stone from one point, soft-edged, like pigment in wet paper;
-         the line melts away; the name appears
-   2.6s  the sheet is ruled one line at a time, a spark of light at each tip, edge to edge — measured horizontals and verticals, diagonals,
-         compass arcs from the corners — softening away around the mark
-   exit  mark, name and lines fade; the sheet's louvres lift away in a wave from the centre outward */
-@property --hk-bloom { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
+/* Blueprint, after the client's sketch.
+   0.2s  the lattice is ruled around where the mark will stand — the baseline first
+   1.5s  each stone is traced in brass inside it
+   3.0s  colour blooms into the stones from one point each; the traced line melts away
+   4.6s  every lattice line extends to the screen's edges, a gold spark at each tip
+   exit  plate and glow fade; the sheet's louvres lift away in a wave from the centre */
+#hk-preloader .hk-bp-plate :is(path) { vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+#hk-preloader .hk-bp-rule {
+  stroke: rgb(125 95 51 / 0.75);
+  stroke-width: 1.1;
+  stroke-dasharray: 1 1;
+  animation: hki-draw 0.9s cubic-bezier(0.45, 0, 0.3, 1) calc(0.2s + var(--d)) both;
+}
+#hk-preloader .hk-bp-rule-base { stroke: rgb(125 95 51 / 0.95); stroke-width: 1.4; }
+
 #hk-preloader .hk-bp-trace {
-  vector-effect: non-scaling-stroke;
-  stroke-width: 1.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  stroke: var(--color-brass-ink);
+  stroke-width: 1.5;
   stroke-dasharray: 1 1;
   animation:
-    hki-draw 1.6s var(--ease-in-out-soft) calc(0.3s + var(--i) * 0.35s) both,
-    hki-fade-out 1s var(--ease-premium) calc(2.9s + var(--i) * 0.2s) forwards;
+    hki-draw 1.7s var(--ease-in-out-soft) calc(1.5s + var(--i) * 0.35s) both,
+    hki-fade-out 1s var(--ease-premium) calc(4.2s + var(--i) * 0.2s) forwards;
 }
-#hk-preloader .hk-intro-blueprint .hk-pre-mark > span { animation: none; }
-#hk-preloader :is(.hk-bp-tall, .hk-bp-small) {
-  -webkit-mask-image: radial-gradient(circle at var(--o), #000 var(--hk-bloom), transparent calc(var(--hk-bloom) + 22%));
-  mask-image: radial-gradient(circle at var(--o), #000 var(--hk-bloom), transparent calc(var(--hk-bloom) + 22%));
-  animation: hki-bp-bloom 2s var(--ease-in-out-soft) both;
-}
-#hk-preloader .hk-bp-tall { --o: 34% 16%; animation-delay: 1.5s; }
-#hk-preloader .hk-bp-small { --o: 72% 82%; animation-delay: 1.85s; }
-#hk-preloader .hk-intro-blueprint .hk-sheen { animation-delay: 3.5s; }
-#hk-preloader .hk-intro-blueprint .hk-pre-letter { animation-delay: calc(2.4s + var(--d) * 70ms); }
-#hk-preloader .hk-intro-blueprint .hk-pre-shine { animation-delay: 3.7s; }
 
-#hk-preloader .hk-bp-lines {
-  -webkit-mask-image: radial-gradient(ellipse 22% 28% at 50% 50%, transparent 40%, #000 100%);
-  mask-image: radial-gradient(ellipse 22% 28% at 50% 50%, transparent 40%, #000 100%);
+/* The stones are hidden by their masks until the discs grow; each disc blooms from its own point. */
+#hk-preloader .hk-bp-bloom {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hki-bp-bloom 1.9s var(--ease-in-out-soft) both;
 }
-/* Each line and its spark share one duration and easing, so the light stays exactly at the line's tip:
-   the line is a dash growing from 0 to 1; the spark a short dash whose leading edge moves with it. */
-#hk-preloader .hk-bp-line,
+#hk-preloader .hk-bp-bloom-tall { animation-delay: 3s; }
+#hk-preloader .hk-bp-bloom-small { animation-delay: 3.35s; }
+
+/* Each extension and its spark share one duration and easing, so the light stays at the line's tip. */
+#hk-preloader .hk-bp-extline,
 #hk-preloader .hk-bp-spark {
-  vector-effect: non-scaling-stroke;
-  stroke-linecap: round;
-  animation-duration: 1.4s;
+  animation-duration: 1.5s;
   animation-timing-function: cubic-bezier(0.45, 0, 0.3, 1);
-  animation-delay: calc(2.6s + var(--d));
+  animation-delay: calc(4.6s + var(--d));
   animation-fill-mode: both;
 }
-#hk-preloader .hk-bp-line { stroke-dasharray: 1 1; animation-name: hki-draw; }
+#hk-preloader .hk-bp-extline { stroke: rgb(125 95 51 / 0.55); stroke-width: 1; stroke-dasharray: 1 1; animation-name: hki-draw; }
 #hk-preloader .hk-bp-spark {
   stroke: #d6a24a;
   stroke-width: 2.6;
-  stroke-dasharray: 0.018 2;
+  stroke-dasharray: 0.03 2;
   animation-name: hki-bp-spark;
 }
-#hk-preloader .hk-bp-node { animation: hki-bp-node 0.9s var(--ease-out-expo) calc(2.6s + var(--d)) both; }
-#hk-preloader .hk-bp-node-dot { fill: var(--color-brass-ink); }
-#hk-preloader .hk-bp-node-halo { fill: rgb(194 160 107 / 0.18); }
+
 /* Centred with transform (not the translate property) so its keyframes can keep it centred. */
 #hk-preloader .hk-bp-glow {
   transform: translate(-50%, -50%);
   animation:
-    hki-bp-glow 2.2s var(--ease-premium) 1.5s both,
-    hki-bp-breathe 3.2s var(--ease-in-out-soft) 3.7s infinite alternate;
+    hki-bp-glow 2.2s var(--ease-premium) 3s both,
+    hki-bp-breathe 3.2s var(--ease-in-out-soft) 5.2s infinite alternate;
 }
-#hk-preloader .hk-bp-line-main { stroke: rgb(125 95 51 / 0.85); stroke-width: 1.3; }
-#hk-preloader .hk-bp-line-fine { stroke: rgb(125 95 51 / 0.55); stroke-width: 1; }
-#hk-preloader .hk-bp-line-arc { stroke: rgb(125 95 51 / 0.6); stroke-width: 1; }
 
 /* Longhands, not the shorthand: the CSS minifier rewrites a shorthand without a name to "none". */
-#hk-preloader.is-leaving :is(.hk-bp-lines, .hk-bp-glow) { animation: hki-fade-out 0.6s var(--ease-premium) 0.2s both; }
-/* The mark eases forward as it fades, and each lifting louvre carries a fine brass edge. */
-#hk-preloader.is-leaving .hk-intro-blueprint :is(.hk-pre-mark, .hk-pre-content) { animation: hki-bp-forward 0.7s var(--ease-premium) both; }
-#hk-preloader.is-leaving .hk-bp-strip { box-shadow: inset -1px 0 0 rgb(125 95 51 / 0.28); }
+#hk-preloader.is-leaving :is(.hk-bp-plate, .hk-bp-glow) { animation: hki-bp-forward 0.7s var(--ease-premium) both; }
 #hk-preloader.is-leaving .hk-bp-strip {
+  box-shadow: inset -1px 0 0 rgb(125 95 51 / 0.28);
+  animation-name: hki-bp-up;
   animation-duration: 1.15s;
   animation-timing-function: cubic-bezier(0.7, 0, 0.2, 1);
   animation-delay: calc(0.45s + var(--s) * 90ms);
   animation-fill-mode: both;
 }
-#hk-preloader.is-leaving .hk-bp-strip { animation-name: hki-bp-up; }
 
 @keyframes hki-bp-bloom {
-  from { --hk-bloom: -22%; filter: blur(4px) saturate(0.5) brightness(1.08); }
-  to { --hk-bloom: 130%; filter: blur(0) saturate(1) brightness(1); }
+  from { transform: scale(0); }
+  to { transform: scale(1.15); }
 }
-@keyframes hki-bp-up { to { transform: translateY(-101%); } }
 /* The spark's leading edge sits at the line's tip all the way along, then fades at the far end. */
 @keyframes hki-bp-spark {
-  from { stroke-dashoffset: 0.018; opacity: 1; }
+  from { stroke-dashoffset: 0.03; opacity: 1; }
   88% { opacity: 1; }
-  to { stroke-dashoffset: -0.982; opacity: 0; }
+  to { stroke-dashoffset: -0.97; opacity: 0; }
 }
-@keyframes hki-bp-node {
-  from { opacity: 0; transform: scale(0.2); }
-  60% { opacity: 1; transform: scale(1.35); }
-  to { opacity: 1; transform: none; }
-}
+@keyframes hki-bp-up { to { transform: translateY(-101%); } }
 @keyframes hki-bp-glow {
   from { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
   to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
@@ -543,9 +527,9 @@ html[data-intro-style="monolith"] #hk-preloader .hk-intro-monolith { display: fl
   from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
   to { opacity: 0.7; transform: translate(-50%, -50%) scale(1.08); }
 }
-@keyframes hki-bp-forward { to { opacity: 0; transform: scale(1.08); filter: blur(2px); } }
-/* The progress line and counter run to the blueprint's longer timeline. */
-html:not([data-intro-style]) #hk-preloader:not(.is-leaving) :is(.hk-pre-progress, .hk-pre-count) { animation-duration: 8.7s; }
+@keyframes hki-bp-forward { to { opacity: 0; } }
+/* The progress line and counter run to the blueprint's timeline. */
+html:not([data-intro-style]) #hk-preloader:not(.is-leaving) :is(.hk-pre-progress, .hk-pre-count) { animation-duration: 7.5s; }
 
 /* Doors: mouldings and pulls settle onto two closed doors carrying the lockup across their seam;
    warm light glows through the gap; then both swing open, inward, into the home. */

@@ -112,7 +112,7 @@ export function ArtOfHomemaking() {
           {/* Stepped like "The Home Karigar Way"; the negative margin cancels the T's side bearing. */}
           <h2
             id="art-title"
-            className="caps -ml-[0.045em] mt-1 font-display text-[clamp(2.6rem,1rem+4vw,4.75rem)] leading-[0.86] pb-[0.25em] font-normal tracking-[-0.055em] text-ink [clip-path:none]!"
+            className="caps -ml-[0.045em] mt-1 font-display text-[min(clamp(2.6rem,1rem+4vw,4.75rem),max(2.1rem,0.2rem+10vw))] leading-[0.86] pb-[0.25em] font-normal tracking-[-0.055em] text-ink [clip-path:none]!"
             data-reveal
           >
             {/* A two-column grid hangs HOME under ART, as KARIGAR hangs under HOME in "The Home Karigar Way". */}

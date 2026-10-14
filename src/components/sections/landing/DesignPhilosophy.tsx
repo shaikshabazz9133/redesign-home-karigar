@@ -29,7 +29,7 @@ export function DesignPhilosophy() {
               word. A two-column grid hangs KARIGAR under HOME, so the second line starts where THE ends. */}
           <h2
             id="philosophy-title"
-            className="caps -ml-[0.045em] grid w-fit grid-cols-[auto_auto] gap-x-[0.24em] font-display text-[clamp(2.6rem,1rem+4vw,4.75rem)] leading-[0.86] font-normal tracking-[-0.055em] text-ink [clip-path:none]!"
+            className="caps -ml-[0.045em] grid w-fit grid-cols-[auto_auto] gap-x-[0.24em] font-display text-[min(clamp(2.6rem,1rem+4vw,4.75rem),max(2.1rem,0.2rem+10vw))] leading-[0.86] font-normal tracking-[-0.055em] text-ink [clip-path:none]!"
             data-reveal
           >
             <span>The</span>

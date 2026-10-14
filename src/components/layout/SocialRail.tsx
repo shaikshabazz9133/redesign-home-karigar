@@ -51,7 +51,8 @@ export function SocialLinks({ layout, className }: { layout: "row" | "rail"; cla
 }
 
 /**
- * A floating rail on the left edge (md and up). On the home page it waits until the visitor scrolls past
+ * A floating rail on the left edge, on screens wide enough (1400px+) that it sits in the margin beside the
+ * content rather than over it. On the home page it waits until the visitor scrolls past
  * the hero — where the same links sit beside the call to action — then slides in; elsewhere it shows once
  * the page has loaded.
  */
@@ -90,7 +91,7 @@ export function SocialRail() {
     <nav
       aria-label="Social"
       data-shown={shown || undefined}
-      className="hk-social-rail fixed left-[clamp(0.75rem,1.6vw,1.75rem)] top-1/2 z-40 hidden -translate-y-1/2 md:block"
+      className="hk-social-rail fixed left-[clamp(0.75rem,1.6vw,1.75rem)] top-1/2 z-40 hidden -translate-y-1/2 min-[1400px]:block"
     >
       <span aria-hidden className="hk-social-line mx-auto mb-3 block h-12 w-px bg-gradient-to-b from-transparent to-current opacity-50" />
       <SocialLinks layout="rail" />
