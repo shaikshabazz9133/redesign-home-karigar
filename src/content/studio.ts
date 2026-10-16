@@ -111,6 +111,43 @@ export const processSteps = [
   },
 ];
 
+/**
+ * Homeowners' words for the home page's testimonials.
+ * PLACEHOLDERS — replace each entry with a real client's words, name and home before going live.
+ */
+export const testimonials: { quote: string; name: string; home: string }[] = [
+  {
+    quote: "Client testimonial to be added — a homeowner's words about their experience with Home Karigar will appear here.",
+    name: "Client name",
+    home: "Flat no. · Community",
+  },
+  {
+    quote: "Client testimonial to be added — a homeowner's words about their experience with Home Karigar will appear here.",
+    name: "Client name",
+    home: "Flat no. · Community",
+  },
+  {
+    quote: "Client testimonial to be added — a homeowner's words about their experience with Home Karigar will appear here.",
+    name: "Client name",
+    home: "Flat no. · Community",
+  },
+  {
+    quote: "Client testimonial to be added — a homeowner's words about their experience with Home Karigar will appear here.",
+    name: "Client name",
+    home: "Flat no. · Community",
+  },
+  {
+    quote: "Client testimonial to be added — a homeowner's words about their experience with Home Karigar will appear here.",
+    name: "Client name",
+    home: "Flat no. · Community",
+  },
+  {
+    quote: "Client testimonial to be added — a homeowner's words about their experience with Home Karigar will appear here.",
+    name: "Client name",
+    home: "Flat no. · Community",
+  },
+];
+
 export const faqs = [
   {
     q: "Do you take an advance before work begins?",

@@ -73,59 +73,57 @@ const pictures = "flex h-[clamp(6rem,30vw,9rem)] gap-3 lg:contents";
 
 /**
  * "Your space isn't plain. It's curated." — three rows of words interleaved with the studio's craft
- * references, after the editorial poster it is modelled on. Everything is sized
- * from one row height (`--row`): the type, the pictures and the block's width, so the gaps stay small and
- * even at every screen size. The block sits centred. The sentence is one h2 for search engines and screen
- * readers; the visible words are its decorative copy.
+ * references, after the editorial poster it is modelled on. It sits beside the Design Journal's title on
+ * the home page. Everything is sized from one row height (`--row`): the type, the pictures and the
+ * block's width, so the gaps stay small and even at every screen size. The words are decorative; the
+ * sentence is given once, as text for screen readers.
  */
-export function CuratedStatement() {
+export function CuratedCollage({ className }: { className?: string }) {
   return (
-    <section
-      aria-labelledby="curated-title"
-      className="bg-ivory pt-4 pb-14 [--row:clamp(7.5rem,2rem+7.5vw,11rem)] md:pb-20"
+    <div
+      className={cn(
+        "flex w-full flex-col gap-6 [--row:clamp(7rem,-1rem+10vw,11rem)] lg:max-w-[calc(var(--row)*3.8)] lg:gap-[calc(var(--row)*0.14)]",
+        className,
+      )}
     >
-      <h2 id="curated-title" className="sr-only">
-        Your space isn&apos;t plain. It&apos;s curated.
-      </h2>
+      <p className="sr-only">Your space isn&apos;t plain. It&apos;s curated.</p>
 
-      <div className="container-site flex flex-col gap-6 lg:max-w-[calc(var(--row)*3.8+5rem)] lg:gap-[calc(var(--row)*0.14)]">
-        <div className={row}>
-          <p aria-hidden className={cn(words, "w-full lg:w-auto")} data-reveal>
-            Your
-            <br />
-            space
-          </p>
-          <div className={pictures}>
-            <TileImage tile={TILES.tile} index={1} />
-            <TileImage tile={TILES.swatches} index={2} />
-          </div>
-        </div>
-
-        <div className={row}>
-          <div className={cn(pictures, "max-lg:order-last")}>
-            <TileImage tile={TILES.karigar} index={1} />
-          </div>
-          <p aria-hidden className={cn(words, "w-full text-right lg:w-auto lg:text-left")} data-reveal>
-            isn&apos;t
-            <br />
-            plain.
-          </p>
-          <div className={cn(pictures, "max-lg:order-last")}>
-            <TileImage tile={TILES.daybed} index={2} />
-          </div>
-        </div>
-
-        <div className={row}>
-          <p aria-hidden className={cn(words, "w-full lg:w-auto")} data-reveal>
-            It&apos;s
-            <br />
-            curated.
-          </p>
-          <div className={pictures}>
-            <TileImage tile={TILES.mural} index={1} />
-          </div>
+      <div className={row}>
+        <p aria-hidden className={cn(words, "w-full lg:w-auto")} data-reveal>
+          Your
+          <br />
+          space
+        </p>
+        <div className={pictures}>
+          <TileImage tile={TILES.tile} index={1} />
+          <TileImage tile={TILES.swatches} index={2} />
         </div>
       </div>
-    </section>
+
+      <div className={row}>
+        <div className={cn(pictures, "max-lg:order-last")}>
+          <TileImage tile={TILES.karigar} index={1} />
+        </div>
+        <p aria-hidden className={cn(words, "w-full text-right lg:w-auto lg:text-left")} data-reveal>
+          isn&apos;t
+          <br />
+          plain.
+        </p>
+        <div className={cn(pictures, "max-lg:order-last")}>
+          <TileImage tile={TILES.daybed} index={2} />
+        </div>
+      </div>
+
+      <div className={row}>
+        <p aria-hidden className={cn(words, "w-full lg:w-auto")} data-reveal>
+          It&apos;s
+          <br />
+          curated.
+        </p>
+        <div className={pictures}>
+          <TileImage tile={TILES.mural} index={1} />
+        </div>
+      </div>
+    </div>
   );
 }

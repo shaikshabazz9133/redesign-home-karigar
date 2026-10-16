@@ -62,7 +62,7 @@ export default async function ArticlePage({ params }: Props) {
         {/* Close */}
         <div className="bg-paper">
           <div className="container-site flex flex-col items-start gap-6 border-t border-line py-12 sm:flex-row sm:items-center sm:justify-between" data-reveal>
-            <p className="font-accent text-[1.5rem] text-ink">Want this in your own home?</p>
+            <p className="font-display text-[1.5rem] tracking-[-0.03em] text-ink">Want this in your own home?</p>
             <ButtonLink href={a.next.href} variant="primary">
               {a.next.label}
             </ButtonLink>
@@ -83,7 +83,7 @@ export default async function ArticlePage({ params }: Props) {
           </div>
           <div className="flex flex-col gap-4 md:col-span-7 md:col-start-6">
             <p className="eyebrow text-muted">Next story · {next.category}</p>
-            <p className="font-accent text-[clamp(1.8rem,1.2rem+1.6vw,2.8rem)] leading-[1.05] text-balance transition-colors duration-300 group-hover:text-oxblood">
+            <p className="font-display text-[clamp(1.6rem,1.1rem+1.4vw,2.4rem)] leading-[1.05] tracking-[-0.04em] text-balance transition-colors duration-300 group-hover:text-oxblood">
               {next.title}
             </p>
             <span className="inline-flex items-center gap-2 text-sm font-medium">
@@ -105,6 +105,7 @@ export default async function ArticlePage({ params }: Props) {
           images: [a.image, ...a.gallery].map((i) => i.src),
           readMinutes: a.readMinutes,
           keywords: [a.category, "interior design", "Bengaluru", "home interiors"],
+          author: a.author,
         })}
       />
     </>

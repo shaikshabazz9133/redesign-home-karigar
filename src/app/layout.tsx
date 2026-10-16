@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter, Inter_Tight, Pinyon_Script } from "next/font/google";
+import { Cormorant_Garamond, Inter, Inter_Tight, Pinyon_Script, Source_Serif_4 } from "next/font/google";
 import { site } from "@/content/site";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -28,6 +28,8 @@ const accent = Cormorant_Garamond({
   display: "swap",
 });
 const script = Pinyon_Script({ subsets: ["latin"], weight: "400", variable: "--font-pinyon", display: "swap" });
+/* Journal reading text is set in Tiempos Text where it is installed; Source Serif is its free stand-in. */
+const bodySerif = Source_Serif_4({ subsets: ["latin"], weight: ["400", "600"], style: ["normal", "italic"], variable: "--font-source-serif", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -67,7 +69,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f4ef" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#1d1815" },
   ],
   width: "device-width",
@@ -76,7 +78,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-IN" className={`${display.variable} ${text.variable} ${accent.variable} ${script.variable}`} suppressHydrationWarning>
+    <html lang="en-IN" className={`${display.variable} ${text.variable} ${accent.variable} ${script.variable} ${bodySerif.variable}`} suppressHydrationWarning>
       <head>
         {/* Enables scroll-reveal styles only once JS is available, and picks the intro style to preview
             (`?intro=arch` / `?intro=doors` / `?intro=monolith`) before first paint. */}

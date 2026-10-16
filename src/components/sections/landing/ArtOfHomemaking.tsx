@@ -103,7 +103,7 @@ export function ArtOfHomemaking() {
   const goTo = (i: number) => track.current && scrollToCard(track.current, i);
 
   return (
-    <section aria-labelledby="art-title" className="relative overflow-hidden bg-ivory pt-4 pb-24 md:pb-32">
+    <section aria-labelledby="art-title" className="relative overflow-hidden bg-ivory pt-4 pb-10 md:pb-14">
       <div className="container-site flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <p className="text-[0.9375rem] tracking-[-0.01em] text-muted" data-reveal>
@@ -164,7 +164,7 @@ export function ArtOfHomemaking() {
       </div>
 
       {/* The reel: full-bleed, snapping one film at a time, edges fading into the section. */}
-      <div className="relative mt-14 md:mt-16 [mask-image:linear-gradient(90deg,transparent,#000_2.5%,#000_97.5%,transparent)]">
+      <div className="relative mt-10 md:mt-12 [mask-image:linear-gradient(90deg,transparent,#000_2.5%,#000_97.5%,transparent)]">
         <ul
           ref={track}
           aria-label="Home Karigar films"

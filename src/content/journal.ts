@@ -1,3 +1,5 @@
+import { CRAFT_IMAGES, CRAFT_SECTIONS, KITCHEN_IMAGES, KITCHEN_SECTIONS, PINTEREST_IMAGES, PINTEREST_SECTIONS, STONE_IMAGES, STONE_SECTIONS } from "./journal-essays";
+
 /**
  * Design Journal — the studio's notes on materials, light and process.
  * Every claim here mirrors what the studio already publishes elsewhere on the
@@ -14,7 +16,7 @@ export interface JournalImage {
 export interface JournalArticle {
   slug: string;
   title: string;
-  category: "Materials" | "Lighting" | "Storage" | "Process" | "Detail";
+  category: "Craft" | "Living" | "Materials" | "Lighting" | "Storage" | "Process" | "Detail";
   excerpt: string;
   readMinutes: number;
   image: JournalImage;
@@ -32,53 +34,86 @@ export interface JournalArticle {
   gallery: JournalImage[];
   /** Where a reader who wants this for their own home should go next. */
   next: { label: string; href: string };
+  /** A signed piece: its author, credited in the byline and the article's structured data. */
+  author?: { name: string; role: string; /** A professional title shown before the name, e.g. "Ar." for an architect. */ honorific?: string };
+  /** The photograph and shorter title shown on the article's card, where they differ from the cover and title. */
+  card?: { image?: JournalImage; title?: string; /** Enlarge the photograph within the arch around this point (CSS position), e.g. to crop a board's margins. */ focus?: { at: string; zoom: number } };
+  /** Set the cover photograph across the left half of the page, the headline beside it on the right. */
+  cover?: "left";
+  /** A standfirst set under the headline in place of the full title (the title stays the page's h1). */
+  dek?: string;
 }
 
 export const journal: JournalArticle[] = [
   {
+    slug: "is-indian-craftsmanship-slowly-disappearing",
+    title: "Is Indian Craftsmanship Slowly Disappearing?",
+    category: "Craft",
+    excerpt:
+      "In our pursuit of speed, are we leaving behind the very hands that once built our homes with patience? An essay on craft, memory and the Indian home.",
+    readMinutes: 6,
+    image: CRAFT_IMAGES.carving,
+    sections: CRAFT_SECTIONS,
+    quote: "A home should never feel anonymous. It should carry traces of the people who shaped it.",
+    layout: "reshuffle",
+    display: { lines: ["Is Indian", "Craftsmanship", "Slowly", "Disappearing?"] },
+    gallery: [CRAFT_IMAGES.turning, CRAFT_IMAGES.finishing],
+    author: { name: "Zuber Khan", honorific: "Ar.", role: "Founder & Principal Designer, Home Karigar" },
+    dek: "In our pursuit of speed, are we leaving behind the very hands that once built our homes with patience?",
+    next: { label: "Meet the studio", href: "/about" },
+  },
+  {
     slug: "why-we-build-kitchens-on-bwp-710-plywood",
-    title: "Why every kitchen we build starts with BWP 710 plywood",
+    title: "Why Every Kitchen We Build Starts with BWP 710 Plywood",
     category: "Materials",
     excerpt:
-      "A kitchen is the wettest, hardest-working room in the home. What sits behind the shutters decides how it ages — so that is where we start.",
+      "The finest kitchens are rarely defined by what catches the eye. It is the material beneath the stone, hardware and shutters that quietly decides how a kitchen ages.",
     readMinutes: 4,
-    image: {
-      src: "/images/13272/4.jpg",
-      alt: "Modular kitchen with high-gloss shutters and lit glass display cabinets",
-      width: 1500,
-      height: 1125,
-    },
-    sections: [
-      {
-        heading: "The part you never see",
-        body: [
-          "Shutters, handles and back panels are what you choose a kitchen by. The carcass — the boxes everything hangs on — is what decides whether it still closes square in ten years.",
-          "Around a sink and hob, water and steam are daily facts. That is why our kitchen carcasses are built on BWP 710 plywood, a boiling-water-proof grade made for exactly these conditions.",
-        ],
-      },
-      {
-        heading: "Hardware that is felt, not heard",
-        body: [
-          "Every drawer and door runs on soft-close hardware from Hettich, Häfele or Ebco. A heavy pan drawer should glide shut on its own, every time, without a slam.",
-          "We plan drawers before doors: deep drawers for pots and everyday plates, so nothing has to be dug out from the back of a low cabinet.",
-        ],
-      },
-      {
-        heading: "Materials you can check yourself",
-        body: [
-          "Branded plywood and hardware arrive on site before the advance is collected, and each item carries its own QR code so you can inspect and authenticate it.",
-          "It is a simple rule: you should be able to see what your kitchen is made of before you pay for it to be built.",
-        ],
-      },
-    ],
-    quote: "You should be able to see what your kitchen is made of before you pay for it to be built.",
+    image: KITCHEN_IMAGES.moodboard,
+    sections: KITCHEN_SECTIONS,
+    quote: "A kitchen should never be designed around trends alone; it should be designed around the rituals of everyday living.",
     layout: "reshuffle",
-    display: { lines: ["Behind the", "Shutters"] },
-    gallery: [
-      { src: "/images/17242/24.jpeg", alt: "Tall kitchen unit with built-in oven, glass-fronted uppers and handle-less drawers", width: 781, height: 1080 },
-      { src: "/images/12263/13.jpeg", alt: "Pull-out wicker basket on soft-close runners inside a kitchen cabinet", width: 960, height: 1280 },
-    ],
+    display: { lines: ["Why Every Kitchen", "We Build Starts", "with BWP 710", "Plywood"] },
+    gallery: [KITCHEN_IMAGES.fridge, KITCHEN_IMAGES.galley],
+    cover: "left",
+    card: { image: KITCHEN_IMAGES.fridge },
+    dek: "A kitchen should never be designed around trends alone; it should be designed around the rituals of everyday living.",
     next: { label: "Explore our kitchens", href: "/services#modular-kitchen" },
+  },
+  {
+    slug: "marble-quartz-granite-designing-the-heart-of-the-home",
+    title: "Marble, Quartz & Granite: Designing the Heart of the Home",
+    category: "Materials",
+    excerpt:
+      "The finest kitchens are rarely defined by a single material. They are shaped by understanding how a family cooks, gathers and lives.",
+    readMinutes: 6,
+    image: STONE_IMAGES.moodboard,
+    sections: STONE_SECTIONS,
+    quote: "The best material is never chosen in isolation—it is chosen for the life it will support.",
+    layout: "reshuffle",
+    display: { lines: ["Marble, Quartz", "& Granite:", "Designing the", "Heart of the Home"] },
+    gallery: [STONE_IMAGES.trends],
+    cover: "left",
+    card: { title: "Marble, Quartz & Granite", focus: { at: "68% 45%", zoom: 1.45 } },
+    author: { name: "Mohammad Nadeem", role: "Co-founder, Home Karigar" },
+    dek: "From marble to quartz and granite, a designer’s guide to choosing the right surface for an Indian kitchen.",
+    next: { label: "Explore our kitchens", href: "/services#modular-kitchen" },
+  },
+  {
+    slug: "why-every-home-doesnt-need-to-look-like-pinterest",
+    title: "Why Every Home Doesn’t Need to Look Like Pinterest",
+    category: "Living",
+    excerpt:
+      "Never before have we possessed so many references, and yet so few genuinely individual spaces — on borrowed identities, homes designed for generations, and what courtyards and verandas still teach us.",
+    readMinutes: 13,
+    image: PINTEREST_IMAGES.cover,
+    sections: PINTEREST_SECTIONS,
+    quote: "When inspiration becomes infinitely available, discernment becomes increasingly rare.",
+    layout: "monograph",
+    display: { lines: ["Why Every", "Home Doesn’t", "Need to Look", "Like Pinterest"] },
+    gallery: [PINTEREST_IMAGES.rattan, PINTEREST_IMAGES.chandelier, PINTEREST_IMAGES.foyer, PINTEREST_IMAGES.panelled],
+    dek: "Also in this edition: Homes Designed for Generations to Come · Courtyards, Verandas and What We Can Learn from Traditional Homes",
+    next: { label: "Meet the studio", href: "/about" },
   },
   {
     slug: "layering-light-false-ceilings",
@@ -117,7 +152,7 @@ export const journal: JournalArticle[] = [
       },
     ],
     quote: "Good lighting is three layers, not one fixture — one gesture per room, done well.",
-    layout: "monograph",
+    layout: "reshuffle",
     display: { lines: ["The", "Layered", "Ceiling"] },
     gallery: [
       { src: "/images/12263/15.jpeg", alt: "Curved false ceiling edged with a band of warm cove light", width: 960, height: 1280 },

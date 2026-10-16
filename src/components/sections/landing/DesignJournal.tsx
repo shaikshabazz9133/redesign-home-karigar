@@ -3,9 +3,11 @@ import { LoadingImage } from "@/components/ui/LoadingImage";
 import { Icon } from "@/components/ui/Icon";
 import { articleHref, getJournal } from "@/content/journal";
 import { pad2 } from "@/lib/utils";
+import { CuratedCollage } from "./CuratedStatement";
 
 /**
- * "The Design Journal": three of the studio's notes, set as an editorial row rather than boxed cards —
+ * "The Design Journal": the title and its note beside the "Your space isn't plain" collage, then three of
+ * the studio's notes, set as an editorial row rather than boxed cards —
  * each an arch-topped photograph (the arch of the brand mark), a numbered line of category and reading
  * time, the title and its opening lines, and a "Read article" link to the full note. Equal columns are divided
  * by hairlines; below desktop the row becomes a swipeable strip. Every whole entry is one link.
@@ -14,9 +16,11 @@ export function DesignJournal() {
   const notes = getJournal().slice(0, 3);
 
   return (
-    <section aria-labelledby="journal-title" className="relative bg-ivory pt-4 pb-24 md:pb-32">
-      <div className="container-site flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-        <div>
+    <section aria-labelledby="journal-title" className="relative bg-ivory pt-4 pb-14 md:pb-20">
+      {/* The title, its note and the way into the journal on the left; the "Your space isn't plain" collage
+          on the right. Below them, the three notes. */}
+      <div className="container-site grid items-start gap-12 lg:grid-cols-12 lg:gap-x-12">
+        <div className="flex flex-col lg:col-span-5">
           <p className="text-[0.9375rem] tracking-[-0.01em] text-muted" data-reveal>
             Notes from the studio
           </p>
@@ -34,29 +38,31 @@ export function DesignJournal() {
               Journal.
             </em>
           </h2>
+
+          <div className="mt-8 flex flex-col gap-6" data-reveal>
+            <p className="max-w-md leading-[1.45] text-muted">
+              What we have learned from every home we build — on materials, light and the details that make a space
+              age well. Written for anyone planning a home of their own.
+            </p>
+            <Link
+              href="/journal"
+              className="group inline-flex h-12 w-fit items-center gap-3 rounded-[0_1rem_0_1rem] bg-[linear-gradient(135deg,#6e5038,#583c26)] px-5 text-[0.75rem] font-medium uppercase tracking-[0.08em] text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.12),0_10px_24px_-14px_rgb(88_60_38/0.6)] transition-[transform,box-shadow] duration-300 ease-premium hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgb(255_255_255/0.16),0_14px_30px_-12px_rgb(88_60_38/0.7)] active:scale-[0.98]"
+            >
+              All journal entries
+              <Icon
+                name="arrowUpRight"
+                size={15}
+                className="text-[#e6cfa9] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </Link>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-6" data-reveal>
-          <p className="max-w-md leading-[1.45] text-muted">
-            What we have learned from every home we build — on materials, light and the details that make a space
-            age well. Written for anyone planning a home of their own.
-          </p>
-          <Link
-            href="/journal"
-            className="group inline-flex h-12 w-fit items-center gap-3 rounded-[0_1rem_0_1rem] bg-[linear-gradient(135deg,#6e5038,#583c26)] px-5 text-[0.75rem] font-medium uppercase tracking-[0.08em] text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.12),0_10px_24px_-14px_rgb(88_60_38/0.6)] transition-[transform,box-shadow] duration-300 ease-premium hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgb(255_255_255/0.16),0_14px_30px_-12px_rgb(88_60_38/0.7)] active:scale-[0.98]"
-          >
-            All journal entries
-            <Icon
-              name="arrowUpRight"
-              size={15}
-              className="text-[#e6cfa9] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
-          </Link>
-        </div>
+        <CuratedCollage className="lg:col-span-7 lg:justify-self-end" />
       </div>
 
       {/* Below desktop: a swipeable strip that bleeds to the screen edge. From lg: three ruled columns. */}
-      <ol className="no-scrollbar container-site mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto max-lg:scroll-pl-[clamp(1rem,4vw,2.5rem)] max-lg:pr-0 md:mt-16 lg:grid lg:grid-cols-3 lg:gap-x-20 lg:overflow-visible">
+      <ol className="no-scrollbar container-site mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto max-lg:scroll-pl-[clamp(1rem,4vw,2.5rem)] max-lg:pr-0 md:mt-14 lg:grid lg:grid-cols-3 lg:gap-x-20 lg:overflow-visible">
         {notes.map((a, i) => (
           <li
             key={a.slug}
@@ -71,14 +77,20 @@ export function DesignJournal() {
               aria-label={`${a.title} — read article`}
             >
               {/* The arch: a full round top over a tall frame, as in the brand mark. */}
-              <div className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-sm bg-linen">
-                <LoadingImage
-                  src={a.image.src}
-                  alt={a.image.alt}
-                  fill
-                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 82vw"
-                  className="object-cover transition-transform duration-[1200ms] ease-out-expo group-hover:scale-[1.05]"
-                />
+              {/* A fine outline keeps the arch's shape even where a photograph has a white ground. */}
+              <div className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-sm bg-linen ring-1 ring-line ring-inset">
+                <div
+                  className="absolute inset-0"
+                  style={a.card?.focus && { transform: `scale(${a.card.focus.zoom})`, transformOrigin: a.card.focus.at }}
+                >
+                  <LoadingImage
+                    src={(a.card?.image ?? a.image).src}
+                    alt={(a.card?.image ?? a.image).alt}
+                    fill
+                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 82vw"
+                    className="object-cover transition-transform duration-[1200ms] ease-out-expo group-hover:scale-[1.05]"
+                  />
+                </div>
               </div>
 
               <p className="mt-7 flex items-center gap-3 whitespace-nowrap text-[0.75rem] uppercase tracking-[0.12em] text-muted">
@@ -89,8 +101,9 @@ export function DesignJournal() {
                 <span>{a.readMinutes} min read</span>
               </p>
 
-              <h3 className="mt-4 font-display text-[clamp(1.35rem,1rem+0.8vw,1.75rem)] leading-[1.15] font-normal tracking-[-0.03em] text-balance text-ink">
-                {a.title}
+              {/* Every title takes two lines' room, so the notes beneath line up across the row. */}
+              <h3 className="mt-4 line-clamp-2 min-h-[2lh] font-display text-[clamp(1.35rem,1rem+0.8vw,1.75rem)] leading-[1.15] font-normal tracking-[-0.03em] text-balance text-ink">
+                {a.card?.title ?? a.title}
               </h3>
               <p className="mt-3 line-clamp-3 leading-[1.5] text-muted">{a.excerpt}</p>
 

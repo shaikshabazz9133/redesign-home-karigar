@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { LogoMark, TAGLINE } from "@/components/ui/Logo";
 import { STONE_SMALL_PATH, STONE_TALL_PATH, STONE_VIEWBOX } from "@/components/ui/stonePaths";
 
@@ -12,7 +12,7 @@ export const INTRO_STYLES = ["blueprint", "arch", "doors", "monolith"] as const;
 type IntroStyle = (typeof INTRO_STYLES)[number];
 
 /** How long each intro's entrance runs before it may lift (ms since navigation start). */
-const MIN_END: Record<IntroStyle, number> = { blueprint: 7700, arch: 5000, doors: 4600, monolith: 4700 };
+const MIN_END: Record<IntroStyle, number> = { blueprint: 7400, arch: 5000, doors: 4600, monolith: 4700 };
 
 type Vars = React.CSSProperties & Record<`--${string}`, number>;
 
@@ -21,10 +21,9 @@ type Vars = React.CSSProperties & Record<`--${string}`, number>;
  * the one shown is chosen before first paint by an inline script in the root
  * layout (`?intro=arch`, `?intro=doors`, `?intro=monolith`; otherwise the blueprint).
  *
- *   blueprint — "drawing the home", after the client's sketch: a small lattice is
- *              ruled at the centre; the stone mark is traced inside it and coloured;
- *              then every lattice line extends to the screen's edges — verticals up and
- *              down, horizontals left and right — and the sheet opens onto the page.
+ *   blueprint — the grid: construction guides are ruled around the mark, each stone
+ *              is traced and its colour spreads in to meet the line; the drawing lifts,
+ *              the name unfolds with a gold glint, and two panels slide up onto the page.
  *   arch     — "entering the home": a brass arch draws itself and warm light
  *              glows inside it; the stone mark is sketched there in brass and
  *              its texture appears within the line; on exit the doorway grows
@@ -127,163 +126,55 @@ function Tagline() {
   );
 }
 
-/*
- * The client's drawing, set on a 600 × 600 plate centred on the screen:
- *   1. a small lattice of lines is ruled around where the mark will sit;
- *   2. the two stones are traced inside it, standing on its baseline, their edges on its lines;
- *   3. colour blooms into the stones;
- *   4. every lattice line extends outward to the edge of the screen — verticals up and down,
- *      horizontals left and right — a spark of light at each tip;
- *   5. the sheet opens like louvres onto the page.
- * The plate is measured on mount so each extension ends exactly at the screen's edge.
+/** Construction guides on the stones' 700×858 canvas: baseline, plumb lines, datum lines and compass arcs. */
+const GUIDES = [
+  "M-160 856H860",
+  "M12 -70V930",
+  "M450 -70V930",
+  "M696 330V930",
+  "M-90 1H560",
+  "M180 422H790",
+  "M231 1a219 219 0 1 1 0 438a219 219 0 1 1 0 -438",
+  "M471 412a228 228 0 1 1 0 456a228 228 0 1 1 0 -456",
+];
+
+/**
+ * The grid intro: construction guides are ruled around the mark — a baseline, plumb and datum lines,
+ * compass arcs — each stone's outline is traced in brass, then its colour spreads in from its lower edge
+ * until it meets the line. The drawing lifts away, light crosses the finished mark, the name unfolds from
+ * its centre with a gold glint over a rule and a diamond, and two panels (ivory over espresso) slide up.
  */
-const PLATE = 600;
-/** The mark on the plate: 260 units tall, standing on the lattice's baseline. */
-const MARK = { x: 194, y: 170, h: 260 } as const;
-const MARK_W = (MARK.h * 700) / 858;
-const MARK_SCALE = MARK.h / 858;
-/** Lattice verticals, keyed to the stones: their outer edges, inner edges and a line either side. */
-const VERTICALS = [150, 197, 234, 268, 332, 368, 406, 450];
-/** Lattice horizontals: the tall stone's top, the small stone's top, the baseline, and lines between. */
-const HORIZONTALS = [170, 234, 297, 368, 430, 476];
-/** How far the lattice reaches before it extends. */
-const LATTICE = { top: 120, bottom: 520, left: 110, right: 490 } as const;
-
-/** Lattice lines in drawing order: the baseline first, then horizontals and verticals in turn, each
-    ruled in the opposite direction to the last. */
-const LATTICE_LINES = (() => {
-  const h = HORIZONTALS.map((y, k) => ({ d: k % 2 ? `M${LATTICE.right} ${y}H${LATTICE.left}` : `M${LATTICE.left} ${y}H${LATTICE.right}`, base: y === 430 }));
-  const v = VERTICALS.map((x, k) => ({ d: k % 2 ? `M${x} ${LATTICE.bottom}V${LATTICE.top}` : `M${x} ${LATTICE.top}V${LATTICE.bottom}`, base: false }));
-  const rest = h.filter((l) => !l.base);
-  const order = [h.find((l) => l.base)!];
-  for (let k = 0; k < Math.max(rest.length, v.length); k++) {
-    if (v[k]) order.push(v[k]);
-    if (rest[k]) order.push(rest[k]);
-  }
-  return order.map((l, k) => ({ ...l, delay: k * 0.09 }));
-})();
-
-type Edges = { top: number; bottom: number; left: number; right: number };
-/** A generous guess at the screen's edges in plate units, used until the plate is measured. */
-const DEFAULT_EDGES: Edges = { top: -900, bottom: 1500, left: -1500, right: 2100 };
-
-/** Extensions: each lattice line continued from its ends to the screen's edges. */
-function extensions(e: Edges) {
-  const lines: { d: string; delay: number }[] = [];
-  VERTICALS.forEach((x, k) => {
-    lines.push({ d: `M${x} ${LATTICE.top}V${e.top}`, delay: k * 0.09 });
-    lines.push({ d: `M${x} ${LATTICE.bottom}V${e.bottom}`, delay: k * 0.09 + 0.04 });
-  });
-  HORIZONTALS.forEach((y, k) => {
-    lines.push({ d: `M${LATTICE.left} ${y}H${e.left}`, delay: 0.2 + k * 0.09 });
-    lines.push({ d: `M${LATTICE.right} ${y}H${e.right}`, delay: 0.2 + k * 0.09 + 0.04 });
-  });
-  return lines;
-}
-
-/** The sheet is cut into louvres along its verticals; on exit they lift away in a wave from the centre. */
-const STRIPS = 8;
-
 function BlueprintIntro() {
-  const plate = useRef<SVGSVGElement>(null);
-  const [edges, setEdges] = useState<Edges>(DEFAULT_EDGES);
-
-  // Measure where the screen's edges fall in plate units, so the extensions end exactly there.
-  useEffect(() => {
-    const measure = () => {
-      const r = plate.current?.getBoundingClientRect();
-      if (!r || !r.width) return;
-      const k = r.width / PLATE;
-      setEdges({
-        top: Math.floor(-r.top / k) - 4,
-        bottom: Math.ceil((window.innerHeight - r.top) / k) + 4,
-        left: Math.floor(-r.left / k) - 4,
-        right: Math.ceil((window.innerWidth - r.left) / k) + 4,
-      });
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, []);
-
-  const ext = extensions(edges);
-  const markBox = { x: MARK.x, y: MARK.y, width: MARK_W, height: MARK.h };
-
   return (
-    <div aria-hidden className="hk-intro hk-intro-blueprint absolute inset-0 items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 flex">
-        {Array.from({ length: STRIPS }, (_, i) => (
-          <span
-            key={i}
-            className="hk-bp-strip relative -mx-px h-full flex-1 bg-ivory"
-            style={{ "--s": Math.abs(i - (STRIPS - 1) / 2) - 0.5 } as Vars}
-          />
-        ))}
+    <div aria-hidden className="hk-intro hk-intro-blueprint absolute inset-0">
+      <div className="hk-gr-panel-back absolute inset-0 bg-espresso" />
+      <div className="hk-gr-panel absolute inset-0 grid place-items-center overflow-hidden bg-ivory">
+        <div className="hk-gr-glow absolute inset-0" />
+
+        <div className="hk-pre-content relative flex flex-col items-center px-4 text-center">
+          <div className="relative">
+            <span className="hk-gr-shadow absolute -bottom-2 left-1/2 h-3 w-[115%] -translate-x-1/2 rounded-[50%] bg-umber/20 blur-md" />
+            <LogoMark size="lg" preload className="h-[clamp(9rem,22vw,12rem)]" tallClassName="hk-gr-tall" smallClassName="hk-gr-small">
+              <svg viewBox={STONE_VIEWBOX} className="hk-gr-plan pointer-events-none absolute inset-0 size-full overflow-visible" fill="none">
+                {GUIDES.map((d, i) => (
+                  <path key={d} d={d} pathLength={1} className="hk-gr-guide" style={{ "--i": i } as Vars} />
+                ))}
+                <path d={STONE_TALL_PATH} pathLength={1} className="hk-gr-outline" style={{ "--i": 0 } as Vars} />
+                <path d={STONE_SMALL_PATH} pathLength={1} className="hk-gr-outline" style={{ "--i": 1 } as Vars} />
+              </svg>
+              <span className="hk-sheen" />
+            </LogoMark>
+          </div>
+
+          <div className="mt-9">
+            <Wordmark letterClass="hk-gr-letter" />
+          </div>
+          <span className="relative mt-4 block w-[min(17rem,62vw)]">
+            <span className="hk-gr-rule block h-px bg-gradient-to-r from-transparent via-brass to-transparent" />
+            <span className="hk-gr-gem absolute top-1/2 left-1/2 -mt-[3px] -ml-[3px] size-[6px] rotate-45 bg-brass" />
+          </span>
+        </div>
       </div>
-
-      {/* Warm light that rises behind the mark as its colour blooms, then breathes. */}
-      <span className="hk-bp-glow pointer-events-none absolute top-1/2 left-1/2 size-[clamp(16rem,40vmin,28rem)] rounded-full bg-[radial-gradient(circle,rgb(236_214_178/0.55),rgb(236_214_178/0.18)_45%,transparent_70%)]" />
-
-      <svg
-        ref={plate}
-        viewBox={`0 0 ${PLATE} ${PLATE}`}
-        className="hk-bp-plate relative size-[clamp(19rem,64vmin,34rem)] overflow-visible"
-        fill="none"
-      >
-        <defs>
-          {/* A warm gold halo around each spark. */}
-          <filter id="hk-bp-glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="5" result="wide" />
-            <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="near" />
-            <feMerge>
-              <feMergeNode in="wide" />
-              <feMergeNode in="wide" />
-              <feMergeNode in="near" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          {/* Soft-edged discs that grow from one point in each stone, so its colour blooms like pigment. */}
-          <radialGradient id="hk-bp-soft">
-            <stop offset="0.62" stopColor="#fff" />
-            <stop offset="1" stopColor="#fff" stopOpacity="0" />
-          </radialGradient>
-          <mask id="hk-bp-mask-tall" maskUnits="userSpaceOnUse" x="0" y="0" width={PLATE} height={PLATE}>
-            <circle cx={232} cy={205} r={300} fill="url(#hk-bp-soft)" className="hk-bp-bloom hk-bp-bloom-tall" />
-          </mask>
-          <mask id="hk-bp-mask-small" maskUnits="userSpaceOnUse" x="0" y="0" width={PLATE} height={PLATE}>
-            <circle cx={382} cy={402} r={230} fill="url(#hk-bp-soft)" className="hk-bp-bloom hk-bp-bloom-small" />
-          </mask>
-        </defs>
-
-        {/* 1 · The lattice, ruled around where the mark will stand. */}
-        <g className="hk-bp-lattice">
-          {LATTICE_LINES.map((l) => (
-            <path key={l.d} d={l.d} pathLength={1} className={l.base ? "hk-bp-rule hk-bp-rule-base" : "hk-bp-rule"} style={{ "--d": `${l.delay.toFixed(2)}s` } as React.CSSProperties} />
-          ))}
-        </g>
-
-        {/* 4 · The extensions, out to every edge, each with a spark at its tip. */}
-        <g className="hk-bp-ext">
-          {ext.map((l) => (
-            <path key={l.d} d={l.d} pathLength={1} className="hk-bp-extline" style={{ "--d": `${l.delay.toFixed(2)}s` } as React.CSSProperties} />
-          ))}
-        </g>
-        <g filter="url(#hk-bp-glow)">
-          {ext.map((l) => (
-            <path key={l.d} d={l.d} pathLength={1} className="hk-bp-spark" style={{ "--d": `${l.delay.toFixed(2)}s` } as React.CSSProperties} />
-          ))}
-        </g>
-
-        {/* 3 · The stones in colour, each revealed by its blooming disc. */}
-        <image href="/brand/stone-tall.webp" {...markBox} mask="url(#hk-bp-mask-tall)" className="hk-bp-stone" />
-        <image href="/brand/stone-small.webp" {...markBox} mask="url(#hk-bp-mask-small)" className="hk-bp-stone" />
-
-        {/* 2 · The stones traced in brass. */}
-        <g transform={`translate(${MARK.x} ${MARK.y}) scale(${MARK_SCALE})`}>
-          <path d={STONE_TALL_PATH} pathLength={1} className="hk-bp-trace" style={{ "--i": 0 } as Vars} />
-          <path d={STONE_SMALL_PATH} pathLength={1} className="hk-bp-trace" style={{ "--i": 1 } as Vars} />
-        </g>
-      </svg>
     </div>
   );
 }

@@ -179,6 +179,8 @@ export function articleSchema(input: {
   images: string[];
   readMinutes: number;
   keywords: string[];
+  /** A signed piece is credited to its author; otherwise to the studio. */
+  author?: { name: string; role: string; honorific?: string };
 }): Json {
   return {
     "@context": "https://schema.org",
@@ -192,7 +194,7 @@ export function articleSchema(input: {
     url: absoluteUrl(input.path),
     mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl(input.path) },
     timeRequired: `PT${input.readMinutes}M`,
-    author: { "@id": ORG_ID },
+    author: input.author ? { "@type": "Person", name: input.author.name, honorificPrefix: input.author.honorific, jobTitle: input.author.role, worksFor: { "@id": ORG_ID } } : { "@id": ORG_ID },
     publisher: { "@id": ORG_ID },
     isPartOf: { "@id": `${site.url}/#website` },
   };

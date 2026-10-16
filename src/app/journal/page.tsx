@@ -83,8 +83,8 @@ export default function JournalPage() {
                 <div className="relative aspect-[3/2] overflow-hidden rounded-sm bg-linen">
                   <ImageFrame fill index={i % 2}>
                     <LoadingImage
-                      src={a.image.src}
-                      alt={a.image.alt}
+                      src={(a.card?.image ?? a.image).src}
+                      alt={(a.card?.image ?? a.image).alt}
                       fill
                       sizes="(min-width: 768px) 46vw, 92vw"
                       className="object-cover transition-transform duration-[1.4s] ease-[var(--ease-premium)] group-hover:scale-[1.05]"

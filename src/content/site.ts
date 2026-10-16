@@ -40,7 +40,7 @@ export const site = {
 export type SocialLabel = (typeof site.socials)[number]["label"];
 
 export const primaryNav = [
-  { label: "Homes", href: "/projects" },
+  { label: "Projects", href: "/projects" },
   { label: "What We Do", href: "/services" },
   { label: "Films", href: "/tours" },
   { label: "Design Journal", href: "/journal" },
