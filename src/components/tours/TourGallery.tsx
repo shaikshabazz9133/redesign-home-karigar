@@ -84,7 +84,7 @@ function TourCard({ tour, onPlay, headingLevel: H = "h3" }: { tour: Tour; onPlay
         <LoadingImage
  tone="dark"
           src={tourThumb(tour.youtubeId)}
-          alt=""
+          alt={`Still from the film: ${tour.title}`}
           fill
           sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 82vw"
           className="object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"

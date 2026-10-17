@@ -76,9 +76,6 @@ export function ImmersiveHero() {
               <ButtonLink href="/projects" variant="leaf-outline" size="md" icon="arrowUpRight" className="max-sm:h-10 max-sm:gap-1.5 max-sm:px-3.5 max-sm:text-[0.625rem] max-sm:tracking-[0.06em] max-[380px]:[&>svg]:hidden">
                 Explore our homes
               </ButtonLink>
-              <ButtonLink href="/contact" variant="leaf" size="md" icon="arrowUpRight" className="max-sm:h-10 max-sm:gap-1.5 max-sm:px-3.5 max-sm:text-[0.625rem] max-sm:tracking-[0.06em] max-[380px]:[&>svg]:hidden">
-                Begin your project
-              </ButtonLink>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { brandAlt } from "@/lib/seo/alt";
 
 type Tile = { src: string; alt: string; width: number; height: number; shape: string; position?: string };
 
@@ -55,7 +56,7 @@ function TileImage({ tile, index }: { tile: Tile; index: number }) {
         tile.shape,
       )}
     >
-      <Image src={tile.src} alt={tile.alt} fill sizes="(min-width: 1024px) 24vw, 45vw" className={cn("object-cover", tile.position)} />
+      <Image src={tile.src} alt={brandAlt(tile.alt)} fill sizes="(min-width: 1024px) 24vw, 45vw" className={cn("object-cover", tile.position)} />
     </figure>
   );
 }

@@ -4,6 +4,7 @@ import Image, { type ImageProps } from "next/image";
 import { useCallback, useState } from "react";
 import { BrandLoader } from "./BrandLoader";
 import { cn } from "@/lib/utils";
+import { brandAlt } from "@/lib/seo/alt";
 
 interface LoadingImageProps extends ImageProps {
   /** "light": shimmer + mark (cards, galleries). "dark": mark only (lightbox, video). */
@@ -14,7 +15,7 @@ interface LoadingImageProps extends ImageProps {
 /**
  * next/image with a branded loading state. Until the photo has decoded,
  * a shimmering placeholder and the animated mark are shown; the photo then
- * fades in. The parent must be `position: relative`.
+ * fades in. The parent must be `position: relative`. Alt text is credited to the studio (see brandAlt).
  *
  * Images are only hidden when JS is running (html.js), so content is never
  * lost without it — and cached images skip the loader entirely.
@@ -41,7 +42,7 @@ export function LoadingImage({ tone = "light", loaderSize, className, onLoad, al
       )}
       <Image
         {...props}
-        alt={alt}
+        alt={typeof alt === "string" ? brandAlt(alt) : alt}
         ref={ref}
         data-loaded={loaded || undefined}
         onLoad={(e) => {

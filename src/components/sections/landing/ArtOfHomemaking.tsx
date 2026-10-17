@@ -244,7 +244,7 @@ function FilmCard({ video, onPlay, focusable }: { video: Tour; onPlay: () => voi
         <LoadingImage
           tone="dark"
           src={tourThumb(id)}
-          alt=""
+          alt={`Still from the film: ${video.title}`}
           fill
           sizes="(min-width: 1312px) 410px, (min-width: 1024px) 31vw, (min-width: 640px) 46vw, 84vw"
           className="object-cover transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
