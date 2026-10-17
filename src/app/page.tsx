@@ -28,7 +28,7 @@ export default function HomePage() {
       <DesignPhilosophy />
       <ArtOfHomemaking />
       <DesignJournal />
-      <CommunityMarquee />
+      {/* <CommunityMarquee /> */}
       <ProcessLine />
       {/* <HowWeWork /> */}
       <SeamlessExperience />

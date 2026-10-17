@@ -103,7 +103,7 @@ export function ArtOfHomemaking() {
   const goTo = (i: number) => track.current && scrollToCard(track.current, i);
 
   return (
-    <section aria-labelledby="art-title" className="relative overflow-hidden bg-ivory pt-4 pb-10 md:pb-14">
+    <section aria-labelledby="art-title" className="relative overflow-hidden bg-ivory py-7 md:py-10">
       <div className="container-site flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <p className="text-[0.9375rem] tracking-[-0.01em] text-muted" data-reveal>

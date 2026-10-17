@@ -1,4 +1,4 @@
-import { CRAFT_IMAGES, CRAFT_SECTIONS, KITCHEN_IMAGES, KITCHEN_SECTIONS, PINTEREST_IMAGES, PINTEREST_SECTIONS, STONE_IMAGES, STONE_SECTIONS } from "./journal-essays";
+import { CRAFT_IMAGES, CRAFT_SECTIONS, KITCHEN_IMAGES, KITCHEN_SECTIONS, MOODBOARD_IMAGES, MOODBOARD_SECTIONS, PINTEREST_IMAGES, PINTEREST_SECTIONS, STONE_IMAGES, STONE_SECTIONS } from "./journal-essays";
 
 /**
  * Design Journal — the studio's notes on materials, light and process.
@@ -58,7 +58,7 @@ export const journal: JournalArticle[] = [
     layout: "reshuffle",
     display: { lines: ["Is Indian", "Craftsmanship", "Slowly", "Disappearing?"] },
     gallery: [CRAFT_IMAGES.turning, CRAFT_IMAGES.finishing],
-    author: { name: "Zuber Khan", honorific: "Ar.", role: "Founder & Principal Designer, Home Karigar" },
+    author: { name: "Zuber Khan", honorific: "Ar.", role: "Founder & CEO, Home Karigar" },
     dek: "In our pursuit of speed, are we leaving behind the very hands that once built our homes with patience?",
     next: { label: "Meet the studio", href: "/about" },
   },
@@ -77,6 +77,7 @@ export const journal: JournalArticle[] = [
     gallery: [KITCHEN_IMAGES.fridge, KITCHEN_IMAGES.galley],
     cover: "left",
     card: { image: KITCHEN_IMAGES.fridge },
+    author: { name: "Mohammad Nadeem", role: "Co-founder & Marketing Head, Home Karigar" },
     dek: "A kitchen should never be designed around trends alone; it should be designed around the rituals of everyday living.",
     next: { label: "Explore our kitchens", href: "/services#modular-kitchen" },
   },
@@ -95,9 +96,28 @@ export const journal: JournalArticle[] = [
     gallery: [STONE_IMAGES.trends],
     cover: "left",
     card: { title: "Marble, Quartz & Granite", focus: { at: "68% 45%", zoom: 1.45 } },
-    author: { name: "Mohammad Nadeem", role: "Co-founder, Home Karigar" },
+    author: { name: "Mohammad Nadeem", role: "Co-founder & Marketing Head, Home Karigar" },
     dek: "From marble to quartz and granite, a designer’s guide to choosing the right surface for an Indian kitchen.",
     next: { label: "Explore our kitchens", href: "/services#modular-kitchen" },
+  },
+  {
+    slug: "not-every-home-needs-to-look-like-pinterest",
+    title: "Not Every Home Needs to Look Like Pinterest",
+    category: "Living",
+    excerpt:
+      "A Pinterest image captures only a single moment. The finest homes are never designed to recreate a photograph — they are designed to support the lives lived within them.",
+    readMinutes: 3,
+    image: MOODBOARD_IMAGES.cover,
+    sections: MOODBOARD_SECTIONS,
+    quote: "The most memorable homes don’t remind you of a Pinterest board every time you walk through the door. They remind you of yourself.",
+    layout: "reshuffle",
+    display: { lines: ["Not Every Home", "Needs to Look", "Like Pinterest"] },
+    gallery: [MOODBOARD_IMAGES.board],
+    cover: "left",
+    card: { image: MOODBOARD_IMAGES.living },
+    author: { name: "Apurva Nalabale", role: "Principal Designer & Brand Manager, Home Karigar" },
+    dek: "Why the best homes aren’t Pinterest copies.",
+    next: { label: "Meet the studio", href: "/about" },
   },
   {
     slug: "why-every-home-doesnt-need-to-look-like-pinterest",

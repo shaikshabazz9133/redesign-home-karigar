@@ -77,7 +77,7 @@ export const CRAFT_SECTIONS: { heading: string; body: string[] }[] = [
       "Perhaps preserving Indian craftsmanship is not about returning to the past. It is about refusing to believe that progress must come at the cost of identity. Contemporary homes can embrace modern living while still celebrating handmade artistry. Technology can improve precision without replacing human imagination. Minimal spaces can still contain soulful objects.",
       "The future of Indian interiors does not lie in choosing between tradition and modernity. It lies in allowing them to coexist with respect.",
       "At Home Karigar, we believe craftsmanship is not a decorative luxury. It is the quiet soul of a home. Because while styles will continue to evolve and trends will inevitably fade, the work of human hands carries something far more enduring. It carries memory. And perhaps that is the greatest legacy we can leave behind.",
-      "— Zuber Khan, Founder & Principal Designer, Home Karigar",
+      "— Zuber Khan, Founder & CEO, Home Karigar",
     ],
   },
   {
@@ -128,7 +128,7 @@ export const PINTEREST_SECTIONS: { heading: string; body: string[] }[] = [
     heading: "Homes designed for generations to come",
     body: [
       "A home is not built to be admired. It is built to be remembered.",
-      "By Zuber Khan, Founder & Principal Designer, Home Karigar",
+      "By Zuber Khan, Founder & CEO, Home Karigar",
       "There is a quiet moment that arrives in every well-lived home.",
       "It isn’t the day the furniture is installed. It isn’t when the final light is switched on, nor when the last piece of artwork finds its place on the wall.",
       "It arrives years later.",
@@ -170,7 +170,7 @@ export const PINTEREST_SECTIONS: { heading: string; body: string[] }[] = [
       "Design should honour that privilege.",
       "Because the most enduring homes are never simply built.",
       "They are lived in, loved deeply, and gently passed from one generation to the next.",
-      "— Zuber Khan, Founder & Principal Designer, Home Karigar",
+      "— Zuber Khan, Founder & CEO, Home Karigar",
     ],
   },
   {
@@ -316,6 +316,62 @@ export const STONE_SECTIONS: { heading: string; body: string[] }[] = [
     heading: "What remains",
     body: [
       "Years from now, cabinet finishes may change and appliances will almost certainly be replaced. The countertop, however, will remain. It will witness hurried school mornings, cups of evening chai, festive meals, birthday cakes and conversations that stretch long after dinner is over. The most memorable kitchens are never defined by whether they feature marble, quartz or granite. They are remembered for how beautifully every material supported the life that unfolded around it.",
+    ],
+  },
+];
+
+/** "Not Every Home Needs to Look Like Pinterest" — the client's cover and living-room material board. */
+export const MOODBOARD_IMAGES = {
+  cover: {
+    src: "/images/design_journal/article4/img1.jpg",
+    alt: "“What we can take from Pinterest and what not?” — a living room of cream sofa, olive and oxblood cushions, a walnut coffee table and a marble island beside material samples",
+    width: 1672,
+    height: 941,
+  },
+  board: {
+    src: "/images/design_journal/article4/img2.jpg",
+    alt: "Material and furniture board for a living room: stone-look flooring, walnut veneer, oxblood accents, an L-shaped sofa, marble coffee table and the room’s layout",
+    width: 1536,
+    height: 1024,
+  },
+  living: {
+    src: "/images/design_journal/article4/card.jpg",
+    alt: "Living room with a cream L-shaped sofa, an oxblood lounge chair, a black marble coffee table and lit oxblood shelving",
+    width: 775,
+    height: 452,
+  },
+} satisfies Record<string, JournalImage>;
+
+/** The Pinterest article by Apurva Nalabale, as the client wrote it, in four parts. */
+export const MOODBOARD_SECTIONS: { heading: string; body: string[] }[] = [
+  {
+    heading: "A single moment",
+    body: [
+      "Pinterest has become one of the most influential tools in interior design. Millions of beautifully photographed homes are only a swipe away, making it easier than ever to imagine what our own spaces could become. It has changed how homeowners collect ideas, discover materials and communicate their aspirations with designers. In many ways, it has made good design more accessible than ever before.",
+      "But a Pinterest image captures only a single moment.",
+    ],
+  },
+  {
+    heading: "Where inspiration and reality diverge",
+    body: [
+      "It doesn’t reveal how a family cooks every evening, where children’s school bags are kept, how much storage is actually needed or how natural light changes throughout the day. It doesn’t tell you whether those open shelves collect dust, whether the white sofa survives everyday life or whether that elegant kitchen was designed for someone who rarely cooks.",
+      "This is where inspiration and reality begin to diverge.",
+      "The finest homes are never designed to recreate a photograph. They are designed to support the lives lived within them. Architecture, climate, routines, family size, maintenance preferences and personal habits all shape a home far more than any trend ever could.",
+    ],
+  },
+  {
+    heading: "What made you fall in love with it?",
+    body: [
+      "That is why we never discourage clients from bringing Pinterest references. In fact, we encourage it. Every project at Home Karigar begins with saved images spread across a table. They become the starting point of a conversation rather than the final destination. Instead of asking, “How do we copy this?” we ask, “What made you fall in love with it?”",
+      "Sometimes it’s the warmth of natural wood, sometimes it’s the calmness of a muted palette, and sometimes it’s simply the feeling a space creates. Before putting pen to paper, we step into our clients’ world. We listen to their stories, understand their routines and imagine life from their perspective, because the most meaningful homes are designed with empathy before they are designed with materials.",
+    ],
+  },
+  {
+    heading: "The beginning, not the blueprint",
+    body: [
+      "Once we understand why a space resonates, we reinterpret those ideas to suit the architecture of the home, its surroundings and, most importantly, the people who will live within it. Inspiration becomes the beginning of the conversation—not the blueprint.",
+      "Because the most memorable homes don’t remind you of a Pinterest board every time you walk through the door.",
+      "They remind you of yourself.",
     ],
   },
 ];

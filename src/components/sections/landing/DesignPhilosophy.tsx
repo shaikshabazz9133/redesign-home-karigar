@@ -19,7 +19,7 @@ const STATS = [
  */
 export function DesignPhilosophy() {
   return (
-    <section aria-labelledby="philosophy-title" className="relative bg-ivory pt-14 pb-12 md:pt-20 md:pb-16">
+    <section aria-labelledby="philosophy-title" className="relative bg-ivory pt-14 pb-7 md:pt-20 md:pb-10">
       {/* Two columns sharing two rows: the title block and the photograph on the left, the record grid on the
           right as a subgrid — so the photograph's top edge sits exactly on the grid's middle rule. */}
       <div className="container-site grid gap-14 lg:grid-cols-2 lg:grid-rows-[auto_auto] lg:gap-x-12 lg:gap-y-0">

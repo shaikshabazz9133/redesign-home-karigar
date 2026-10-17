@@ -7,7 +7,7 @@ import { ButtonLink } from "@/components/ui/Button";
 /** Native <details> accordion: accessible, zero JavaScript, animated in CSS. */
 export function FaqSection() {
   return (
-    <section aria-labelledby="faq-title" className="section-y">
+    <section aria-labelledby="faq-title" className="pt-7 pb-14 md:pt-10 md:pb-20">
       <div className="container-site grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <SectionHeading

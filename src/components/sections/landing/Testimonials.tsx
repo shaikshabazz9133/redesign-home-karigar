@@ -89,7 +89,7 @@ export function Testimonials() {
   const goTo = (i: number) => track.current && scrollToCard(track.current, i);
 
   return (
-    <section aria-labelledby="testimonials-title" className="relative overflow-hidden border-t border-line bg-ivory py-14 md:py-20">
+    <section aria-labelledby="testimonials-title" className="relative overflow-hidden bg-ivory py-7 md:py-10">
       <div className="container-site flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <p className="text-[0.9375rem] tracking-[-0.01em] text-muted" data-reveal>

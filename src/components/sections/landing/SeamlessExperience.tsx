@@ -7,7 +7,7 @@ import { ButtonLink } from "@/components/ui/Button";
  */
 export function SeamlessExperience() {
   return (
-    <section aria-labelledby="seamless-title" className="bg-ivory pb-14 md:pb-20">
+    <section aria-labelledby="seamless-title" className="bg-ivory py-7 md:py-10">
       <div className="container-site">
         <div className="flex flex-col items-center text-center">
           <h2

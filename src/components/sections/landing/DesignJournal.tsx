@@ -4,19 +4,21 @@ import { Icon } from "@/components/ui/Icon";
 import { articleHref, getJournal } from "@/content/journal";
 import { pad2 } from "@/lib/utils";
 import { CuratedCollage } from "./CuratedStatement";
+import { StripDots } from "./StripDots";
 
 /**
  * "The Design Journal": the title and its note beside the "Your space isn't plain" collage, then three of
  * the studio's notes, set as an editorial row rather than boxed cards —
  * each an arch-topped photograph (the arch of the brand mark), a numbered line of category and reading
  * time, the title and its opening lines, and a "Read article" link to the full note. Equal columns are divided
- * by hairlines; below desktop the row becomes a swipeable strip. Every whole entry is one link.
+ * by hairlines; three show at a time on desktop and the row scrolls sideways (by swipe, trackpad or the dots beneath)
+ * to the rest. Every whole entry is one link.
  */
 export function DesignJournal() {
-  const notes = getJournal().slice(0, 3);
+  const notes = getJournal().slice(0, 4);
 
   return (
-    <section aria-labelledby="journal-title" className="relative bg-ivory pt-4 pb-14 md:pb-20">
+    <section aria-labelledby="journal-title" className="relative bg-ivory py-7 md:py-10">
       {/* The title, its note and the way into the journal on the left; the "Your space isn't plain" collage
           on the right. Below them, the three notes. */}
       <div className="container-site grid items-start gap-12 lg:grid-cols-12 lg:gap-x-12">
@@ -61,12 +63,16 @@ export function DesignJournal() {
         <CuratedCollage className="lg:col-span-7 lg:justify-self-end" />
       </div>
 
-      {/* Below desktop: a swipeable strip that bleeds to the screen edge. From lg: three ruled columns. */}
-      <ol className="no-scrollbar container-site mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto max-lg:scroll-pl-[clamp(1rem,4vw,2.5rem)] max-lg:pr-0 md:mt-14 lg:grid lg:grid-cols-3 lg:gap-x-20 lg:overflow-visible">
+      {/* A sideways-scrolling strip: below desktop it bleeds to the screen edge; from lg, three ruled columns
+          show at a time and the rest scroll into view. */}
+      <ol
+        id="journal-strip"
+        className="no-scrollbar container-site mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-pl-[clamp(1rem,4vw,2.5rem)] max-lg:pr-0 md:mt-20 lg:gap-x-20"
+      >
         {notes.map((a, i) => (
           <li
             key={a.slug}
-            className="relative w-[82%] shrink-0 snap-start max-lg:last:mr-4 sm:w-[45%] lg:w-auto lg:before:absolute lg:before:inset-y-0 lg:before:-left-10 lg:before:w-px lg:before:bg-line lg:first:before:hidden"
+            className="relative w-[82%] shrink-0 snap-start max-lg:last:mr-4 sm:w-[45%] lg:w-[calc((100%-10rem)/3)] lg:before:absolute lg:before:inset-y-0 lg:before:-left-10 lg:before:w-px lg:before:bg-line lg:first:before:hidden"
           >
             {/* The reveal sits on the link, not the item, so its clip never hides the column rule. */}
             <Link
@@ -117,6 +123,7 @@ export function DesignJournal() {
           </li>
         ))}
       </ol>
+      <StripDots target="journal-strip" className="mt-10" />
     </section>
   );
 }
