@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ImageFrame } from "@/components/motion/ImageFrame";
 import { LoadingImage } from "@/components/ui/LoadingImage";
+import { CountUp } from "@/components/sections/landing/CountUp";
 import { pillars, team } from "@/content/studio";
 import { deliveryStats, site } from "@/content/site";
 import { pageMetadata } from "@/lib/seo/metadata";
@@ -13,7 +14,7 @@ import { pad2 } from "@/lib/utils";
 export const metadata: Metadata = pageMetadata({
   title: "Architect-led Interior Designers in Bengaluru",
   description:
-    "Meet Home Karigar: an architect-led interior design studio with over a decade of residential practice and 400+ homes delivered across Bengaluru.",
+    "Meet Home Karigar: an architect-led interior design studio with over six years of residential practice and 400+ homes delivered across Bengaluru.",
   path: "/about",
   image: { src: "/images/Home_Karigar_Team.png", alt: "The Home Karigar team", width: 1536, height: 1024 },
 });
@@ -30,7 +31,7 @@ export default function AboutPage() {
 
       <section aria-labelledby="story-title" className="container-site section-y grid gap-14 lg:grid-cols-12 lg:gap-16">
         <ImageFrame parallax={0.1} className="aspect-[4/5] rounded-sm bg-linen lg:col-span-5">
-          <LoadingImage src="/images/about_us_01.jpeg" alt="Home Karigar designers reviewing a home interior" fill sizes="(min-width: 1024px) 38vw, 92vw" className="object-cover" />
+          <LoadingImage src="/images/about-founder.jpg" alt="Mohammed Zuber, founder of Home Karigar, in a study with a forest-green wall, timber shelving and a walnut desk" fill sizes="(min-width: 1024px) 38vw, 92vw" className="object-cover object-top" />
         </ImageFrame>
         <div className="flex flex-col justify-center lg:col-span-6 lg:col-start-7">
           <div data-reveal><Eyebrow>Our story</Eyebrow></div>
@@ -48,11 +49,15 @@ export default function AboutPage() {
           <dl className="mt-12 grid grid-cols-2 gap-8 border-t border-line pt-8" data-reveal>
             <div className="flex flex-col gap-2">
               <dt className="text-sm text-muted">Homes delivered</dt>
-              <dd className="order-first font-display text-6xl font-medium tracking-[-0.05em] text-oxblood">{deliveryStats.homesDelivered}</dd>
+              <dd className="order-first font-display text-6xl font-medium tracking-[-0.05em] text-oxblood">
+                <CountUp to={parseInt(deliveryStats.homesDelivered, 10)} suffix="+" duration={2000} />
+              </dd>
             </div>
             <div className="flex flex-col gap-2">
               <dt className="text-sm text-muted">Years of practice</dt>
-              <dd className="order-first font-display text-6xl font-medium tracking-[-0.05em] text-oxblood">{site.foundedYearsAgo}+</dd>
+              <dd className="order-first font-display text-6xl font-medium tracking-[-0.05em] text-oxblood">
+                <CountUp to={site.foundedYearsAgo} suffix="+" duration={1300} delay={180} />
+              </dd>
             </div>
           </dl>
         </div>
@@ -86,11 +91,11 @@ export default function AboutPage() {
               <LoadingImage src="/images/Home_Karigar_Team.png" alt="The Home Karigar team of architects, designers and site managers" fill sizes="(min-width: 1320px) 1240px, 100vw" className="object-cover" />
             </ImageFrame>
           </figure>
-          <ul className="mt-14 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-14 grid grid-cols-1 gap-x-12 sm:grid-cols-2 lg:gap-x-16">
             {team.map((m, i) => (
-              <li key={m.name} className="flex items-baseline justify-between gap-4 border-b border-line py-5" data-reveal style={{ "--i": i % 3 } as React.CSSProperties}>
-                <span className="font-display text-xl">{m.name}</span>
-                <span className="text-right text-sm text-muted">{m.role}</span>
+              <li key={m.name} className="flex items-baseline justify-between gap-6 border-b border-line py-6" data-reveal style={{ "--i": i % 2 } as React.CSSProperties}>
+                <span className="min-w-0 font-display text-xl">{m.name}</span>
+                <span className="shrink-0 text-right text-sm text-muted">{m.role}</span>
               </li>
             ))}
           </ul>

@@ -1,18 +1,9 @@
 import { ButtonLink } from "@/components/ui/Button";
-import { Icon } from "@/components/ui/Icon";
-import { pad2 } from "@/lib/utils";
 
-/** What makes the experience seamless — each a promise the studio keeps elsewhere on the site. */
-const PROMISES = [
-  { title: "One team, start to finish", text: "Designers, site managers and karigars under one roof — one point of contact from the first sketch to the keys." },
-  { title: "Designed before it is built", text: "Every room is approved in photo-real 3D first, so what we build is exactly what you have already seen." },
-  { title: "Materials you can verify", text: "Branded plywood and hardware arrive on site with their own QR codes, for you to inspect and authenticate." },
-  { title: "Progress you can see", text: "Regular updates and site visits, with our designers supervising every stage of the work." },
-];
 
 /**
- * "A seamless experience": the studio's promise in four commitments, set as a ruled row beneath a centred
- * title in the site's heading voice, closing on the way into its finished homes.
+ * "A seamless experience": the studio's promise beneath a centred title in the site's heading voice, closing
+ * on the way into its finished homes.
  */
 export function SeamlessExperience() {
   return (
@@ -35,25 +26,6 @@ export function SeamlessExperience() {
           </p>
         </div>
 
-        <ol className="mt-12 grid border-t border-line sm:grid-cols-2 lg:grid-cols-4">
-          {PROMISES.map((p, i) => (
-            <li
-              key={p.title}
-              data-reveal
-              style={{ "--i": i } as React.CSSProperties}
-              className="border-b border-line py-7 sm:px-6 sm:[&:nth-child(even)]:border-l lg:border-b-0 lg:first:pl-0 lg:last:pr-0 lg:[&:not(:first-child)]:border-l"
-            >
-              <p className="flex items-center gap-3">
-                <span className="grid size-8 place-items-center rounded-full bg-[linear-gradient(135deg,#6e5038,#583c26)] text-white">
-                  <Icon name="check" size={15} />
-                </span>
-                <span className="font-display text-[0.9375rem] tabular-nums text-muted">{pad2(i + 1)}</span>
-              </p>
-              <h3 className="mt-5 font-display text-[1.25rem] leading-tight tracking-[-0.03em] text-ink">{p.title}</h3>
-              <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-muted">{p.text}</p>
-            </li>
-          ))}
-        </ol>
 
         <div className="mt-10 flex justify-center" data-reveal>
           <ButtonLink href="/projects" variant="timber" icon="arrowUpRight">

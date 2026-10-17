@@ -5,10 +5,10 @@ import { LoadingImage } from "@/components/ui/LoadingImage";
 import { BrandIcon, Icon } from "@/components/ui/Icon";
 import { VideoDialog } from "@/components/tours/TourGallery";
 import { site } from "@/content/site";
-import { tourThumb, tours, type Tour } from "@/content/studio";
+import { featuredFilms, tourThumb, type Tour } from "@/content/studio";
 
-/** Home tours first, then client stories. */
-const VIDEOS = [...tours.filter((t) => t.kind === "Home tour"), ...tours.filter((t) => t.kind === "Client story")];
+/** The studio's chosen films, in order. */
+const VIDEOS = featuredFilms;
 const channel = site.socials.find((s) => s.label === "YouTube")?.href;
 /** How long each step of the reel rests before moving on by one film. */
 const ADVANCE_MS = 4500;

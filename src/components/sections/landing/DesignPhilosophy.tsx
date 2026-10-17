@@ -45,19 +45,24 @@ export function DesignPhilosophy() {
           </h2>
 
           <p className="mt-10 max-w-lg text-lead text-ink-soft" data-reveal>
-            Luxury isn&apos;t defined by excess. It&apos;s found in thoughtful proportions, enduring materials, and
-            spaces that quietly enrich everyday living. At Home Karigar, we create homes that reflect the people who
-            live in them—timeless in character and purposeful in every detail.
+            Home Karigar creates homes that feel as considered as they are beautiful. By taking on a limited number of
+            projects, we remain deeply involved at every stage—from planning and design to execution and
+            handover—ensuring every space is crafted with clarity, precision, and lasting quality.
+          </p>
+          {/* Signed by the founder, the name in the copperplate as a signature. */}
+          <p className="mt-6 flex flex-col" data-reveal>
+            <span className="font-script text-[2.4rem] leading-none text-oxblood">Mohammed Zuber</span>
+            <span className="mt-2 text-[0.75rem] tracking-[0.16em] text-muted uppercase">Founder &amp; CEO</span>
           </p>
         </div>
 
-        {/* Left, row two: the photograph */}
-        <ImageFrame className="aspect-[4/3] w-full overflow-hidden rounded-sm bg-linen lg:col-start-1 lg:row-start-2" parallax={0.08}>
+        {/* Left, row two: the founder, shown whole at the photograph's own proportions. */}
+        <ImageFrame className="aspect-[1024/1536] w-full max-w-md overflow-hidden rounded-sm bg-linen lg:col-start-1 lg:row-start-2 lg:max-w-[min(100%,26rem)]">
           <Image
-            src="/images/philosophy/walk-in-wardrobe.jpg"
-            alt="Walk-in wardrobe with lit glass-fronted shutters, fluted drawers and an upholstered bench, designed by Home Karigar"
+            src="/images/home_karigar_ceo.jpg"
+            alt="Mohammed Zuber, founder and CEO of Home Karigar, seated at his desk in the studio"
             fill
-            sizes="(min-width: 1024px) 45vw, 92vw"
+            sizes="(min-width: 1024px) 26rem, (min-width: 640px) 28rem, 92vw"
             className="object-cover"
           />
         </ImageFrame>

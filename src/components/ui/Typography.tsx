@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /** Small uppercase label with a brass rule — introduces a section. */
-export function Eyebrow({ children, tone = "dark", className }: { children: ReactNode; tone?: "dark" | "light"; className?: string }) {
+export function Eyebrow({ children, tone = "dark", className, rule = true }: { children: ReactNode; tone?: "dark" | "light"; className?: string; rule?: boolean }) {
   return (
     <p
       className={cn(
@@ -11,13 +11,15 @@ export function Eyebrow({ children, tone = "dark", className }: { children: Reac
         className,
       )}
     >
-      <span aria-hidden className={cn("h-px w-7", tone === "dark" ? "bg-brass-ink/60" : "bg-brass")} />
+      {rule && <span aria-hidden className={cn("h-px w-7", tone === "dark" ? "bg-brass-ink/60" : "bg-brass")} />}
       {children}
     </p>
   );
 }
 
 interface SectionHeadingProps {
+  /** Show the short rule before the eyebrow (default true). */
+  eyebrowRule?: boolean;
   eyebrow?: string;
   title: ReactNode;
   intro?: ReactNode;
@@ -29,7 +31,7 @@ interface SectionHeadingProps {
 }
 
 /** Consistent heading block for every section. */
-export function SectionHeading({ eyebrow, title, intro, tone = "dark", align = "start", as: Tag = "h2", className, action }: SectionHeadingProps) {
+export function SectionHeading({ eyebrow, eyebrowRule = true, title, intro, tone = "dark", align = "start", as: Tag = "h2", className, action }: SectionHeadingProps) {
   return (
     <div
       className={cn(
@@ -40,7 +42,7 @@ export function SectionHeading({ eyebrow, title, intro, tone = "dark", align = "
       )}
     >
       <div className={cn("flex max-w-2xl flex-col gap-5", align === "center" && "items-center")} data-reveal>
-        {eyebrow && <Eyebrow tone={tone}>{eyebrow}</Eyebrow>}
+        {eyebrow && <Eyebrow tone={tone} rule={eyebrowRule}>{eyebrow}</Eyebrow>}
         <Tag className={cn("caps", Tag === "h1" ? "text-h1" : "text-h2", tone === "dark" ? "text-ink" : "text-ivory")}>{title}</Tag>
         {intro && (
           <p className={cn("text-lead max-w-xl", tone === "dark" ? "text-muted" : "text-ivory-muted")}>{intro}</p>

@@ -12,11 +12,13 @@ export function ProcessPromise({ headingId = "process-title" }: { headingId?: st
     <section aria-labelledby={headingId} className="on-dark section-y relative overflow-hidden bg-espresso text-ivory">
       <div className="container-site">
         <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <div className="lg:sticky lg:top-32">
+          {/* The heading sits centred against the steps, so space is shared evenly above and below it. */}
+          <div className="lg:col-span-5 lg:self-center">
+            <div>
               <SectionHeading
                 tone="light"
                 eyebrow="How we work"
+                eyebrowRule={false}
                 title={<span id={headingId}>Pay only as your home takes shape</span>}
                 intro="Every stage is tied to something you can see. No advance until you've approved your 3D designs and materials are on site."
               />

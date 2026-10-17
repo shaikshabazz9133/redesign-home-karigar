@@ -38,7 +38,7 @@ export default function ServicesPage() {
         eyebrow="What we do"
         title="Every surface, every fitting — designed as one home"
         intro="A single studio for ceilings, kitchens, wardrobes and every built-in, so materials, proportions and light stay consistent from the foyer to the bedroom."
-        aside={<ButtonLink href="/contact">Discuss your home</ButtonLink>}
+        aside={<ButtonLink href="/contact" variant="timber" icon="arrowUpRight">Discuss your home</ButtonLink>}
       />
 
       <section aria-label="Service details" className="container-site section-y flex flex-col gap-24 md:gap-32">

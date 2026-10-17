@@ -30,7 +30,7 @@ export default function HomePage() {
       <DesignJournal />
       <CommunityMarquee />
       <ProcessLine />
-      <HowWeWork />
+      {/* <HowWeWork /> */}
       <SeamlessExperience />
       <Testimonials />
       <FaqSection />

@@ -20,10 +20,10 @@ export const services: Service[] = [
       "Lighting planned with furniture layout",
     ],
     image: {
-      src: "/images/home/1.png",
-      alt: "Living room with a curved false ceiling, warm cove lighting and a statement chandelier",
-      width: 1536,
-      height: 1024,
+      src: "/images/services/false-ceiling-and-lighting.jpg",
+      alt: "3D design of a living room under a cove-lit false ceiling with a sculptural chandelier and calligraphy wall",
+      width: 2400,
+      height: 1846,
     },
   },
   {
@@ -33,10 +33,10 @@ export const services: Service[] = [
       "Kitchens built on BWP 710 plywood carcasses with soft-close hardware from Hettich, Häfele or Ebco and marble-finish back panels.",
     details: ["BWP 710 plywood carcass", "Hettich · Häfele · Ebco hardware", "Marble-finish back panels"],
     image: {
-      src: "/images/13272/4.jpg",
-      alt: "Modular kitchen with high-gloss shutters and lit glass display cabinets",
-      width: 1500,
-      height: 1125,
+      src: "/images/services/modular-kitchen.jpg",
+      alt: "3D design of an L-shaped modular kitchen with lit glass-fronted uppers, a chimney hood and handle-less lower cabinets",
+      width: 2400,
+      height: 1846,
     },
   },
   {
@@ -46,10 +46,10 @@ export const services: Service[] = [
       "Wardrobes with drawers, hanging space and premium handles — built in Greenply or Century ply with Hettich fittings.",
     details: ["Greenply / Century ply", "Hettich fittings", "Drawers, lofts and hanging space"],
     image: {
-      src: "/images/17242/9.jpeg",
-      alt: "Floor-to-ceiling bedroom wardrobes framing a window seat with built-in storage",
-      width: 1500,
-      height: 1125,
+      src: "/images/services/wardrobes-and-storage.jpg",
+      alt: "3D design of a walk-in wardrobe with lit glass-fronted shutters, open hanging bays and a drawer island",
+      width: 2400,
+      height: 1846,
     },
   },
   {
@@ -59,10 +59,10 @@ export const services: Service[] = [
       "Designer TV units, entrance foyers, pooja units, study and dressing — composed as one curated scope across the home.",
     details: ["Entrance foyer & shoe units", "TV and display walls", "Pooja, study and dressing units"],
     image: {
-      src: "/images/17024/17.jpeg",
-      alt: "TV wall with fluted wood panels, lit display shelving and a glossy white overhead cabinet",
-      width: 1280,
-      height: 960,
+      src: "/images/services/tv-unit-foyer-and-pooja.jpg",
+      alt: "3D design of a TV wall with lit display niches and a textured feature wall in a double-height living room",
+      width: 2400,
+      height: 1846,
     },
   },
 ];
@@ -176,15 +176,17 @@ export const faqs = [
 ];
 
 export const team = [
-  { name: "Ar. Mohammed Zuber", role: "Architect & Founder" },
-  { name: "Mohammed Nadeem", role: "Marketing Head" },
+  { name: "Ar. Mohammed Zuber", role: "Founder & CEO" },
+  { name: "Mohammed Nadeem", role: "CO-Founder & Marketing Head" },
   { name: "ID. Wajeeda Mullani", role: "Senior Interior Designer" },
-  { name: "ID. Shahid Mecci", role: "Interior Designer" },
+  { name: "Zuner", role: "Site Supervision Manager" },
   { name: "ID. Durga Kumari", role: "Interior Designer" },
-  { name: "ID. Apurva Nalabale", role: "Brand Manager" },
-  { name: "Hemanta Manna", role: "General Manager & Sales" },
+  { name: "ID. Apurva Nalabale", role: "Principle Designer & Brand Manager" },
+  { name: "Chetan", role: "Digital Marketing & Execution" },
   { name: "Farhaan Khan", role: "Site Manager & Sales" },
-  { name: "Farhat Banu", role: "Sales Executive" },
+  { name: "Farhat Banu", role: "Senior Sales Executive" },
+  { name: "Syed Adeeba", role: "Sales Executive" },
+
 ];
 
 export interface Tour {
@@ -206,6 +208,17 @@ export const tours: Tour[] = [
   { youtubeId: "x0rHT-EkhB4", title: "Welcome to a Home Karigar home tour", kind: "Home tour" },
   { youtubeId: "yEKpyhu3FIU", title: "When design meets client satisfaction", kind: "Client story" },
   { youtubeId: "9m9qDTgr7Zc", title: "Rental living, elevated — thoughtful design in every corner", kind: "Home tour" },
+];
+
+/** The films shown on the home page's "The Art of Home Making" reel, in this order. */
+export const featuredFilms: Tour[] = [
+  { youtubeId: "x9yu9KIZULc", title: "A 1,629 sq. ft. home at Meridian Park, The Prestige City", kind: "Home tour" },
+  { youtubeId: "y6x07bnYu7k", title: "3BHK Signature Living, The Prestige City", kind: "Home tour" },
+  { youtubeId: "gFIi3_ps-aQ", title: "A 1,600 sq. ft. 3BHK — full home tour, The Prestige City", kind: "Home tour" },
+  { youtubeId: "xFK7xzl3H9A", title: "A 3BHK home at Avalon Park, The Prestige City", kind: "Home tour" },
+  { youtubeId: "cMT1FTAT0H8", title: "An honest client review of a luxury home interior", kind: "Client story" },
+  { youtubeId: "otvulaTX7S4", title: "A real customer review — Meridian Park, The Prestige City", kind: "Client story" },
+  { youtubeId: "yEKpyhu3FIU", title: "When design meets client satisfaction", kind: "Client story" },
 ];
 
 export const tourThumb = (id: string) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
