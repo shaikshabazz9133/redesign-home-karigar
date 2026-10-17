@@ -108,7 +108,7 @@ export function DesignJournal() {
               </p>
 
               {/* Every title takes two lines' room, so the notes beneath line up across the row. */}
-              <h3 className="mt-4 line-clamp-2 min-h-[2lh] font-display text-[clamp(1.35rem,1rem+0.8vw,1.75rem)] leading-[1.15] font-normal tracking-[-0.03em] text-balance text-ink">
+              <h3 className="mt-4 line-clamp-2 min-h-[2lh] whitespace-pre-line font-display text-[clamp(1.35rem,1rem+0.8vw,1.75rem)] leading-[1.15] font-normal tracking-[-0.03em] text-balance text-ink">
                 {a.card?.title ?? a.title}
               </h3>
               <p className="mt-3 line-clamp-3 leading-[1.5] text-muted">{a.excerpt}</p>

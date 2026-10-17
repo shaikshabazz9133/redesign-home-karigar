@@ -95,7 +95,7 @@ export const journal: JournalArticle[] = [
     display: { lines: ["Marble, Quartz", "& Granite:", "Designing the", "Heart of the Home"] },
     gallery: [STONE_IMAGES.trends],
     cover: "left",
-    card: { title: "Marble, Quartz & Granite", focus: { at: "68% 45%", zoom: 1.45 } },
+    card: { title: "Marble, Quartz & Granite\nDesigning the Heart of the Home", focus: { at: "68% 45%", zoom: 1.45 } },
     author: { name: "Mohammad Nadeem", role: "Co-founder & Marketing Head, Home Karigar" },
     dek: "From marble to quartz and granite, a designer’s guide to choosing the right surface for an Indian kitchen.",
     next: { label: "Explore our kitchens", href: "/services#modular-kitchen" },
