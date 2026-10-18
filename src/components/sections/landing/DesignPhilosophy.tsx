@@ -9,7 +9,12 @@ import { deliveryStats } from "@/content/site";
 const STATS = [
   { value: 6, suffix: "+", label: "years of architect-led residential Home Design & Execution Experience." },
   { value: parseInt(deliveryStats.homesDelivered, 10), suffix: "+", label: "Homes Designed, Crafted & Delivered." },
-  { value: 200, suffix: "+", label: "Prestige Specialists Across Multiple Communities." },
+  {
+    value: 200,
+    suffix: "+",
+    label: "Prestige Specialists Across Multiple Communities.",
+    logo: { src: "/images/prestige-logo.png", alt: "Prestige Group", width: 700, height: 859 },
+  },
 ];
 
 /**
@@ -79,9 +84,25 @@ export function DesignPhilosophy() {
               }`}
             >
               <p className="min-w-0 max-w-[13rem] text-[0.9375rem] leading-snug text-ink-soft">{s.label}</p>
-              <p className="shrink-0 font-display text-[clamp(3rem,2rem+2vw,4rem)] leading-[0.8] font-normal tracking-[-0.05em] text-ink">
-                <CountUp to={s.value} suffix={s.suffix} delay={i * 180} duration={s.value < 10 ? 1300 : 2000} align="end" />
-              </p>
+              <div className="flex shrink-0 flex-col gap-4">
+                {/* The communities' own mark, centred over the figure's digits: the row shares the figure's font
+                    size, so its right padding is exactly the width of the "+". */}
+                {s.logo && (
+                  <div className="flex justify-center pr-[0.56em] text-[clamp(3rem,2rem+2vw,4rem)]">
+                    <Image
+                      src={s.logo.src}
+                      alt={s.logo.alt}
+                      width={s.logo.width}
+                      height={s.logo.height}
+                      sizes="6rem"
+                      className="h-auto w-[4.25rem] sm:w-[4.75rem] lg:w-[5.25rem]"
+                    />
+                  </div>
+                )}
+                <p className="font-display text-[clamp(3rem,2rem+2vw,4rem)] leading-[0.8] font-normal tracking-[-0.05em] text-ink">
+                  <CountUp to={s.value} suffix={s.suffix} delay={i * 180} duration={s.value < 10 ? 1300 : 2000} align="end" />
+                </p>
+              </div>
             </div>
           ))}
 

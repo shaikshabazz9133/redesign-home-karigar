@@ -3,6 +3,7 @@
 // import { SectionHeading } from "@/components/ui/Typography";
 // import { ButtonLink } from "@/components/ui/Button";
 // import { cn } from "@/lib/utils";
+import { START, STAGES, sentence, type StageData, type StageIcon } from "@/content/journey";
 
 // /** The journey, stage by stage: a short name and what happens within it. */
 // const START = { title: "Begin", points: ["A meeting at your home or our studio", "Your floor plan and brief", "How you live, and what you love"] };
@@ -250,87 +251,6 @@ import { SectionHeading } from "@/components/ui/Typography";
 import { ButtonLink } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
-type StageIcon =
-  | "begin"
-  | "concept"
-  | "design"
-  // | "drawings"
-  | "materials"
-  | "execution"
-  | "handover";
-
-type StageData = {
-  title: string;
-  icon: StageIcon;
-  points: string[];
-};
-
-const START: StageData = {
-  title: "Begin",
-  icon: "begin",
-  points: [
-    "A meeting at your home or our studio",
-    "Your floor plan and brief",
-    "How you live, and what you love",
-  ],
-};
-
-const STAGES: StageData[] = [
-  {
-    title: "Concept",
-    icon: "concept",
-    points: [
-      "Site measurements",
-      "Space planning and layouts",
-      "Moodboards and material palettes",
-      "The design concept",
-    ],
-  },
-  {
-    title: "3D design",
-    icon: "design",
-    points: [
-      "Photo-real 3D views, room by room",
-      "Refined with you until every detail is right",
-    ],
-  },
-  // {
-  //   title: "Drawings",
-  //   icon: "drawings",
-  //   points: [
-  //     "Working drawings for every room",
-  //     "Electrical, lighting and ceiling plans",
-  //   ],
-  // },
-  {
-    title: "Materials",
-    icon: "materials",
-    points: [
-      "Branded plywood and hardware",
-      "Finishes chosen with you from real samples",
-      "Each item QR-verified on your site",
-    ],
-  },
-  {
-    title: "Execution",
-    icon: "execution",
-    points: [
-      "Karigars at work on site",
-      "Design supervision throughout",
-      "Quality checks at every stage",
-    ],
-  },
-  {
-    title: "Handover",
-    icon: "handover",
-    points: [
-      "A final walkthrough together",
-      "Every room checked and finished, detail by detail",
-      "The keys to your new home",
-    ],
-  },
-];
-
 const ACCENT = "#9F8C74";
 
 const STAGE_ICONS: Record<StageIcon, React.ReactNode> = {
@@ -418,33 +338,55 @@ function StageIconView({ name }: { name: StageIcon }) {
 }
 
 /* ── The journey line ──────────────────────────────────────────────────────
-   The journey drawn as one open, flowing line: no frame and no floor plan, just a dashed walnut wave on a
-   faint dot grid that fades out towards the edges. The line draws itself as the section comes into view,
-   dropping a numbered pin at each stage, with the stage's notes always set beside it — above the crests,
-   below the troughs. Once drawn, the stages are highlighted in turn until the visitor points at one.
-   Coordinates are on a 1200 × 520 plate. */
-const PLATE = { w: 1200, h: 520 };
+   The journey as one continuous walnut wave: it rises and falls across the top through 01–03, sweeps
+   round a wide curve on the right, and waves back along the bottom through 04–06, so the whole path reads
+   as a single unbroken line. Each stage sits on the line as a white disc carrying its icon, with its
+   notes set in the open space beside the wave and a large faded number behind them. The line draws itself
+   as the section comes into view; once drawn, the stages are highlighted in turn until the visitor points
+   at one. Coordinates are on a 1200 × 800 plate. */
+const PLATE = { w: 1200, h: 800 };
 const ALL = [START, ...STAGES];
 
-/** The pins, alternating low and high along the wave. */
-const LOW = 340;
-const HIGH = 180;
-const PINS = ALL.map((_, i) => ({ x: 130 + i * 188, y: i % 2 ? HIGH : LOW }));
+/** One row's wave, by column: a low first stage, a crest, a dip, then a higher third stage. */
+const ROW = { c1: { x: 170, y: 235 }, c2: { x: 520, y: 70 }, dip: { x: 740, y: 240 }, c3: { x: 940, y: 120 } };
+/** How far the bottom row sits below the top one, and how far the turn swings out past the last column. */
+const ROW_GAP = 420;
+const TURN = 290;
+const low = (p: { x: number; y: number }) => ({ x: p.x, y: p.y + ROW_GAP });
 
-/** A smooth wave through every pin (level at each pin), led in from the left edge and out to the right. */
+/** The top row left to right, then the bottom row right to left, so the line never breaks. */
+const PINS = [ROW.c1, ROW.c2, ROW.c3, low(ROW.c3), low(ROW.c2), low(ROW.c1)];
+/** Which side of the line each stage's notes sit: above the low stages, below the high ones. */
+const NOTES_SIDE: ("above" | "below")[] = ["above", "below", "below", "below", "below", "above"];
+
+type Pt = { x: number; y: number };
+/** A smooth wave from a to b, level at both ends, so crests and dips are soft and round. */
+const wave = (a: Pt, b: Pt) => {
+  const mid = (b.x - a.x) / 2;
+  return `C${a.x + mid} ${a.y} ${b.x - mid} ${b.y} ${b.x} ${b.y}`;
+};
+const ENTER = { x: -10, y: 200 };
+
 const PATH_D = [
-  `M0 ${PINS[0].y} H${PINS[0].x}`,
-  ...PINS.slice(1).map((p, i) => {
-    const a = PINS[i];
-    const mid = (p.x - a.x) / 2;
-    return `C${a.x + mid} ${a.y} ${p.x - mid} ${p.y} ${p.x} ${p.y}`;
-  }),
-  `H${PLATE.w}`,
+  `M${ENTER.x} ${ENTER.y}`,
+  wave(ENTER, ROW.c1),
+  wave(ROW.c1, ROW.c2),
+  wave(ROW.c2, ROW.dip),
+  wave(ROW.dip, ROW.c3),
+  // the sweep round the right: out level from 03, round, and back in level to 04
+  `C${ROW.c3.x + TURN} ${ROW.c3.y} ${ROW.c3.x + TURN} ${ROW.c3.y + ROW_GAP} ${ROW.c3.x} ${ROW.c3.y + ROW_GAP}`,
+  wave(low(ROW.c3), low(ROW.dip)),
+  wave(low(ROW.dip), low(ROW.c2)),
+  wave(low(ROW.c2), low(ROW.c1)),
+  wave(low(ROW.c1), low(ENTER)),
 ].join(" ");
 
-/** How far along the path (0–1) each pin sits, so it appears as the line reaches it. */
-const PIN_AT = [0.086, 0.252, 0.417, 0.583, 0.748, 0.914];
-const DRAW_S = 2.6;
+/** Roughly how far along the path (0–1) each pin sits; measured from the drawn path once mounted. */
+const PIN_AT_GUESS = [0.08, 0.2, 0.33, 0.62, 0.75, 0.9];
+const DRAW_S = 3.4;
+
+/** Where each row's notes start, so notes on the same side of a row share one top edge. */
+const NOTES_TOP = { above: 15, below: 215 };
 
 /** A soft white disc carrying the stage's icon, lifted on a shadow with a warm glow beneath. */
 function Badge({ icon, className }: { icon: StageIcon; className?: string }) {
@@ -475,13 +417,6 @@ function BigNumber({ n, className, style }: { n: number; className?: string; sty
   );
 }
 
-/** A stage's points read as one sentence: "Site measurements, space planning and layouts … and the design concept." */
-function sentence(points: string[]) {
-  const parts = points.map((p, i) => (i === 0 || /^[A-Z0-9]{2}/.test(p) ? p : p.charAt(0).toLowerCase() + p.slice(1)));
-  const body = parts.length > 1 ? `${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}` : parts[0];
-  return `${body}.`;
-}
-
 function Notes({ stage }: { stage: StageData }) {
   return (
     <>
@@ -491,10 +426,12 @@ function Notes({ stage }: { stage: StageData }) {
   );
 }
 
-/** The journey line, its pins and notes. */
+/** The journey line, its hexagons and notes. */
 function Blueprint() {
   const ref = useRef<HTMLDivElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
   const [drawn, setDrawn] = useState(false);
+  const [pinAt, setPinAt] = useState(PIN_AT_GUESS);
   const [active, setActive] = useState<number | null>(null);
   const [touched, setTouched] = useState(false);
 
@@ -502,9 +439,28 @@ function Blueprint() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => e.isIntersecting && (setDrawn(true), io.disconnect()), { threshold: 0.35 });
+    const io = new IntersectionObserver(([e]) => e.isIntersecting && (setDrawn(true), io.disconnect()), { threshold: 0.3 });
     io.observe(el);
     return () => io.disconnect();
+  }, []);
+
+  // Find how far along the line each stage sits, so each one appears just as the line reaches it.
+  useEffect(() => {
+    const p = pathRef.current;
+    if (!p) return;
+    const length = p.getTotalLength();
+    const at = PINS.map((pin) => {
+      let best = 0;
+      let bestD = Infinity;
+      for (let s = 0; s <= length; s += 4) {
+        const q = p.getPointAtLength(s);
+        const d = (q.x - pin.x) ** 2 + (q.y - pin.y) ** 2;
+        if (d < bestD) [bestD, best] = [d, s];
+      }
+      return best / length;
+    });
+    const frame = requestAnimationFrame(() => setPinAt(at));
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   // Once drawn, the stages are highlighted in turn until the visitor points at one.
@@ -525,73 +481,95 @@ function Blueprint() {
   };
 
   return (
-    <div ref={ref} className={cn("hk-bp relative mx-auto mt-20 hidden max-w-[72rem] xl:block", drawn && "is-drawn")} style={{ aspectRatio: `${PLATE.w} / ${PLATE.h}` }}>
-      {/* A faint dot grid, fading out towards the edges so the drawing has no frame. */}
-      <div
-        aria-hidden
-        className="hk-bp-plan absolute inset-0 bg-[radial-gradient(rgb(110_80_56/0.2)_1px,transparent_1.5px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_55%_at_center,#000_35%,transparent_100%)]"
-      />
-
+    <div
+      ref={ref}
+      className={cn("hk-bp relative mx-auto mt-14 hidden max-w-[62rem] xl:block", drawn && "is-drawn")}
+      style={{ aspectRatio: `${PLATE.w} / ${PLATE.h}`, "--draw": `${DRAW_S}s` } as React.CSSProperties}
+    >
       <svg aria-hidden viewBox={`0 0 ${PLATE.w} ${PLATE.h}`} className="absolute inset-0 size-full overflow-visible" fill="none">
         <defs>
           <mask id="hk-bp-walk" maskUnits="userSpaceOnUse">
-            <path d={PATH_D} pathLength={1} stroke="#fff" strokeWidth={12} className="hk-bp-reveal" />
+            <path d={PATH_D} pathLength={1} stroke="#fff" strokeWidth={60} className="hk-bp-reveal" />
           </mask>
-          {/* the line fades in from the left edge and out at the right */}
+          {/* the line fades in at the left where it starts, and out again where it ends */}
           <linearGradient id="hk-bp-fade" gradientUnits="userSpaceOnUse" x1={0} x2={PLATE.w} y1={0} y2={0}>
             <stop offset="0" stopColor="#6e5038" stopOpacity={0} />
-            <stop offset="0.09" stopColor="#6e5038" />
-            <stop offset="0.91" stopColor="#6e5038" />
-            <stop offset="1" stopColor="#6e5038" stopOpacity={0} />
+            <stop offset="0.1" stopColor="#6e5038" />
+            <stop offset="1" stopColor="#6e5038" />
           </linearGradient>
+          <linearGradient id="hk-bp-shade" gradientUnits="userSpaceOnUse" x1={0} x2={PLATE.w} y1={0} y2={0}>
+            <stop offset="0" stopColor="#33200d" stopOpacity={0} />
+            <stop offset="0.12" stopColor="#33200d" stopOpacity={0.12} />
+            <stop offset="1" stopColor="#33200d" stopOpacity={0.12} />
+          </linearGradient>
+          <filter id="hk-bp-soft" x="-10%" y="-10%" width="120%" height="140%">
+            <feGaussianBlur stdDeviation="7" />
+          </filter>
         </defs>
-        {/* a soft solid track beneath, then the dashed walnut walk, revealed as if drawn */}
-        <path className="hk-bp-plan" d={PATH_D} stroke="url(#hk-bp-fade)" strokeOpacity={0.14} strokeWidth={8} strokeLinecap="round" />
-        <path d={PATH_D} mask="url(#hk-bp-walk)" stroke="url(#hk-bp-fade)" strokeWidth={2.4} strokeDasharray="10 9" strokeLinecap="round" />
+        <g mask="url(#hk-bp-walk)">
+          {/* a soft shadow cast beneath the line, then the walnut line itself */}
+          <path d={PATH_D} transform="translate(0 16)" stroke="url(#hk-bp-shade)" strokeWidth={12} strokeLinecap="round" filter="url(#hk-bp-soft)" />
+          <path ref={pathRef} d={PATH_D} stroke="url(#hk-bp-fade)" strokeWidth={2.6} strokeLinecap="round" />
+        </g>
       </svg>
 
       <ol className="absolute inset-0" onPointerLeave={() => touched && setActive(null)}>
         {PINS.map((pin, i) => {
           const stage = ALL[i];
           const on = active === i;
-          const high = pin.y === HIGH;
+          const delay = { "--d": `${(pinAt[i] * DRAW_S).toFixed(2)}s` } as React.CSSProperties;
+          // Notes in the first column sit at the left edge; the others start a little left of their disc,
+          // clear of the wave on either side. Notes on the same side of a row share one top edge.
+          const notesX = pin.x < 300 ? 40 : pin.x < 700 ? pin.x - 150 : pin.x - 110;
+          const notesY = NOTES_TOP[NOTES_SIDE[i]] + (i < 3 ? 0 : ROW_GAP);
           return (
-            <li
-              key={stage.title}
-              className={cn("hk-bp-pin absolute", on ? "z-30" : "z-10")}
-              style={{ left: `${(pin.x / PLATE.w) * 100}%`, top: `${(pin.y / PLATE.h) * 100}%`, "--d": `${(PIN_AT[i] * DRAW_S).toFixed(2)}s` } as React.CSSProperties}
-            >
-              <button
-                type="button"
-                onPointerEnter={() => take(i)}
-                onFocus={() => take(i)}
-                onClick={() => take(on ? null : i)}
-                aria-describedby={`bp-stage-${i}`}
-                className={cn(
-                  "absolute z-10 grid size-11 -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-[linear-gradient(135deg,#6e5038,#583c26)] font-display text-[0.875rem] text-white tabular-nums shadow-[0_0_0_5px_#fff,0_10px_24px_-8px_rgb(88_60_38/0.6)] transition-transform duration-500 ease-out-expo outline-none hover:scale-110 focus-visible:scale-110",
-                  on && "scale-110",
-                )}
-              >
-                {String(i + 1).padStart(2, "0")}
-                <span className="sr-only">{stage.title}</span>
-                {/* a soft pulse while this stage is highlighted */}
-                <span aria-hidden className={cn("absolute inset-0 rounded-full border-2 border-[#6e5038]", on ? "animate-ping opacity-40" : "opacity-0")} />
-              </button>
-
-              {/* The stage's notes, always shown: above the crests, below the troughs. */}
-              <div
-                id={`bp-stage-${i}`}
-                className={cn("absolute left-0 w-[15rem] -translate-x-1/2 text-center", high ? "bottom-10 h-[11rem]" : "top-10")}
-              >
-                <div className="flex flex-col items-center gap-2">
-                  <span className={cn("transition-opacity duration-500", on ? "opacity-100" : "opacity-60")}>
+            <li key={stage.title} className={cn("pointer-events-none absolute inset-0", on ? "z-30" : "z-10")}>
+              <span className="hk-bp-pin absolute" style={{ ...delay, left: `${(pin.x / PLATE.w) * 100}%`, top: `${(pin.y / PLATE.h) * 100}%` }}>
+                <button
+                  type="button"
+                  onPointerEnter={() => take(i)}
+                  onFocus={() => take(i)}
+                  onClick={() => take(on ? null : i)}
+                  aria-describedby={`bp-stage-${i}`}
+                  className={cn(
+                    "pointer-events-auto absolute grid size-[3.75rem] -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white outline-none",
+                    "shadow-[0_0_0_6px_rgb(255_255_255/0.9),0_16px_30px_-10px_rgb(51_32_13/0.28),inset_0_0_0_1px_rgb(110_80_56/0.14)]",
+                    "transition-[scale,box-shadow] duration-500 ease-out-expo hover:scale-110 focus-visible:scale-110",
+                    on && "scale-110 shadow-[0_0_0_6px_rgb(255_255_255/0.9),0_18px_34px_-10px_rgb(51_32_13/0.34),inset_0_0_0_1.5px_rgb(110_80_56/0.55)]",
+                  )}
+                >
+                  <span className={cn("transition-opacity duration-500 [&_svg]:size-7", on ? "opacity-100" : "opacity-75")}>
                     <StageIconView name={stage.icon} />
                   </span>
-                  <h3 className={cn("font-display text-[1.125rem] leading-tight font-semibold tracking-[-0.02em] transition-colors duration-500", on ? "text-[#6e5038]" : "text-ink")}>
+                  <span className="sr-only">
+                    {String(i + 1).padStart(2, "0")} {stage.title}
+                  </span>
+                </button>
+              </span>
+
+              {/* The stage's notes, in the open space beside the wave, with a large faded number behind. */}
+              <div
+                id={`bp-stage-${i}`}
+                onPointerEnter={() => take(i)}
+                className="hk-bp-note pointer-events-auto absolute w-56"
+                style={{
+                  ...delay,
+                  left: `${(notesX / PLATE.w) * 100}%`,
+                  top: `${(notesY / PLATE.h) * 100}%`,
+                }}
+              >
+                <BigNumber n={i + 1} className="absolute -top-6 right-2 text-[6.5rem]" />
+                <div className="relative">
+                  <h3
+                    className={cn(
+                      "font-display text-[1.375rem] leading-tight font-semibold tracking-[-0.035em] transition-colors duration-500",
+                      on ? "text-oxblood" : "text-ink",
+                    )}
+                  >
                     {stage.title}
                   </h3>
+                  <p className="mt-2 text-[0.875rem] leading-[1.65] text-muted">{sentence(stage.points)}</p>
                 </div>
-                <p className="mt-1.5 text-[0.875rem] leading-[1.55] text-muted">{sentence(stage.points)}</p>
               </div>
             </li>
           );

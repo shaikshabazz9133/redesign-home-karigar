@@ -872,10 +872,12 @@ html.lenis, html.lenis body { height: auto; }
 .hk-bp .hk-bp-reveal { stroke-dasharray: 1 1; stroke-dashoffset: 1; }
 .hk-bp .hk-bp-pin { opacity: 0; scale: 0.4; transition: opacity 0.5s var(--ease-out-expo), scale 0.7s var(--ease-out-expo); }
 .hk-bp.is-drawn .hk-bp-plan { opacity: 1; }
-.hk-bp.is-drawn .hk-bp-reveal { animation: hk-bp-walk 2.6s cubic-bezier(0.45, 0, 0.3, 1) 0.4s forwards; }
+.hk-bp .hk-bp-note { opacity: 0; transition: opacity 0.8s var(--ease-out-expo), stroke-opacity 0.5s; }
+.hk-bp.is-drawn .hk-bp-reveal { animation: hk-bp-walk var(--draw, 2.6s) linear 0.4s forwards; }
 .hk-bp.is-drawn .hk-bp-pin { opacity: 1; scale: 1; transition-delay: calc(0.4s + var(--d)); }
+.hk-bp.is-drawn .hk-bp-note { opacity: 1; transition-delay: calc(0.55s + var(--d)), 0s; }
 @keyframes hk-bp-walk { to { stroke-dashoffset: 0; } }
 @media (prefers-reduced-motion: reduce) {
-  .hk-bp .hk-bp-plan, .hk-bp .hk-bp-pin { opacity: 1; scale: 1; transition: none; }
+  .hk-bp .hk-bp-plan, .hk-bp .hk-bp-pin, .hk-bp .hk-bp-note { opacity: 1; scale: 1; transition: none; }
   .hk-bp .hk-bp-reveal { stroke-dashoffset: 0; }
 }
