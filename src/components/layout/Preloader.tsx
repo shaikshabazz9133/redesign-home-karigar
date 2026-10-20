@@ -12,7 +12,7 @@ export const INTRO_STYLES = ["blueprint", "arch", "doors", "monolith"] as const;
 type IntroStyle = (typeof INTRO_STYLES)[number];
 
 /** How long each intro's entrance runs before it may lift (ms since navigation start). */
-const MIN_END: Record<IntroStyle, number> = { blueprint: 7400, arch: 5000, doors: 4600, monolith: 4700 };
+const MIN_END: Record<IntroStyle, number> = { blueprint: 7000, arch: 5000, doors: 4600, monolith: 4700 };
 
 type Vars = React.CSSProperties & Record<`--${string}`, number>;
 
@@ -22,8 +22,9 @@ type Vars = React.CSSProperties & Record<`--${string}`, number>;
  * layout (`?intro=arch`, `?intro=doors`, `?intro=monolith`; otherwise the blueprint).
  *
  *   blueprint — the grid: construction guides are ruled around the mark, each stone
- *              is traced and its colour spreads in to meet the line; the drawing lifts,
- *              the name unfolds with a gold glint, and two panels slide up onto the page.
+ *              is traced and its colour spreads in to meet the line; the guides run on to
+ *              the screen's edges and a light grid is ruled over the page; the name
+ *              unfolds; then the mark opens onto the landing page.
  *   arch     — "entering the home": a brass arch draws itself and warm light
  *              glows inside it; the stone mark is sketched there in brass and
  *              its texture appears within the line; on exit the doorway grows
@@ -56,6 +57,15 @@ export function Preloader() {
       if (document.readyState === "complete") resolve();
       else window.addEventListener("load", () => resolve(), { once: true });
     });
+    // Time since the intro's CSS timeline actually began, which can trail navigation start when the
+    // first paint is slow, so the drawing is never cut short.
+    const elapsed = () => {
+      const starts = el
+        .getAnimations?.({ subtree: true })
+        .map((a) => a.startTime)
+        .filter((t): t is number => typeof t === "number");
+      return performance.now() - (starts?.length ? Math.min(...starts) : 0);
+    };
     const cap = new Promise<void>((resolve) => timers.push(window.setTimeout(resolve, 7000)));
 
     Promise.race([Promise.all([loaded, document.fonts?.ready]), cap]).then(() => {
@@ -66,7 +76,7 @@ export function Preloader() {
           root.dataset.intro = "done"; // the hero's entrance keys off this
           timers.push(window.setTimeout(() => (root.style.overflow = ""), reduced ? 0 : 900));
           timers.push(window.setTimeout(() => (el.hidden = true), reduced ? 50 : 2100));
-        }, Math.max(0, minEnd - performance.now())),
+        }, Math.max(0, minEnd - elapsed())),
       );
     });
 
@@ -139,22 +149,50 @@ const GUIDES = [
 ];
 
 /**
+ * The grid, like an architect's sheet: major squares one mark-width across, registered to the mark — vertical
+ * lines on its left and right edges, horizontal lines on its baseline — each halved by a fainter minor line,
+ * so every line is the same distance from the next. Each entry is a line's offset in half-cells (from the
+ * screen's centre across, from the baseline down), whether it is a major line, and its ring outward from the
+ * mark, which sets when it is drawn. The mark's own edges and baseline (ring 0) are ruled first.
+ */
+const GRID_X = Array.from({ length: 49 }, (_, i) => i - 24).map((j) => ({ at: j, major: j % 2 !== 0, ring: Math.max(0, Math.abs(j) - 1) }));
+const GRID_Y = Array.from({ length: 31 }, (_, i) => i - 17).map((j) => ({ at: j, major: j % 2 === 0, ring: Math.abs(j) }));
+
+/** A grid line's classes: its axis, major or minor, and whether it is one of the mark's own edges. */
+const lineClass = (axis: "x" | "y", major: boolean, ring: number) =>
+  `hk-gr-gl hk-gr-gl-${axis} ${major ? "hk-gr-gl-major" : ""} ${major && ring === 0 ? "hk-gr-gl-edge" : ""}`;
+
+/**
  * The grid intro: construction guides are ruled around the mark — a baseline, plumb and datum lines,
  * compass arcs — each stone's outline is traced in brass, then its colour spreads in from its lower edge
- * until it meets the line. The drawing lifts away, light crosses the finished mark, the name unfolds from
- * its centre with a gold glint over a rule and a diamond, and two panels (ivory over espresso) slide up.
+ * until it meets the line. Its edges and baseline then run on to the edges of the screen, and a fine, light
+ * grid of equal squares registered to them is ruled outward until it covers the page, each line
+ * drawn in brass that cools to grey, and brass points ripple across its crossings, while the sketch
+ * clears and the name unfolds beneath. On exit the mark opens: a soft aperture grows from its centre and
+ * the landing page appears through it as the grid drifts outward and dissolves.
  */
 function BlueprintIntro() {
   return (
     <div aria-hidden className="hk-intro hk-intro-blueprint absolute inset-0">
-      <div className="hk-gr-panel-back absolute inset-0 bg-espresso" />
-      <div className="hk-gr-panel absolute inset-0 grid place-items-center overflow-hidden bg-ivory">
+      <div className="hk-gr-panel absolute inset-0 grid place-items-center overflow-hidden bg-ivory [--hk-mh:clamp(9rem,22vw,12rem)]">
         <div className="hk-gr-glow absolute inset-0" />
 
-        <div className="hk-pre-content relative flex flex-col items-center px-4 text-center">
+        {/* The full-screen grid, centred on the mark; each line is drawn outward from the centre. */}
+        <div className="hk-gr-grid pointer-events-none absolute inset-0">
+          {GRID_X.map(({ at, major, ring }) => (
+            <span key={`x${at}`} className={lineClass("x", major, ring)} style={{ "--k": at, "--d": ring } as Vars} />
+          ))}
+          {GRID_Y.map(({ at, major, ring }) => (
+            <span key={`y${at}`} className={lineClass("y", major, ring)} style={{ "--k": at, "--d": ring } as Vars} />
+          ))}
+          {/* Brass points on the major crossings, rippling out from the mark once the sheet is ruled. */}
+          <span className="hk-gr-dots absolute" />
+        </div>
+
+        <div className="hk-pre-content relative flex flex-col items-center text-center">
           <div className="relative">
             <span className="hk-gr-shadow absolute -bottom-2 left-1/2 h-3 w-[115%] -translate-x-1/2 rounded-[50%] bg-umber/20 blur-md" />
-            <LogoMark size="lg" preload className="h-[clamp(9rem,22vw,12rem)]" tallClassName="hk-gr-tall" smallClassName="hk-gr-small">
+            <LogoMark size="lg" preload className="h-[var(--hk-mh)]" tallClassName="hk-gr-tall" smallClassName="hk-gr-small">
               <svg viewBox={STONE_VIEWBOX} className="hk-gr-plan pointer-events-none absolute inset-0 size-full overflow-visible" fill="none">
                 {GUIDES.map((d, i) => (
                   <path key={d} d={d} pathLength={1} className="hk-gr-guide" style={{ "--i": i } as Vars} />
@@ -166,13 +204,16 @@ function BlueprintIntro() {
             </LogoMark>
           </div>
 
-          <div className="mt-9">
+          {/* Hung below the mark so the mark itself sits at the centre of the screen and of the grid. */}
+          <div className="absolute top-full left-1/2 mt-9 flex -translate-x-1/2 flex-col items-center">
+            {/* A soft pool of paper behind the name, so the grid never runs through the letters. */}
+            <span className="hk-gr-halo absolute -inset-x-20 -inset-y-12 bg-[radial-gradient(closest-side,var(--color-ivory)_35%,rgb(255_255_255/0.6)_65%,transparent)]" />
             <Wordmark letterClass="hk-gr-letter" />
+            <span className="relative mt-4 block w-[min(17rem,62vw)]">
+              <span className="hk-gr-rule block h-px bg-gradient-to-r from-transparent via-brass to-transparent" />
+              <span className="hk-gr-gem absolute top-1/2 left-1/2 -mt-[3px] -ml-[3px] size-[6px] rotate-45 bg-brass" />
+            </span>
           </div>
-          <span className="relative mt-4 block w-[min(17rem,62vw)]">
-            <span className="hk-gr-rule block h-px bg-gradient-to-r from-transparent via-brass to-transparent" />
-            <span className="hk-gr-gem absolute top-1/2 left-1/2 -mt-[3px] -ml-[3px] size-[6px] rotate-45 bg-brass" />
-          </span>
         </div>
       </div>
     </div>

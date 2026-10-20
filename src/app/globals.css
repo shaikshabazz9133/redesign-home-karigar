@@ -453,10 +453,15 @@ html[data-intro-style="monolith"] #hk-preloader .hk-intro-monolith { display: fl
 
 /* Grid (the "blueprint" style).
    0.1s  construction guides are ruled around the mark — baseline, plumb and datum lines, compass arcs
-   0.9s  each stone's outline is traced in brass
-   2.6s  colour spreads into each stone from its lower edge until it meets the line; a shadow settles
-   5.0s  the drawing lifts; light crosses the mark; the name unfolds from its centre, rule and diamond seat
-   exit  the content lifts; the ivory panel, then the espresso one behind it, slide up */
+   0.7s  each stone's outline is traced in brass
+   2.0s  colour spreads into each stone from its lower edge until it meets the line; a shadow settles
+   3.4s  the mark's edges and baseline run on to the edges of the screen
+   3.9s  a fine, light grid of equal squares is ruled outward from the mark until it covers the page,
+         each line drawn in brass that cools to grey; brass points then ripple across its crossings;
+         the construction sketch clears
+   4.6s  light crosses the mark; the name unfolds from its centre, rule and diamond seat
+   exit  the mark swells and dissolves while an aperture opens from its centre onto the landing page;
+         the grid drifts outward and fades */
 #hk-preloader .hk-gr-glow { animation: hki-fade-in 1.6s var(--ease-premium) backwards; }
 #hk-preloader :is(.hk-gr-guide, .hk-gr-outline) {
   vector-effect: non-scaling-stroke;
@@ -465,14 +470,14 @@ html[data-intro-style="monolith"] #hk-preloader .hk-intro-monolith { display: fl
   stroke-linejoin: round;
 }
 #hk-preloader .hk-gr-guide {
-  stroke: rgb(143 119 99 / 0.45);
+  stroke: rgb(143 119 99 / 0.4);
   stroke-width: 1;
-  animation: hki-draw 1.4s var(--ease-in-out-soft) calc(0.1s + var(--i) * 90ms) both;
+  animation: hki-draw 1.3s var(--ease-in-out-soft) calc(0.1s + var(--i) * 80ms) both;
 }
 #hk-preloader .hk-gr-outline {
   stroke: var(--color-brass-ink);
   stroke-width: 1.4;
-  animation: hki-draw 1.8s var(--ease-in-out-soft) calc(0.9s + var(--i) * 0.3s) both;
+  animation: hki-draw 1.6s var(--ease-in-out-soft) calc(0.7s + var(--i) * 0.3s) both;
 }
 /* A feathered radial mask whose radius grows from the stone's lower edge; it rests fully open. */
 @property --hk-gr-r { syntax: "<percentage>"; inherits: false; initial-value: 130%; }
@@ -480,38 +485,125 @@ html[data-intro-style="monolith"] #hk-preloader .hk-intro-monolith { display: fl
   -webkit-mask: radial-gradient(circle at var(--cx) var(--cy), #000 var(--hk-gr-r), transparent calc(var(--hk-gr-r) + 22%));
   mask: radial-gradient(circle at var(--cx) var(--cy), #000 var(--hk-gr-r), transparent calc(var(--hk-gr-r) + 22%));
 }
-#hk-preloader .hk-gr-tall { --cx: 2%; --cy: 81%; animation: hki-gr-bloom 2.4s cubic-bezier(0.33, 0, 0.2, 1) 2.6s backwards; }
-#hk-preloader .hk-gr-small { --cx: 100%; --cy: 76%; animation: hki-gr-bloom 2.4s cubic-bezier(0.33, 0, 0.2, 1) 2.9s backwards; }
-#hk-preloader .hk-gr-shadow { animation: hki-gr-shadow 1.8s var(--ease-out-expo) 2.7s backwards; }
-#hk-preloader .hk-gr-plan { animation: hki-gr-plan-out 1s var(--ease-in-out-soft) 5s both; }
-#hk-preloader .hk-intro-blueprint .hk-sheen { animation: hki-sheen 1.6s var(--ease-in-out-soft) 5.4s backwards; }
+#hk-preloader .hk-gr-tall { --cx: 2%; --cy: 81%; animation: hki-gr-bloom 2.1s cubic-bezier(0.33, 0, 0.2, 1) 2s backwards; }
+#hk-preloader .hk-gr-small { --cx: 100%; --cy: 76%; animation: hki-gr-bloom 2.1s cubic-bezier(0.33, 0, 0.2, 1) 2.25s backwards; }
+#hk-preloader .hk-gr-shadow { animation: hki-gr-shadow 1.8s var(--ease-out-expo) 2.1s backwards; }
+/* As the grid takes over, the construction sketch clears so only the even grid remains. */
+#hk-preloader .hk-gr-plan { animation: hki-gr-plan-clear 1.4s var(--ease-in-out-soft) 4s both; }
+#hk-preloader .hk-intro-blueprint .hk-sheen { animation: hki-sheen 1.6s var(--ease-in-out-soft) 4.9s backwards; }
+
+/* The grid, like an architect's sheet: major squares one mark-width across, registered to the mark's left
+   and right edges and its baseline, each halved by a fainter minor line, so every line is evenly spaced.
+   Each line sits on a whole pixel so all are crisp hairlines. The mark's own edges and baseline are ruled
+   first, out to the screen's edges; the rest follow ring by ring outward from the mark, each drawn in warm
+   brass that cools to the grid's grey. Then brass points ripple out across the major crossings. */
+#hk-preloader .hk-gr-grid {
+  --cell: calc(var(--hk-mh) * 700 / 858);
+  --unit: calc(var(--cell) / 2);
+}
+#hk-preloader .hk-gr-gl {
+  position: absolute;
+  background: rgb(143 119 99 / 0.08);
+  animation: hki-gr-rule 1.3s cubic-bezier(0.65, 0, 0.2, 1) calc(3.9s + var(--d) * 55ms) backwards;
+}
+#hk-preloader .hk-gr-gl-major { background: rgb(143 119 99 / 0.17); }
+#hk-preloader .hk-gr-gl-edge {
+  animation:
+    hki-gr-rule 1.5s cubic-bezier(0.65, 0, 0.2, 1) 3.4s backwards,
+    hki-gr-guide-pale 1.2s var(--ease-premium) 4.9s backwards;
+}
+#hk-preloader .hk-gr-gl-x {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  left: calc(50% + var(--k) * var(--unit));
+  left: round(calc(50% + var(--k) * var(--unit)), 1px);
+  --s: scaleY(0);
+}
+#hk-preloader .hk-gr-gl-y {
+  left: 0;
+  right: 0;
+  height: 1px;
+  top: calc(50% + var(--hk-mh) / 2 + var(--k) * var(--unit) - 1px);
+  top: round(calc(50% + var(--hk-mh) / 2 + var(--k) * var(--unit) - 1px), 1px);
+  --s: scaleX(0);
+}
+/* One layer of tiled dots, far larger than any screen, placed so a dot lands on every major crossing; a
+   feathered circle centred on the mark grows to reveal them. */
+@property --hk-dr { syntax: "<length>"; inherits: false; initial-value: 0px; }
+#hk-preloader .hk-gr-dots {
+  --o: 150vmax;
+  left: calc(50% - var(--o));
+  top: calc(50% + var(--hk-mh) / 2 - 0.5px - var(--o));
+  width: calc(var(--o) * 2);
+  height: calc(var(--o) * 2);
+  background: radial-gradient(circle, rgb(125 95 51 / 0.5) 0 1.1px, transparent 1.7px);
+  background-size: var(--cell) var(--cell);
+  background-position: calc(var(--o) - var(--cell)) calc(var(--o) - var(--cell) / 2);
+  -webkit-mask: radial-gradient(circle at var(--o) calc(var(--o) - var(--hk-mh) / 2), #000 var(--hk-dr), transparent calc(var(--hk-dr) + 8rem));
+  mask: radial-gradient(circle at var(--o) calc(var(--o) - var(--hk-mh) / 2), #000 var(--hk-dr), transparent calc(var(--hk-dr) + 8rem));
+  animation: hki-gr-dots 2.4s cubic-bezier(0.4, 0, 0.2, 1) 5s both;
+}
+#hk-preloader .hk-gr-halo { animation: hki-fade-in 1s var(--ease-premium) 4.4s backwards; }
 
 /* The name: letters unfold in 3D from the centre outward while the tracking settles; a glint sweeps it. */
-#hk-preloader .hk-intro-blueprint .hk-pre-wordmark { perspective: 700px; animation: hki-gr-tracking 2.2s var(--ease-out-expo) 5.2s backwards; }
+#hk-preloader .hk-intro-blueprint .hk-pre-wordmark { perspective: 700px; animation: hki-gr-tracking 2.2s var(--ease-out-expo) 4.6s backwards; }
 #hk-preloader .hk-gr-letter {
   transform-origin: 50% 100%;
-  animation: hki-gr-unfold 1.5s var(--ease-out-expo) calc(5.2s + var(--d) * 75ms) backwards;
+  animation: hki-gr-unfold 1.5s var(--ease-out-expo) calc(4.6s + var(--d) * 70ms) backwards;
 }
-#hk-preloader .hk-intro-blueprint .hk-pre-shine { animation-delay: 6.5s; }
-#hk-preloader .hk-gr-rule { animation: hki-rule-in 1.4s var(--ease-out-expo) 5.75s backwards; }
-#hk-preloader .hk-gr-gem { animation: hki-gr-gem 0.9s var(--ease-out-expo) 6.2s backwards; }
+#hk-preloader .hk-intro-blueprint .hk-pre-shine { animation-delay: 5.5s; }
+#hk-preloader .hk-gr-rule { animation: hki-rule-in 1.4s var(--ease-out-expo) 5.1s backwards; }
+#hk-preloader .hk-gr-gem { animation: hki-gr-gem 0.9s var(--ease-out-expo) 5.6s backwards; }
 
-/* Longhands, not the shorthand: the CSS minifier rewrites a shorthand without a name to "none". */
-#hk-preloader.is-leaving :is(.hk-gr-panel, .hk-gr-panel-back) {
-  animation-name: hki-gr-panel-up;
-  animation-duration: 1.05s;
-  animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+/* Exit: the mark opens onto the page. Longhands, not the shorthand: the CSS minifier rewrites a
+   shorthand without a name to "none". */
+@property --hk-ap { syntax: "<length>"; inherits: false; initial-value: 0px; }
+#hk-preloader.is-leaving .hk-intro-blueprint .hk-pre-content {
+  animation-name: hki-gr-mark-open;
+  animation-duration: 0.9s;
+  animation-timing-function: cubic-bezier(0.5, 0, 0.2, 1);
   animation-fill-mode: both;
 }
-#hk-preloader.is-leaving .hk-gr-panel { animation-delay: 0.45s; }
-#hk-preloader.is-leaving .hk-gr-panel-back { animation-delay: 0.6s; }
+#hk-preloader.is-leaving .hk-gr-gl { animation: none; }
+#hk-preloader.is-leaving .hk-gr-grid {
+  animation-name: hki-gr-grid-out;
+  animation-duration: 1.5s;
+  animation-timing-function: cubic-bezier(0.6, 0, 0.2, 1);
+  animation-fill-mode: both;
+}
+#hk-preloader.is-leaving .hk-gr-panel {
+  -webkit-mask: radial-gradient(circle at 50% 50%, transparent var(--hk-ap), #000 calc(var(--hk-ap) + 3rem));
+  mask: radial-gradient(circle at 50% 50%, transparent var(--hk-ap), #000 calc(var(--hk-ap) + 3rem));
+  animation-name: hki-gr-aperture;
+  animation-duration: 1.45s;
+  animation-delay: 0.2s;
+  animation-timing-function: cubic-bezier(0.7, 0, 0.25, 1);
+  animation-fill-mode: both;
+}
 
 @keyframes hki-gr-bloom {
   from { --hk-gr-r: -22%; }
   to { --hk-gr-r: 100%; }
 }
 @keyframes hki-gr-shadow { from { opacity: 0; transform: translateX(-50%) scaleX(0.4); } }
-@keyframes hki-gr-plan-out { to { opacity: 0; transform: scale(1.04); } }
+@keyframes hki-gr-plan-clear { to { opacity: 0; } }
+@keyframes hki-gr-guide-pale { from { background: rgb(143 119 99 / 0.45); } }
+@keyframes hki-gr-rule {
+  from { transform: var(--s); opacity: 0; background-color: rgb(194 160 107 / 0.75); }
+  30% { opacity: 1; }
+  55% { background-color: rgb(194 160 107 / 0.55); }
+}
+@keyframes hki-gr-dots {
+  from { --hk-dr: -8rem; }
+  to { --hk-dr: 150vmax; }
+}
+@keyframes hki-gr-mark-open { to { opacity: 0; transform: scale(1.18); filter: blur(6px); } }
+@keyframes hki-gr-grid-out { to { opacity: 0; transform: scale(1.3); } }
+@keyframes hki-gr-aperture {
+  from { --hk-ap: -3rem; }
+  to { --hk-ap: 120vmax; }
+}
 @keyframes hki-gr-tracking { from { letter-spacing: 0.7em; } }
 @keyframes hki-gr-unfold {
   from { opacity: 0; transform: rotateX(-90deg) translateY(0.3em); filter: blur(4px); }
@@ -521,9 +613,8 @@ html[data-intro-style="monolith"] #hk-preloader .hk-intro-monolith { display: fl
   from { opacity: 0; transform: rotate(45deg) scale(0); }
   to { opacity: 1; transform: rotate(45deg) scale(1); }
 }
-@keyframes hki-gr-panel-up { to { transform: translateY(-100%); } }
 /* The progress line and counter run to the grid intro's timeline. */
-html:not([data-intro-style]) #hk-preloader:not(.is-leaving) :is(.hk-pre-progress, .hk-pre-count) { animation-duration: 7.2s; }
+html:not([data-intro-style]) #hk-preloader:not(.is-leaving) :is(.hk-pre-progress, .hk-pre-count) { animation-duration: 6.8s; }
 
 /* Doors: mouldings and pulls settle onto two closed doors carrying the lockup across their seam;
    warm light glows through the gap; then both swing open, inward, into the home. */

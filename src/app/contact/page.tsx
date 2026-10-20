@@ -40,22 +40,6 @@ export default function ContactPage() {
               carries no obligation.
             </p>
 
-            <a
-              href={whatsappLink("Hello Home Karigar, I'd like to discuss interiors for my home.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group mt-10 flex items-center gap-4 rounded-md border border-line bg-paper p-5 transition-[border-color,box-shadow] duration-300 hover:border-line-strong hover:shadow-soft animate-rise [animation-delay:240ms]"
-            >
-              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-success/10 text-success">
-                <BrandIcon name="WhatsApp" size={22} />
-              </span>
-              <span className="flex-1">
-                <span className="block font-medium text-ink">Prefer WhatsApp?</span>
-                <span className="block text-sm text-muted">Message the studio directly — usually the fastest reply.</span>
-              </span>
-              <Icon name="arrowUpRight" size={18} className="text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </a>
-
             <dl className="mt-10 grid gap-6 sm:grid-cols-2">
               {details.map((d) => (
                 <div key={d.label} className={`flex gap-4 ${d.wide ? "sm:col-span-2" : ""}`}>
@@ -74,6 +58,28 @@ export default function ContactPage() {
               <h2 className="mb-8 text-h3">Send an enquiry</h2>
               <ContactForm />
             </div>
+
+            <div className="my-6 flex items-center gap-4 text-xs uppercase tracking-[0.2em] text-muted animate-rise [animation-delay:260ms]" aria-hidden>
+              <span className="h-px flex-1 bg-line" />
+              or
+              <span className="h-px flex-1 bg-line" />
+            </div>
+
+            <a
+              href={whatsappLink("Hello Home Karigar, I'd like to discuss interiors for my home.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 rounded-md border border-line bg-paper p-5 transition-[border-color,box-shadow] duration-300 hover:border-line-strong hover:shadow-soft animate-rise [animation-delay:280ms]"
+            >
+              <span className="grid size-12 shrink-0 place-items-center rounded-full bg-success/10 text-success">
+                <BrandIcon name="WhatsApp" size={22} />
+              </span>
+              <span className="flex-1">
+                <span className="block font-medium text-ink">Prefer WhatsApp?</span>
+                <span className="block text-sm text-muted">Message the studio directly — usually the fastest reply.</span>
+              </span>
+              <Icon name="arrowUpRight" size={18} className="text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
           </div>
         </div>
       </section>
