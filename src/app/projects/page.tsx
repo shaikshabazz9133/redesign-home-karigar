@@ -5,13 +5,14 @@ import { pageMetadata } from "@/lib/seo/metadata";
 import { PageHero } from "@/components/common/PageHero";
 import { ProjectGrid, ProjectsExplorer } from "@/components/projects/ProjectsExplorer";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { IMAGE_ALT } from "@/lib/seo/alt";
 
 export const metadata: Metadata = pageMetadata({
   title: "Completed Home Interiors in Bengaluru",
   description:
     "Browse 3 BHK and 3.5 BHK homes designed and delivered by Home Karigar at Avlon Park and Meridian Park, The Prestige City, Bengaluru — photographed room by room.",
   path: "/projects",
-  image: { src: "/images/home/1.png", alt: "Living room designed by Home Karigar", width: 1536, height: 1024 },
+  image: { src: "/images/home/1.png", alt: IMAGE_ALT, width: 1536, height: 1024 },
 });
 
 export default function ProjectsPage() {

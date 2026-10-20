@@ -4,6 +4,7 @@ import { ImageFrame } from "@/components/motion/ImageFrame";
 import { Icon } from "@/components/ui/Icon";
 import { CountUp } from "./CountUp";
 import { deliveryStats } from "@/content/site";
+import { IMAGE_ALT } from "@/lib/seo/alt";
 
 /** The studio's record, each figure set large beside the sentence it completes. */
 const STATS = [
@@ -65,26 +66,27 @@ export function DesignPhilosophy() {
         <ImageFrame className="aspect-[1024/1536] w-full max-w-md overflow-hidden rounded-sm bg-linen lg:col-start-1 lg:row-start-2 lg:max-w-[min(100%,26rem)]">
           <Image
             src="/images/home_karigar_ceo.jpg"
-            alt="Mohammed Zuber, founder and CEO of Home Karigar, seated at his desk in the studio"
+            alt={IMAGE_ALT}
             fill
             sizes="(min-width: 1024px) 26rem, (min-width: 640px) 28rem, 92vw"
             className="object-cover"
           />
         </ImageFrame>
 
-        {/* Right: the record as a ruled grid, closing on a dark credo card */}
+        {/* Right: the record as a ruled grid, closing on a dark credo card. Phones set each figure beside its
+            sentence; from sm the cells are narrower, so the sentence sits on top and the figure at the foot. */}
         <div className="grid grid-cols-1 border-t border-line sm:grid-cols-2 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:grid-rows-subgrid">
           {STATS.map((s, i) => (
             <div
               key={s.label}
               data-reveal
               style={{ "--i": i } as React.CSSProperties}
-              className={`flex items-end justify-between gap-6 border-b border-line py-6 sm:min-h-56 sm:py-7 sm:px-6 lg:min-h-64 ${
+              className={`flex items-end justify-between gap-6 border-b border-line py-6 sm:min-h-56 sm:flex-col sm:items-stretch sm:py-7 sm:px-6 lg:min-h-64 ${
                 i % 2 === 0 ? "sm:border-r sm:pl-0" : "sm:pr-0"
               }`}
             >
-              <p className="min-w-0 max-w-[13rem] text-[0.9375rem] leading-snug text-ink-soft">{s.label}</p>
-              <div className="flex shrink-0 flex-col gap-4">
+              <p className="min-w-0 max-w-[13rem] text-[0.9375rem] leading-snug text-ink-soft sm:max-w-[16rem]">{s.label}</p>
+              <div className="flex shrink-0 flex-col gap-4 sm:self-end">
                 {/* The communities' own mark, centred over the figure's digits: the row shares the figure's font
                     size, so its right padding is exactly the width of the "+". */}
                 {s.logo && (

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
+import { brandAlt } from "@/lib/seo/alt";
 
 /** The searches the studio wants to be found for, carried by every page. */
 export const SITE_KEYWORDS = [
@@ -47,7 +48,7 @@ export function pageMetadata({
   keywords,
 }: PageMetaInput): Metadata {
   const ogImages = image
-    ? [{ url: image.src, alt: image.alt, width: image.width, height: image.height }]
+    ? [{ url: image.src, alt: brandAlt(image.alt), width: image.width, height: image.height }]
     : undefined;
 
   return {

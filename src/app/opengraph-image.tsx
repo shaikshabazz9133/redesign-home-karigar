@@ -1,9 +1,9 @@
 import { ImageResponse } from "next/og";
+import { IMAGE_ALT } from "@/lib/seo/alt";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { site } from "@/content/site";
 
-export const alt = `${site.name} — luxury home interiors in Bengaluru`;
+export const alt = IMAGE_ALT;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

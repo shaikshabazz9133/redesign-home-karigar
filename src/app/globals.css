@@ -116,6 +116,11 @@
 /* ── Base ─────────────────────────────────────────────────── */
 @layer base {
   html {
+    /* Large screens: the whole rem-based layout (type, spacing, the 82rem container) grows with the
+       viewport — 16px up to 1440px wide, ~18px at 1920px, 20px from 2560px — so wide monitors are not
+       left with a small column of text and empty margins. Media queries are unaffected (they use the
+       browser's initial 16px). */
+    font-size: clamp(100%, 0.625rem + 0.41667vw, 125%);
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
     scroll-padding-top: 6rem;

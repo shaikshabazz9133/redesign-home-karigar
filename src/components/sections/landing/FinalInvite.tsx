@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { IMAGE_ALT } from "@/lib/seo/alt";
 import { site, whatsappLink } from "@/content/site";
 import { ButtonAnchor, ButtonLink } from "@/components/ui/Button";
 import { BrandIcon, Icon } from "@/components/ui/Icon";
@@ -16,7 +17,7 @@ export function FinalInvite() {
     <section aria-labelledby="invite-title" className="relative isolate">
       {/* The photograph at its own proportions, so the whole room shows, ceiling to floor. */}
       <div className="relative min-h-[46rem] overflow-hidden sm:aspect-[1024/788] sm:min-h-0">
-        <Image src="/images/dinning1.jpg" alt="Dining room designed by Home Karigar, with a sculptural ribbon chandelier over a stone-topped table, tan upholstered chairs and a botanical mural wall" fill sizes="100vw" quality={90} className="object-cover object-[32%_50%] sm:object-top" />
+        <Image src="/images/dinning1.jpg" alt={IMAGE_ALT} fill sizes="100vw" quality={90} className="object-cover object-[32%_50%] sm:object-top" />
         <div aria-hidden className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
         <div className="container-site absolute inset-x-0 bottom-0 pb-8 md:pb-12">
           <p className="eyebrow text-white/80" data-reveal>

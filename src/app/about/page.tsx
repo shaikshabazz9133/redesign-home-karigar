@@ -10,13 +10,14 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { Eyebrow, SectionHeading } from "@/components/ui/Typography";
 import { ButtonLink } from "@/components/ui/Button";
 import { pad2 } from "@/lib/utils";
+import { IMAGE_ALT } from "@/lib/seo/alt";
 
 export const metadata: Metadata = pageMetadata({
   title: "Architect-led Interior Designers in Bengaluru",
   description:
     "Meet Home Karigar: an architect-led interior design studio with over six years of residential practice and 400+ homes delivered across Bengaluru.",
   path: "/about",
-  image: { src: "/images/Home_Karigar_Team.png", alt: "The Home Karigar team", width: 1536, height: 1024 },
+  image: { src: "/images/Home_Karigar_Team.png", alt: IMAGE_ALT, width: 1536, height: 1024 },
 });
 
 export default function AboutPage() {
@@ -31,7 +32,7 @@ export default function AboutPage() {
 
       <section aria-labelledby="story-title" className="container-site section-y grid gap-14 lg:grid-cols-12 lg:gap-16">
         <ImageFrame parallax={0.1} className="aspect-[4/5] rounded-sm bg-linen lg:col-span-5">
-          <LoadingImage src="/images/about-founder.jpg" alt="Mohammed Zuber, founder of Home Karigar, in a study with a forest-green wall, timber shelving and a walnut desk" fill sizes="(min-width: 1024px) 38vw, 92vw" className="object-cover object-top" />
+          <LoadingImage src="/images/about-founder.jpg" alt={IMAGE_ALT} fill sizes="(min-width: 1024px) 38vw, 92vw" className="object-cover object-top" />
         </ImageFrame>
         <div className="flex flex-col justify-center lg:col-span-6 lg:col-start-7">
           <div data-reveal><Eyebrow>Our story</Eyebrow></div>
@@ -88,14 +89,15 @@ export default function AboutPage() {
           />
           <figure className="mt-14">
             <ImageFrame parallax={0.08} className="aspect-[3/2] rounded-sm bg-linen">
-              <LoadingImage src="/images/Home_Karigar_Team.png" alt="The Home Karigar team of architects, designers and site managers" fill sizes="(min-width: 1320px) 1240px, 100vw" className="object-cover" />
+              <LoadingImage src="/images/Home_Karigar_Team.png" alt={IMAGE_ALT} fill sizes="(min-width: 1320px) 1240px, 100vw" className="object-cover" />
             </ImageFrame>
           </figure>
+          {/* Phones: one column, role beside the name. Tablets: two columns, so the role drops under the name. */}
           <ul className="mt-14 grid grid-cols-1 gap-x-12 sm:grid-cols-2 lg:gap-x-16">
             {team.map((m, i) => (
-              <li key={m.name} className="flex items-baseline justify-between gap-6 border-b border-line py-6" data-reveal style={{ "--i": i % 2 } as React.CSSProperties}>
+              <li key={m.name} className="flex items-baseline justify-between gap-6 border-b border-line py-6 sm:flex-col sm:items-start sm:gap-1.5 lg:flex-row lg:items-baseline lg:gap-6" data-reveal style={{ "--i": i % 2 } as React.CSSProperties}>
                 <span className="min-w-0 font-display text-xl">{m.name}</span>
-                <span className="shrink-0 text-right text-sm text-muted">{m.role}</span>
+                <span className="shrink-0 text-right text-sm text-muted sm:text-left lg:text-right">{m.role}</span>
               </li>
             ))}
           </ul>

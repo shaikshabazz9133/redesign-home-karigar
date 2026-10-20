@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { IMAGE_ALT } from "@/lib/seo/alt";
 import { ButtonLink } from "@/components/ui/Button";
 import { SocialLinks } from "@/components/layout/SocialRail";
 
@@ -21,7 +22,7 @@ export function ImmersiveHero() {
       <div className="hk-hero-photo absolute inset-0 -z-20">
         <Image
           src="/images/hero/double-height-living.jpg"
-          alt="Double-height living room in Bengaluru designed by Home Karigar, with a floating timber staircase, fluted glass partitions and sculptural pendant lights"
+          alt={IMAGE_ALT}
           fill
           preload
           fetchPriority="high"

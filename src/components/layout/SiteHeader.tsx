@@ -174,24 +174,42 @@ export function SiteHeader() {
           >
             <nav aria-label="Mobile" className="container-site flex-1">
               <ul className="flex flex-col border-t border-line-dark">
-                {[{ label: "Home", href: "/" }, ...primaryNav].map((item, i) => (
-                  <m.li
-                    key={item.href}
-                    className="border-b border-line-dark"
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.15 + i * 0.05, ease: EASE }}
-                  >
-                    <Link
-                      href={item.href}
-                      aria-current={pathname === item.href ? "page" : undefined}
-                      className="group flex items-center justify-between py-4 caps font-display text-[2.25rem] font-medium leading-none tracking-[-0.04em]"
+                {[{ label: "Home", href: "/" }, ...primaryNav].map((item, i) => {
+                  const active = item.href === "/" ? pathname === "/" : isActive(item.href);
+                  return (
+                    <m.li
+                      key={item.href}
+                      className="border-b border-line-dark"
+                      initial={{ opacity: 0, y: 18 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.15 + i * 0.05, ease: EASE }}
                     >
-                      <span className={cn(pathname === item.href ? "text-brass" : "text-ivory")}>{item.label}</span>
-                      <Icon name="arrowRight" className="opacity-40 transition-transform duration-300 group-hover:translate-x-1 group-hover:opacity-100" />
-                    </Link>
-                  </m.li>
-                ))}
+                      {/* Light display type in its natural case, with a small italic index — calm rather than shouty. */}
+                      <Link
+                        href={item.href}
+                        aria-current={active ? "page" : undefined}
+                        className="group flex items-center gap-4 py-[clamp(0.85rem,2.2vh,1.25rem)]"
+                      >
+                        <span aria-hidden className="numeral w-6 shrink-0 text-sm text-ivory-muted">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span
+                          className={cn(
+                            "flex-1 font-display text-[clamp(1.5rem,1.1rem+2vw,2.25rem)] font-light leading-none tracking-[-0.02em] transition-colors duration-300",
+                            active ? "text-brass" : "text-ivory group-hover:text-brass",
+                          )}
+                        >
+                          {item.label}
+                        </span>
+                        {active ? (
+                          <span aria-hidden className="mr-1.5 size-1.5 rounded-full bg-brass" />
+                        ) : (
+                          <Icon name="arrowRight" size={18} className="opacity-35 transition-[opacity,transform] duration-300 group-hover:translate-x-1 group-hover:opacity-100" />
+                        )}
+                      </Link>
+                    </m.li>
+                  );
+                })}
               </ul>
             </nav>
             <m.div

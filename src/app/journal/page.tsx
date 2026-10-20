@@ -8,19 +8,20 @@ import { PageHero } from "@/components/common/PageHero";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Icon } from "@/components/ui/Icon";
 import { cn, pad2 } from "@/lib/utils";
+import { IMAGE_ALT } from "@/lib/seo/alt";
 
 export const metadata: Metadata = pageMetadata({
   title: "Interior Design Journal & Home Ideas",
   description:
     "The Home Karigar design journal: why we build kitchens on BWP 710 plywood, how we plan false ceilings and lighting, wardrobes that last, and what to approve in 3D before you pay.",
   path: "/journal",
-  image: { src: "/images/home/2.png", alt: "Dining space under a curved false ceiling with warm cove lighting", width: 1536, height: 1024 },
+  image: { src: "/images/home/2.png", alt: IMAGE_ALT, width: 1536, height: 1024 },
 });
 
 /** Category and reading time, set in the site's eyebrow style. */
 function Meta({ article, tone = "dark" }: { article: JournalArticle; tone?: "dark" | "light" }) {
   return (
-    <p className={cn("eyebrow flex items-center gap-3", tone === "dark" ? "text-muted" : "text-ivory/80")}>
+    <p className={cn("eyebrow flex items-center gap-3 whitespace-nowrap", tone === "dark" ? "text-muted" : "text-ivory/80")}>
       <span className={tone === "dark" ? "text-brass-ink" : "text-brass"}>{article.category}</span>
       <span aria-hidden className="h-px w-5 bg-current opacity-40" />
       <span>{article.readMinutes} min read</span>
@@ -58,15 +59,15 @@ export default function JournalPage() {
               />
             </ImageFrame>
           </div>
-          <div className="flex flex-col justify-between gap-10 p-8 md:p-12 lg:col-span-5">
+          <div className="flex flex-col justify-between gap-10 p-6 sm:p-8 md:p-12 lg:col-span-5">
             <div className="flex flex-col gap-6">
               <p className="numeral text-xl text-brass-ink tabular-nums">{pad2(1)} · Featured</p>
               <h2 className="text-h2 text-balance">{featured.title}</h2>
               <p className="text-lead text-muted">{featured.excerpt}</p>
             </div>
-            <div className="flex items-center justify-between gap-6 border-t border-line pt-6">
+            <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border-t border-line pt-6">
               <Meta article={featured} />
-              <span className="inline-flex items-center gap-2 text-sm font-medium text-oxblood">
+              <span className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap text-sm font-medium text-oxblood">
                 Read the story
                 <Icon name="arrowRight" size={16} className="transition-transform duration-500 ease-[var(--ease-premium)] group-hover:translate-x-1" />
               </span>
