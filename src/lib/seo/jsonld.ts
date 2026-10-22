@@ -106,7 +106,7 @@ export function faqSchema(faqs: { q: string; a: string }[]): Json {
     mainEntity: faqs.map((f) => ({
       "@type": "Question",
       name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
+      acceptedAnswer: { "@type": "Answer", text: f.a.replaceAll("**", "") },
     })),
   };
 }

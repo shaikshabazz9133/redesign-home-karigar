@@ -747,22 +747,16 @@ html:not([data-intro-style]) #hk-preloader:not(.is-leaving) :is(.hk-pre-progress
   from { transform: scale(1.12); filter: brightness(0.75); }
   to { transform: none; filter: none; }
 }
-/* Hero slideshow: rooms crossfade, each drifting slowly closer while shown and
-   through its fade-out; the index's hairline fills over each room's turn. */
-.hk-hero-slide { opacity: 0; transition: opacity 1.8s var(--ease-premium); }
+/* Hero slideshow: rooms crossfade, each drifting gently closer while shown and
+   through its fade-out. */
+.hk-hero-slide { opacity: 0; transition: opacity 1.1s cubic-bezier(0.4, 0, 0.2, 1); }
 .hk-hero-slide[data-active] { opacity: 1; }
 @media (prefers-reduced-motion: no-preference) {
-  .hk-hero-slide[data-shown] img { animation: hk-hero-drift 9s linear both; }
-  .hk-hero-timer[data-running] { animation: hk-hero-timer linear both; }
-  .hk-hero-caption { animation: hk-hero-rise 0.9s var(--ease-premium) both; }
+  .hk-hero-slide[data-shown] img { animation: hk-hero-drift 6s cubic-bezier(0.25, 0.1, 0.25, 1) both; }
 }
 @keyframes hk-hero-drift {
   from { transform: scale(1); }
-  to { transform: scale(1.07) translate3d(-0.6%, -0.4%, 0); }
-}
-@keyframes hk-hero-timer {
-  from { scale: 0 1; }
-  to { scale: 1 1; }
+  to { transform: scale(1.06) translate3d(-0.5%, -0.3%, 0); }
 }
 @keyframes hk-hero-rise {
   from { opacity: 0; transform: translate3d(0, 28px, 0); }

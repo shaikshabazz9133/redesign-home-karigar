@@ -4,12 +4,26 @@ import { JsonLd } from "@/components/common/JsonLd";
 import { SectionHeading } from "@/components/ui/Typography";
 import { ButtonLink } from "@/components/ui/Button";
 
-/** Native <details> accordion: accessible, zero JavaScript, animated in CSS. */
+/** An answer's paragraphs, with its **emphasised** phrases set in ink against the muted text. */
+function Answer({ text }: { text: string }) {
+  return (
+    <div className="max-w-2xl space-y-4 pb-7 pr-12 text-muted">
+      {text.split("\n\n").map((para) => (
+        <p key={para}>
+          {para.split("**").map((part, i) => (i % 2 ? <strong key={i} className="font-medium text-ink">{part}</strong> : part))}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+/** Native <details> accordion: accessible, zero JavaScript, animated in CSS. The heading column stays in view
+    beside the long list on large screens. */
 export function FaqSection() {
   return (
     <section aria-labelledby="faq-title" className="pt-7 pb-14 md:pt-10 md:pb-20">
       <div className="container-site grid gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-4">
+        <div className="lg:sticky lg:top-32 lg:col-span-4 lg:self-start">
           <SectionHeading
             eyebrow="Questions"
             title={<span id="faq-title">Before you begin</span>}
@@ -31,7 +45,7 @@ export function FaqSection() {
                   className="hk-faq-icon relative grid size-9 shrink-0 place-items-center rounded-full border border-line-strong transition-colors duration-300 group-open:border-ink group-open:bg-ink before:absolute before:h-px before:w-3 before:bg-current after:absolute after:h-3 after:w-px after:bg-current group-open:text-ivory"
                 />
               </summary>
-              <p className="max-w-2xl pb-7 pr-12 text-muted">{f.a}</p>
+              <Answer text={f.a} />
             </details>
           ))}
         </div>

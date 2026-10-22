@@ -185,30 +185,99 @@ export const testimonials: { quote: string; name: string; home: string }[] = [
   },
 ];
 
+/** Answers are paragraphs split by a blank line; **double asterisks** mark the emphasised phrases. */
 export const faqs = [
   {
     q: "Do you take an advance before work begins?",
-    a: "No. We don't take any advance payment until your 3D designs are confirmed and materials are delivered to your site. The advance collected after delivery is used to commence the framework as per the approved designs and drawings.",
+    a: [
+      "Unlike many interior companies, we don't ask for a percentage of the project value upfront. We only collect a small **design booking fee** to initiate the design process.",
+      "Before creating your 3D designs, we conduct two detailed sessions with you. The first is a **Requirement Discussion**, where we understand your lifestyle, needs, preferences, and vision for your home. The second is a **Moodboard Presentation**, where we walk you through design concepts, material options, color palettes, and various possibilities, helping you visualize your future home before the designing begins.",
+      "Only after these discussions do we proceed with your customized 3D designs. Once the designs are finalized and approved, we move forward with material planning and execution as per the approved designs.",
+    ].join("\n\n"),
   },
   {
     q: "How are payments structured after that?",
-    a: "Further payments are made according to the progress of work on site. You retain 10% of the total project amount until the final inspection and completion, and release it only once the project is complete.",
+    a: [
+      "After the design phase, payments are linked to clearly defined project milestones and are made as the work progresses on-site. This ensures complete transparency and allows you to pay based on the actual progress of your project.",
+      "For your peace of mind, you retain **10% of the total project value** until the final inspection and handover, releasing it only after you are fully satisfied with the completed work.",
+    ].join("\n\n"),
   },
   {
     q: "Which materials and hardware do you use?",
-    a: "Only branded materials. Kitchens are built on BWP 710 plywood carcasses with soft-close hardware from Hettich, Häfele or Ebco. Wardrobes use Greenply or Century ply with Hettich fittings. Every material delivered to site has an individual QR code for inspection and authentication.",
-  },
-  {
-    q: "Which communities and areas do you work in?",
-    a: "We design complete residential interiors across Bengaluru and have delivered over 400 homes — including Prestige Finsbury Park, Prestige Waterford and The Prestige City (Avlon Park, Eden Park and Meridian Park).",
+    a: [
+      "We use only premium-quality, branded materials and hardware to ensure lasting durability and superior performance.",
+      "Our kitchens are built using **BWP 710-grade plywood carcasses** paired with premium soft-close hardware from trusted brands such as **Hettich, Häfele, or Ebco**. For wardrobes and other cabinetry, we use **Greenply, CenturyPly** or **Neem Ply** with high-quality Hettich fittings.",
+      "To maintain complete transparency, every sheet of plywood and major material delivered to your site comes with its own **QR code**, allowing you to verify its authenticity and specifications before installation.",
+    ].join("\n\n"),
   },
   {
     q: "What does a complete home interior include?",
-    a: "Typically false ceilings and lighting, a modular kitchen, wardrobes and storage, TV unit, entrance foyer, pooja unit, study and dressing — designed and executed under one curated scope.",
+    a: [
+      "Our complete home interior solution is designed to cover every essential space in your home, providing a seamless experience from design to execution.",
+      "It includes **living room interiors** such as foyer design, feature walls, TV unit, sofa setup, coffee table, crockery unit, dining area, decorative wall treatments, and custom partitions. For **bedrooms**, we design wardrobes, hydraulic beds, dressing units, study units, bay window seating, and customized wall décor. Our **kitchen and utility** solutions include a fully customized modular kitchen, utility storage, and optimized space planning.",
+      "We also take care of **false ceilings, lighting layouts, electrical point planning, balcony designs, bathroom storage and premium hardware fittings, tile modifications wherever required**, along with other design elements that enhance the overall look and functionality of your home.",
+      "From concept development and 3D visualization to material selection and final execution, every element is thoughtfully designed to create a cohesive, functional, and beautifully finished home—all under one roof.",
+    ].join("\n\n"),
   },
   {
     q: "How do I get started?",
-    a: "Share your requirements through our enquiry form, WhatsApp or a phone call. Our studio is open Monday to Saturday, 10 AM to 7 PM, and the first consultation carries no obligation.",
+    a: [
+      "Getting started is simple. Reach out to us by filling out our enquiry form, calling us, or sending us a message on WhatsApp. Our team will schedule an initial consultation to understand your requirements, lifestyle, design preferences, and project goals.",
+      "The first consultation is completely **free and carries no obligation**. From there, we'll guide you through our structured design process, beginning with a detailed requirement discussion, followed by a curated moodboard presentation, before moving on to your personalized 3D designs.",
+      "Our studio is open **Monday to Saturday, from 10:00 AM to 7:00 PM**, and we're always happy to assist you in planning your dream home.",
+    ].join("\n\n"),
+  },
+  {
+    q: "How long does a complete home interior take?",
+    a: [
+      "The project timeline depends on the scope of work, site readiness, and the level of customization involved. Before execution begins, we provide you with a detailed project schedule outlining every stage of the process.",
+      "For a typical **3 BHK home**, **factory-finished interiors** are generally completed within **30–45 working days**, while **carpentry work executed on-site** typically takes around **60 working days**. Throughout the project, our dedicated team ensures timely coordination, regular progress updates, and strict quality checks to deliver your home as planned.",
+    ].join("\n\n"),
+  },
+  {
+    q: "Do you provide only on-site carpentry work, or do you also offer factory-finished interiors?",
+    a: [
+      "We offer **both on-site carpentry and factory-finished interiors**, allowing you to choose the solution that best suits your preferences, budget, and project requirements. Our design team will help you understand the advantages of each approach and recommend the most suitable option for your home.",
+      "We also take pride in having a highly skilled **in-house carpentry team** with years of experience in crafting premium, customized interiors. Whether you choose factory-finished modules or on-site carpentry, we maintain the same commitment to quality, precision, and craftsmanship throughout the execution process.",
+    ].join("\n\n"),
+  },
+  {
+    q: "What makes Home Karigar different from other interior companies?",
+    a: [
+      "At **Home Karigar**, we believe exceptional interiors begin with understanding the people who will live in them. Every project starts with a structured design journey—including detailed requirement discussions and curated moodboard presentations—so your home is designed around your lifestyle, not a standard template.",
+      "What sets us apart is our commitment to **transparent pricing with no hidden costs**, **premium branded materials**, **QR code verification for material authenticity**, **high-quality craftsmanship**, and **timely project delivery**. Whether you choose factory-finished interiors or our expert in-house carpentry, every detail is executed with precision and attention to finish.",
+      "We're proud to be a **trusted interior partner for homeowners across Bengaluru**, with a particularly strong presence in **The Prestige City** and other premium residential communities. Every project is managed by a dedicated team, ensuring clear communication, regular progress updates, and strict quality checks from design to handover.",
+      "Our goal isn't just to create beautiful interiors—it's to deliver a home that reflects your personality, maximizes functionality, and provides a smooth, transparent, and stress-free experience from start to finish.",
+    ].join("\n\n"),
+  },
+  {
+    q: "Will I receive regular project updates?",
+    a: [
+      "Absolutely. We believe complete transparency is essential throughout your interior journey. Our team keeps you informed at every stage of the project with **daily progress updates**, including **site videos**, photos, and milestone updates, so you always know exactly how your home is progressing—even if you're unable to visit the site.",
+      "You're also welcome to **visit the site at any time** during the execution to personally inspect the work and interact with our project team. A dedicated project manager coordinates the entire process, ensures timely communication, addresses your queries, and keeps the project on track from start to finish.",
+      "With Home Karigar, you'll always have complete visibility into your project's progress, quality, and timeline.",
+    ].join("\n\n"),
+  },
+  {
+    q: "Who supervises the work on-site?",
+    a: [
+      "Every project is supervised by a **dedicated site supervisor** who oversees the day-to-day execution, coordinates with the carpentry and installation teams, monitors workmanship, maintains quality standards, and ensures the project progresses according to schedule.",
+      "Since our projects are concentrated within the same region, our **design, execution, and management teams are regularly present on-site**, allowing us to closely monitor every stage of the work and respond quickly whenever required. This collaborative, hands-on approach ensures better coordination, faster decision-making, consistent quality, and a smoother experience throughout your project.",
+    ].join("\n\n"),
+  },
+  {
+    q: "Do you handle electrical, plumbing, and civil work?",
+    a: [
+      "Yes. We provide **complete end-to-end interior execution**, including electrical, plumbing, and civil work wherever required as part of your project. From electrical point planning and lighting provisions to plumbing modifications, tiling, and necessary civil work, every aspect is professionally coordinated by our team.",
+      "By managing all trades under one roof, we ensure seamless execution, consistent quality, timely completion, and a hassle-free experience—so you don't have to coordinate with multiple contractors.",
+    ].join("\n\n"),
+  },
+  {
+    q: "Can you work within my budget?",
+    a: [
+      "Absolutely. We understand that every homeowner has a different budget, and we design solutions that align with your financial goals without compromising on quality, functionality, or aesthetics.",
+      "During the planning stage, we discuss your budget in detail and recommend the most suitable materials, finishes, and design options to maximize value. Our transparent pricing ensures there are **no hidden costs**, allowing you to make informed decisions while creating a home that reflects your style and requirements.",
+    ].join("\n\n"),
   },
 ];
 
