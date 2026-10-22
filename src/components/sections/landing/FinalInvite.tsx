@@ -9,16 +9,19 @@ import { BrandIcon, Icon } from "@/components/ui/Icon";
 const ON_WALNUT = "border-white/40! bg-transparent! text-white! hover:border-white! hover:bg-white! hover:text-[#583c26]!";
 
 /**
- * The closing invitation: the dining room shown whole and uncovered, with the heading, note and the three
+ * The closing invitation: the living room shown whole and uncovered, with the heading, note and the three
  * ways to get in touch set straight over its darker lower edge.
  */
 export function FinalInvite() {
   return (
     <section aria-labelledby="invite-title" className="relative isolate">
-      {/* The photograph at its own proportions, so the whole room shows, ceiling to floor. */}
-      <div className="relative min-h-[46rem] overflow-hidden sm:aspect-[1024/788] sm:min-h-0">
-        <Image src="/images/dinning1.jpg" alt={IMAGE_ALT} fill sizes="100vw" quality={90} className="object-cover object-[32%_50%] sm:object-top" />
-        <div aria-hidden className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+      {/* The photograph at its own wide proportions, so the whole room shows, ceiling to floor; on narrower
+          screens a minimum height keeps room for the text and the sides crop around the sofa and chandelier. */}
+      <div className="relative min-h-[46rem] overflow-hidden sm:min-h-[40rem] lg:aspect-[2/1] lg:min-h-[36rem]">
+        <Image src="/images/home_karigar_luxury.png" alt={IMAGE_ALT} fill sizes="100vw" quality={90} className="object-cover object-[50%_40%]" />
+        {/* The room is bright, so a warm walnut wash deepens its lower half for the white type to sit on. */}
+        <div aria-hidden className="absolute inset-x-0 bottom-0 h-[70%] bg-gradient-to-t from-[#1c130c]/90 via-[#1c130c]/55 to-transparent" />
+        <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_55%,rgb(28_19_12/0.25))]" />
         <div className="container-site absolute inset-x-0 bottom-0 pb-8 md:pb-12">
           <p className="eyebrow text-white/80" data-reveal>
             Begin with a conversation

@@ -747,6 +747,23 @@ html:not([data-intro-style]) #hk-preloader:not(.is-leaving) :is(.hk-pre-progress
   from { transform: scale(1.12); filter: brightness(0.75); }
   to { transform: none; filter: none; }
 }
+/* Hero slideshow: rooms crossfade, each drifting slowly closer while shown and
+   through its fade-out; the index's hairline fills over each room's turn. */
+.hk-hero-slide { opacity: 0; transition: opacity 1.8s var(--ease-premium); }
+.hk-hero-slide[data-active] { opacity: 1; }
+@media (prefers-reduced-motion: no-preference) {
+  .hk-hero-slide[data-shown] img { animation: hk-hero-drift 9s linear both; }
+  .hk-hero-timer[data-running] { animation: hk-hero-timer linear both; }
+  .hk-hero-caption { animation: hk-hero-rise 0.9s var(--ease-premium) both; }
+}
+@keyframes hk-hero-drift {
+  from { transform: scale(1); }
+  to { transform: scale(1.07) translate3d(-0.6%, -0.4%, 0); }
+}
+@keyframes hk-hero-timer {
+  from { scale: 0 1; }
+  to { scale: 1 1; }
+}
 @keyframes hk-hero-rise {
   from { opacity: 0; transform: translate3d(0, 28px, 0); }
   to { opacity: 1; transform: none; }
@@ -897,8 +914,12 @@ html:not([data-intro-style]) #hk-preloader:not(.is-leaving) :is(.hk-pre-progress
 .hk-spin-slow { animation: hk-spin 26s linear infinite; }
 @keyframes hk-spin { to { transform: rotate(360deg); } }
 
+/* Service slideshow: the showing photograph drifts slowly in while it plays. */
+.hk-slide-drift { animation: hk-slide-drift 5.5s linear both; }
+@keyframes hk-slide-drift { from { transform: scale(1.06); } to { transform: scale(1); } }
+
 /* Community marquee */
-.hk-marquee-track { animation: hk-marquee 48s linear infinite; }
+.hk-marquee-track { animation: hk-marquee 70s linear infinite; }
 @keyframes hk-marquee { to { transform: translateX(-50%); } }
 
 /* Process connector draws left → right when revealed */
@@ -908,7 +929,7 @@ html:not([data-intro-style]) #hk-preloader:not(.is-leaving) :is(.hk-pre-progress
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hk-spin-slow, .hk-marquee-track { animation: none; }
+  .hk-spin-slow, .hk-marquee-track, .hk-slide-drift { animation: none; }
 }
 
 /* ── Curtain mask reveal (ImageFrame) ─────────────────────────

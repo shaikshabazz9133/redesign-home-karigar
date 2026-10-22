@@ -28,11 +28,11 @@ export default function HomePage() {
       <DesignPhilosophy />
       <ArtOfHomemaking />
       <DesignJournal />
-      {/* <CommunityMarquee /> */}
       <ProcessLine />
       {/* <HowWeWork /> */}
       <SeamlessExperience />
       <Testimonials />
+      <CommunityMarquee />
       <FaqSection />
       <FinalInvite />
     </>

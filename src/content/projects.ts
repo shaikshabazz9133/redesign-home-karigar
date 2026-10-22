@@ -10,6 +10,8 @@ export interface ProjectImage {
 export interface Project {
   id: number;
   slug: string;
+  /** The home's design name, shown as its heading. */
+  name: string;
   flatNo: string;
   configuration: string;
   development: string;
@@ -19,7 +21,27 @@ export interface Project {
   images: ProjectImage[];
 }
 
-const projects = data as Project[];
+/**
+ * The homes shown on the site, in display order, with the studio's name and the built-up area for each.
+ * Homes not listed here stay in the synced data but are hidden everywhere. Hidden for now (add an entry
+ * here to bring one back): 13272, 11172, 25147, 12253, 12263, 17024 — all at Avlon Park.
+ */
+const SHOWCASE: { flatNo: string; name: string; area: string }[] = [
+  { flatNo: "57175", name: "Minimal Contemporary Interior", area: "1,629 sq. ft." },
+  { flatNo: "13102", name: "Warm Modernism", area: "1,600 sq. ft." },
+  { flatNo: "13104", name: "A Symphony of Spaces", area: "1,875 sq. ft." },
+  { flatNo: "17242", name: "Minimalist Harmony", area: "1,800 sq. ft." },
+  { flatNo: "59051", name: "Modern Rajputana", area: "1,465 sq. ft." },
+  { flatNo: "17285", name: "Essential Living", area: "1,800 sq. ft." },
+  { flatNo: "17193", name: "Modern Aesthetic", area: "1,875 sq. ft." },
+  { flatNo: "13262", name: "Modern Contemporary", area: "1,875 sq. ft." },
+];
+
+const synced = data as Omit<Project, "name">[];
+const projects: Project[] = SHOWCASE.flatMap(({ flatNo, name, area }) => {
+  const p = synced.find((s) => s.flatNo === flatNo);
+  return p ? [{ ...p, name, area }] : [];
+});
 
 /** Display order for rooms within a project. */
 const ROOM_ORDER = [
@@ -35,9 +57,9 @@ const ROOM_ORDER = [
   "Interiors",
 ];
 
-/** Projects with richer galleries are featured first. */
+/** The showcased homes, in the studio's chosen order. */
 export function getProjects(): Project[] {
-  return [...projects].sort((a, b) => b.images.length - a.images.length);
+  return [...projects];
 }
 
 export function getProject(slug: string): Project | undefined {
@@ -49,7 +71,7 @@ export function getProjectById(id: number): Project | undefined {
 }
 
 export function projectTitle(p: Project): string {
-  return `Flat ${p.flatNo}, ${p.development}`;
+  return `${p.name}, ${p.development}`;
 }
 
 export function projectHref(p: Project): string {

@@ -1,10 +1,10 @@
-import Image from "next/image";
-import { IMAGE_ALT } from "@/lib/seo/alt";
 import { ButtonLink } from "@/components/ui/Button";
 import { SocialLinks } from "@/components/layout/SocialRail";
+import { HeroSlideshow } from "@/components/sections/landing/HeroSlideshow";
 
 /**
- * Full-bleed opening frame, one screen tall on every device (taller only if a screen is too short to hold it): a double-height living room with
+ * Full-bleed opening frame, one screen tall on every device (taller only if a screen is too short to hold it): the studio's rooms in turn
+ * (see HeroSlideshow), opening on a double-height living room, with
  * the studio's promise stepped across its top left, as in an architectural monograph, and the call to
  * action at its foot. The kicker sits inside the h1, so the page's main heading carries the search
  * phrase ("Luxury interior design studio in Bengaluru") as well as the promise.
@@ -19,18 +19,7 @@ export function ImmersiveHero() {
       data-hero
       className="on-dark relative isolate flex min-h-[max(100svh,36rem)] overflow-hidden bg-espresso text-ivory"
     >
-      <div className="hk-hero-photo absolute inset-0 -z-20">
-        <Image
-          src="/images/hero/double-height-living.jpg"
-          alt={IMAGE_ALT}
-          fill
-          preload
-          fetchPriority="high"
-          quality={75}
-          sizes="100vw"
-          className="object-cover object-[50%_55%] max-lg:object-[56%_50%]"
-        />
-      </div>
+      <HeroSlideshow />
       {/* Scrim: deepest behind the headline (top left) and at the foot behind the call to action. */}
       <div
         aria-hidden

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter, Inter_Tight, Pinyon_Script, Source_Serif_4 } from "next/font/google";
+import localFont from "next/font/local";
 import { site } from "@/content/site";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -18,18 +18,28 @@ import "./globals.css";
    Text    — Inter: body copy, navigation, buttons and small uppercase labels.
    Accent  — Cormorant Garamond: the logo wordmark and italic emphasis inside headings.
    Plus one flourish: Pinyon Script, a copperplate hand, for the hero's "beautifully." alone. */
-const display = Inter_Tight({ subsets: ["latin"], weight: ["300", "400", "500", "600"], variable: "--font-inter-tight", display: "swap" });
-const text = Inter({ subsets: ["latin"], weight: ["400", "500", "600"], variable: "--font-inter", display: "swap" });
-const accent = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  style: ["normal", "italic"],
+/* Self-hosted from ./fonts (the Latin subsets from Google Fonts, as variable fonts where available), so builds
+   never depend on downloading fonts — the Google fetch in next/font/google failed intermittently. */
+const display = localFont({ src: "./fonts/inter-tight-normal.woff2", weight: "300 600", variable: "--font-inter-tight", display: "swap" });
+const text = localFont({ src: "./fonts/inter-normal.woff2", weight: "400 600", variable: "--font-inter", display: "swap" });
+const accent = localFont({
+  src: [
+    { path: "./fonts/cormorant-garamond-normal.woff2", weight: "400 700", style: "normal" },
+    { path: "./fonts/cormorant-garamond-italic.woff2", weight: "400 700", style: "italic" },
+  ],
   variable: "--font-cormorant",
   display: "swap",
 });
-const script = Pinyon_Script({ subsets: ["latin"], weight: "400", variable: "--font-pinyon", display: "swap" });
+const script = localFont({ src: "./fonts/pinyon-script-normal.woff2", weight: "400", variable: "--font-pinyon", display: "swap" });
 /* Journal reading text is set in Tiempos Text where it is installed; Source Serif is its free stand-in. */
-const bodySerif = Source_Serif_4({ subsets: ["latin"], weight: ["400", "600"], style: ["normal", "italic"], variable: "--font-source-serif", display: "swap" });
+const bodySerif = localFont({
+  src: [
+    { path: "./fonts/source-serif-4-normal.woff2", weight: "400 600", style: "normal" },
+    { path: "./fonts/source-serif-4-italic.woff2", weight: "400 600", style: "italic" },
+  ],
+  variable: "--font-source-serif",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

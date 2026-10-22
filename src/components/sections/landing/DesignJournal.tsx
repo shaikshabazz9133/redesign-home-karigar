@@ -20,8 +20,8 @@ export function DesignJournal() {
   return (
     <section aria-labelledby="journal-title" className="relative bg-ivory py-7 md:py-10">
       {/* The title, its note and the way into the journal on the left; the "Your space isn't plain" collage
-          on the right. Below them, the three notes. */}
-      <div className="container-site grid items-start gap-12 lg:grid-cols-12 lg:gap-x-12">
+          on the right, centred beside them. Below them, the three notes. */}
+      <div className="container-site grid items-start gap-12 lg:grid-cols-12 lg:items-center lg:gap-x-12">
         <div className="flex flex-col lg:col-span-5">
           <p className="text-[0.9375rem] tracking-[-0.01em] text-muted" data-reveal>
             Notes from the studio
@@ -60,7 +60,7 @@ export function DesignJournal() {
           </div>
         </div>
 
-        <CuratedCollage className="lg:col-span-7 lg:justify-self-end" />
+        <CuratedCollage className="lg:col-span-7" />
       </div>
 
       {/* A sideways-scrolling strip: below desktop it bleeds to the screen edge; from lg, three ruled columns

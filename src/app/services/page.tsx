@@ -13,6 +13,7 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { SectionHeading } from "@/components/ui/Typography";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
+import { ServiceSlideshow } from "@/components/sections/ServiceSlideshow";
 import { cn, pad2 } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
@@ -44,9 +45,11 @@ export default function ServicesPage() {
       <section aria-label="Service details" className="container-site section-y flex flex-col gap-24 md:gap-32">
         {services.map((s, i) => (
           <article key={s.slug} id={s.slug} className="grid scroll-mt-28 items-center gap-10 lg:grid-cols-12 lg:gap-16">
-            <ImageFrame parallax={0.1} className={cn("aspect-[4/3] rounded-sm bg-linen lg:col-span-7", i % 2 && "lg:order-2")}>
-              <LoadingImage src={s.image.src} alt={s.image.alt} fill sizes="(min-width: 1024px) 56vw, 92vw" className="object-cover" />
-            </ImageFrame>
+            <ServiceSlideshow
+              title={s.title}
+              slides={s.gallery}
+              className={cn("lg:col-span-7", i % 2 && "lg:order-2")}
+            />
             <div className="lg:col-span-5">
               <p className="numeral text-xl text-brass-ink tabular-nums" data-reveal>{pad2(i + 1)}</p>
               <h2 className="mt-4 text-h2 caps" data-reveal>{s.title}</h2>

@@ -11,7 +11,7 @@ export const site = {
   locale: "en_IN",
   description:
     "Home Karigar is a Bengaluru interior design studio delivering complete residential interiors — from 3D design to handover — with no advance until your designs are approved.",
-  foundedYearsAgo: 6,
+  foundedYearsAgo: 8,
   email: "query.homekarigar@gmail.com",
   phones: [
     { display: "+91 86605 22278", e164: "+918660522278" },

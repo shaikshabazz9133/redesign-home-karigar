@@ -2,6 +2,7 @@ import Image from "next/image";
 import { LoadingImage } from "@/components/ui/LoadingImage";
 import type { JournalArticle, JournalImage } from "@/content/journal";
 import { site } from "@/content/site";
+import { brandAlt } from "@/lib/seo/alt";
 import { cn } from "@/lib/utils";
 
 /*
@@ -41,7 +42,7 @@ function Photo({
       data-reveal
     >
       <div className="relative w-full overflow-hidden bg-linen" style={{ aspectRatio: `${img.width} / ${img.height}` }}>
-        <LoadingImage src={img.src} alt={img.alt} fill sizes={sizes} priority={priority} className="object-cover" />
+        <LoadingImage src={img.src} alt={brandAlt(img.alt)} fill sizes={sizes} priority={priority} className="object-cover" />
       </div>
       {caption && <figcaption className="mt-3 text-[0.75rem] leading-snug text-muted">{caption}</figcaption>}
     </figure>
@@ -180,15 +181,23 @@ function Reshuffle({ a }: { a: JournalArticle }) {
           )}
 
           <div className="mt-10 gap-10 border-t border-line pt-8 md:columns-2 lg:columns-3 [&>*+*]:mt-6">
-            {/* The photographs are spread evenly through the text. */}
-            {a.sections.map((s, i) => [
-              section(s, i),
-              ...a.gallery
-                .filter((_, k) => Math.max(0, Math.round(((k + 1) * a.sections.length) / (a.gallery.length + 1)) - 1) === i)
-                .map((img) => (
-                  <Photo key={img.src} img={img} sizes="(min-width: 1024px) 28vw, (min-width: 768px) 44vw, 92vw" caption={img.alt} />
-                )),
-            ])}
+            {/* The photographs are spread evenly through the text, each set ahead of the section it opens rather
+                than after it — so the first leads the essay and each lands near the top of a column. With three
+                across, the middle one follows its section instead, so it sits lower with text above it. */}
+            {a.sections.map((s, i) => {
+              const photos = a.gallery
+                .map((img, k) => ({ img, k }))
+                .filter(({ k }) => Math.round((k * a.sections.length) / a.gallery.length) === i);
+              const after = (k: number) => a.gallery.length === 3 && k === 1;
+              const photo = ({ img }: { img: JournalImage }) => (
+                <Photo key={img.src} img={img} sizes="(min-width: 1024px) 28vw, (min-width: 768px) 44vw, 92vw" caption={img.alt} />
+              );
+              return [
+                ...photos.filter(({ k }) => !after(k)).map(photo),
+                section(s, i),
+                ...photos.filter(({ k }) => after(k)).map(photo),
+              ];
+            })}
           </div>
         </div>
       </div>

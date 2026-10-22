@@ -11,17 +11,23 @@ export const CRAFT_IMAGES = {
     width: 1200,
     height: 1200,
   },
-  turning: {
-    src: "/images/design_journal/imag2.jpeg",
-    alt: "Weathered hands guiding a chisel through turned wood, shavings piled beneath",
-    width: 736,
-    height: 1308,
+  drilling: {
+    src: "/images/craft/craft_1.png",
+    alt: "A karigar drilling into the edge of a plywood carcass, sawdust lit up in the workshop light",
+    width: 1086,
+    height: 1448,
   },
-  finishing: {
-    src: "/images/design_journal/image3.jpeg",
-    alt: "A craftsman's hand drawing a plane along a timber surface — hand-finished surfaces",
-    width: 736,
-    height: 979,
+  sawing: {
+    src: "/images/craft/craft_2.png",
+    alt: "A craftsman guiding a circular saw through a timber board, both hands steadying the cut",
+    width: 1086,
+    height: 1448,
+  },
+  chiselling: {
+    src: "/images/craft/craft_3.png",
+    alt: "Barefoot at the bench, a karigar drives a chisel into timber with a mallet, shavings all around",
+    width: 1086,
+    height: 1448,
   },
 } satisfies Record<string, JournalImage>;
 

@@ -54,16 +54,20 @@ export function ProjectCard({
 
       <div className="mt-5 flex items-start justify-between gap-4">
         <div>
-          <p className="eyebrow mb-2.5 text-muted">{p.development}</p>
+          <p className="eyebrow mb-2.5 text-muted">
+            Flat {p.flatNo} · {p.development}
+          </p>
           <H className="text-h3 text-ink">
             <Link href={projectHref(p)} className="after:absolute after:inset-0 after:content-['']">
-              Flat {p.flatNo}
+              {p.name}
             </Link>
           </H>
         </div>
         <p className="mt-6 shrink-0 text-right text-sm text-muted">
           {p.area}
-          <span className="block">{p.images.length} photographs</span>
+          <span className="block">
+            {p.images.length} {p.images.length === 1 ? "photograph" : "photographs"}
+          </span>
         </p>
       </div>
     </article>

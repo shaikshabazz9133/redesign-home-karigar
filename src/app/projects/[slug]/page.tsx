@@ -72,13 +72,12 @@ export default async function ProjectPage({ params }: Props) {
     <>
       <header className="pt-32 md:pt-40">
         <div className="container-site">
-          <Breadcrumbs items={[{ name: "Homes", path: "/projects" }, { name: `Flat ${p.flatNo}`, path: `/projects/${p.slug}` }]} />
+          <Breadcrumbs items={[{ name: "Homes", path: "/projects" }, { name: p.name, path: `/projects/${p.slug}` }]} />
           <div className="mt-10 grid gap-8 md:mt-14 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
               <div className="animate-rise"><Eyebrow>{p.configuration} residence</Eyebrow></div>
               <h1 className="mt-6 text-h1 caps animate-rise [animation-delay:80ms]">
-                Flat {p.flatNo}
-                <span className="block text-muted">{p.development}</span>
+                {p.name}
               </h1>
             </div>
             <dl className="grid grid-cols-2 gap-x-8 gap-y-6 animate-rise [animation-delay:160ms] lg:col-span-5">

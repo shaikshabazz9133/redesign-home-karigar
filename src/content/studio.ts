@@ -6,6 +6,8 @@ export interface Service {
   summary: string;
   details: string[];
   image: { src: string; alt: string; width: number; height: number };
+  /** 3D renders of this work from the Shoib Residence, played as the service's slideshow. */
+  gallery: string[];
 }
 
 export const services: Service[] = [
@@ -25,6 +27,16 @@ export const services: Service[] = [
       width: 2400,
       height: 1846,
     },
+    gallery: [
+      "/images/services/shoib/ceiling-1.jpg",
+      "/images/services/shoib/ceiling-2.jpg",
+      "/images/services/shoib/ceiling-3.jpg",
+      "/images/services/shoib/ceiling-4.jpg",
+      "/images/services/shoib/ceiling-5.jpg",
+      "/images/services/shoib/ceiling-6.jpg",
+      "/images/services/shoib/ceiling-7.jpg",
+      "/images/services/shoib/ceiling-8.jpg",
+    ],
   },
   {
     slug: "modular-kitchen",
@@ -38,6 +50,13 @@ export const services: Service[] = [
       width: 2400,
       height: 1846,
     },
+    gallery: [
+      "/images/services/shoib/kitchen-1.jpg",
+      "/images/services/shoib/kitchen-2.jpg",
+      "/images/services/shoib/kitchen-3.jpg",
+      "/images/services/shoib/kitchen-4.jpg",
+      "/images/services/shoib/kitchen-5.jpg",
+    ],
   },
   {
     slug: "wardrobes-and-storage",
@@ -51,6 +70,15 @@ export const services: Service[] = [
       width: 2400,
       height: 1846,
     },
+    gallery: [
+      "/images/services/shoib/wardrobe-1.jpg",
+      "/images/services/shoib/wardrobe-2.jpg",
+      "/images/services/shoib/wardrobe-3.jpg",
+      "/images/services/shoib/wardrobe-4.jpg",
+      "/images/services/shoib/wardrobe-5.jpg",
+      "/images/services/shoib/wardrobe-6.jpg",
+      "/images/services/shoib/wardrobe-7.jpg",
+    ],
   },
   {
     slug: "tv-unit-foyer-and-pooja",
@@ -64,6 +92,15 @@ export const services: Service[] = [
       width: 2400,
       height: 1846,
     },
+    gallery: [
+      "/images/services/shoib/tv-1.jpg",
+      "/images/services/shoib/tv-2.jpg",
+      "/images/services/shoib/tv-3.jpg",
+      "/images/services/shoib/tv-4.jpg",
+      "/images/services/shoib/tv-5.jpg",
+      "/images/services/shoib/tv-6.jpg",
+      "/images/services/shoib/tv-7.jpg",
+    ],
   },
 ];
 
@@ -179,13 +216,14 @@ export const team = [
   { name: "Ar. Mohammed Zuber", role: "Founder & CEO" },
   { name: "Mohammed Nadeem", role: "CO-Founder & Marketing Head" },
   { name: "ID. Wajeeda Mullani", role: "Senior Interior Designer" },
-  { name: "Zuner", role: "Site Supervision Manager" },
   { name: "ID. Durga Kumari", role: "Interior Designer" },
   { name: "ID. Apurva Nalabale", role: "Principle Designer & Brand Manager" },
-  { name: "Chetan", role: "Digital Marketing & Execution" },
-  { name: "Farhaan Khan", role: "Site Manager & Sales" },
+  { name:"Sanjna", role:"Marketing"},
   { name: "Farhat Banu", role: "Senior Sales Executive" },
   { name: "Syed Adeeba", role: "Sales Executive" },
+  { name: "Zuner", role: "Site Supervision Manager" },
+  { name: "Farhaan Khan", role: "Site Manager & Sales" },
+
 
 ];
 
