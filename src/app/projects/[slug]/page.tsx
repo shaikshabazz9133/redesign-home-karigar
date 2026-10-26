@@ -155,7 +155,7 @@ export default async function ProjectPage({ params }: Props) {
       <div className="pt-20 md:pt-28">
         <CtaBand
           title={`Planning a ${p.configuration} at ${p.development}?`}
-          body="We know these floor plans well. Share yours and we'll show you what's possible — no advance until you approve the 3D designs."
+          body="We know these floor plans well. Share yours and we'll show you what's possible. No advance until you approve the 3D designs."
         />
       </div>
 

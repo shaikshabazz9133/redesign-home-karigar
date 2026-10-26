@@ -57,7 +57,7 @@ export function ProjectsExplorer({ projects }: { projects: Project[] }) {
           ) : (
             <EmptyState
               title="No homes match these filters"
-              body="Try another community or configuration — or clear the filters to see the full portfolio."
+              body="Try another community or configuration, or clear the filters to see the full portfolio."
               action={
                 <Button variant="secondary" onClick={() => router.replace("/projects", { scroll: false })}>
                   Clear filters

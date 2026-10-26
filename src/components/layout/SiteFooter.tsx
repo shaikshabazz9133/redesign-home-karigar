@@ -25,7 +25,7 @@ export function SiteFooter() {
               <Logo />
             </Link>
             <p className="max-w-md text-ivory-muted">
-              Complete residential interiors in Bengaluru — designed in 3D, built with branded materials and delivered as
+              Complete residential interiors in Bengaluru, designed in 3D, built with branded materials and delivered as
               promised.
             </p>
           </div>

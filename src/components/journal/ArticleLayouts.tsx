@@ -84,8 +84,10 @@ function Reshuffle({ a }: { a: JournalArticle }) {
   const long = a.sections.length > 4 || a.gallery.length > 2 || a.cover === "left";
   // The headline fits its column whatever its longest word: its size is capped by that word's length.
   const longest = Math.max(...a.display.lines.map((l) => l.length));
-  const section = (s: { heading: string; body: string[] }, i: number) => (
-    <section key={s.heading} aria-labelledby={`s${i}`} data-reveal>
+  // Text running through newspaper columns isn't revealed on scroll: a section broken across two columns is
+  // observed by where it starts, so its carried-over half would sit hidden at the top of the next column.
+  const section = (s: { heading: string; body: string[] }, i: number, inColumns = false) => (
+    <section key={s.heading} aria-labelledby={`s${i}`} data-reveal={inColumns ? undefined : ""}>
       <h2 id={`s${i}`} className={cn(H2, "break-after-avoid")}>
         {s.heading}
       </h2>
@@ -194,7 +196,7 @@ function Reshuffle({ a }: { a: JournalArticle }) {
               );
               return [
                 ...photos.filter(({ k }) => !after(k)).map(photo),
-                section(s, i),
+                section(s, i, true),
                 ...photos.filter(({ k }) => after(k)).map(photo),
               ];
             })}
@@ -297,7 +299,7 @@ function Monograph({ a }: { a: JournalArticle }) {
           <>
             <div className={cn("mt-14 gap-12 border-t border-line pt-10 md:columns-2", BODY)}>
               {parts.map((s, k) => (
-                <section key={s.heading} aria-labelledby={`p${k}`} className="mb-10" data-reveal>
+                <section key={s.heading} aria-labelledby={`p${k}`} className="mb-10">
                   <p className="font-sans text-[0.75rem] tracking-[0.16em] text-oxblood uppercase">Part {ROMAN[k]}</p>
                   <h2 id={`p${k}`} className={H2}>
                     {s.heading}
@@ -475,7 +477,7 @@ function Character({ a }: { a: JournalArticle }) {
 
         <div className={cn("mt-12 max-w-4xl gap-14 md:columns-2 md:text-justify md:hyphens-auto", BODY)}>
           {a.sections.map((s, si) => (
-            <section key={s.heading} aria-labelledby={`s${si}`} className="mb-6" data-reveal>
+            <section key={s.heading} aria-labelledby={`s${si}`} className="mb-6">
               <h2 id={`s${si}`} className={cn(H2, "mb-2")}>
                 {s.heading}
               </h2>

@@ -98,7 +98,7 @@ export function DesignPhilosophy() {
               className="on-dark flex min-h-48 flex-col justify-between gap-8 bg-[#3a2418] p-7 text-ivory lg:min-h-0 lg:p-6"
             >
               <p className="max-w-[16rem] text-lg leading-snug">
-                Design isn&apos;t just what you see — it&apos;s how a space <em className="font-accent text-[1.15em] italic">lives</em>{" "}
+                Design isn&apos;t just what you see; it&apos;s how a space <em className="font-accent text-[1.15em] italic">lives</em>{" "}
                 with you.
               </p>
               <Link
@@ -116,8 +116,8 @@ export function DesignPhilosophy() {
         <div className="order-2 mt-12 lg:col-start-2 lg:row-start-1 lg:mt-0 lg:pb-8">
           <p className="max-w-lg text-lead text-ink-soft" data-reveal>
             Home Karigar creates homes that feel as considered as they are beautiful. By taking on a limited number of
-            projects, we remain deeply involved at every stage—from planning and design to execution and
-            handover—ensuring every space is crafted with clarity, precision, and lasting quality. Every home begins
+            projects, we remain deeply involved at every stage, from planning and design to execution and
+            handover, ensuring every space is crafted with clarity, precision, and lasting quality. Every home begins
             with how you live, and is detailed in 3D before work starts on site, so what you approve is exactly what
             is built.
           </p>

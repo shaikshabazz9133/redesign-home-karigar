@@ -71,7 +71,7 @@ export function LoginForm() {
           <Icon name="shield" size={20} className="mt-0.5 shrink-0 text-brass-ink" />
           <p>
             Portal access is set up by your project designer once your design is underway. If you&apos;re an active client,
-            ask your designer for an invitation — or{" "}
+            ask your designer for an invitation, or{" "}
             <Link href="/contact" className="font-medium underline underline-offset-4">contact the studio</Link>.
           </p>
         </div>

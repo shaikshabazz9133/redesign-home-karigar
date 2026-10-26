@@ -60,7 +60,7 @@ export const CRAFT_SECTIONS: { heading: string; body: string[] }[] = [
     heading: "When minimalism erases character",
     body: [
       "Minimalism itself is not the concern. When practised thoughtfully, it can be deeply calming and beautifully restrained. The concern begins when minimalism becomes an excuse to eliminate character. When every home begins to resemble the next. When handcrafted details disappear because they require more time than the market is willing to give. When machine-made perfection quietly replaces the subtle irregularities that once revealed the presence of human hands.",
-      "A home should never feel anonymous. It should carry traces of the people who shaped it. A hand-carved console, an intricately woven cane panel, a block-printed textile, a bronze sculpture collected over years rather than purchased overnight—these are not decorative additions. They are reminders that craftsmanship is, above all, a conversation between time and the maker.",
+      "A home should never feel anonymous. It should carry traces of the people who shaped it. A hand-carved console, an intricately woven cane panel, a block-printed textile, a bronze sculpture collected over years rather than purchased overnight. These are not decorative additions. They are reminders that craftsmanship is, above all, a conversation between time and the maker.",
     ],
   },
   {
@@ -89,7 +89,7 @@ export const CRAFT_SECTIONS: { heading: string; body: string[] }[] = [
   {
     heading: "A question to carry forward",
     body: [
-      "As we build homes for the future, what parts of our past are we willing to leave behind—and what deserves to be carried forward?",
+      "As we build homes for the future, what parts of our past are we willing to leave behind, and what deserves to be carried forward?",
     ],
   },
 ];
@@ -150,18 +150,18 @@ export const PINTEREST_SECTIONS: { heading: string; body: string[] }[] = [
       "They possess a quiet confidence.",
       "They understand that beauty is not created through abundance, but through intention.",
       "A room does not become luxurious because it is filled with expensive objects. It becomes luxurious when every object has a reason to exist.",
-      "A handwoven rug beneath your feet carries generations of craftsmanship. A bronze sculpture collected during travel speaks of curiosity rather than consumption. A piece of art inherited from a parent transforms a wall into a memory. Even a carefully chosen wallpaper does more than decorate a surface—it establishes atmosphere. It changes how morning light settles into a room, how silence feels in the afternoon, and how a space welcomes people before a single word is spoken.",
+      "A handwoven rug beneath your feet carries generations of craftsmanship. A bronze sculpture collected during travel speaks of curiosity rather than consumption. A piece of art inherited from a parent transforms a wall into a memory. Even a carefully chosen wallpaper does more than decorate a surface. It establishes atmosphere. It changes how morning light settles into a room, how silence feels in the afternoon, and how a space welcomes people before a single word is spoken.",
       "Design, at its finest, is never about filling a home.",
       "It is about revealing the people who live within it.",
       "The homes we remember most are never perfect. They evolve.",
       "Books slowly replace decorative objects on coffee tables. Children’s drawings find unexpected places on carefully painted walls. A favourite chair becomes worn in exactly the places where evening conversations unfold. Fresh flowers appear one week, branches collected during a walk the next.",
       "The architecture remains constant, but life quietly edits the interior.",
-      "And that is perhaps the greatest achievement of thoughtful design—to create spaces generous enough to accept change without losing their identity.",
+      "And that is perhaps the greatest achievement of thoughtful design: to create spaces generous enough to accept change without losing their identity.",
       "A home should never feel frozen in time.",
       "It should mature alongside the people who inhabit it.",
       "This is why we believe homes should be designed for generations rather than trends.",
       "Not because timelessness is fashionable, but because permanence has become increasingly rare.",
-      "The materials we choose are not selected simply for their appearance, but for the stories they will one day carry. The artwork is not chosen merely to complement a palette, but to express something deeply personal. The textures, the objects, the light, the proportions—together they begin to describe a family long before introductions are made.",
+      "The materials we choose are not selected simply for their appearance, but for the stories they will one day carry. The artwork is not chosen merely to complement a palette, but to express something deeply personal. The textures, the objects, the light, the proportions: together they begin to describe a family long before introductions are made.",
       "A beautifully designed home is, in many ways, an autobiography.",
       "It speaks without language.",
       "It reveals values without explanation.",
@@ -184,10 +184,10 @@ export const PINTEREST_SECTIONS: { heading: string; body: string[] }[] = [
     body: [
       "Some of the greatest lessons in design were never documented in textbooks. They were quietly embedded within the architecture of the homes we inherited.",
       "Words & editorial: Apurva Nalabale · Published by Home Karigar",
-      "Architecture has always been a reflection of the society that builds it. Long before sustainability entered contemporary discourse, before wellness evolved into an industry, and before biophilic design became part of architectural vocabulary, traditional Indian homes had already internalised these principles—not as trends, but as an instinctive way of living. What we now celebrate as innovation once existed as common wisdom, shaped not by design movements but by generations of observation, climate and culture.",
+      "Architecture has always been a reflection of the society that builds it. Long before sustainability entered contemporary discourse, before wellness evolved into an industry, and before biophilic design became part of architectural vocabulary, traditional Indian homes had already internalised these principles, not as trends, but as an instinctive way of living. What we now celebrate as innovation once existed as common wisdom, shaped not by design movements but by generations of observation, climate and culture.",
       "The Indian home was never conceived as an isolated object. It was imagined as a living ecosystem where architecture, climate, ritual and community existed in quiet reciprocity. Light was never introduced merely as an aesthetic device, but as a measure of time itself. The movement of the sun choreographed the rhythm of everyday life, while shifting shadows quietly announced the passing of morning into evening. Wind was not engineered through mechanical systems but welcomed through orientation, proportion and restraint. Nature was never treated as something beyond the walls of the home; it was invited to become one of its inhabitants.",
       "Perhaps this is why traditional homes continue to feel profoundly relevant, even in an age that often defines progress through technology. Their endurance lies not in nostalgia, but in their understanding of human life. They remind us that architecture is not simply about constructing buildings. It is about shaping experiences.",
-      "The courtyard, perhaps the most quietly intelligent invention within Indian domestic architecture, was never an architectural void waiting to be occupied. It was the emotional and environmental nucleus of the home—a place where daylight, rain, breeze and silence became part of everyday living. It welcomed the first monsoon before anyone else did. It carried the fragrance of wet earth into surrounding rooms. It framed the changing sky as naturally as it framed family life. Children grew up within its boundaries while grandparents watched over them from shaded verandas. Festivals unfolded beneath the open sky. Morning prayers, afternoon conversations and quiet moments of reflection all found their place there.",
+      "The courtyard, perhaps the most quietly intelligent invention within Indian domestic architecture, was never an architectural void waiting to be occupied. It was the emotional and environmental nucleus of the home, a place where daylight, rain, breeze and silence became part of everyday living. It welcomed the first monsoon before anyone else did. It carried the fragrance of wet earth into surrounding rooms. It framed the changing sky as naturally as it framed family life. Children grew up within its boundaries while grandparents watched over them from shaded verandas. Festivals unfolded beneath the open sky. Morning prayers, afternoon conversations and quiet moments of reflection all found their place there.",
       "Its value could never be measured in square feet.",
       "It existed because some experiences deserve space.",
       "The veranda possessed a similarly profound intelligence. Neither entirely private nor entirely public, it occupied a delicate threshold between intimacy and society. It dissolved the rigid boundary between the home and the street, encouraging encounters that required no invitation, conversations that demanded no occasion and moments of pause that contemporary architecture often struggles to accommodate. It allowed the home to participate in the life of its neighbourhood without surrendering its privacy.",
@@ -209,7 +209,7 @@ export const PINTEREST_SECTIONS: { heading: string; body: string[] }[] = [
       "The intelligence of traditional Indian homes was never confined to brick, timber or stone. It lived in an understanding that architecture should respond not only to climate, but also to culture. Not only to movement, but also to memory. Not only to function, but also to the subtle rituals that transform a house into a home.",
       "Perhaps the future of Indian architecture does not depend upon recreating the forms of the past.",
       "It depends upon recovering the wisdom that shaped them.",
-      "The courtyard was never merely a courtyard. The veranda was never merely a transitional space. They were architectural expressions of a civilisation that understood something we are only beginning to rediscover—that the finest homes are not those that separate us from the world, but those that quietly teach us how to belong within it.",
+      "The courtyard was never merely a courtyard. The veranda was never merely a transitional space. They were architectural expressions of a civilisation that understood something we are only beginning to rediscover: that the finest homes are not those that separate us from the world, but those that quietly teach us how to belong within it.",
     ],
   },
 ];
@@ -241,13 +241,13 @@ export const KITCHEN_SECTIONS: { heading: string; body: string[] }[] = [
   {
     heading: "The material beneath",
     body: [
-      "The finest kitchens are rarely defined by what catches the eye. Stone, hardware and beautifully finished shutters may shape the first impression, but it is the material beneath them that quietly determines how the space will age. A kitchen lives through steam, humidity, changing temperatures and constant movement, making it the most demanding room in the home. That’s why every Home Karigar kitchen begins with BWP 710 Grade plywood—a material chosen not for specification sheets, but for the confidence it offers years after the home is lived in.",
+      "The finest kitchens are rarely defined by what catches the eye. Stone, hardware and beautifully finished shutters may shape the first impression, but it is the material beneath them that quietly determines how the space will age. A kitchen lives through steam, humidity, changing temperatures and constant movement, making it the most demanding room in the home. That’s why every Home Karigar kitchen begins with BWP 710 Grade plywood, a material chosen not for specification sheets, but for the confidence it offers years after the home is lived in.",
     ],
   },
   {
     heading: "Designed around everyday rituals",
     body: [
-      "Design, however, extends far beyond cabinetry. A well-planned pantry brings everyday essentials effortlessly within reach, bottle pull-outs transform narrow gaps into purposeful storage, and deep tandem drawers replace traditional shelves with a more intuitive way of organising cookware. Spice racks, wicker baskets and thoughtfully positioned microwave units aren’t simply accessories—they’re quiet decisions that shape how a kitchen is experienced every day. Details such as fluted glass introduce softness and texture, while precision hardware ensures every drawer and cabinet feels as refined on its thousandth use as it did on its first. Because a kitchen should never be designed around trends alone; it should be designed around the rituals of everyday living.",
+      "Design, however, extends far beyond cabinetry. A well-planned pantry brings everyday essentials effortlessly within reach, bottle pull-outs transform narrow gaps into purposeful storage, and deep tandem drawers replace traditional shelves with a more intuitive way of organising cookware. Spice racks, wicker baskets and thoughtfully positioned microwave units aren’t simply accessories. They’re quiet decisions that shape how a kitchen is experienced every day. Details such as fluted glass introduce softness and texture, while precision hardware ensures every drawer and cabinet feels as refined on its thousandth use as it did on its first. Because a kitchen should never be designed around trends alone; it should be designed around the rituals of everyday living.",
     ],
   },
 ];
@@ -279,13 +279,13 @@ export const STONE_SECTIONS: { heading: string; body: string[] }[] = [
   {
     heading: "Every kitchen tells a story",
     body: [
-      "Every Indian kitchen tells a different story. Some wake before sunrise to the whistle of a pressure cooker and the aroma of fresh chai. Others become gathering places only on weekends, when family and friends linger around an island over slow breakfasts. There are kitchens built for elaborate festive cooking, where kadais, spice boxes and generations of family recipes take centre stage, and there are homes where simplicity, clean lines and effortless maintenance define everyday living. Before recommending marble, quartz or granite, a designer first understands these rituals, because the best material is never chosen in isolation—it is chosen for the life it will support.",
+      "Every Indian kitchen tells a different story. Some wake before sunrise to the whistle of a pressure cooker and the aroma of fresh chai. Others become gathering places only on weekends, when family and friends linger around an island over slow breakfasts. There are kitchens built for elaborate festive cooking, where kadais, spice boxes and generations of family recipes take centre stage, and there are homes where simplicity, clean lines and effortless maintenance define everyday living. Before recommending marble, quartz or granite, a designer first understands these rituals, because the best material is never chosen in isolation; it is chosen for the life it will support.",
     ],
   },
   {
     heading: "Marble",
     body: [
-      "Marble has remained one of architecture’s most admired materials for centuries because no engineered surface can replicate what nature creates. Every slab is unique, with veining and movement that cannot be repeated. It brings depth, softness and an unmistakable sense of permanence to a kitchen. Yet marble also asks for care. Ingredients commonly found in Indian cooking—lemon, tamarind, vinegar and richly spiced gravies—can affect its surface if left unattended. For many homeowners, however, that is part of its charm. Marble ages gracefully, collecting the quiet traces of everyday life rather than hiding them.",
+      "Marble has remained one of architecture’s most admired materials for centuries because no engineered surface can replicate what nature creates. Every slab is unique, with veining and movement that cannot be repeated. It brings depth, softness and an unmistakable sense of permanence to a kitchen. Yet marble also asks for care. Ingredients commonly found in Indian cooking, such as lemon, tamarind, vinegar and richly spiced gravies, can affect its surface if left unattended. For many homeowners, however, that is part of its charm. Marble ages gracefully, collecting the quiet traces of everyday life rather than hiding them.",
     ],
   },
   {
@@ -330,7 +330,7 @@ export const STONE_SECTIONS: { heading: string; body: string[] }[] = [
 export const MOODBOARD_IMAGES = {
   cover: {
     src: "/images/design_journal/article4/img1.jpg",
-    alt: "“What we can take from Pinterest and what not?” — a living room of cream sofa, olive and oxblood cushions, a walnut coffee table and a marble island beside material samples",
+    alt: "“What we can take from Pinterest and what not?”: a living room of cream sofa, olive and oxblood cushions, a walnut coffee table and a marble island beside material samples",
     width: 1672,
     height: 941,
   },
@@ -375,7 +375,7 @@ export const MOODBOARD_SECTIONS: { heading: string; body: string[] }[] = [
   {
     heading: "The beginning, not the blueprint",
     body: [
-      "Once we understand why a space resonates, we reinterpret those ideas to suit the architecture of the home, its surroundings and, most importantly, the people who will live within it. Inspiration becomes the beginning of the conversation—not the blueprint.",
+      "Once we understand why a space resonates, we reinterpret those ideas to suit the architecture of the home, its surroundings and, most importantly, the people who will live within it. Inspiration becomes the beginning of the conversation, not the blueprint.",
       "Because the most memorable homes don’t remind you of a Pinterest board every time you walk through the door.",
       "They remind you of yourself.",
     ],

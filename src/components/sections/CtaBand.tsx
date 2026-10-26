@@ -6,7 +6,7 @@ import { BrandIcon } from "@/components/ui/Icon";
 /** Closing call to action, reused at the end of most pages. */
 export function CtaBand({
   title = "Let’s design the home you’ll live in for years.",
-  body = "Tell us about your floor plan and how you live. The first consultation carries no obligation — and no advance is taken until you approve the 3D designs.",
+  body = "Tell us about your floor plan and how you live. The first consultation carries no obligation, and no advance is taken until you approve the 3D designs.",
 }: {
   title?: string;
   body?: string;

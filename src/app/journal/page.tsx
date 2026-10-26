@@ -42,7 +42,7 @@ export default function JournalPage() {
             Notes from the <em className="text-oxblood">studio floor</em>
           </>
         }
-        intro="What we have learned designing and delivering homes — on materials, light, storage and the decisions worth making before anything is built."
+        intro="What we have learned designing and delivering homes: on materials, light, storage and the decisions worth making before anything is built."
       />
 
       <section aria-label="Featured story" className="container-site pt-12 md:pt-16">

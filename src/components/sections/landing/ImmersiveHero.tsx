@@ -3,8 +3,8 @@ import { SocialLinks } from "@/components/layout/SocialRail";
 import { HeroSlideshow } from "@/components/sections/landing/HeroSlideshow";
 
 /**
- * Full-bleed opening frame, one screen tall on every device (taller only if a screen is too short to hold it): the studio's rooms in turn
- * (see HeroSlideshow), opening on a double-height living room, with
+ * Full-bleed opening frame, one screen tall on every device (taller only if a screen is too short to hold it): the studio's
+ * rooms in turn (see HeroSlideshow), opening on the walk-in wardrobe, with
  * the studio's promise stepped across its top left, as in an architectural monograph, and the call to
  * action at its foot. The kicker sits inside the h1, so the page's main heading carries the search
  * phrase ("Luxury interior design studio in Bengaluru") as well as the promise.
@@ -60,7 +60,7 @@ export function ImmersiveHero() {
           <SocialLinks layout="row" className="hk-hero-in order-last [--d:560ms] sm:order-none" />
           <div className="hk-hero-in flex flex-col items-center gap-5 text-center [--d:460ms] sm:items-end sm:gap-6 sm:text-right">
             <p className="max-w-[17rem] text-[0.9375rem] leading-snug text-white/85">
-              Complete homes, from 3D design to handover — build as uniquely as you.
+              Complete homes, from 3D design to handover. Build as uniquely as you.
             </p>
             <div className="flex gap-2 sm:gap-3">
               <ButtonLink href="/projects" variant="leaf-outline" size="md" icon="arrowUpRight" className="max-sm:h-10 max-sm:gap-1.5 max-sm:px-3.5 max-sm:text-[0.625rem] max-sm:tracking-[0.06em] max-[380px]:[&>svg]:hidden">

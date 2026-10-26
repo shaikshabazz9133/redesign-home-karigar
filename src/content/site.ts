@@ -10,7 +10,7 @@ export const site = {
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://homekarigar.in").replace(/\/$/, ""),
   locale: "en_IN",
   description:
-    "Home Karigar is a Bengaluru interior design studio delivering complete residential interiors — from 3D design to handover — with no advance until your designs are approved.",
+    "Home Karigar is a Bengaluru interior design studio delivering complete residential interiors, from 3D design to handover, with no advance until your designs are approved.",
   foundedYearsAgo: 8,
   email: "query.homekarigar@gmail.com",
   phones: [
@@ -58,7 +58,7 @@ export const deliveryStats = {
     {
       count: "138+",
       name: "Prestige Finsbury Park",
-      note: "Our largest delivered community — designed, built and handed over to homeowners.",
+      note: "Our largest delivered community: designed, built and handed over to homeowners.",
     },
     {
       count: "62+",

@@ -130,12 +130,15 @@ export function Testimonials() {
               aria-hidden={i >= count || undefined}
               className="w-[84vw] shrink-0 snap-start sm:w-[calc((100vw-2*clamp(1rem,4vw,2.5rem)-1.5rem)/2)] lg:w-[calc((min(100vw,82rem)-2*clamp(1rem,4vw,2.5rem)-3rem)/3)]"
             >
-              <figure className="flex h-full flex-col rounded-sm border border-line bg-paper p-7 md:p-8">
-                <span aria-hidden className="font-script text-[3.5rem] leading-[0.6] text-oxblood">
-                  &ldquo;
-                </span>
-                <blockquote className="mt-4 flex-1 text-[0.9375rem] leading-[1.7] text-ink-soft">{t.quote}</blockquote>
-                <figcaption className="mt-7 border-t border-line pt-5">
+              <figure className="flex h-full flex-col rounded-sm border border-line bg-paper p-6 md:p-7">
+                {/* The script quote marks open and close the words inline; leading-0 keeps them from
+                    deepening the lines they sit on, and the offset drops the high-set glyphs onto the text line. */}
+                <blockquote className="flex-1 text-pretty text-[0.9375rem] leading-[1.65] text-ink-soft">
+                  <span aria-hidden className="relative top-[0.42em] mr-1.5 font-script text-[2.5em] leading-[0] text-oxblood">&ldquo;</span>
+                  {t.quote}
+                  <span aria-hidden className="relative top-[0.42em] ml-0.5 font-script text-[2.5em] leading-[0] text-oxblood">&rdquo;</span>
+                </blockquote>
+                <figcaption className="mt-4 border-t border-line pt-4">
                   <span className="block font-display text-[1.25rem] leading-tight tracking-[-0.03em] text-ink">{t.name}</span>
                   <span className="mt-1 block text-[0.75rem] tracking-[0.12em] text-muted uppercase">{t.home}</span>
                 </figcaption>

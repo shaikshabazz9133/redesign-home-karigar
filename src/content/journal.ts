@@ -90,7 +90,7 @@ export const journal: JournalArticle[] = [
     readMinutes: 6,
     image: STONE_IMAGES.moodboard,
     sections: STONE_SECTIONS,
-    quote: "The best material is never chosen in isolation—it is chosen for the life it will support.",
+    quote: "The best material is never chosen in isolation; it is chosen for the life it will support.",
     layout: "reshuffle",
     display: { lines: ["Marble, Quartz", "& Granite:", "Designing the", "Heart of the Home"] },
     gallery: [STONE_IMAGES.trends],
@@ -105,7 +105,7 @@ export const journal: JournalArticle[] = [
     title: "Not Every Home Needs to Look Like Pinterest",
     category: "Living",
     excerpt:
-      "A Pinterest image captures only a single moment. The finest homes are never designed to recreate a photograph — they are designed to support the lives lived within them.",
+      "A Pinterest image captures only a single moment. The finest homes are never designed to recreate a photograph. They are designed to support the lives lived within them.",
     readMinutes: 3,
     image: MOODBOARD_IMAGES.cover,
     sections: MOODBOARD_SECTIONS,
@@ -124,7 +124,7 @@ export const journal: JournalArticle[] = [
     title: "Why Every Home Doesn’t Need to Look Like Pinterest",
     category: "Living",
     excerpt:
-      "Never before have we possessed so many references, and yet so few genuinely individual spaces — on borrowed identities, homes designed for generations, and what courtyards and verandas still teach us.",
+      "Never before have we possessed so many references, and yet so few genuinely individual spaces. On borrowed identities, homes designed for generations, and what courtyards and verandas still teach us.",
     readMinutes: 13,
     image: PINTEREST_IMAGES.cover,
     sections: PINTEREST_SECTIONS,
@@ -159,7 +159,7 @@ export const journal: JournalArticle[] = [
       {
         heading: "Three layers of light",
         body: [
-          "Cove lighting washes the ceiling with a soft, indirect glow — the light you live in through the evening.",
+          "Cove lighting washes the ceiling with a soft, indirect glow: the light you live in through the evening.",
           "Spotlights do the work: over the counter, the dining table, a reading chair. A statement fixture, like a chandelier over the table, gives the room its centre.",
           "With all three on separate circuits, one room can be bright for a dinner party and calm for a film.",
         ],
@@ -167,11 +167,11 @@ export const journal: JournalArticle[] = [
       {
         heading: "Curves, steps and restraint",
         body: [
-          "Curved and stepped profiles bring movement to a flat slab, but every edge also catches light and dust. We keep profiles purposeful — one gesture per room, done well.",
+          "Curved and stepped profiles bring movement to a flat slab, but every edge also catches light and dust. We keep profiles purposeful: one gesture per room, done well.",
         ],
       },
     ],
-    quote: "Good lighting is three layers, not one fixture — one gesture per room, done well.",
+    quote: "Good lighting is three layers, not one fixture, one gesture per room, done well.",
     layout: "reshuffle",
     display: { lines: ["The", "Layered", "Ceiling"] },
     gallery: [
@@ -185,7 +185,7 @@ export const journal: JournalArticle[] = [
     title: "Designing a wardrobe you will still love in ten years",
     category: "Storage",
     excerpt:
-      "Drawers, lofts and hanging space in the right proportions — and the ply and fittings that keep the doors aligned long after move-in day.",
+      "Drawers, lofts and hanging space in the right proportions, and the ply and fittings that keep the doors aligned long after move-in day.",
     readMinutes: 4,
     image: {
       src: "/images/17242/9.jpeg",
@@ -198,7 +198,7 @@ export const journal: JournalArticle[] = [
         heading: "Measure the wardrobe, then the clothes",
         body: [
           "Before we draw a single shutter we ask what goes inside: long dresses or shirts, folded or hung, how many shoes, what lives in a suitcase until next season.",
-          "That decides the split between hanging rails, drawers and shelves — and how high the loft should start so it is useful rather than forgotten.",
+          "That decides the split between hanging rails, drawers and shelves, and how high the loft should start so it is useful rather than forgotten.",
         ],
       },
       {
@@ -239,7 +239,7 @@ export const journal: JournalArticle[] = [
       {
         heading: "Approval is the contract",
         body: [
-          "Your home is designed in 3D, room by room, and refined with you until every detail is right. Only then — and only once branded materials are delivered to site — is an advance collected.",
+          "Your home is designed in 3D, room by room, and refined with you until every detail is right. Only then, and only once branded materials are delivered to site, is an advance collected.",
           "Because execution follows the approved designs and drawings exactly, the 3D stage is where every decision should be made.",
         ],
       },
@@ -286,7 +286,7 @@ export const journal: JournalArticle[] = [
       {
         heading: "One palette, many pieces",
         body: [
-          "Entrance foyers, shoe units, TV and display walls, pooja units, study and dressing — designed separately, they become a collection of nice objects. Designed as one curated scope, they become a home.",
+          "Entrance foyers, shoe units, TV and display walls, pooja units, study and dressing. Designed separately, they become a collection of nice objects. Designed as one curated scope, they become a home.",
           "We carry a small set of materials, tones and proportions through every built-in, so the foyer quietly introduces the living room.",
         ],
       },
@@ -299,7 +299,7 @@ export const journal: JournalArticle[] = [
       {
         heading: "A pooja unit with presence",
         body: [
-          "A pooja unit should feel deliberate rather than squeezed in — with its own light, a considered backdrop and storage for everything used in daily prayer kept close at hand.",
+          "A pooja unit should feel deliberate rather than squeezed in, with its own light, a considered backdrop and storage for everything used in daily prayer kept close at hand.",
         ],
       },
     ],

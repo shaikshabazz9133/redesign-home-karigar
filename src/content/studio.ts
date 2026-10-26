@@ -62,7 +62,7 @@ export const services: Service[] = [
     slug: "wardrobes-and-storage",
     title: "Wardrobes & Storage",
     summary:
-      "Wardrobes with drawers, hanging space and premium handles — built in Greenply or Century ply with Hettich fittings.",
+      "Wardrobes with drawers, hanging space and premium handles, built in Greenply or Century ply with Hettich fittings.",
     details: ["Greenply / Century ply", "Hettich fittings", "Drawers, lofts and hanging space"],
     image: {
       src: "/images/services/wardrobes-and-storage.jpg",
@@ -84,7 +84,7 @@ export const services: Service[] = [
     slug: "tv-unit-foyer-and-pooja",
     title: "TV Units, Foyers & Pooja",
     summary:
-      "Designer TV units, entrance foyers, pooja units, study and dressing — composed as one curated scope across the home.",
+      "Designer TV units, entrance foyers, pooja units, study and dressing, composed as one curated scope across the home.",
     details: ["Entrance foyer & shoe units", "TV and display walls", "Pooja, study and dressing units"],
     image: {
       src: "/images/services/tv-unit-foyer-and-pooja.jpg",
@@ -111,11 +111,11 @@ export const pillars = [
   },
   {
     title: "Detail",
-    body: "Concepts become drawings, and drawings become precise details. Materials are curated for function, comfort and longevity — every element considered before it reaches site.",
+    body: "Concepts become drawings, and drawings become precise details. Materials are curated for function, comfort and longevity, every element considered before it reaches site.",
   },
   {
     title: "Distinction",
-    body: "Execution is coordinated end to end — vendors, site work and final installation — so the home is delivered exactly as it was designed.",
+    body: "Execution is coordinated end to end (vendors, site work and final installation) so the home is delivered exactly as it was designed.",
   },
 ];
 
@@ -150,36 +150,38 @@ export const processSteps = [
 
 /**
  * Homeowners' words for the home page's testimonials.
- * PLACEHOLDERS — replace each entry with a real client's words, name and home before going live.
+ * The first is a real client's handwritten note (22 Oct 2026); the rest are PLACEHOLDERS — replace each with a
+ * real client's words, name and home before going live.
  */
 export const testimonials: { quote: string; name: string; home: string }[] = [
   {
-    quote: "Client testimonial to be added — a homeowner's words about their experience with Home Karigar will appear here.",
+    quote:
+      "We got a space, you converted it into a home. Your consultation, emphasis on prioritizing the ask and balancing design with utility stood out for me. A huge shout-out to your team. Execution is your strength. Your team is a strong foundation. Kudos! All the best!",
+    name: "Surabhi Choudhary",
+    home: "Sr. HRP · Amazon India",
+  },
+  {
+    quote: "Client testimonial to be added: a homeowner's words about their experience with Home Karigar will appear here.",
     name: "Client name",
     home: "Flat no. · Community",
   },
   {
-    quote: "Client testimonial to be added — a homeowner's words about their experience with Home Karigar will appear here.",
+    quote: "Client testimonial to be added: a homeowner's words about their experience with Home Karigar will appear here.",
     name: "Client name",
     home: "Flat no. · Community",
   },
   {
-    quote: "Client testimonial to be added — a homeowner's words about their experience with Home Karigar will appear here.",
+    quote: "Client testimonial to be added: a homeowner's words about their experience with Home Karigar will appear here.",
     name: "Client name",
     home: "Flat no. · Community",
   },
   {
-    quote: "Client testimonial to be added — a homeowner's words about their experience with Home Karigar will appear here.",
+    quote: "Client testimonial to be added: a homeowner's words about their experience with Home Karigar will appear here.",
     name: "Client name",
     home: "Flat no. · Community",
   },
   {
-    quote: "Client testimonial to be added — a homeowner's words about their experience with Home Karigar will appear here.",
-    name: "Client name",
-    home: "Flat no. · Community",
-  },
-  {
-    quote: "Client testimonial to be added — a homeowner's words about their experience with Home Karigar will appear here.",
+    quote: "Client testimonial to be added: a homeowner's words about their experience with Home Karigar will appear here.",
     name: "Client name",
     home: "Flat no. · Community",
   },
@@ -216,7 +218,7 @@ export const faqs = [
       "Our complete home interior solution is designed to cover every essential space in your home, providing a seamless experience from design to execution.",
       "It includes **living room interiors** such as foyer design, feature walls, TV unit, sofa setup, coffee table, crockery unit, dining area, decorative wall treatments, and custom partitions. For **bedrooms**, we design wardrobes, hydraulic beds, dressing units, study units, bay window seating, and customized wall décor. Our **kitchen and utility** solutions include a fully customized modular kitchen, utility storage, and optimized space planning.",
       "We also take care of **false ceilings, lighting layouts, electrical point planning, balcony designs, bathroom storage and premium hardware fittings, tile modifications wherever required**, along with other design elements that enhance the overall look and functionality of your home.",
-      "From concept development and 3D visualization to material selection and final execution, every element is thoughtfully designed to create a cohesive, functional, and beautifully finished home—all under one roof.",
+      "From concept development and 3D visualization to material selection and final execution, every element is thoughtfully designed to create a cohesive, functional, and beautifully finished home, all under one roof.",
     ].join("\n\n"),
   },
   {
@@ -244,16 +246,16 @@ export const faqs = [
   {
     q: "What makes Home Karigar different from other interior companies?",
     a: [
-      "At **Home Karigar**, we believe exceptional interiors begin with understanding the people who will live in them. Every project starts with a structured design journey—including detailed requirement discussions and curated moodboard presentations—so your home is designed around your lifestyle, not a standard template.",
+      "At **Home Karigar**, we believe exceptional interiors begin with understanding the people who will live in them. Every project starts with a structured design journey, including detailed requirement discussions and curated moodboard presentations, so your home is designed around your lifestyle, not a standard template.",
       "What sets us apart is our commitment to **transparent pricing with no hidden costs**, **premium branded materials**, **QR code verification for material authenticity**, **high-quality craftsmanship**, and **timely project delivery**. Whether you choose factory-finished interiors or our expert in-house carpentry, every detail is executed with precision and attention to finish.",
       "We're proud to be a **trusted interior partner for homeowners across Bengaluru**, with a particularly strong presence in **The Prestige City** and other premium residential communities. Every project is managed by a dedicated team, ensuring clear communication, regular progress updates, and strict quality checks from design to handover.",
-      "Our goal isn't just to create beautiful interiors—it's to deliver a home that reflects your personality, maximizes functionality, and provides a smooth, transparent, and stress-free experience from start to finish.",
+      "Our goal isn't just to create beautiful interiors; it's to deliver a home that reflects your personality, maximizes functionality, and provides a smooth, transparent, and stress-free experience from start to finish.",
     ].join("\n\n"),
   },
   {
     q: "Will I receive regular project updates?",
     a: [
-      "Absolutely. We believe complete transparency is essential throughout your interior journey. Our team keeps you informed at every stage of the project with **daily progress updates**, including **site videos**, photos, and milestone updates, so you always know exactly how your home is progressing—even if you're unable to visit the site.",
+      "Absolutely. We believe complete transparency is essential throughout your interior journey. Our team keeps you informed at every stage of the project with **daily progress updates**, including **site videos**, photos, and milestone updates, so you always know exactly how your home is progressing, even if you're unable to visit the site.",
       "You're also welcome to **visit the site at any time** during the execution to personally inspect the work and interact with our project team. A dedicated project manager coordinates the entire process, ensures timely communication, addresses your queries, and keeps the project on track from start to finish.",
       "With Home Karigar, you'll always have complete visibility into your project's progress, quality, and timeline.",
     ].join("\n\n"),
@@ -269,7 +271,7 @@ export const faqs = [
     q: "Do you handle electrical, plumbing, and civil work?",
     a: [
       "Yes. We provide **complete end-to-end interior execution**, including electrical, plumbing, and civil work wherever required as part of your project. From electrical point planning and lighting provisions to plumbing modifications, tiling, and necessary civil work, every aspect is professionally coordinated by our team.",
-      "By managing all trades under one roof, we ensure seamless execution, consistent quality, timely completion, and a hassle-free experience—so you don't have to coordinate with multiple contractors.",
+      "By managing all trades under one roof, we ensure seamless execution, consistent quality, timely completion, and a hassle-free experience, so you don't have to coordinate with multiple contractors.",
     ].join("\n\n"),
   },
   {
@@ -305,26 +307,27 @@ export interface Tour {
 export const tours: Tour[] = [
   { youtubeId: "x9yu9KIZULc", title: "A 1,629 sq. ft. home at Meridian Park, The Prestige City", kind: "Home tour" },
   { youtubeId: "y6x07bnYu7k", title: "3BHK Signature Living", kind: "Home tour" },
-  { youtubeId: "P5jEn8-EQeM", title: "From empty space to complete home — 3.5 BHK", kind: "Home tour" },
+  { youtubeId: "P5jEn8-EQeM", title: "From empty space to complete home, 3.5 BHK", kind: "Home tour" },
   { youtubeId: "vCsrterpYik", title: "Voices of happy homeowners", kind: "Client story" },
   { youtubeId: "xFK7xzl3H9A", title: "A 3BHK home by Home Karigar Interiors", kind: "Home tour" },
   { youtubeId: "oF56Q5OLSkE", title: "A 4.5 BHK rental home where practicality meets premium design", kind: "Home tour" },
-  { youtubeId: "y-uREkKJsCc", title: "Client stories — designed for living", kind: "Client story" },
+  { youtubeId: "y-uREkKJsCc", title: "Client stories: designed for living", kind: "Client story" },
   { youtubeId: "P_6DljNS3jk", title: "A complete 3 BHK tour, designed for modern living", kind: "Home tour" },
   { youtubeId: "KhJTw2XmLzg", title: "Complete home interior at Meridian Park, Bengaluru", kind: "Home tour" },
   { youtubeId: "x0rHT-EkhB4", title: "Welcome to a Home Karigar home tour", kind: "Home tour" },
   { youtubeId: "yEKpyhu3FIU", title: "When design meets client satisfaction", kind: "Client story" },
-  { youtubeId: "9m9qDTgr7Zc", title: "Rental living, elevated — thoughtful design in every corner", kind: "Home tour" },
+  { youtubeId: "9m9qDTgr7Zc", title: "Rental living, elevated: thoughtful design in every corner", kind: "Home tour" },
 ];
 
 /** The films shown on the home page's "The Art of Home Making" reel, in this order. */
 export const featuredFilms: Tour[] = [
   { youtubeId: "x9yu9KIZULc", title: "A 1,629 sq. ft. home at Meridian Park, The Prestige City", kind: "Home tour" },
   { youtubeId: "y6x07bnYu7k", title: "3BHK Signature Living, The Prestige City", kind: "Home tour" },
-  { youtubeId: "gFIi3_ps-aQ", title: "A 1,600 sq. ft. 3BHK — full home tour, The Prestige City", kind: "Home tour" },
+  { youtubeId: "gFIi3_ps-aQ", title: "A 1,600 sq. ft. 3BHK, full home tour, The Prestige City", kind: "Home tour" },
+  { youtubeId: "o4TLwiZvhMA", title: "The Rajput family shares the story behind their home", kind: "Client story" },
   { youtubeId: "xFK7xzl3H9A", title: "A 3BHK home at Avalon Park, The Prestige City", kind: "Home tour" },
   { youtubeId: "cMT1FTAT0H8", title: "An honest client review of a luxury home interior", kind: "Client story" },
-  { youtubeId: "otvulaTX7S4", title: "A real customer review — Meridian Park, The Prestige City", kind: "Client story" },
+  { youtubeId: "otvulaTX7S4", title: "A real customer review, Meridian Park, The Prestige City", kind: "Client story" },
   { youtubeId: "yEKpyhu3FIU", title: "When design meets client satisfaction", kind: "Client story" },
 ];
 

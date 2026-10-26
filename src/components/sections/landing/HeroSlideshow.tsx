@@ -7,16 +7,15 @@ import { cn } from "@/lib/utils";
 
 const INTERVAL = 4500;
 
+// Opens on the walk-in wardrobe (the render from public/images/image_01.pdf), then the rooms that hold up
+// full-screen behind the white headline.
 const SLIDES = [
+  { src: "/images/hero/walk-in-wardrobe.jpg", room: "Walk-in wardrobe", position: "object-[50%_45%]" },
   { src: "/images/hero/double-height-living.jpg", room: "Double-height living", position: "object-[50%_55%] max-lg:object-[56%_50%]" },
   { src: "/images/home_karigar_luxury.png", room: "Formal living", position: "object-[50%_45%]" },
   { src: "/images/services/shoib/ceiling-3.jpg", room: "Dining", position: "object-[50%_55%]" },
   { src: "/images/services/shoib/ceiling-5.jpg", room: "Master bedroom", position: "object-[50%_50%]" },
-  { src: "/images/hero/walk-in-wardrobe.jpg", room: "Walk-in wardrobe", position: "object-[45%_50%]" },
-  { src: "/images/services/shoib/kitchen-2.jpg", room: "Kitchen", position: "object-[50%_55%]" },
   { src: "/images/services/shoib/tv-1.jpg", room: "Family lounge", position: "object-[50%_55%]" },
-  { src: "/images/hero-2.png", room: "Living & dining", position: "object-[50%_40%]" },
-  { src: "/images/services/shoib/ceiling-1.jpg", room: "Lounge", position: "object-[50%_60%]" },
 ] as const;
 
 /** True once the intro preloader has lifted (or there is none), so the first photograph gets its full turn. */

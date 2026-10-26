@@ -27,7 +27,7 @@ export default function AboutPage() {
         crumbs={[{ name: "Studio", path: "/about" }]}
         eyebrow="The studio"
         title="A small, architect-led team that stays with your home"
-        intro={`For over ${site.foundedYearsAgo} years we have designed and delivered residential interiors in Bengaluru — from the first idea to the final installation.`}
+        intro={`For over ${site.foundedYearsAgo} years we have designed and delivered residential interiors in Bengaluru, from the first idea to the final installation.`}
       />
 
       <section aria-labelledby="story-title" className="container-site section-y grid gap-14 lg:grid-cols-12 lg:gap-16">
@@ -44,7 +44,7 @@ export default function AboutPage() {
             </p>
             <p>
               The same team carries your home from concept to drawings, through material selection and site execution, to
-              handover — so nothing is lost between the idea and the finished room.
+              handover, so nothing is lost between the idea and the finished room.
             </p>
           </div>
           <dl className="mt-12 grid grid-cols-2 gap-8 border-t border-line pt-8" data-reveal>

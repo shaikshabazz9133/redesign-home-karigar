@@ -74,7 +74,7 @@ export function ContactForm() {
         <div>
           <h2 className="text-h3">Thank you, {values.name.trim().split(" ")[0]}.</h2>
           <p className="mt-3 max-w-md text-muted">
-            Your enquiry is ready in WhatsApp — just press send. A designer will respond within studio hours ({site.hours.display}).
+            Your enquiry is ready in WhatsApp. Just press send. A designer will respond within studio hours ({site.hours.display}).
           </p>
         </div>
         <div className="flex flex-wrap gap-3">

@@ -41,7 +41,7 @@ const STEPS: { title: string; icon: keyof typeof ICONS; text: string }[] = [
   {
     title: "Briefing",
     icon: "briefing",
-    text: "We begin by listening — your floor plan, your routines and the way your family lives — so every decision that follows starts from you.",
+    text: "We begin by listening to your floor plan, your routines and the way your family lives, so every decision that follows starts from you.",
   },
   {
     title: "Design",

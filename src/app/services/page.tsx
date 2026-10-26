@@ -19,7 +19,7 @@ import { cn, pad2 } from "@/lib/utils";
 export const metadata: Metadata = pageMetadata({
   title: "Interior Design Services in Bengaluru",
   description:
-    "Modular kitchens, wardrobes, false ceilings, TV units, foyers and pooja units — complete home interiors in Bengaluru, built on BWP 710 ply with branded hardware.",
+    "Modular kitchens, wardrobes, false ceilings, TV units, foyers and pooja units: complete home interiors in Bengaluru, built on BWP 710 ply with branded hardware.",
   path: "/services",
   keywords: ["modular kitchen designers Bengaluru", "wardrobe makers Bengaluru", "false ceiling designers Bengaluru", "TV unit design", "pooja unit design"],
   image: { src: services[0].image.src, alt: services[0].image.alt, width: services[0].image.width, height: services[0].image.height },
@@ -37,7 +37,7 @@ export default function ServicesPage() {
       <PageHero
         crumbs={[{ name: "What We Do", path: "/services" }]}
         eyebrow="What we do"
-        title="Every surface, every fitting — designed as one home"
+        title="Every surface, every fitting, designed as one home"
         intro="A single studio for ceilings, kitchens, wardrobes and every built-in, so materials, proportions and light stay consistent from the foyer to the bedroom."
         aside={<ButtonLink href="/contact" variant="timber" icon="arrowUpRight">Discuss your home</ButtonLink>}
       />

@@ -16,7 +16,7 @@ import { FaqSection } from "@/components/sections/FaqSection";
 export const metadata: Metadata = pageMetadata({
   title: `${site.name} — Luxury Interior Design Studio in Bengaluru`,
   description:
-    "Luxury interior designers in Bengaluru. Complete home interiors from 3D design to handover — 400+ homes delivered, no advance until you approve your designs.",
+    "Luxury interior designers in Bengaluru. Complete home interiors from 3D design to handover. 400+ homes delivered, no advance until you approve your designs.",
   path: "/",
   absoluteTitle: true,
 });

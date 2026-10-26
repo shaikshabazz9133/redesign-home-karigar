@@ -43,7 +43,7 @@ export function DesignJournal() {
 
           <div className="mt-8 flex flex-col gap-6" data-reveal>
             <p className="max-w-md leading-[1.45] text-muted">
-              What we have learned from every home we build — on materials, light and the details that make a space
+              What we have learned from every home we build: on materials, light and the details that make a space
               age well. Written for anyone planning a home of their own.
             </p>
             <Link

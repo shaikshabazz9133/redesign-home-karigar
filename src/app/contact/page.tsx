@@ -9,7 +9,7 @@ import { BrandIcon, Icon, type IconName } from "@/components/ui/Icon";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact Interior Designers in Bengaluru",
-  description: `Book a consultation with Home Karigar in Bengaluru. Call ${site.phones[0].display}, WhatsApp the studio or send an enquiry — open ${site.hours.display}.`,
+  description: `Book a consultation with Home Karigar in Bengaluru. Call ${site.phones[0].display}, WhatsApp the studio or send an enquiry, open ${site.hours.display}.`,
   path: "/contact",
 });
 
@@ -36,7 +36,7 @@ export default function ContactPage() {
             <div className="animate-rise"><Eyebrow>Contact</Eyebrow></div>
             <h1 id="contact-title" className="mt-6 text-h1 caps animate-rise [animation-delay:80ms]">Let&apos;s talk about your home</h1>
             <p className="text-lead mt-6 text-muted animate-rise [animation-delay:160ms]">
-              Tell us a little about your space. A designer will get back to you within studio hours — the first consultation
+              Tell us a little about your space. A designer will get back to you within studio hours. The first consultation
               carries no obligation.
             </p>
 
@@ -76,7 +76,7 @@ export default function ContactPage() {
               </span>
               <span className="flex-1">
                 <span className="block font-medium text-ink">Prefer WhatsApp?</span>
-                <span className="block text-sm text-muted">Message the studio directly — usually the fastest reply.</span>
+                <span className="block text-sm text-muted">Message the studio directly, usually the fastest reply.</span>
               </span>
               <Icon name="arrowUpRight" size={18} className="text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
