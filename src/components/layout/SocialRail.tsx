@@ -17,7 +17,13 @@ const LINKS = [
     label: "Chat on WhatsApp",
     icon: <BrandIcon name="WhatsApp" size={18} />,
   },
-  { key: "mail", href: `mailto:${site.email}`, label: "Write to us", icon: <Icon name="mail" size={19} /> },
+  // Opens a Gmail compose window addressed to the studio: a bare mailto: does nothing on desktops with no mail app set up.
+  {
+    key: "mail",
+    href: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(site.email)}`,
+    label: "Write to us",
+    icon: <Icon name="mail" size={19} />,
+  },
 ].filter((l) => l.href);
 
 /**
@@ -32,8 +38,8 @@ export function SocialLinks({ layout, className }: { layout: "row" | "rail"; cla
         <li key={l.key} style={{ "--i": i } as React.CSSProperties}>
           <a
             href={l.href}
-            target={l.key === "mail" ? undefined : "_blank"}
-            rel={l.key === "mail" ? undefined : "noopener noreferrer"}
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label={l.label}
             className={cn("hk-social-disc group relative grid size-11 place-items-center rounded-full text-white", `hk-social-${l.key}`)}
           >

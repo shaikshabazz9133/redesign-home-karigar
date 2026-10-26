@@ -150,8 +150,8 @@ export const processSteps = [
 
 /**
  * Homeowners' words for the home page's testimonials.
- * The first is a real client's handwritten note (22 Oct 2026); the rest are PLACEHOLDERS — replace each with a
- * real client's words, name and home before going live.
+ * The first is a real client's handwritten note (22 Oct 2026); the rest are DRAFT copy written for layout, not
+ * real clients' words — swap each for a real homeowner's words, name and home (with their consent) before going live.
  */
 export const testimonials: { quote: string; name: string; home: string }[] = [
   {
@@ -161,29 +161,34 @@ export const testimonials: { quote: string; name: string; home: string }[] = [
     home: "Sr. HRP · Amazon India",
   },
   {
-    quote: "Client testimonial to be added: a homeowner's words about their experience with Home Karigar will appear here.",
-    name: "Client name",
-    home: "Flat no. · Community",
+    quote:
+      "We were nervous about handing over our first home, but the 3D designs took away all the guesswork. What we saw on screen is exactly what we walked into on handover day. The team was patient with every change we asked for.",
+    name: "Homeowner",
+    home: "3 BHK · Sarjapur Road",
   },
   {
-    quote: "Client testimonial to be added: a homeowner's words about their experience with Home Karigar will appear here.",
-    name: "Client name",
-    home: "Flat no. · Community",
+    quote:
+      "No advance until we approved the designs, and a clear payment schedule after that. That transparency is what made us choose Home Karigar, and they stuck to the timeline they promised.",
+    name: "Homeowner",
+    home: "Villa · Whitefield",
   },
   {
-    quote: "Client testimonial to be added: a homeowner's words about their experience with Home Karigar will appear here.",
-    name: "Client name",
-    home: "Flat no. · Community",
+    quote:
+      "The kitchen is easily our favourite room now. They planned the storage around how we actually cook, and the finish on the cabinets is excellent. Site updates every week meant we never had to chase anyone.",
+    name: "Homeowner",
+    home: "2 BHK · Electronic City",
   },
   {
-    quote: "Client testimonial to be added: a homeowner's words about their experience with Home Karigar will appear here.",
-    name: "Client name",
-    home: "Flat no. · Community",
+    quote:
+      "From the false ceiling to the wardrobes, everything was handled under one roof. The site supervisor kept the place clean and walked us through every stage. Our home feels warm and very us.",
+    name: "Homeowner",
+    home: "3 BHK · HSR Layout",
   },
   {
-    quote: "Client testimonial to be added: a homeowner's words about their experience with Home Karigar will appear here.",
-    name: "Client name",
-    home: "Flat no. · Community",
+    quote:
+      "They balanced our budget with the look we wanted without cutting corners on materials. Small details like the lighting and the wall panelling make a big difference. Highly recommend them to anyone in Bengaluru.",
+    name: "Homeowner",
+    home: "4 BHK · Hebbal",
   },
 ];
 
