@@ -129,7 +129,7 @@ export const processSteps = [
   {
     title: "3D design approval",
     body: "Your home is designed in 3D, room by room, and refined with you until every detail is right.",
-    promise: "No advance until you approve the 3D designs",
+    promise: "Every room signed off by you before production",
   },
   {
     title: "Branded materials, delivered",

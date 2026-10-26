@@ -30,7 +30,7 @@ function Meta({ article, tone = "dark" }: { article: JournalArticle; tone?: "dar
 }
 
 export default function JournalPage() {
-  const [featured, ...rest] = getJournal();
+  const [featured, ...rest] = getJournal().slice(0, 4);
 
   return (
     <>
