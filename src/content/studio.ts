@@ -294,11 +294,11 @@ export const team = [
   { name: "ID. Wajeeda Mullani", role: "Senior Interior Designer" },
   { name: "ID. Durga Kumari", role: "Interior Designer" },
   { name: "ID. Apurva Nalabale", role: "Principle Designer & Brand Manager" },
-  { name:"Sanjna", role:"Marketing"},
+  { name:"Sanjana", role:"Marketing Head"},
   { name: "Farhat Banu", role: "Senior Sales Executive" },
   { name: "Syed Adeeba", role: "Sales Executive" },
-  { name: "Zuner", role: "Site Supervision Manager" },
-  { name: "Farhaan Khan", role: "Site Manager & Sales" },
+  { name: "Zunair", role: "Site Supervision Manager" },
+  { name: "Farhan Khan", role: "Site Manager & Sales" },
 
 
 ];

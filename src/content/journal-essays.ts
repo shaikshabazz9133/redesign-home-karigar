@@ -31,7 +31,7 @@ export const CRAFT_IMAGES = {
   },
 } satisfies Record<string, JournalImage>;
 
-/** "Is Indian Craftsmanship Slowly Disappearing?" by Zuber Khan, in its movements, set as paragraphs. */
+/** "Is Indian Craftsmanship Slowly Disappearing?" by Mohammed Zuber, in its movements, set as paragraphs. */
 export const CRAFT_SECTIONS: { heading: string; body: string[] }[] = [
   {
     heading: "A story before the house",
@@ -83,7 +83,7 @@ export const CRAFT_SECTIONS: { heading: string; body: string[] }[] = [
       "Perhaps preserving Indian craftsmanship is not about returning to the past. It is about refusing to believe that progress must come at the cost of identity. Contemporary homes can embrace modern living while still celebrating handmade artistry. Technology can improve precision without replacing human imagination. Minimal spaces can still contain soulful objects.",
       "The future of Indian interiors does not lie in choosing between tradition and modernity. It lies in allowing them to coexist with respect.",
       "At Home Karigar, we believe craftsmanship is not a decorative luxury. It is the quiet soul of a home. Because while styles will continue to evolve and trends will inevitably fade, the work of human hands carries something far more enduring. It carries memory. And perhaps that is the greatest legacy we can leave behind.",
-      "— Zuber Khan, Founder & CEO, Home Karigar",
+      "— Ar. Mohammed Zuber, Founder & CEO, Home Karigar",
     ],
   },
   {
@@ -105,7 +105,7 @@ export const PINTEREST_IMAGES = {
 
 /**
  * The second article: three pieces read together — "Why Every Home Doesn't Need to Look Like Pinterest",
- * "Homes Designed for Generations to Come" by Zuber Khan, and "Courtyards, Verandas and What We Can
+ * "Homes Designed for Generations to Come" by Mohammed Zuber, and "Courtyards, Verandas and What We Can
  * Learn from Traditional Homes" by Apurva Nalabale.
  */
 export const PINTEREST_SECTIONS: { heading: string; body: string[] }[] = [
@@ -134,7 +134,7 @@ export const PINTEREST_SECTIONS: { heading: string; body: string[] }[] = [
     heading: "Homes designed for generations to come",
     body: [
       "A home is not built to be admired. It is built to be remembered.",
-      "By Zuber Khan, Founder & CEO, Home Karigar",
+      "By Ar. Mohammed Zuber, Founder & CEO, Home Karigar",
       "There is a quiet moment that arrives in every well-lived home.",
       "It isn’t the day the furniture is installed. It isn’t when the final light is switched on, nor when the last piece of artwork finds its place on the wall.",
       "It arrives years later.",
@@ -176,7 +176,7 @@ export const PINTEREST_SECTIONS: { heading: string; body: string[] }[] = [
       "Design should honour that privilege.",
       "Because the most enduring homes are never simply built.",
       "They are lived in, loved deeply, and gently passed from one generation to the next.",
-      "— Zuber Khan, Founder & CEO, Home Karigar",
+      "— Ar. Mohammed Zuber, Founder & CEO, Home Karigar",
     ],
   },
   {
