@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { getProjects } from "@/content/projects";
+import { getProjects } from "@/lib/projects-api";
+
+// Homes come from the admin via the API on every request, so changes show immediately.
+export const dynamic = "force-dynamic";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { PageHero } from "@/components/common/PageHero";
 import { ProjectGrid, ProjectsExplorer } from "@/components/projects/ProjectsExplorer";
@@ -15,8 +18,8 @@ export const metadata: Metadata = pageMetadata({
   image: { src: "/images/home/1.png", alt: IMAGE_ALT, width: 1536, height: 1024 },
 });
 
-export default function ProjectsPage() {
-  const projects = getProjects();
+export default async function ProjectsPage() {
+  const projects = await getProjects();
   return (
     <>
       <PageHero

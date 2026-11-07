@@ -2,15 +2,8 @@ import type { Metadata } from "next";
 import { ImageFrame } from "@/components/motion/ImageFrame";
 import { LoadingImage } from "@/components/ui/LoadingImage";
 import { notFound } from "next/navigation";
-import {
-  getProject,
-  getProjects,
-  getRelatedProjects,
-  groupByRoom,
-  imageAlt,
-  projectTitle,
-  roomSlug,
-} from "@/content/projects";
+import { groupByRoom, imageAlt, projectTitle, relatedProjects, roomSlug } from "@/content/projects";
+import { getProject, getProjects } from "@/lib/projects-api";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { imageGallerySchema } from "@/lib/seo/jsonld";
 import { Breadcrumbs } from "@/components/common/Breadcrumbs";
@@ -23,15 +16,12 @@ import { ButtonLink } from "@/components/ui/Button";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return getProjects().map((p) => ({ slug: p.slug }));
-}
+// Rendered on every request from the API, so admin changes (new homes, photos, covers) show immediately.
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const p = getProject(slug);
+  const p = await getProject(slug);
   if (!p) return {};
   const rooms = groupByRoom(p).map((r) => r.room.toLowerCase());
   return pageMetadata({
@@ -44,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
-  const p = getProject(slug);
+  const p = await getProject(slug);
   if (!p) notFound();
 
   const rooms = groupByRoom(p).map((g) => ({
@@ -58,7 +48,7 @@ export default async function ProjectPage({ params }: Props) {
       caption: g.room,
     })),
   }));
-  const related = getRelatedProjects(p);
+  const related = relatedProjects(p, await getProjects());
   const title = projectTitle(p);
 
   const facts = [
@@ -123,7 +113,7 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </nav>
 
-      <div className="container-site py-16 md:py-24">
+      <div className="container-site py-10 md:py-14">
         <RoomGallery rooms={rooms} />
       </div>
 

@@ -75,4 +75,6 @@ export function pageMetadata({
   };
 }
 
-export const absoluteUrl = (path = "/") => `${site.url}${path.startsWith("/") ? path : `/${path}`}`;
+/** A site path on the site's origin; URLs that are already absolute (e.g. photos on the API) are returned as-is. */
+export const absoluteUrl = (path = "/") =>
+  /^https?:\/\//.test(path) ? path : `${site.url}${path.startsWith("/") ? path : `/${path}`}`;

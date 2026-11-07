@@ -10,7 +10,8 @@ npm run dev          # http://localhost:3100
 npm run build && npm start
 ```
 
-Set `NEXT_PUBLIC_SITE_URL` (see `.env.example`) for canonical URLs, sitemap and Open Graph.
+Set `NEXT_PUBLIC_SITE_URL` (see `.env.example`) for canonical URLs, sitemap and Open Graph, and `API_URL` for
+the Home Karigar backend (default `http://localhost:8000/api/v1`) — the site needs it running to show homes.
 
 ## Content
 
@@ -18,13 +19,12 @@ Set `NEXT_PUBLIC_SITE_URL` (see `.env.example`) for canonical URLs, sitemap and 
 | --- | --- |
 | Company facts, phones, hours, socials, delivery stats | `src/content/site.ts` |
 | Services, process, FAQs, team, video tours | `src/content/studio.ts` |
-| Projects & galleries | generated from `../src/data/projects.ts` |
+| Homes (projects) & their photographs | the admin panel → backend `GET /public/projects` (`src/lib/projects-api.ts`) |
 
-**Adding or changing a project:** edit the legacy `src/data/projects.ts` as before, add the photos under
-this project's `public/images/<flat>/`, then run `npm run sync-content` (set `LEGACY_DIR` if the original
-repo is not at `~/Desktop/codersnest/home karigar`). The script reads the room comments
-(`// ── Kitchen ──`), skips missing files and records image sizes into
-`src/content/generated/projects.json`.
+**Adding or changing a home:** do it in the Home Karigar admin (details, photos by room, cover, order). The site
+fetches the feed on every request (no cache), so changes show on the next page load — no code change or deploy. Photos
+are served from the backend's `/media` (allowed in `next.config.ts` from `API_URL`'s host). Types and pure helpers
+(room grouping, alt text) stay in `src/content/projects.ts`.
 
 ## Structure
 
@@ -41,7 +41,7 @@ src/
     forms/             Field, ContactForm, LoginForm, validation
     common/            Breadcrumbs, JsonLd, PageHero, EmptyState, MapEmbed
     motion/            RevealObserver (scroll reveals)
-  content/             typed content + generated data
+  content/             typed content
   lib/seo/             metadata helper, JSON-LD builders
 ```
 

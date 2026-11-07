@@ -1,10 +1,14 @@
 import type { MetadataRoute } from "next";
-import { getProjects, projectHref } from "@/content/projects";
+import { projectHref } from "@/content/projects";
+import { getProjects } from "@/lib/projects-api";
+
+// Homes come from the admin via the API on every request, so changes show immediately.
+export const dynamic = "force-dynamic";
 import { articleHref, getJournal } from "@/content/journal";
 import { absoluteUrl } from "@/lib/seo/metadata";
 
 /** Public, indexable pages only — /login and /api are intentionally excluded. */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const pages: { path: string; priority: number; freq: "weekly" | "monthly" }[] = [
     { path: "/", priority: 1, freq: "weekly" },
@@ -18,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...pages.map((p) => ({ url: absoluteUrl(p.path), lastModified: now, changeFrequency: p.freq, priority: p.priority })),
-    ...getProjects().map((p) => ({
+    ...(await getProjects()).map((p) => ({
       url: absoluteUrl(projectHref(p)),
       lastModified: now,
       changeFrequency: "monthly" as const,
