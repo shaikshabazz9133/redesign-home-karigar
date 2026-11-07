@@ -1,6 +1,11 @@
-import data from "./generated/projects.json";
+/**
+ * Shapes and helpers for the homes shown on the site. The homes themselves — details and photographs — are managed in
+ * the Home Karigar admin and fetched from the backend (see `@/lib/projects-api`); nothing about them is hard-coded here,
+ * so this module is safe to use from client components.
+ */
 
 export interface ProjectImage {
+  /** Absolute URL of the photograph on the backend's /media. */
   src: string;
   room: string;
   width: number;
@@ -8,6 +13,7 @@ export interface ProjectImage {
 }
 
 export interface Project {
+  /** Position on the site (1 = first). Not stable across admin edits — use `slug` to identify a home. */
   id: number;
   slug: string;
   /** The home's design name, shown as its heading. */
@@ -18,32 +24,11 @@ export interface Project {
   community: string;
   area: string;
   cover: ProjectImage;
+  /** Grouped by room, rooms in ROOM_ORDER (custom rooms last), photos in the order set in the admin. */
   images: ProjectImage[];
 }
 
-/**
- * The homes shown on the site, in display order, with the studio's name and the built-up area for each.
- * Homes not listed here stay in the synced data but are hidden everywhere. Hidden for now (add an entry
- * here to bring one back): 13272, 11172, 25147, 12253, 12263, 17024 — all at Avlon Park.
- */
-const SHOWCASE: { flatNo: string; name: string; area: string }[] = [
-  { flatNo: "57175", name: "Minimal Contemporary Interior", area: "1,629 sq. ft." },
-  { flatNo: "13102", name: "Warm Modernism", area: "1,600 sq. ft." },
-  { flatNo: "13104", name: "A Symphony of Spaces", area: "1,875 sq. ft." },
-  { flatNo: "17242", name: "Minimalist Harmony", area: "1,800 sq. ft." },
-  { flatNo: "59051", name: "Modern Rajputana", area: "1,465 sq. ft." },
-  { flatNo: "17285", name: "Essential Living", area: "1,800 sq. ft." },
-  { flatNo: "17193", name: "Modern Aesthetic", area: "1,875 sq. ft." },
-  { flatNo: "13262", name: "Modern Contemporary", area: "1,875 sq. ft." },
-];
-
-const synced = data as Omit<Project, "name">[];
-const projects: Project[] = SHOWCASE.flatMap(({ flatNo, name, area }) => {
-  const p = synced.find((s) => s.flatNo === flatNo);
-  return p ? [{ ...p, name, area }] : [];
-});
-
-/** Display order for rooms within a project. */
+/** Display order for rooms within a project (same as the backend's ROOMS). Custom rooms come after these. */
 const ROOM_ORDER = [
   "Entrance & Foyer",
   "Living Room",
@@ -57,24 +42,16 @@ const ROOM_ORDER = [
   "Interiors",
 ];
 
-/** The showcased homes, in the studio's chosen order. */
-export function getProjects(): Project[] {
-  return [...projects];
-}
-
-export function getProject(slug: string): Project | undefined {
-  return projects.find((p) => p.slug === slug);
-}
-
-export function getProjectById(id: number): Project | undefined {
-  return projects.find((p) => p.id === id);
-}
+const roomRank = (room: string) => {
+  const i = ROOM_ORDER.indexOf(room);
+  return i === -1 ? ROOM_ORDER.length : i;
+};
 
 export function projectTitle(p: Project): string {
   return `${p.name}, ${p.development}`;
 }
 
-export function projectHref(p: Project): string {
+export function projectHref(p: Pick<Project, "slug">): string {
   return `/projects/${p.slug}`;
 }
 
@@ -91,23 +68,23 @@ export function groupByRoom(p: Project): { room: string; images: ProjectImage[] 
     groups.set(img.room, list);
   }
   return [...groups.entries()]
-    .sort(([a], [b]) => ROOM_ORDER.indexOf(a) - ROOM_ORDER.indexOf(b))
+    .sort(([a], [b]) => roomRank(a) - roomRank(b) || a.localeCompare(b))
     .map(([room, images]) => ({ room, images }));
 }
 
-export function getRelatedProjects(p: Project, limit = 3): Project[] {
-  const others = getProjects().filter((o) => o.id !== p.id);
+export function relatedProjects(p: Project, all: Project[], limit = 3): Project[] {
+  const others = all.filter((o) => o.slug !== p.slug);
   const same = others.filter((o) => o.development === p.development);
   return [...same, ...others.filter((o) => o.development !== p.development)].slice(0, limit);
 }
 
-export function getDevelopments(): string[] {
-  return [...new Set(projects.map((p) => p.development))];
-}
-
-/** Finds a representative image for a room across all projects. */
-export function findRoomImage(room: string, skip = 0): { project: Project; image: ProjectImage } | undefined {
-  const matches = getProjects().flatMap((project) =>
+/** Finds a representative (landscape) image for a room across the given projects. */
+export function findRoomImage(
+  projects: Project[],
+  room: string,
+  skip = 0,
+): { project: Project; image: ProjectImage } | undefined {
+  const matches = projects.flatMap((project) =>
     project.images
       .filter((image) => image.room === room && image.width >= image.height)
       .slice(0, 1)

@@ -3,7 +3,11 @@ import { ImageFrame } from "@/components/motion/ImageFrame";
 import { LoadingImage } from "@/components/ui/LoadingImage";
 import Link from "next/link";
 import { services } from "@/content/studio";
-import { findRoomImage, groupByRoom, getProjects, imageAlt, projectHref, roomSlug } from "@/content/projects";
+import { findRoomImage, groupByRoom, imageAlt, projectHref, roomSlug } from "@/content/projects";
+import { getProjects } from "@/lib/projects-api";
+
+// Homes come from the admin via the API on every request, so changes show immediately.
+export const dynamic = "force-dynamic";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { servicesSchema } from "@/lib/seo/jsonld";
 import { JsonLd } from "@/components/common/JsonLd";
@@ -27,10 +31,11 @@ export const metadata: Metadata = pageMetadata({
 
 const ROOMS = ["Living Room", "Kitchen", "Master Bedroom", "Kids' Bedroom", "Entrance & Foyer", "Dining & Crockery"];
 
-export default function ServicesPage() {
-  const rooms = ROOMS.map((room, i) => ({ room, match: findRoomImage(room, i % 2) })).filter((r) => r.match);
+export default async function ServicesPage() {
+  const projects = await getProjects();
+  const rooms = ROOMS.map((room, i) => ({ room, match: findRoomImage(projects, room, i % 2) })).filter((r) => r.match);
   const roomCounts = new Map<string, number>();
-  for (const p of getProjects()) for (const g of groupByRoom(p)) roomCounts.set(g.room, (roomCounts.get(g.room) ?? 0) + 1);
+  for (const p of projects) for (const g of groupByRoom(p)) roomCounts.set(g.room, (roomCounts.get(g.room) ?? 0) + 1);
 
   return (
     <>
